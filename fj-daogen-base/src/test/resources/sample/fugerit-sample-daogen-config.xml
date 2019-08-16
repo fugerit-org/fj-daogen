@@ -1,0 +1,27 @@
+<daogen-config
+	base-src-folder="../fj-daogen-sample"
+	gen-version="1.0.0"
+	gen-author="fugerit"
+	src-main-java="src/main/java"
+	src-test-java="src/test/java"
+	src-main-resources="src/main/resources"
+	src-test-resources="src/test/resources"
+	package-model="org.fugerit.java.daogen.sample.model">
+  <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USERS" name="USERS" primaryKey="ID" schema="FUGERIT">
+    <field comments="User system id" id="ID"/>
+    <field comments="User chosen id" id="USERNAME"/>
+    <field comments="Password hash" id="PASSWORD"/>
+    <field comments="Time of last user login" id="LAST_LOGIN"/>
+    <field comments="1 active, 0 not active" id="STATE"/>
+  </entity>
+  <entity catalog="PUBLIC" comments="Contains addresses data" foreignKeys="PUBLIC.FUGERIT.USERS" id="PUBLIC.FUGERIT.ADDRESSES" name="ADDRESSES" primaryKey="ID" schema="FUGERIT">
+    <field comments="Address system id" id="ID"/>
+    <field comments="User linked to to address" id="ID_USER"/>
+    <field comments="Address info" id="INFO"/>
+  </entity>
+  <entity catalog="PUBLIC" id="PUBLIC.FUGERIT.LOG_DATA" name="LOG_DATA" schema="FUGERIT">
+    <field comments="" id="ID"/>
+    <field comments="" id="LOG_TIME"/>
+    <field comments="" id="INFO"/>
+  </entity>
+</daogen-config>
