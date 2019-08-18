@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Helper for code generation of rest class</comment>
+
+<entry key="rest.worker">
+/**
+ * Service method to load entity of type {0}.
+ * Property {1} is being used as filter
+ * 
+ * @param context	DAO context
+ * @param {2}	THe value of property {1} to use as a filter
+ * @return			l' elenco dei risultati trovati
+ * @throws AnprBasicException		in caso di problemi durante il caricamento
+ */
+</entry>
+
+</properties>

@@ -80,6 +80,17 @@ public class DaogenConfigDump {
 				Element currentFieldTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_FIELD );
 				currentFieldTag.setAttribute( DaogenCatalogField.ATT_ID , columnModel.getName() );
 				currentFieldTag.setAttribute( DaogenCatalogField.ATT_COMMENTS , columnModel.getComment() );
+				currentFieldTag.setAttribute( DaogenCatalogField.ATT_SQL_TYPE , String.valueOf( columnModel.getTypeSql() ) );
+				currentFieldTag.setAttribute( DaogenCatalogField.ATT_SQL_TYPE_NAME , columnModel.getTypeName() );
+				currentFieldTag.setAttribute( DaogenCatalogField.ATT_SIZE , String.valueOf( columnModel.getSize() ) );
+				String nullable = "unknown";
+				if ( columnModel.getNullable() == ColumnModel.NULLABLE_TRUE ) {
+					nullable = "yes";
+				} else if ( columnModel.getNullable() == ColumnModel.NULLABLE_FALSE ) { 
+					nullable = "no";
+				}
+				currentFieldTag.setAttribute( DaogenCatalogField.ATT_NULLABLE , nullable );
+				currentFieldTag.setAttribute( DaogenCatalogField.ATT_JAVA_TYPE , columnModel.getJavaType() );
 				currentEntityTag.appendChild( currentFieldTag );
 			}
 		}

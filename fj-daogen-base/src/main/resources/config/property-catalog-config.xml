@@ -1,0 +1,10 @@
+<data-catalog-config 
+	check-duplicate-id="fail"
+	default-catalog="comments">
+
+	<data-list id="comments">
+		<data id="common" description="Common code generation" xml="true"
+			mode="classloader" path="config/template/comments_common.xml"/>
+	</data-list>
+	
+</data-catalog-config>

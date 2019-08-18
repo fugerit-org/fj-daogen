@@ -42,4 +42,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator {
 	@Override
 	public abstract void generateBody() throws Exception;
 	
+	public String getEntityModelName() {
+		return "Model"+this.getJavaName();
+	}
+	
 }

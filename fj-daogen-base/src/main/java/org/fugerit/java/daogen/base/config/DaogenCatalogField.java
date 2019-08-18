@@ -9,6 +9,11 @@ import org.fugerit.java.core.lang.helpers.StringUtils;
 public class DaogenCatalogField extends BasicIdConfigType {
 
 	public static final String ATT_ID = "id";
+	public static final String ATT_SQL_TYPE = "sqlType";
+	public static final String ATT_SQL_TYPE_NAME = "sqlTypeName";
+	public static final String ATT_JAVA_TYPE = "javaType";
+	public static final String ATT_SIZE = "size";
+	public static final String ATT_NULLABLE = "nullable";
 	public static final String ATT_COMMENTS = "comments";
 	
 	/**
@@ -18,6 +23,16 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	
 	private String comments;
 
+	private String sqlType;
+	
+	private String sqlTypeName;
+	
+	private String javaType;
+	
+	private String size;
+	
+	private String nullable;
+	
 	public String getComments() {
 		return comments;
 	}
@@ -26,8 +41,53 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		this.comments = comments;
 	}
 
+	public String getSqlType() {
+		return sqlType;
+	}
+
+	public void setSqlType(String sqlType) {
+		this.sqlType = sqlType;
+	}
+
+	public String getSqlTypeName() {
+		return sqlTypeName;
+	}
+
+	public void setSqlTypeName(String sqlTypeName) {
+		this.sqlTypeName = sqlTypeName;
+	}
+
+	public String getJavaType() {
+		return javaType;
+	}
+
+	public void setJavaType(String javaType) {
+		this.javaType = javaType;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public String getNullable() {
+		return nullable;
+	}
+
+	public void setNullable(String nullable) {
+		this.nullable = nullable;
+	}
+
 	public String describe() {
 		 List<String> list = new ArrayList<String>();
+		 list.add( StringUtils.concat( ":" , ATT_SQL_TYPE, this.getSqlType() ) );
+		 list.add( StringUtils.concat( ":" , ATT_SQL_TYPE_NAME, this.getSqlTypeName() ) );
+		 list.add( StringUtils.concat( ":" , ATT_JAVA_TYPE, this.getJavaType() ) );
+		 list.add( StringUtils.concat( ":" , ATT_SIZE, this.getSize() ) );
+		 list.add( StringUtils.concat( ":" , ATT_NULLABLE, this.getNullable() ) );
 		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
 		 return StringUtils.concat(  ",", list );
 	}

@@ -5,6 +5,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
+import org.fugerit.java.daogen.base.config.DaogenCustomCode;
 
 public class ModelGenerator extends DaogenBasicGenerator {
 
@@ -20,8 +21,12 @@ public class ModelGenerator extends DaogenBasicGenerator {
 			String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
 			String className = GeneratorNameHelper.toClassName( field.getId() );
 			String type = "String";
+			DaogenCustomCode.addCustomCode( DaogenCustomCode.ID_LIST_COMMENTS , DaogenCustomCode.ID_COMMENTS_COMMON, "comment_model_getter", 
+					DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, field.getNullable(), field.getComments() );
 			this.println( "	"+type+" get"+className+"();" );
 			this.println();
+			DaogenCustomCode.addCustomCode( DaogenCustomCode.ID_LIST_COMMENTS , DaogenCustomCode.ID_COMMENTS_COMMON, "comment_model_setter", 
+					DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, field.getNullable(), field.getComments() );
 			this.println( "	void set"+className+"( "+type+" value );" );
 			this.println();
 		}

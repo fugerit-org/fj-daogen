@@ -75,6 +75,7 @@
 
 	<modules>
 		<module>fj-daogen-base</module>
+		<module>fj-daogen-sample</module>
 	</modules>
 
 	<dependencyManagement>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Helper for code generation of facade definition class</comment>
+
+
+<entry key="facade.def.create">
+/**
+ * Method to create an new entity of type : {0}
+ *
+ * A new ID should be assigned by this method.
+ *
+ * @param context	DAO context
+ * @param model		Entity to create
+ *
+ * @return 			The created entity
+ * @throws AnprBasicException		In case of any error.
+ */
+</entry>
+
+<entry key="cfacade.def.updateById">
+/**
+ * Method to modify an entity of type : {0}
+ *
+ * @param context	DAO context
+ * @param model		Entity to modify
+ *
+ * @return 			The modified entity
+ * @throws AnprBasicException		In case of any error.
+ */
+</entry>
+
+<entry key="facade.def.deleteById">
+/**
+ * Method to delete an entity of type : {0}
+ *
+ * @param context	il contesto dell'operazione
+ * @param id		id entity da cancellare
+ *
+ * @return Il risultato della cancellazione
+ * @throws AnprBasicException		In case of any error.
+ */
+</entry>
+
+</properties>
