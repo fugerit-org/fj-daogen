@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>DaoGen Default field mapping</comment>
+<entry key="model_java.lang.Long">java.math.BigDecimal</entry>
+<entry key="model_java.lang.Integer">java.math.BigDecimal</entry>
+<entry key="model_java.lang.Short">java.math.BigDecimal</entry>
+<entry key="model_java.lang.Byte">java.math.BigDecimal</entry>
+<entry key="model_java.sql.Date">java.util.Date</entry>
+<entry key="model_java.sql.Time">java.util.Date</entry>
+<entry key="model_java.sql.Timestamp">java.util.Date</entry>
+<entry key="model_java.sql.Blob">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
+<entry key="model_oracle.sql.BLOB">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
+</properties>

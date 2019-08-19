@@ -15,6 +15,10 @@ public class DaogenCustomCode {
 	
 	public static final String ID_COMMENTS_COMMON = "common";
 	
+	public static final String ID_COMMENTS_FACADE_DEF = "facade_def";
+	
+	public static final String ID_COMMENTS_REST = "rest";
+	
 	public static final String NO_INDENT = "";
 	
 	public static final String INDENT_1 = "	";
@@ -36,6 +40,22 @@ public class DaogenCustomCode {
 		} catch (Exception e) {
 			throw new ConfigException( e );
 		}
+	}
+	
+	public static void addComment( String holder, String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
+		addCustomCode( ID_LIST_COMMENTS, holder, key, indent, pw, params);
+	}
+	
+	public static void addCommentCommon( String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
+		addComment( ID_COMMENTS_COMMON, key, indent, pw, params);
+	}
+	
+	public static void addCommentFacadeDef( String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
+		addComment( ID_COMMENTS_FACADE_DEF, key, indent, pw, params);
+	}
+	
+	public static void addCommentRest( String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
+		addComment( ID_COMMENTS_REST, key, indent, pw, params);
 	}
 	
 	private static PropertyCatalog instance = null;

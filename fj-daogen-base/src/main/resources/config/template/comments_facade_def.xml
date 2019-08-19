@@ -14,11 +14,11 @@
  * @param model		Entity to create
  *
  * @return 			The created entity
- * @throws AnprBasicException		In case of any error.
+ * @throws DAOException		In case of any error.
  */
 </entry>
 
-<entry key="cfacade.def.updateById">
+<entry key="facade.def.updateById">
 /**
  * Method to modify an entity of type : {0}
  *
@@ -26,7 +26,7 @@
  * @param model		Entity to modify
  *
  * @return 			The modified entity
- * @throws AnprBasicException		In case of any error.
+ * @throws DAOException		In case of any error.
  */
 </entry>
 
@@ -38,7 +38,7 @@
  * @param id		id entity da cancellare
  *
  * @return Il risultato della cancellazione
- * @throws AnprBasicException		In case of any error.
+ * @throws DAOException		In case of any error.
  */
 </entry>
 

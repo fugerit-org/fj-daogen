@@ -1,0 +1,204 @@
+package org.fugerit.java.daogen.sample.impl.rest.load;
+
+import java.util.List;
+import java.math.BigDecimal;
+import javax.ejb.Stateless;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.fugerit.java.core.db.daogen.DAOContext;
+import org.fugerit.java.core.db.daogen.CloseableDAOContext;
+import org.fugerit.java.core.db.dao.DAOException;
+import org.fugerit.java.core.db.daogen.BasicDaoResult;
+import org.fugerit.java.core.db.daogen.SimpleServiceResult;
+import org.fugerit.java.daogen.sample.def.model.ModelAddress;
+import org.fugerit.java.daogen.sample.impl.helper.HelperAddress;
+import org.fugerit.java.daogen.sample.def.facade.AddressFinder;
+import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
+import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
+
+// custom import start ( code above here will be overwritten )
+// custom import end ( code below here will be overwritten )
+
+/**
+ * LoadAddress, version : 1.0.0
+ *
+ * author: fugerit
+ *
+ * warning!: auto generated object, insert custom code only between comments :
+ * // custom code start ( code above here will be overwritten )
+ * // custom code end ( code below here will be overwritten )
+ */
+@Stateless
+@Path("/address/load")
+public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper {
+
+	// custom code start ( code above here will be overwritten )
+	// custom code end ( code below here will be overwritten )
+
+	private static final long serialVersionUID = 507700138041L;
+
+	/**
+	 * Service method to load entity of type ModelAddress.
+	 * Property id is being used as filter
+	 * 
+	 * @param context	DAO context
+	 * @param id	THe value of property id to use as a filter
+	 * @return			l' elenco dei risultati trovati
+	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 */
+	public static SimpleServiceResult<ModelAddress> loadByIdWorker( DAOContext context, BigDecimal id ) throws DAOException {
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityAddressFacade facade = factory.getEntityAddressFacade();
+		ModelAddress model = facade.loadById( context , id );
+		SimpleServiceResult<ModelAddress>  result = SimpleServiceResult.newDefaultResult( model );
+		return result;
+	}
+
+	@GET
+	@Path("/id/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByID(@PathParam( "id" ) String id) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			BigDecimal idCurrent = new BigDecimal( id );
+			SimpleServiceResult<ModelAddress>  result = loadByIdWorker( context, idCurrent );
+			res = Response.ok( result ).build();
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadAddress - getByID - valore := "+id+" - "+e, e );
+		}
+		return res;
+	}
+
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAll() throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityAddressFacade facade = factory.getEntityAddressFacade();
+			BasicDaoResult<ModelAddress> resultFacade = facade.loadAll( context );
+			SimpleServiceResult<List<ModelAddress>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
+			res = Response.ok( result ).build();
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadAddress - getAll - "+e, e );
+		}
+		return res;
+	}
+
+	/**
+	 * Service method to load entity of type ModelAddress.
+	 * Property ModelAddress is being used as filter
+	 * 
+	 * @param context	DAO context
+	 * @param model	THe value of property ModelAddress to use as a filter
+	 * @return			l' elenco dei risultati trovati
+	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 */
+	public static SimpleServiceResult<List<ModelAddress>> loadByModelWorker( DAOContext context, ModelAddress model ) throws DAOException {
+		AddressFinder finder = AddressFinder.newInstance( model );
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityAddressFacade facade = factory.getEntityAddressFacade();
+		BasicDaoResult<ModelAddress> resultFacade = facade.loadAllByFinder( context , finder );
+		SimpleServiceResult<List<ModelAddress>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
+		return result;
+	}
+
+	/**
+	 * Service method to load entity of type ModelAddress.
+	 * Property id is being used as filter
+	 * 
+	 * @param context	DAO context
+	 * @param current	THe value of property id to use as a filter
+	 * @return			l' elenco dei risultati trovati
+	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 */
+	public static SimpleServiceResult<List<ModelAddress>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
+		HelperAddress model = new HelperAddress();
+		model.setId( current );
+		SimpleServiceResult<List<ModelAddress>>  result = loadByModelWorker( context , model );
+		return result;
+	}
+
+	@GET
+	@Path("/id/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllId(@PathParam( "id" ) String id) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			BigDecimal value = new BigDecimal(id);
+			SimpleServiceResult<List<ModelAddress>>  result = loadById( context, value );
+			res = Response.ok( result ).build();
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadAddress - getAllId - "+e, e );
+		}
+		return res;
+	}
+
+	/**
+	 * Service method to load entity of type ModelAddress.
+	 * Property idUser is being used as filter
+	 * 
+	 * @param context	DAO context
+	 * @param current	THe value of property idUser to use as a filter
+	 * @return			l' elenco dei risultati trovati
+	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 */
+	public static SimpleServiceResult<List<ModelAddress>> loadByIdUser( DAOContext context, java.math.BigDecimal current ) throws DAOException {
+		HelperAddress model = new HelperAddress();
+		model.setIdUser( current );
+		SimpleServiceResult<List<ModelAddress>>  result = loadByModelWorker( context , model );
+		return result;
+	}
+
+	@GET
+	@Path("/id_user/{id_user}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllIdUser(@PathParam( "id_user" ) String idUser) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			BigDecimal value = new BigDecimal(idUser);
+			SimpleServiceResult<List<ModelAddress>>  result = loadByIdUser( context, value );
+			res = Response.ok( result ).build();
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadAddress - getAllIdUser - "+e, e );
+		}
+		return res;
+	}
+
+	/**
+	 * Service method to load entity of type ModelAddress.
+	 * Property info is being used as filter
+	 * 
+	 * @param context	DAO context
+	 * @param current	THe value of property info to use as a filter
+	 * @return			l' elenco dei risultati trovati
+	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 */
+	public static SimpleServiceResult<List<ModelAddress>> loadByInfo( DAOContext context, java.lang.String current ) throws DAOException {
+		HelperAddress model = new HelperAddress();
+		model.setInfo( current );
+		SimpleServiceResult<List<ModelAddress>>  result = loadByModelWorker( context , model );
+		return result;
+	}
+
+	@GET
+	@Path("/info/{info}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllInfo(@PathParam( "info" ) String info) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			String value = info;
+			SimpleServiceResult<List<ModelAddress>>  result = loadByInfo( context, value );
+			res = Response.ok( result ).build();
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadAddress - getAllInfo - "+e, e );
+		}
+		return res;
+	}
+
+}

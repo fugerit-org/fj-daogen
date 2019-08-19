@@ -9,9 +9,9 @@
  * Property {1} is being used as filter
  * 
  * @param context	DAO context
- * @param {2}	THe value of property {1} to use as a filter
- * @return			l' elenco dei risultati trovati
- * @throws AnprBasicException		in caso di problemi durante il caricamento
+ * @param {2}	Tee value of property {1} to use as a filter
+ * @return			the result found
+ * @throws DAOException		in case of any issue
  */
 </entry>
 

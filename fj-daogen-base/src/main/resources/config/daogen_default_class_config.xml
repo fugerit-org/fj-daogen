@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>DaoGen Configuration</comment>
+<!-- dao context -->
+<entry key="dao.context.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.context.class">DAOContext</entry>
+<entry key="dao.closeablecontext.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.closeablecontext.class">CloseableDAOContext</entry>
+<!-- dao exception -->
+<entry key="dao.exception.package">org.fugerit.java.core.db.dao</entry>
+<entry key="dao.exception.class">DAOException</entry>
+<!-- base finder -->
+<entry key="dao.basefinder.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.basefinder.class">BaseIdFinder</entry>
+<!-- base result -->
+<entry key="dao.result.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.result.class">BasicDaoResult</entry>
+<!-- base helper -->
+<entry key="dao.helper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.helper.class">BasicHelper</entry>
+<!-- base wrapper -->
+<entry key="dao.wrapper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.wrapper.class">BasicWrapper</entry>
+<!-- dao helper -->
+<entry key="dao.daohelper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.daohelper.class">BasicDAOHelper</entry>
+<!-- select helper -->
+<entry key="dao.selecthelper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.selecthelper.class">SelectHelper</entry>
+<!-- update helper -->
+<entry key="dao.updatehelper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.updatehelper.class">UpdateHelper</entry>
+<!-- delete helper -->
+<entry key="dao.deletehelper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.deletehelper.class">DeleteHelper</entry>
+<!-- insert helper -->
+<entry key="dao.inserthelper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.inserthelper.class">InsertHelper</entry>
+<!-- data facade helper -->
+<entry key="dao.datafacade.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.datafacade.class">BasicDataFacade</entry>
+<!-- result set extractor helper -->
+<entry key="dao.rsehelper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.rsehelper.class">BasicRSExtractor</entry>
+<!-- obj mapper interface -->
+<entry key="dao.structmapper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.structmapper.class">StructMapper</entry>
+<!-- obj mapper interface -->
+<entry key="dao.serviceresult.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.serviceresult.class">SimpleServiceResult</entry>
+</properties>

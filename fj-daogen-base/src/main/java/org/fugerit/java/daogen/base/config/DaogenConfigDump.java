@@ -27,7 +27,7 @@ public class DaogenConfigDump {
 	private static Logger logger = LoggerFactory.getLogger( DaogenConfigDump.class );
 	
 	public static final String PARAM_TABLE_LIST = "table-list";
-	public static final String PARAM_TABLE_LIST_ALL = "all";
+	public static final String PARAM_TABLE_LIST_ALL = "*";
 	
 	public static final String PARAM_CATALOG = "catalog";
 	public static final String PARAM_SCHEMA = "schema";

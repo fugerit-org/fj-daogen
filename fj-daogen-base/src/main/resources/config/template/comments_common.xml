@@ -3,7 +3,7 @@
 <properties>
 <comment>Helper for code generation, common methods</comment>
 
-<entry key="comment_model_getter">
+<entry key="comments.common.getter">
 /**
  * Getter method for property : {0} (nullable: {1})
  *
@@ -13,7 +13,7 @@
  */
 </entry>
 
-<entry key="comment_model_setter">
+<entry key="comments.common.setter">
 /**
  * Setter method for property : {0} (nullable: {1})
  *

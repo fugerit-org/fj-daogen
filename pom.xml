@@ -5,7 +5,7 @@
 	<groupId>org.fugerit.java</groupId>
 	<artifactId>fj-daogen</artifactId>
 
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>pom</packaging>
 
 	<name>fj-daogen</name>
@@ -76,6 +76,7 @@
 	<modules>
 		<module>fj-daogen-base</module>
 		<module>fj-daogen-sample</module>
+		<module>fj-daogen-tool</module>
 	</modules>
 
 	<dependencyManagement>

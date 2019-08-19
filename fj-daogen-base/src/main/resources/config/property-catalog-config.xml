@@ -4,7 +4,11 @@
 
 	<data-list id="comments">
 		<data id="common" description="Common code generation" xml="true"
-			mode="classloader" path="config/template/comments_common.xml"/>
+			mode="cl" path="config/template/comments_common.xml"/>
+		<data id="facade_def" description="Comment for facade definition" xml="true"
+			mode="cl" path="config/template/comments_facade_def.xml"/>
+		<data id="rest" description="Comment for rest" xml="true"
+			mode="cl" path="config/template/comments_rest.xml"/>								
 	</data-list>
 	
 </data-catalog-config>
