@@ -34,10 +34,10 @@
 /**
  * Method to delete an entity of type : {0}
  *
- * @param context	il contesto dell'operazione
+ * @param context	DAO context
  * @param id		id entity da cancellare
  *
- * @return Il risultato della cancellazione
+ * @return 			delete result
  * @throws DAOException		In case of any error.
  */
 </entry>
