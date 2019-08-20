@@ -47,10 +47,15 @@
     <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="CONTENT" javaType="java.sql.Blob" nullable="yes" size="1073741824" sqlType="2004" sqlTypeName="BLOB"/>
-  </entity>  
+  </entity>
   <entity catalog="PUBLIC" id="PUBLIC.FUGERIT.LOG_DATA" name="LOG_DATA" schema="FUGERIT">
     <field comments="" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
     <field comments="" id="LOG_TIME" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="INFO" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+  </entity>
+  <entity catalog="PUBLIC" id="PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY" name="TEST_TWO_FIELD_KEY" primaryKey="ID_ONE,ID_TWO" schema="FUGERIT">
+    <field comments="" id="ID_ONE" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="" id="ID_TWO" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
     <field comments="" id="INFO" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
   </entity>
 </daogen-config>

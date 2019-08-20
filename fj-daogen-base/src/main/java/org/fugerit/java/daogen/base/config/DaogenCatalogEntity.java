@@ -9,6 +9,9 @@ import org.fugerit.java.core.lang.helpers.StringUtils;
 
 public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 
+
+	public static final String DEFAULT_ID_FIELD = "ID";
+	
 	public static final String ATT_ID = "id";
 	public static final String ATT_NAME = "name";
 	public static final String ATT_SCHEMA = "schema";
@@ -99,6 +102,10 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_FOREIGN_KEYS, this.getForeignKeys() ) );
 		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
 		 return StringUtils.concat(  ",", list );
+	}
+	
+	public boolean containsDefaultId() {
+		return this.get( DEFAULT_ID_FIELD.toLowerCase() ) != null || this.get( DEFAULT_ID_FIELD.toUpperCase() ) != null;
 	}
 	
 }

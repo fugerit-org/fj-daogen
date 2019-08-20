@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.gen;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -11,7 +12,7 @@ import org.fugerit.java.daogen.base.config.DaogenCustomCode;
 
 public class RestLoadGenerator extends DaogenBasicGenerator {
 
-	public static final String KEY = "FacadeDefGenerator";
+	public static final String KEY = "RestLoadGenerator";
 	
 	@Override
 	public String getKey() {
@@ -56,30 +57,32 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 		this.addSerialVerUID();
 		String factoryClassName = GeneratorNameHelper.classFromPackage( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 		// load by id
-		DaogenCustomCode.addCommentRest( "rest.worker" ,DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName(), "id", "id" );
-		this.getWriter().println( "	public static "+this.getClassServiceResult()+"<"+this.getEntityModelName()+"> loadByIdWorker( DAOContext context, BigDecimal id ) throws "+this.getClassDaoException()+" {" );
-		this.getWriter().println( "		"+factoryClassName+" factory = ("+factoryClassName+") context.getAttribute("+factoryClassName+".ATT_NAME );" );
-		this.getWriter().println( "		"+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
-		this.getWriter().println( "		"+this.getEntityModelName()+" model = facade.loadById( context , id );" );
-		this.getWriter().println( "		"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
-		this.getWriter().println( "		return result;" );
-		this.getWriter().println( "	}" );
-		this.getWriter().println( );
-		this.getWriter().println( "	@GET" );
-		this.getWriter().println( "	@Path(\"/id/{id}\")" );
-		this.getWriter().println( "	@Produces(MediaType.APPLICATION_JSON)" );
-		this.getWriter().println( "	public Response getByID(@PathParam( \"id\" ) String id) throws Exception {" );
-		this.getWriter().println( "		Response res = null;" );
-		this.getWriter().println( "		try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-		this.getWriter().println( "			BigDecimal idCurrent = new BigDecimal( id );" );
-		this.getWriter().println( "			"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = loadByIdWorker( context, idCurrent );" );
-		this.getWriter().println( "			res = Response.ok( result ).build();" );
-		this.getWriter().println( "		} catch(Exception e) {" );
-		this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - valore := \"+id+\" - \"+e, e );" );
-		this.getWriter().println( "		}" );
-		this.getWriter().println( "		return res;" );
-		this.getWriter().println( "	}" );
-		this.getWriter().println( );
+		if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
+			GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() ).setForLoadInterface();
+			DaogenCustomCode.addCommentRest( "rest.worker" ,DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName(), "id", "id" );
+			this.getWriter().println( "	public static "+this.getClassServiceResult()+"<"+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+			this.getWriter().println( "		"+factoryClassName+" factory = ("+factoryClassName+") context.getAttribute("+factoryClassName+".ATT_NAME );" );
+			this.getWriter().println( "		"+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
+			this.getWriter().println( "		"+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
+			this.getWriter().println( "		"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
+			this.getWriter().println( "		return result;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println( );
+			this.getWriter().println( "	@GET" );
+			this.getWriter().println( "	@Path(\""+primaryKeyHelper.getUrlParams()+"\")" );
+			this.getWriter().println( "	@Produces(MediaType.APPLICATION_JSON)" );
+			this.getWriter().println( "	public Response getByID("+primaryKeyHelper.getPathParams()+") throws Exception {" );
+			this.getWriter().println( "		Response res = null;" );
+			this.getWriter().println( "		try (CloseableDAOContext context = this.newDefaultContext() ) {" );
+			this.getWriter().println( "			"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = loadByIdWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
+			this.getWriter().println( "			res = Response.ok( result ).build();" );
+			this.getWriter().println( "		} catch(Exception e) {" );
+			this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
+			this.getWriter().println( "		}" );
+			this.getWriter().println( "		return res;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println( );
+		}
 		// load all
 		this.getWriter().println( "	@GET" );
 		this.getWriter().println( "	@Path(\"/all\")" );

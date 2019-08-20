@@ -1,6 +1,5 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
-import java.math.BigDecimal;
 import org.fugerit.java.core.db.daogen.DAOContext;
 import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.db.daogen.BasicDaoResult;
@@ -24,40 +23,41 @@ public interface EntityAddressFacade {
 	// custom code end ( code below here will be overwritten )
 
 	/*
-	 * NOTA: Eccetto la ricerca per id, e' preferibile usare dei finder per incapsulare i parametri di ricerca.
+	 * NOTE: It is advised to use a finder for incapsulating search params, except searches for primary key.
 	 */
 
 	/**
-	 * Metodo di caricamento per id della entity : ModelAddress
+	 * Method to load all the items for entity : ModelAddress
 	 *
-	 * @param context	il contesto dell'operazione
-	 * @param id		id dell'oggetto da cercare
+	 * @param context	DAOContext
 	 *
-	 * @return l'oggetto trovato o <code>null</code>.
-	 * @throws DAOException			in caso di errori
-	 */
-	ModelAddress loadById( DAOContext context, BigDecimal id ) throws DAOException;
-
-	/**
-	 * Metodo di caricamento per tutte le entity : ModelAddress
-	 *
-	 * @param context	il contesto dell'operazione
-	 *
-	 * @return Il risultato della ricerca
-	 * @throws DAOException			in caso di errori
+	 * @return search result
+	 * @throws DAOException			in case of errors
 	 */
 	BasicDaoResult<ModelAddress> loadAll( DAOContext context ) throws DAOException;
 
 	/**
-	 * Metodo di caricamento per tutte le entity : ModelAddress
+	 * Method to load all the items for entity : ModelAddress
 	 *
-	 * @param context	il contesto dell'operazione
-	 * @param finder	il finder
+	 * @param context	DAOContext
+	 * @param finder	the finder incapsulating search params
 	 *
-	 * @return Il risultato della ricerca
+	 * @return search result
 	 * @throws DAOException			in caso di errori
 	 */
 	BasicDaoResult<ModelAddress> loadAllByFinder( DAOContext context, AddressFinder finder ) throws DAOException;
+
+	/**
+	 * Load method by primary key for entity : ModelAddress
+	 *
+	 * @param context	DAO Context
+	 * @param idAddress system id
+
+	 *
+	 * @return The found object or <code>null</code>
+	 * @throws DAOException			in case of errors
+	 */
+	ModelAddress loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException;
 
 	/**
 	 * Method to create an new entity of type : ModelAddress
@@ -68,30 +68,30 @@ public interface EntityAddressFacade {
 	 * @param model		Entity to create
 	 *
 	 * @return 			The created entity
-	 * @throws AnprBasicException		In case of any error.
+	 * @throws DAOException		In case of any error.
 	 */
 	BasicDaoResult<ModelAddress> create( DAOContext context, ModelAddress model ) throws DAOException;
+	/**
+	 * Delete method by primary key for entity : ModelAddress
+	 *
+	 * @param context	DAO Context
+	 * @param idAddress system id
+
+	 *
+	 * @return Delete result (resultCode=0, delete ok)
+	 * @throws DAOException			in case of errors
+	 */
+	BasicDaoResult<ModelAddress> deleteById( DAOContext context, java.math.BigDecimal id ) throws DAOException;
 
 	/**
-	 * Method to modify an entity of type : ModelAddress
+	 * Delete method by primary key for entity : ModelAddress
 	 *
-	 * @param context	DAO context
-	 * @param model		Entity to modify
+	 * @param context	DAO Context
+	 * @param 	model	entity to update
 	 *
-	 * @return 			The modified entity
-	 * @throws AnprBasicException		In case of any error.
+	 * @return Update result (resultCode=0, update ok)
+	 * @throws DAOException			in case of errors
 	 */
 	BasicDaoResult<ModelAddress> updateById( DAOContext context, ModelAddress model ) throws DAOException;
-
-	/**
-	 * Method to delete an entity of type : ModelAddress
-	 *
-	 * @param context	il contesto dell'operazione
-	 * @param id		id entity da cancellare
-	 *
-	 * @return Il risultato della cancellazione
-	 * @throws AnprBasicException		In case of any error.
-	 */
-	BasicDaoResult<ModelAddress> deleteById( DAOContext context, BigDecimal id ) throws DAOException;
 
 }

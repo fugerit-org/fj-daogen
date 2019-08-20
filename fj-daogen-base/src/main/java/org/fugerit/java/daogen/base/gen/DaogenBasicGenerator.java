@@ -86,6 +86,10 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return DaogenCatalogConstants.structPrefix( this.getDaogenConfig() )+this.getCurrentEntity().getName();
 	}
 	
+	protected String getEntityBaseResult() {
+		return this.getClassBaseResult()+"<"+this.getEntityModelName()+">";
+	}
+	
 	private String classDaogenContext;
 	
 	private String classCloseableDaogenContext;

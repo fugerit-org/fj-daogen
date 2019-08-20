@@ -4,7 +4,6 @@ import org.fugerit.java.core.db.daogen.StructMapper;
 import org.fugerit.java.daogen.sample.def.model.ModelLogData;
 import org.fugerit.java.daogen.sample.impl.helper.HelperLogData;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperLogData;
-import org.fugerit.java.core.db.daogen.SQLTypeConverter;
 import java.util.Map;
 import java.util.HashMap;
 import java.sql.SQLData;
@@ -73,7 +72,7 @@ public class ObjLogData extends WrapperLogData implements SQLData, StructMapper 
 	@Override
 	public void writeSQL(SQLOutput stream) throws SQLException {
 		stream.writeBigDecimal( this.getId() );
-		stream.writeTimestamp( SQLTypeConverter.utilDateToSqlTimestamp( this.getLogTime() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getLogTime() ) );
 		stream.writeString( this.getInfo() );
 	}
 

@@ -46,11 +46,11 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * Property id is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param id	THe value of property id to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param id	Tee value of property id to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
-	public static SimpleServiceResult<ModelUser> loadByIdWorker( DAOContext context, BigDecimal id ) throws DAOException {
+	public static SimpleServiceResult<ModelUser> loadByIdWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
 		EntityUserFacade facade = factory.getEntityUserFacade();
 		ModelUser model = facade.loadById( context , id );
@@ -61,14 +61,13 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	@GET
 	@Path("/id/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByID(@PathParam( "id" ) String id) throws Exception {
+	public Response getByID(@PathParam( "id") String id) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal idCurrent = new BigDecimal( id );
-			SimpleServiceResult<ModelUser>  result = loadByIdWorker( context, idCurrent );
+			SimpleServiceResult<ModelUser>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
 			res = Response.ok( result ).build();
 		} catch(Exception e) {
-			logger.error("ERRORE - REST- LoadUser - getByID - valore := "+id+" - "+e, e );
+			logger.error("ERRORE - REST- LoadUser - getByID - "+e, e );
 		}
 		return res;
 	}
@@ -95,9 +94,9 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * Property ModelUser is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param model	THe value of property ModelUser to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param model	Tee value of property ModelUser to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByModelWorker( DAOContext context, ModelUser model ) throws DAOException {
 		UserFinder finder = UserFinder.newInstance( model );
@@ -113,9 +112,9 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * Property id is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property id to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property id to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
 		HelperUser model = new HelperUser();
@@ -144,9 +143,9 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * Property username is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property username to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property username to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByUsername( DAOContext context, java.lang.String current ) throws DAOException {
 		HelperUser model = new HelperUser();
@@ -175,9 +174,9 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * Property password is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property password to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property password to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByPassword( DAOContext context, java.lang.String current ) throws DAOException {
 		HelperUser model = new HelperUser();
@@ -206,9 +205,9 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * Property state is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property state to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property state to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByState( DAOContext context, java.math.BigDecimal current ) throws DAOException {
 		HelperUser model = new HelperUser();

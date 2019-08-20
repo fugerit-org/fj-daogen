@@ -5,6 +5,8 @@ import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityAddressFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityLogDataFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityLogDataFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
+import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityTestTwoFieldKeyFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUploadFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUploadFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserFacade;
@@ -39,6 +41,13 @@ public class FugeritDataLogicFacade implements org.fugerit.java.daogen.sample.de
 	@Override
 	public EntityLogDataFacade getEntityLogDataFacade() throws DAOException {
 		return this.entitylogdatafacade;
+	}
+
+	private EntityTestTwoFieldKeyFacade entitytesttwofieldkeyfacade = new DataEntityTestTwoFieldKeyFacade();
+
+	@Override
+	public EntityTestTwoFieldKeyFacade getEntityTestTwoFieldKeyFacade() throws DAOException {
+		return this.entitytesttwofieldkeyfacade;
 	}
 
 	private EntityUploadFacade entityuploadfacade = new DataEntityUploadFacade();

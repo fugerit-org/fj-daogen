@@ -1,9 +1,9 @@
 package org.fugerit.java.daogen.sample.impl.struct;
 
 import org.fugerit.java.core.db.daogen.StructMapper;
-import org.fugerit.java.daogen.sample.def.model.ModelAddress;
-import org.fugerit.java.daogen.sample.impl.helper.HelperAddress;
-import org.fugerit.java.daogen.sample.impl.helper.WrapperAddress;
+import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
+import org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey;
+import org.fugerit.java.daogen.sample.impl.helper.WrapperTestTwoFieldKey;
 import java.util.Map;
 import java.util.HashMap;
 import java.sql.SQLData;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 // custom import end ( code below here will be overwritten )
 
 /**
- * ObjAddress, version : 1.0.0
+ * ObjTestTwoFieldKey, version : 1.0.0
  *
  * author: fugerit
  *
@@ -23,27 +23,27 @@ import java.sql.SQLException;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class ObjAddress extends WrapperAddress implements SQLData, StructMapper {
+public class ObjTestTwoFieldKey extends WrapperTestTwoFieldKey implements SQLData, StructMapper {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 411737603450L;
+	private static final long serialVersionUID = 171920118757L;
 
-	public ObjAddress( ModelAddress wrapped ) {
+	public ObjTestTwoFieldKey( ModelTestTwoFieldKey wrapped ) {
 		super( wrapped );
 	}
 
-	public ObjAddress() {
-		this( new HelperAddress() );
+	public ObjTestTwoFieldKey() {
+		this( new HelperTestTwoFieldKey() );
 	}
 
-	public final static String SQL_TYPE_NAME = "OBJ_ADDRESS";
+	public final static String SQL_TYPE_NAME = "OBJ_TEST_TWO_FIELD_KEY";
 
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
-		map.put( SQL_TYPE_NAME, ObjAddress.class );
+		map.put( SQL_TYPE_NAME, ObjTestTwoFieldKey.class );
 		return map;
 	}
 
@@ -52,31 +52,27 @@ public class ObjAddress extends WrapperAddress implements SQLData, StructMapper 
 		return SQL_TYPE_NAME;
 	}
 
-	public static ObjAddress wrap( ModelAddress model ) {
-		ObjAddress res = null;
-		if ( model instanceof ObjAddress ) {
-			res = (ObjAddress) model;
+	public static ObjTestTwoFieldKey wrap( ModelTestTwoFieldKey model ) {
+		ObjTestTwoFieldKey res = null;
+		if ( model instanceof ObjTestTwoFieldKey ) {
+			res = (ObjTestTwoFieldKey) model;
 		} else { 
-			res = new ObjAddress( model );
+			res = new ObjTestTwoFieldKey( model );
 		}
 		return res;
 	}
 
 	@Override
 	public void readSQL(SQLInput stream, String typeName) throws SQLException {
-		this.setId( stream.readBigDecimal() );
-		this.setIdUser( stream.readBigDecimal() );
-		this.setDateInsert( stream.readTimestamp() );
-		this.setDateUpdate( stream.readTimestamp() );
+		this.setIdOne( stream.readBigDecimal() );
+		this.setIdTwo( stream.readBigDecimal() );
 		this.setInfo( stream.readString() );
 	}
 
 	@Override
 	public void writeSQL(SQLOutput stream) throws SQLException {
-		stream.writeBigDecimal( this.getId() );
-		stream.writeBigDecimal( this.getIdUser() );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
+		stream.writeBigDecimal( this.getIdOne() );
+		stream.writeBigDecimal( this.getIdTwo() );
 		stream.writeString( this.getInfo() );
 	}
 

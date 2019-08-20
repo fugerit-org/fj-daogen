@@ -3,6 +3,7 @@ package org.fugerit.java.daogen.sample.def.facade;
 import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityLogDataFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUploadFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserFacade;
 
@@ -40,6 +41,14 @@ public interface FugeritLogicFacade {
 	 * @throws DAOException	in case of problems
 	 */
 	EntityLogDataFacade getEntityLogDataFacade() throws DAOException;
+
+	/**
+	 * Facade incapsulating persistance for entity : TEST_TWO_FIELD_KEY
+	 *
+	 * @return	the facade
+	 * @throws DAOException	in case of problems
+	 */
+	EntityTestTwoFieldKeyFacade getEntityTestTwoFieldKeyFacade() throws DAOException;
 
 	/**
 	 * Facade incapsulating persistance for entity : UPLOAD

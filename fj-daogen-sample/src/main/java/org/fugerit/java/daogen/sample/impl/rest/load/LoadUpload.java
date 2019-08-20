@@ -46,11 +46,11 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 	 * Property id is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param id	THe value of property id to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param id	Tee value of property id to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
-	public static SimpleServiceResult<ModelUpload> loadByIdWorker( DAOContext context, BigDecimal id ) throws DAOException {
+	public static SimpleServiceResult<ModelUpload> loadByIdWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
 		EntityUploadFacade facade = factory.getEntityUploadFacade();
 		ModelUpload model = facade.loadById( context , id );
@@ -61,14 +61,13 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 	@GET
 	@Path("/id/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByID(@PathParam( "id" ) String id) throws Exception {
+	public Response getByID(@PathParam( "id") String id) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal idCurrent = new BigDecimal( id );
-			SimpleServiceResult<ModelUpload>  result = loadByIdWorker( context, idCurrent );
+			SimpleServiceResult<ModelUpload>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
 			res = Response.ok( result ).build();
 		} catch(Exception e) {
-			logger.error("ERRORE - REST- LoadUpload - getByID - valore := "+id+" - "+e, e );
+			logger.error("ERRORE - REST- LoadUpload - getByID - "+e, e );
 		}
 		return res;
 	}
@@ -95,9 +94,9 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 	 * Property ModelUpload is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param model	THe value of property ModelUpload to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param model	Tee value of property ModelUpload to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUpload>> loadByModelWorker( DAOContext context, ModelUpload model ) throws DAOException {
 		UploadFinder finder = UploadFinder.newInstance( model );
@@ -113,9 +112,9 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 	 * Property id is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property id to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property id to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUpload>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
 		HelperUpload model = new HelperUpload();

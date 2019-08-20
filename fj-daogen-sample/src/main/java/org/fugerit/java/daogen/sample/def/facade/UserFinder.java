@@ -1,6 +1,5 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
-import java.math.BigDecimal;
 import org.fugerit.java.core.db.daogen.BaseIdFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelUser;
 
@@ -34,24 +33,24 @@ public class UserFinder extends BaseIdFinder {
 	}
 
 	/**
-	 * Factory method per un nuovo finder 
+	 *Factory method to create a new finder 
 	 *
-	 * @param id		id dell'oggetto da cercare
+	 * @param id		id to wrap in the finder
 	 *
-	 * @return	il finder
+	 * @return	the finder
 	 */
-	public static UserFinder newInstance( BigDecimal id ) { 
+	public static UserFinder newInstance( java.math.BigDecimal id ) { 
 		UserFinder finder = new UserFinder();
 		finder.setId( id );
 		return finder;
 	}
 
 	/**
-	 * Factory method per un nuovo finder 
+	 * Factory method to create a new finder 
 	 *
-	 * @param model		l'oggetto di modello
+	 * @param model		the model to wrap in the finder
 	 *
-	 * @return	il finder
+	 * @return	the finder
 	 */
 	public static UserFinder newInstance( ModelUser model ) { 
 		UserFinder finder = new UserFinder();

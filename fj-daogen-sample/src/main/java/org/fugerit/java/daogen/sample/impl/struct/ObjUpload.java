@@ -4,7 +4,6 @@ import org.fugerit.java.core.db.daogen.StructMapper;
 import org.fugerit.java.daogen.sample.def.model.ModelUpload;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUpload;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperUpload;
-import org.fugerit.java.core.db.daogen.SQLTypeConverter;
 import java.util.Map;
 import java.util.HashMap;
 import java.sql.SQLData;
@@ -68,15 +67,15 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 		this.setId( stream.readBigDecimal() );
 		this.setDateInsert( stream.readTimestamp() );
 		this.setDateUpdate( stream.readTimestamp() );
-		this.setContent( SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() ) );
+		this.setContent( org.fugerit.java.core.db.daogen.SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() ) );
 	}
 
 	@Override
 	public void writeSQL(SQLOutput stream) throws SQLException {
 		throwUnsupported( "Method writeSQL() not implemented for "+this.getSQLTypeName() );
 		stream.writeBigDecimal( this.getId() );
-		stream.writeTimestamp( SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
-		stream.writeTimestamp( SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
 		// blob must be writtern separately : this.getContent();
 	}
 

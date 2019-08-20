@@ -4,7 +4,6 @@ import org.fugerit.java.core.db.daogen.StructMapper;
 import org.fugerit.java.daogen.sample.def.model.ModelUser;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperUser;
-import org.fugerit.java.core.db.daogen.SQLTypeConverter;
 import java.util.Map;
 import java.util.HashMap;
 import java.sql.SQLData;
@@ -79,9 +78,9 @@ public class ObjUser extends WrapperUser implements SQLData, StructMapper {
 		stream.writeBigDecimal( this.getId() );
 		stream.writeString( this.getUsername() );
 		stream.writeString( this.getPassword() );
-		stream.writeTimestamp( SQLTypeConverter.utilDateToSqlTimestamp( this.getLastLogin() ) );
-		stream.writeTimestamp( SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
-		stream.writeTimestamp( SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getLastLogin() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
 		stream.writeBigDecimal( this.getState() );
 	}
 

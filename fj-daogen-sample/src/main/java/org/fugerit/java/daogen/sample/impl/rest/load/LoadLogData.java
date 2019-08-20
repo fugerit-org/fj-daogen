@@ -41,38 +41,6 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 
 	private static final long serialVersionUID = 618306791208L;
 
-	/**
-	 * Service method to load entity of type ModelLogData.
-	 * Property id is being used as filter
-	 * 
-	 * @param context	DAO context
-	 * @param id	THe value of property id to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
-	 */
-	public static SimpleServiceResult<ModelLogData> loadByIdWorker( DAOContext context, BigDecimal id ) throws DAOException {
-		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
-		EntityLogDataFacade facade = factory.getEntityLogDataFacade();
-		ModelLogData model = facade.loadById( context , id );
-		SimpleServiceResult<ModelLogData>  result = SimpleServiceResult.newDefaultResult( model );
-		return result;
-	}
-
-	@GET
-	@Path("/id/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByID(@PathParam( "id" ) String id) throws Exception {
-		Response res = null;
-		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal idCurrent = new BigDecimal( id );
-			SimpleServiceResult<ModelLogData>  result = loadByIdWorker( context, idCurrent );
-			res = Response.ok( result ).build();
-		} catch(Exception e) {
-			logger.error("ERRORE - REST- LoadLogData - getByID - valore := "+id+" - "+e, e );
-		}
-		return res;
-	}
-
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -95,9 +63,9 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * Property ModelLogData is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param model	THe value of property ModelLogData to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param model	Tee value of property ModelLogData to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelLogData>> loadByModelWorker( DAOContext context, ModelLogData model ) throws DAOException {
 		LogDataFinder finder = LogDataFinder.newInstance( model );
@@ -113,9 +81,9 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * Property id is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property id to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property id to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelLogData>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
 		HelperLogData model = new HelperLogData();
@@ -144,9 +112,9 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * Property info is being used as filter
 	 * 
 	 * @param context	DAO context
-	 * @param current	THe value of property info to use as a filter
-	 * @return			l' elenco dei risultati trovati
-	 * @throws AnprBasicException		in caso di problemi durante il caricamento
+	 * @param current	Tee value of property info to use as a filter
+	 * @return			the result found
+	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelLogData>> loadByInfo( DAOContext context, java.lang.String current ) throws DAOException {
 		HelperLogData model = new HelperLogData();

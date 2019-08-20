@@ -1,13 +1,13 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
 import org.fugerit.java.core.db.daogen.BaseIdFinder;
-import org.fugerit.java.daogen.sample.def.model.ModelAddress;
+import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
 /**
- * AddressFinder, version : 1.0.0
+ * TestTwoFieldKeyFinder, version : 1.0.0
  *
  * author: fugerit
  *
@@ -15,34 +15,21 @@ import org.fugerit.java.daogen.sample.def.model.ModelAddress;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class AddressFinder extends BaseIdFinder {
+public class TestTwoFieldKeyFinder extends BaseIdFinder {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 566741358487L;
+	private static final long serialVersionUID = 772549612012L;
 
-	private ModelAddress model;
+	private ModelTestTwoFieldKey model;
 
-	public void setModel( ModelAddress model ) {
+	public void setModel( ModelTestTwoFieldKey model ) {
 		this.model = model;
 	}
 
-	public ModelAddress getModel() {
+	public ModelTestTwoFieldKey getModel() {
 		return this.model;
-	}
-
-	/**
-	 *Factory method to create a new finder 
-	 *
-	 * @param id		id to wrap in the finder
-	 *
-	 * @return	the finder
-	 */
-	public static AddressFinder newInstance( java.math.BigDecimal id ) { 
-		AddressFinder finder = new AddressFinder();
-		finder.setId( id );
-		return finder;
 	}
 
 	/**
@@ -52,9 +39,9 @@ public class AddressFinder extends BaseIdFinder {
 	 *
 	 * @return	the finder
 	 */
-	public static AddressFinder newInstance( ModelAddress model ) { 
-		AddressFinder finder = new AddressFinder();
-		finder.setId( model.getId() );
+	public static TestTwoFieldKeyFinder newInstance( ModelTestTwoFieldKey model ) { 
+		TestTwoFieldKeyFinder finder = new TestTwoFieldKeyFinder();
+		// default id not available for this entity
 		finder.setModel( model );
 		return finder;
 	}

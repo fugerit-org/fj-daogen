@@ -1,6 +1,5 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
-import java.math.BigDecimal;
 import org.fugerit.java.core.db.daogen.DAOContext;
 import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.db.daogen.BasicDaoResult;
@@ -24,40 +23,41 @@ public interface EntityUploadFacade {
 	// custom code end ( code below here will be overwritten )
 
 	/*
-	 * NOTA: Eccetto la ricerca per id, e' preferibile usare dei finder per incapsulare i parametri di ricerca.
+	 * NOTE: It is advised to use a finder for incapsulating search params, except searches for primary key.
 	 */
 
 	/**
-	 * Metodo di caricamento per id della entity : ModelUpload
+	 * Method to load all the items for entity : ModelUpload
 	 *
-	 * @param context	il contesto dell'operazione
-	 * @param id		id dell'oggetto da cercare
+	 * @param context	DAOContext
 	 *
-	 * @return l'oggetto trovato o <code>null</code>.
-	 * @throws DAOException			in caso di errori
-	 */
-	ModelUpload loadById( DAOContext context, BigDecimal id ) throws DAOException;
-
-	/**
-	 * Metodo di caricamento per tutte le entity : ModelUpload
-	 *
-	 * @param context	il contesto dell'operazione
-	 *
-	 * @return Il risultato della ricerca
-	 * @throws DAOException			in caso di errori
+	 * @return search result
+	 * @throws DAOException			in case of errors
 	 */
 	BasicDaoResult<ModelUpload> loadAll( DAOContext context ) throws DAOException;
 
 	/**
-	 * Metodo di caricamento per tutte le entity : ModelUpload
+	 * Method to load all the items for entity : ModelUpload
 	 *
-	 * @param context	il contesto dell'operazione
-	 * @param finder	il finder
+	 * @param context	DAOContext
+	 * @param finder	the finder incapsulating search params
 	 *
-	 * @return Il risultato della ricerca
+	 * @return search result
 	 * @throws DAOException			in caso di errori
 	 */
 	BasicDaoResult<ModelUpload> loadAllByFinder( DAOContext context, UploadFinder finder ) throws DAOException;
+
+	/**
+	 * Load method by primary key for entity : ModelUpload
+	 *
+	 * @param context	DAO Context
+	 * @param id part of the key
+
+	 *
+	 * @return The found object or <code>null</code>
+	 * @throws DAOException			in case of errors
+	 */
+	ModelUpload loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException;
 
 	/**
 	 * Method to create an new entity of type : ModelUpload
@@ -68,30 +68,30 @@ public interface EntityUploadFacade {
 	 * @param model		Entity to create
 	 *
 	 * @return 			The created entity
-	 * @throws AnprBasicException		In case of any error.
+	 * @throws DAOException		In case of any error.
 	 */
 	BasicDaoResult<ModelUpload> create( DAOContext context, ModelUpload model ) throws DAOException;
+	/**
+	 * Delete method by primary key for entity : ModelUpload
+	 *
+	 * @param context	DAO Context
+	 * @param id part of the key
+
+	 *
+	 * @return Delete result (resultCode=0, delete ok)
+	 * @throws DAOException			in case of errors
+	 */
+	BasicDaoResult<ModelUpload> deleteById( DAOContext context, java.math.BigDecimal id ) throws DAOException;
 
 	/**
-	 * Method to modify an entity of type : ModelUpload
+	 * Delete method by primary key for entity : ModelUpload
 	 *
-	 * @param context	DAO context
-	 * @param model		Entity to modify
+	 * @param context	DAO Context
+	 * @param 	model	entity to update
 	 *
-	 * @return 			The modified entity
-	 * @throws AnprBasicException		In case of any error.
+	 * @return Update result (resultCode=0, update ok)
+	 * @throws DAOException			in case of errors
 	 */
 	BasicDaoResult<ModelUpload> updateById( DAOContext context, ModelUpload model ) throws DAOException;
-
-	/**
-	 * Method to delete an entity of type : ModelUpload
-	 *
-	 * @param context	il contesto dell'operazione
-	 * @param id		id entity da cancellare
-	 *
-	 * @return Il risultato della cancellazione
-	 * @throws AnprBasicException		In case of any error.
-	 */
-	BasicDaoResult<ModelUpload> deleteById( DAOContext context, BigDecimal id ) throws DAOException;
 
 }
