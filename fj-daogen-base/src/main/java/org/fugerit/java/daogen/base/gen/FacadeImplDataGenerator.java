@@ -155,7 +155,7 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		"+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 			this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 			if ( autoSetDateUpdate != null ) {
-				DaogenCatalogField colData = this.getCurrentEntity().get( autoSetDateInsert );
+				DaogenCatalogField colData = this.getCurrentEntity().get( autoSetDateUpdate );
 				if ( colData != null ) {
 					this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
 					this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
