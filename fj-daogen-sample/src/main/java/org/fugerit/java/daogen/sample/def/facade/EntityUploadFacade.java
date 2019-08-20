@@ -71,6 +71,7 @@ public interface EntityUploadFacade {
 	 * @throws DAOException		In case of any error.
 	 */
 	BasicDaoResult<ModelUpload> create( DAOContext context, ModelUpload model ) throws DAOException;
+
 	/**
 	 * Delete method by primary key for entity : ModelUpload
 	 *
