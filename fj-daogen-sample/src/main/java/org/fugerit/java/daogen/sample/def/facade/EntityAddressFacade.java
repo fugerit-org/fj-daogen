@@ -51,7 +51,7 @@ public interface EntityAddressFacade {
 	 * Load method by primary key for entity : ModelAddress
 	 *
 	 * @param context	DAO Context
-	 * @param idAddress system id
+	 * @param id Address system id
 
 	 *
 	 * @return The found object or <code>null</code>
@@ -71,11 +71,12 @@ public interface EntityAddressFacade {
 	 * @throws DAOException		In case of any error.
 	 */
 	BasicDaoResult<ModelAddress> create( DAOContext context, ModelAddress model ) throws DAOException;
+
 	/**
 	 * Delete method by primary key for entity : ModelAddress
 	 *
 	 * @param context	DAO Context
-	 * @param idAddress system id
+	 * @param id Address system id
 
 	 *
 	 * @return Delete result (resultCode=0, delete ok)

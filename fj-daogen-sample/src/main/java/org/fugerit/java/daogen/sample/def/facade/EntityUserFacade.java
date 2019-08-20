@@ -51,7 +51,7 @@ public interface EntityUserFacade {
 	 * Load method by primary key for entity : ModelUser
 	 *
 	 * @param context	DAO Context
-	 * @param idUser system id
+	 * @param id User system id
 
 	 *
 	 * @return The found object or <code>null</code>
@@ -71,11 +71,12 @@ public interface EntityUserFacade {
 	 * @throws DAOException		In case of any error.
 	 */
 	BasicDaoResult<ModelUser> create( DAOContext context, ModelUser model ) throws DAOException;
+
 	/**
 	 * Delete method by primary key for entity : ModelUser
 	 *
 	 * @param context	DAO Context
-	 * @param idUser system id
+	 * @param id User system id
 
 	 *
 	 * @return Delete result (resultCode=0, delete ok)

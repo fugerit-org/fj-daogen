@@ -66,19 +66,20 @@ public class GeneratorKeyHelper implements Serializable {
 					this.pathParams.append( ", " );
 				}
 				String fieldName = GeneratorNameHelper.toPropertyName( currentField );
-				this.keyBuilder.append( config.getTypeMapper().mapForModel( field ) );
+				String javaType = config.getTypeMapper().mapForModel( field );
+				this.keyBuilder.append( javaType );
 				this.keyBuilder.append( " " );
 				this.keyBuilder.append( fieldName );
 				this.paramBuilder.append( "	 * @param " );
 				this.paramBuilder.append( fieldName );
-				this.forwardBuilder.append( fieldName );
 				if ( StringUtils.isNotEmpty( field.getComments() ) ) {
+					this.paramBuilder.append( " " );
 					this.paramBuilder.append( field.getComments() );	
 				} else {
 					this.paramBuilder.append( " part of the key" );
 				}
-				String javaType = config.getTypeMapper().mapForModel( field );
 				this.paramBuilder.append( System.lineSeparator() );
+				this.forwardBuilder.append( fieldName );
 				// rest data
 				if ( javaType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
 					this.restBuilder.append( "new java.math.BigDecimal(" );

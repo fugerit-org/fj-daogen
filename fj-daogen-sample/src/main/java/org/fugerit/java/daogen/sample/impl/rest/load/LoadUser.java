@@ -41,15 +41,6 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 
 	private static final long serialVersionUID = 960947509004L;
 
-	/**
-	 * Service method to load entity of type ModelUser.
-	 * Property id is being used as filter
-	 * 
-	 * @param context	DAO context
-	 * @param id	Tee value of property id to use as a filter
-	 * @return			the result found
-	 * @throws DAOException		in case of any issue
-	 */
 	public static SimpleServiceResult<ModelUser> loadByIdWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
 		EntityUserFacade facade = factory.getEntityUserFacade();

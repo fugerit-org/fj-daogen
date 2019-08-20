@@ -41,15 +41,6 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 
 	private static final long serialVersionUID = 507700138041L;
 
-	/**
-	 * Service method to load entity of type ModelAddress.
-	 * Property id is being used as filter
-	 * 
-	 * @param context	DAO context
-	 * @param id	Tee value of property id to use as a filter
-	 * @return			the result found
-	 * @throws DAOException		in case of any issue
-	 */
 	public static SimpleServiceResult<ModelAddress> loadByIdWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
 		EntityAddressFacade facade = factory.getEntityAddressFacade();
