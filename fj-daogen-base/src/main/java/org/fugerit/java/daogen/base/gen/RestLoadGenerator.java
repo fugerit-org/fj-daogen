@@ -75,7 +75,7 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		Response res = null;" );
 			this.getWriter().println( "		try (CloseableDAOContext context = this.newDefaultContext() ) {" );
 			this.getWriter().println( "			"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = loadByIdWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
-			this.getWriter().println( "			res = Response.ok( result ).build();" );
+			this.getWriter().println( "			res = this.createResponse( result );" );
 			this.getWriter().println( "		} catch(Exception e) {" );
 			this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
 			this.getWriter().println( "		}" );
@@ -94,7 +94,7 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( "		"+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
 		this.getWriter().println( "			"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> resultFacade = facade.loadAll( context );" );
 		this.getWriter().println( "			"+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = "+this.getClassServiceResult()+".newDefaultResult( resultFacade.getList() );" );
-		this.getWriter().println( "			res = Response.ok( result ).build();" );
+		this.getWriter().println( "			res = this.createResponse( result );" );
 		this.getWriter().println( "		} catch(Exception e) {" );
 		this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getAll - \"+e, e );" );
 		this.getWriter().println( "		}" );
@@ -138,7 +138,7 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 					this.getWriter().println( "			BigDecimal value = new BigDecimal("+propertyName+");" );
 				}
 				this.getWriter().println( "			"+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = loadBy"+javaName+"( context, value );" );
-				this.getWriter().println( "			res = Response.ok( result ).build();" );
+				this.getWriter().println( "			res = this.createResponse( result );" );
 				this.getWriter().println( "		} catch(Exception e) {" );
 				this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getAll"+javaName+" - \"+e, e );" );
 				this.getWriter().println( "		}" );
