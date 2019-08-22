@@ -34,7 +34,7 @@ import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
  */
 @Stateless
 @Path("/upload/load")
-public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper {
+public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper<ModelUpload> {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
@@ -56,7 +56,7 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			SimpleServiceResult<ModelUpload>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUpload - getByID - "+e, e );
 		}
@@ -73,7 +73,7 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 		EntityUploadFacade facade = factory.getEntityUploadFacade();
 			BasicDaoResult<ModelUpload> resultFacade = facade.loadAll( context );
 			SimpleServiceResult<List<ModelUpload>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUpload - getAll - "+e, e );
 		}
@@ -122,7 +122,7 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(id);
 			SimpleServiceResult<List<ModelUpload>>  result = loadById( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUpload - getAllId - "+e, e );
 		}

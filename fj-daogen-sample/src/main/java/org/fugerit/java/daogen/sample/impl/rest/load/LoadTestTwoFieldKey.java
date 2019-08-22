@@ -34,7 +34,7 @@ import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
  */
 @Stateless
 @Path("/testtwofieldkey/load")
-public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper {
+public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper<ModelTestTwoFieldKey> {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
@@ -56,7 +56,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			SimpleServiceResult<ModelTestTwoFieldKey>  result = loadByIdWorker( context, new java.math.BigDecimal(idTwo), new java.math.BigDecimal(idOne) );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getByID - "+e, e );
 		}
@@ -73,7 +73,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 		EntityTestTwoFieldKeyFacade facade = factory.getEntityTestTwoFieldKeyFacade();
 			BasicDaoResult<ModelTestTwoFieldKey> resultFacade = facade.loadAll( context );
 			SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getAll - "+e, e );
 		}
@@ -122,7 +122,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(idOne);
 			SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByIdOne( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getAllIdOne - "+e, e );
 		}
@@ -153,7 +153,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(idTwo);
 			SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByIdTwo( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getAllIdTwo - "+e, e );
 		}
@@ -184,7 +184,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			String value = info;
 			SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByInfo( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getAllInfo - "+e, e );
 		}

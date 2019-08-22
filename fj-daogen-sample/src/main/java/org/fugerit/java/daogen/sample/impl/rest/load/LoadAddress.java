@@ -34,7 +34,7 @@ import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
  */
 @Stateless
 @Path("/address/load")
-public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper {
+public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper<ModelAddress> {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
@@ -56,7 +56,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			SimpleServiceResult<ModelAddress>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadAddress - getByID - "+e, e );
 		}
@@ -73,7 +73,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		EntityAddressFacade facade = factory.getEntityAddressFacade();
 			BasicDaoResult<ModelAddress> resultFacade = facade.loadAll( context );
 			SimpleServiceResult<List<ModelAddress>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadAddress - getAll - "+e, e );
 		}
@@ -122,7 +122,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(id);
 			SimpleServiceResult<List<ModelAddress>>  result = loadById( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadAddress - getAllId - "+e, e );
 		}
@@ -153,7 +153,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(idUser);
 			SimpleServiceResult<List<ModelAddress>>  result = loadByIdUser( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadAddress - getAllIdUser - "+e, e );
 		}
@@ -184,7 +184,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			String value = info;
 			SimpleServiceResult<List<ModelAddress>>  result = loadByInfo( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadAddress - getAllInfo - "+e, e );
 		}

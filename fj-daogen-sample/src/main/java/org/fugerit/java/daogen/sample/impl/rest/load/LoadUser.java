@@ -34,7 +34,7 @@ import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
  */
 @Stateless
 @Path("/user/load")
-public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper {
+public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper<ModelUser> {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
@@ -56,7 +56,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			SimpleServiceResult<ModelUser>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getByID - "+e, e );
 		}
@@ -73,7 +73,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		EntityUserFacade facade = factory.getEntityUserFacade();
 			BasicDaoResult<ModelUser> resultFacade = facade.loadAll( context );
 			SimpleServiceResult<List<ModelUser>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getAll - "+e, e );
 		}
@@ -122,7 +122,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(id);
 			SimpleServiceResult<List<ModelUser>>  result = loadById( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getAllId - "+e, e );
 		}
@@ -153,7 +153,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			String value = username;
 			SimpleServiceResult<List<ModelUser>>  result = loadByUsername( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getAllUsername - "+e, e );
 		}
@@ -184,7 +184,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			String value = password;
 			SimpleServiceResult<List<ModelUser>>  result = loadByPassword( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getAllPassword - "+e, e );
 		}
@@ -215,7 +215,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(state);
 			SimpleServiceResult<List<ModelUser>>  result = loadByState( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getAllState - "+e, e );
 		}
