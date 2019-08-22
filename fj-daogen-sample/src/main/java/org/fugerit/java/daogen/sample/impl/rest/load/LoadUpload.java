@@ -1,7 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
 import java.util.List;
-import java.math.BigDecimal;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,7 +38,7 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 755298642977L;
+	private static final long serialVersionUID = 509829836417L;
 
 	public static SimpleServiceResult<ModelUpload> loadByIdWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
@@ -56,6 +55,28 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			SimpleServiceResult<ModelUpload>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
+			res = this.createResponseFromObject( result );
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadUpload - getByID - "+e, e );
+		}
+		return res;
+	}
+
+	public static SimpleServiceResult<ModelUpload> loadByIdDeepWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityUploadFacade facade = factory.getEntityUploadFacade();
+		ModelUpload model = facade.loadById( context , id );
+		SimpleServiceResult<ModelUpload>  result = SimpleServiceResult.newDefaultResult( model );
+		return result;
+	}
+
+	@GET
+	@Path("/deep/id/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByIDdeep(@PathParam( "id") String id) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			SimpleServiceResult<ModelUpload>  result = loadByIdDeepWorker( context, new java.math.BigDecimal(id) );
 			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUpload - getByID - "+e, e );
@@ -96,37 +117,6 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 		BasicDaoResult<ModelUpload> resultFacade = facade.loadAllByFinder( context , finder );
 		SimpleServiceResult<List<ModelUpload>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
 		return result;
-	}
-
-	/**
-	 * Service method to load entity of type ModelUpload.
-	 * Property id is being used as filter
-	 * 
-	 * @param context	DAO context
-	 * @param current	Tee value of property id to use as a filter
-	 * @return			the result found
-	 * @throws DAOException		in case of any issue
-	 */
-	public static SimpleServiceResult<List<ModelUpload>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperUpload model = new HelperUpload();
-		model.setId( current );
-		SimpleServiceResult<List<ModelUpload>>  result = loadByModelWorker( context , model );
-		return result;
-	}
-
-	@GET
-	@Path("/id/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllId(@PathParam( "id" ) String id) throws Exception {
-		Response res = null;
-		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(id);
-			SimpleServiceResult<List<ModelUpload>>  result = loadById( context, value );
-			res = this.createResponseFromList( result );
-		} catch(Exception e) {
-			logger.error("ERRORE - REST- LoadUpload - getAllId - "+e, e );
-		}
-		return res;
 	}
 
 }

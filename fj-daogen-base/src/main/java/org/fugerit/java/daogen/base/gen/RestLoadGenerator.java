@@ -9,6 +9,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
+import org.fugerit.java.daogen.base.config.DaogenGeneratorCatalog;
 
 public class RestLoadGenerator extends DaogenBasicGenerator {
 
@@ -24,7 +25,6 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD ), DaogenCatalogConstants.restLoadName( entity ) ), 
 				STYLE_CLASS, daogenConfig, entity );
 		this.getImportList().add( "java.util.List" );
-		this.getImportList().add( "java.math.BigDecimal" );
 		this.getImportList().add( "javax.ejb.Stateless" );
 		this.getImportList().add( "javax.ws.rs.GET" );
 		this.getImportList().add( "javax.ws.rs.Path" );
@@ -74,7 +74,7 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "	public Response getByID("+primaryKeyHelper.getPathParams()+") throws Exception {" );
 			this.getWriter().println( "		Response res = null;" );
 			this.getWriter().println( "		try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-			this.getWriter().println( "			"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = loadByIdWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
+			this.getWriter().println( "			"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
 			this.getWriter().println( "			res = this.createResponseFromObject( result );" );
 			this.getWriter().println( "		} catch(Exception e) {" );
 			this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
@@ -82,6 +82,29 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		return res;" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println( );
+			// deep load
+			this.getWriter().println( "	public static "+this.getClassServiceResult()+"<"+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+			this.getWriter().println( "		"+factoryClassName+" factory = ("+factoryClassName+") context.getAttribute("+factoryClassName+".ATT_NAME );" );
+			this.getWriter().println( "		"+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
+			this.getWriter().println( "		"+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
+			this.getWriter().println( "		"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
+			this.getWriter().println( "		return result;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println( );
+			this.getWriter().println( "	@GET" );
+			this.getWriter().println( "	@Path(\"/deep"+primaryKeyHelper.getUrlParams()+"\")" );
+			this.getWriter().println( "	@Produces(MediaType.APPLICATION_JSON)" );
+			this.getWriter().println( "	public Response getByIDdeep("+primaryKeyHelper.getPathParams()+") throws Exception {" );
+			this.getWriter().println( "		Response res = null;" );
+			this.getWriter().println( "		try (CloseableDAOContext context = this.newDefaultContext() ) {" );
+			this.getWriter().println( "			"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
+			this.getWriter().println( "			res = this.createResponseFromObject( result );" );
+			this.getWriter().println( "		} catch(Exception e) {" );
+			this.getWriter().println( "			logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
+			this.getWriter().println( "		}" );
+			this.getWriter().println( "		return res;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println( );			
 		}
 		// load all
 		this.getWriter().println( "	@GET" );
@@ -114,7 +137,7 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( );
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			String javaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
-			if ( !field.getId().equals( "id") && ( javaType.equalsIgnoreCase( "java.lang.String" ) || javaType.equals( "java.math.BigDecimal" ) ) ) {
+			if ( !field.getId().equalsIgnoreCase( this.getCurrentEntity().getPrimaryKey() ) && ( javaType.equalsIgnoreCase( "java.lang.String" ) || javaType.equals( "java.math.BigDecimal" ) ) ) {
 				String javaName = GeneratorNameHelper.toClassName( field.getId() );
 				String urlName = field.getId().toLowerCase();
 				String propertyName = GeneratorNameHelper.toPropertyName( urlName );
@@ -135,7 +158,7 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 				if ( field.getJavaType().equals( "java.lang.String" ) ) {
 					this.getWriter().println( "			String value = "+propertyName+";" );
 				} else {
-					this.getWriter().println( "			BigDecimal value = new BigDecimal("+propertyName+");" );
+					this.getWriter().println( "			java.math.BigDecimal value = new java.math.BigDecimal("+propertyName+");" );
 				}
 				this.getWriter().println( "			"+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = loadBy"+javaName+"( context, value );" );
 				this.getWriter().println( "			res = this.createResponseFromList( result );" );

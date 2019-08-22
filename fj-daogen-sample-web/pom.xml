@@ -2,7 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>fj-daogen-sample</artifactId>
+	<artifactId>fj-daogen-sample-web</artifactId>
+	<packaging>war</packaging>
 
 	<parent>
 		<groupId>org.fugerit.java</groupId>
@@ -10,7 +11,7 @@
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<name>fj-daogen-sample</name>
+	<name>fj-daogen-sample-web</name>
 	<description></description>
 
 	<licenses>
@@ -26,62 +27,73 @@
 	</build>
 
 	<dependencies>
-
+	
+		<dependency>
+		    <groupId>org.glassfish.jersey.containers</groupId>
+		    <artifactId>jersey-container-servlet</artifactId>
+		    <version>2.26-b06</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish.jersey.inject</groupId>
+		    <artifactId>jersey-hk2</artifactId>
+		    <version>2.26-b06</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish.jersey.media</groupId>
+		    <artifactId>jersey-media-json-jackson</artifactId>
+		    <version>2.26-b06</version>
+		</dependency>		
+		
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-test</artifactId>
 		</dependency>	
-
+		
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-core</artifactId>
 		</dependency>	
 	
-		<!-- java core dependancies -->
+		<dependency>
+			<groupId>org.fugerit.java</groupId>
+			<artifactId>fj-daogen-sample</artifactId>
+		</dependency>		
+	
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>			
+			
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>		
+		
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+			</dependency>			
+		
+		<!-- 
+
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- logging -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>commons-dbcp</groupId>
-		    <artifactId>commons-dbcp</artifactId>
-		</dependency>		
-		
-		<!-- for testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>test</scope>
-		</dependency>			
-		
+			<scope>provided</scope>
+		</dependency>				
+ -->
 	</dependencies>
 
 	<organization>

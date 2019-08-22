@@ -9,6 +9,7 @@ import org.fugerit.java.core.db.daogen.CloseableDAOContext;
 import org.fugerit.java.core.db.daogen.SimpleServiceProvider;
 import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade;
+import org.fugerit.java.test.db.helper.MemDBHelper;
 
 public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
 
@@ -19,13 +20,18 @@ public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
 
 	@Override
 	protected CloseableDAOContext newDefaultContext() throws DAOException {
-		final Connection connData = null;
+		Connection connData =  null;
+		try {
+			connData = MemDBHelper.newConnection();
+		} catch (Exception e) {
+			throw new DAOException( e );
+		}
+		final Connection conn = connData;
 		CloseableDAOContext context = new CloseableDAOContext() {
-			private Connection conn = connData;
 			private Map<String, Object> map = new HashMap<String, Object>();
 			@Override
 			public void close() throws Exception {
-				this.conn.close();
+				conn.close();
 			}
 			@Override
 			public void setAttribute(String key, Object value) {
@@ -38,7 +44,7 @@ public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
 			
 			@Override
 			public Connection getConnection() throws DAOException {
-				return this.conn;
+				return conn;
 			}
 		};
 		context.setAttribute( FugeritLogicFacade.ATT_NAME, new FugeritDataLogicFacade() );

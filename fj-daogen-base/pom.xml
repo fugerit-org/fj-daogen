@@ -29,6 +29,11 @@
 
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
+			<artifactId>fj-test</artifactId>
+		</dependency>	
+
+		<dependency>
+			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-core</artifactId>
 		</dependency>	
 	

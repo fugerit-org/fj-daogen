@@ -1,7 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
 import java.util.List;
-import java.math.BigDecimal;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,23 +38,45 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 892898388143L;
+	private static final long serialVersionUID = 243870584263L;
 
-	public static SimpleServiceResult<ModelTestTwoFieldKey> loadByIdWorker( DAOContext context, java.math.BigDecimal idTwo, java.math.BigDecimal idOne ) throws DAOException {
+	public static SimpleServiceResult<ModelTestTwoFieldKey> loadByIdWorker( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
 		EntityTestTwoFieldKeyFacade facade = factory.getEntityTestTwoFieldKeyFacade();
-		ModelTestTwoFieldKey model = facade.loadById( context , idTwo, idOne );
+		ModelTestTwoFieldKey model = facade.loadById( context , idOne, idTwo );
 		SimpleServiceResult<ModelTestTwoFieldKey>  result = SimpleServiceResult.newDefaultResult( model );
 		return result;
 	}
 
 	@GET
-	@Path("/idTwo/{idTwo}/idOne/{idOne}")
+	@Path("/idOne/{idOne}/idTwo/{idTwo}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByID(@PathParam( "idTwo") String idTwo, @PathParam( "idOne") String idOne) throws Exception {
+	public Response getByID(@PathParam( "idOne") String idOne, @PathParam( "idTwo") String idTwo) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			SimpleServiceResult<ModelTestTwoFieldKey>  result = loadByIdWorker( context, new java.math.BigDecimal(idTwo), new java.math.BigDecimal(idOne) );
+			SimpleServiceResult<ModelTestTwoFieldKey>  result = loadByIdWorker( context, new java.math.BigDecimal(idOne), new java.math.BigDecimal(idTwo) );
+			res = this.createResponseFromObject( result );
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getByID - "+e, e );
+		}
+		return res;
+	}
+
+	public static SimpleServiceResult<ModelTestTwoFieldKey> loadByIdDeepWorker( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException {
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityTestTwoFieldKeyFacade facade = factory.getEntityTestTwoFieldKeyFacade();
+		ModelTestTwoFieldKey model = facade.loadById( context , idOne, idTwo );
+		SimpleServiceResult<ModelTestTwoFieldKey>  result = SimpleServiceResult.newDefaultResult( model );
+		return result;
+	}
+
+	@GET
+	@Path("/deep/idOne/{idOne}/idTwo/{idTwo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByIDdeep(@PathParam( "idOne") String idOne, @PathParam( "idTwo") String idTwo) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			SimpleServiceResult<ModelTestTwoFieldKey>  result = loadByIdDeepWorker( context, new java.math.BigDecimal(idOne), new java.math.BigDecimal(idTwo) );
 			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getByID - "+e, e );
@@ -120,7 +141,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 	public Response getAllIdOne(@PathParam( "id_one" ) String idOne) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(idOne);
+			java.math.BigDecimal value = new java.math.BigDecimal(idOne);
 			SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByIdOne( context, value );
 			res = this.createResponseFromList( result );
 		} catch(Exception e) {
@@ -151,7 +172,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 	public Response getAllIdTwo(@PathParam( "id_two" ) String idTwo) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(idTwo);
+			java.math.BigDecimal value = new java.math.BigDecimal(idTwo);
 			SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByIdTwo( context, value );
 			res = this.createResponseFromList( result );
 		} catch(Exception e) {

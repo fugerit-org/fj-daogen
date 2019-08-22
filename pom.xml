@@ -18,7 +18,7 @@
 		<j2ee-version-compliance>6.0</j2ee-version-compliance>
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
-		<fj-version>0.5.1</fj-version>
+		<fj-version>0.5-SNAPSHOT</fj-version>
 	    <!-- maven plugin versions -->
 	    <mvn-source-version>3.1.0</mvn-source-version>
 	    <mvn-javadoc-version>3.1.0</mvn-javadoc-version>
@@ -76,12 +76,25 @@
 	<modules>
 		<module>fj-daogen-base</module>
 		<module>fj-daogen-sample</module>
+		<module>fj-daogen-sample-web</module>
 		<module>fj-daogen-tool</module>
 	</modules>
 
 	<dependencyManagement>
 	
 		<dependencies>
+
+	        <dependency>
+	            <groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>${hsqldb-version}</version>
+			</dependency>			
+
+			<dependency>
+				<groupId>org.fugerit.java</groupId>
+				<artifactId>fj-test</artifactId>
+				<version>${fj-version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.fugerit.java</groupId>
@@ -93,7 +106,20 @@
 				<groupId>org.fugerit.java</groupId>
 				<artifactId>fj-daogen-base</artifactId>
 				<version>${project.version}</version>
-			</dependency>			
+			</dependency>	
+			
+			<dependency>
+				<groupId>org.fugerit.java</groupId>
+				<artifactId>fj-daogen-sample</artifactId>
+				<version>${project.version}</version>
+			</dependency>		
+			
+			<dependency>
+				<groupId>org.fugerit.java</groupId>
+				<artifactId>fj-daogen-sample</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>								
 								
 			<dependency>
 				<groupId>javax</groupId>
@@ -112,19 +138,16 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j-version}</version>
-				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>${slf4j-version}</version>
-				<scope>runtime</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j-version}</version>
-				<scope>runtime</scope>
 			</dependency>		
 
 			<dependency>
@@ -147,13 +170,6 @@
 				<version>${junit-version}</version>
 				<scope>test</scope>
 			</dependency>
-			
-	        <dependency>
-	            <groupId>org.hsqldb</groupId>
-				<artifactId>hsqldb</artifactId>
-				<version>${hsqldb-version}</version>
-				<scope>test</scope>
-			</dependency>			
 		
 			<dependency>
 				<groupId>org.fugerit.java</groupId>

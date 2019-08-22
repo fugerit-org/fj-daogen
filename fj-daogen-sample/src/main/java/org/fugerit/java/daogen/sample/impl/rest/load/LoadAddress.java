@@ -114,21 +114,6 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		return result;
 	}
 
-	@GET
-	@Path("/id/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllId(@PathParam( "id" ) String id) throws Exception {
-		Response res = null;
-		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(id);
-			SimpleServiceResult<List<ModelAddress>>  result = loadById( context, value );
-			res = this.createResponseFromList( result );
-		} catch(Exception e) {
-			logger.error("ERRORE - REST- LoadAddress - getAllId - "+e, e );
-		}
-		return res;
-	}
-
 	/**
 	 * Service method to load entity of type ModelAddress.
 	 * Property idUser is being used as filter

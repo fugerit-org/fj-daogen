@@ -1,7 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
 import java.util.List;
-import java.math.BigDecimal;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,7 +38,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 618306791208L;
+	private static final long serialVersionUID = 778275664140L;
 
 	@GET
 	@Path("/all")
@@ -98,7 +97,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	public Response getAllId(@PathParam( "id" ) String id) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(id);
+			java.math.BigDecimal value = new java.math.BigDecimal(id);
 			SimpleServiceResult<List<ModelLogData>>  result = loadById( context, value );
 			res = this.createResponseFromList( result );
 		} catch(Exception e) {

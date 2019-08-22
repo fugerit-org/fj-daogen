@@ -1,7 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
 import java.util.List;
-import java.math.BigDecimal;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,7 +38,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 960947509004L;
+	private static final long serialVersionUID = 609752129833L;
 
 	public static SimpleServiceResult<ModelUser> loadByIdWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
@@ -56,6 +55,28 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			SimpleServiceResult<ModelUser>  result = loadByIdWorker( context, new java.math.BigDecimal(id) );
+			res = this.createResponseFromObject( result );
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadUser - getByID - "+e, e );
+		}
+		return res;
+	}
+
+	public static SimpleServiceResult<ModelUser> loadByIdDeepWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityUserFacade facade = factory.getEntityUserFacade();
+		ModelUser model = facade.loadById( context , id );
+		SimpleServiceResult<ModelUser>  result = SimpleServiceResult.newDefaultResult( model );
+		return result;
+	}
+
+	@GET
+	@Path("/deep/id/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByIDdeep(@PathParam( "id") String id) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			SimpleServiceResult<ModelUser>  result = loadByIdDeepWorker( context, new java.math.BigDecimal(id) );
 			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadUser - getByID - "+e, e );
@@ -96,37 +117,6 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		BasicDaoResult<ModelUser> resultFacade = facade.loadAllByFinder( context , finder );
 		SimpleServiceResult<List<ModelUser>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
 		return result;
-	}
-
-	/**
-	 * Service method to load entity of type ModelUser.
-	 * Property id is being used as filter
-	 * 
-	 * @param context	DAO context
-	 * @param current	Tee value of property id to use as a filter
-	 * @return			the result found
-	 * @throws DAOException		in case of any issue
-	 */
-	public static SimpleServiceResult<List<ModelUser>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperUser model = new HelperUser();
-		model.setId( current );
-		SimpleServiceResult<List<ModelUser>>  result = loadByModelWorker( context , model );
-		return result;
-	}
-
-	@GET
-	@Path("/id/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllId(@PathParam( "id" ) String id) throws Exception {
-		Response res = null;
-		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(id);
-			SimpleServiceResult<List<ModelUser>>  result = loadById( context, value );
-			res = this.createResponseFromList( result );
-		} catch(Exception e) {
-			logger.error("ERRORE - REST- LoadUser - getAllId - "+e, e );
-		}
-		return res;
 	}
 
 	/**
@@ -213,7 +203,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	public Response getAllState(@PathParam( "state" ) String state) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(state);
+			java.math.BigDecimal value = new java.math.BigDecimal(state);
 			SimpleServiceResult<List<ModelUser>>  result = loadByState( context, value );
 			res = this.createResponseFromList( result );
 		} catch(Exception e) {
