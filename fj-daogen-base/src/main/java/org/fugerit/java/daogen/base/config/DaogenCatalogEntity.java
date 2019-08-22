@@ -6,6 +6,7 @@ import java.util.List;
 import org.fugerit.java.core.cfg.xml.ListMapConfig;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.StringUtils;
+import org.fugerit.java.core.util.collection.ListMapStringKey;
 
 public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 
@@ -26,8 +27,10 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	private static final long serialVersionUID = -4440733564820863888L;
 
 	public DaogenCatalogEntity() {
-		
+		this.relations = new ListMapStringKey<>();
 	}
+	
+	private ListMapStringKey<DaogenCatalogRelation> relations;
 	
 	private String catalog;
 	
@@ -92,7 +95,11 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	public String toClassName() {
 		return GeneratorNameHelper.toClassName( this.getName() );
 	}
-	
+
+	public ListMapStringKey<DaogenCatalogRelation> getRelations() {
+		return relations;
+	}
+
 	public String describe() {
 		 List<String> list = new ArrayList<String>();
 		 list.add( StringUtils.concat( ":" , ATT_NAME, this.getName() ) );
@@ -101,6 +108,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_PRIMARY_KEY, this.getPrimaryKey() ) );
 		 list.add( StringUtils.concat( ":" , ATT_FOREIGN_KEYS, this.getForeignKeys() ) );
 		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
+		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}
 	

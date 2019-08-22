@@ -34,6 +34,9 @@ public class WrapperLogData extends BasicWrapper<ModelLogData> implements ModelL
 		return res;
 	}
 
+	/*
+	 * fields generated for entity attributes 
+	 */
 	@Override
 	public void setId( java.math.BigDecimal value ) {
 		this.unwrapModel().setId( value );

@@ -18,6 +18,24 @@ public interface ModelUser {
 	// custom code end ( code below here will be overwritten )
 
 	/**
+	 * Getter method for property : UserAddresses (nullable: yes)
+	 *
+	 * relation to entity : ADDRESS
+	 *
+	 * @return the value of UserAddresses
+	 */
+	java.util.List<ModelAddress> getUserAddresses();
+
+	/**
+	 * Setter method for property : UserAddresses (nullable: yes)
+	 *
+	 * relation to entity : ADDRESS
+	 *
+	 * @param value the value of UserAddresses
+	 */
+	void setUserAddresses( java.util.List<ModelAddress> value );
+
+	/**
 	 * Getter method for property : id (nullable: no)
 	 *
 	 * User system id

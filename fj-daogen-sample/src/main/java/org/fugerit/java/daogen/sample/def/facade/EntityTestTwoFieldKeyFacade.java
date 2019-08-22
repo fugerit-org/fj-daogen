@@ -51,14 +51,14 @@ public interface EntityTestTwoFieldKeyFacade {
 	 * Load method by primary key for entity : ModelTestTwoFieldKey
 	 *
 	 * @param context	DAO Context
-	 * @param idTwo part of the key
 	 * @param idOne part of the key
+	 * @param idTwo part of the key
 
 	 *
 	 * @return The found object or <code>null</code>
 	 * @throws DAOException			in case of errors
 	 */
-	ModelTestTwoFieldKey loadById( DAOContext context, java.math.BigDecimal idTwo, java.math.BigDecimal idOne ) throws DAOException;
+	ModelTestTwoFieldKey loadById( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException;
 
 	/**
 	 * Method to create an new entity of type : ModelTestTwoFieldKey
@@ -77,14 +77,14 @@ public interface EntityTestTwoFieldKeyFacade {
 	 * Delete method by primary key for entity : ModelTestTwoFieldKey
 	 *
 	 * @param context	DAO Context
-	 * @param idTwo part of the key
 	 * @param idOne part of the key
+	 * @param idTwo part of the key
 
 	 *
 	 * @return Delete result (resultCode=0, delete ok)
 	 * @throws DAOException			in case of errors
 	 */
-	BasicDaoResult<ModelTestTwoFieldKey> deleteById( DAOContext context, java.math.BigDecimal idTwo, java.math.BigDecimal idOne ) throws DAOException;
+	BasicDaoResult<ModelTestTwoFieldKey> deleteById( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException;
 
 	/**
 	 * Delete method by primary key for entity : ModelTestTwoFieldKey

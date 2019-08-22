@@ -6,6 +6,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
+import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
 
 public class ModelGenerator extends DaogenBasicGenerator {
@@ -25,6 +26,21 @@ public class ModelGenerator extends DaogenBasicGenerator {
 
 	@Override
 	public void generateBody() throws Exception {
+		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
+			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
+			String baseType = DaogenCatalogConstants.modelName( entityTo );
+			String className = GeneratorNameHelper.toClassName( relation.getName() );
+			String propertyName = GeneratorNameHelper.toClassName( relation.getName() );
+			if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
+				baseType = "java.util.List<"+baseType+">";
+			}
+			DaogenCustomCode.addCommentCommon( "comments.common.getter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
+			this.println( "	"+baseType+" get"+className+"();" );
+			this.println();
+			DaogenCustomCode.addCommentCommon( "comments.common.setter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
+			this.println( "	void set"+className+"( "+baseType+" value );" );
+			this.println();
+		}
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
 			String className = GeneratorNameHelper.toClassName( field.getId() );

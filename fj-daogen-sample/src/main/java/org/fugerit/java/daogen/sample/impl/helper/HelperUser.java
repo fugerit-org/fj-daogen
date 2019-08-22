@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.sample.impl.helper;
 
 import org.fugerit.java.core.db.daogen.BasicHelper;
 import org.fugerit.java.daogen.sample.def.model.ModelUser;
+import org.fugerit.java.daogen.sample.def.model.ModelAddress;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -22,6 +23,25 @@ public class HelperUser extends BasicHelper implements ModelUser {
 
 	private static final long serialVersionUID = 727585503819L;
 
+	/*
+	 * fields generated for relations 
+	 */
+
+	private java.util.List<ModelAddress> UserAddresses;
+
+	@Override
+	public void setUserAddresses( java.util.List<ModelAddress> value ) {
+		this.UserAddresses = value;
+	}
+
+	@Override
+	public java.util.List<ModelAddress> getUserAddresses() {
+		return this.UserAddresses;
+	}
+
+	/*
+	 * fields generated for entity attributes 
+	 */
 	private java.math.BigDecimal id;
 
 	@Override

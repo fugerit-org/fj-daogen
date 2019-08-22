@@ -41,21 +41,21 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 
 	private static final long serialVersionUID = 892898388143L;
 
-	public static SimpleServiceResult<ModelTestTwoFieldKey> loadByIdWorker( DAOContext context, java.math.BigDecimal idTwo, java.math.BigDecimal idOne ) throws DAOException {
+	public static SimpleServiceResult<ModelTestTwoFieldKey> loadByIdWorker( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException {
 		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
 		EntityTestTwoFieldKeyFacade facade = factory.getEntityTestTwoFieldKeyFacade();
-		ModelTestTwoFieldKey model = facade.loadById( context , idTwo, idOne );
+		ModelTestTwoFieldKey model = facade.loadById( context , idOne, idTwo );
 		SimpleServiceResult<ModelTestTwoFieldKey>  result = SimpleServiceResult.newDefaultResult( model );
 		return result;
 	}
 
 	@GET
-	@Path("/idTwo/{idTwo}/idOne/{idOne}")
+	@Path("/idOne/{idOne}/idTwo/{idTwo}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByID(@PathParam( "idTwo") String idTwo, @PathParam( "idOne") String idOne) throws Exception {
+	public Response getByID(@PathParam( "idOne") String idOne, @PathParam( "idTwo") String idTwo) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			SimpleServiceResult<ModelTestTwoFieldKey>  result = loadByIdWorker( context, new java.math.BigDecimal(idTwo), new java.math.BigDecimal(idOne) );
+			SimpleServiceResult<ModelTestTwoFieldKey>  result = loadByIdWorker( context, new java.math.BigDecimal(idOne), new java.math.BigDecimal(idTwo) );
 			res = this.createResponseFromObject( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadTestTwoFieldKey - getByID - "+e, e );

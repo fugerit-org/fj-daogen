@@ -22,6 +22,9 @@ public class HelperLogData extends BasicHelper implements ModelLogData {
 
 	private static final long serialVersionUID = 412994167955L;
 
+	/*
+	 * fields generated for entity attributes 
+	 */
 	private java.math.BigDecimal id;
 
 	@Override

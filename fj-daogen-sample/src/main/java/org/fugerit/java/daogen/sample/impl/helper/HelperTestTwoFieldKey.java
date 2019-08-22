@@ -22,6 +22,9 @@ public class HelperTestTwoFieldKey extends BasicHelper implements ModelTestTwoFi
 
 	private static final long serialVersionUID = 145827814931L;
 
+	/*
+	 * fields generated for entity attributes 
+	 */
 	private java.math.BigDecimal idOne;
 
 	@Override
