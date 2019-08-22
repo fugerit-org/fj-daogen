@@ -69,11 +69,11 @@ public class DataEntityTestTwoFieldKeyFacade extends BasicDataFacade<ModelTestTw
 	public BasicDaoResult<ModelTestTwoFieldKey> create( DAOContext context, ModelTestTwoFieldKey model ) throws DAOException {
 		BasicDaoResult<ModelTestTwoFieldKey> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
-		if ( model.getIdTwo() == null ) { 
-			model.setIdTwo( this.generateId( context ) ); 
-		} 
 		if ( model.getIdOne() == null ) { 
 			model.setIdOne( this.generateId( context ) ); 
+		} 
+		if ( model.getIdTwo() == null ) { 
+			model.setIdTwo( this.generateId( context ) ); 
 		} 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID_ONE, model.getIdOne() );
@@ -85,23 +85,23 @@ public class DataEntityTestTwoFieldKeyFacade extends BasicDataFacade<ModelTestTw
 	}
 
 	@Override
-	public ModelTestTwoFieldKey loadById( DAOContext context, java.math.BigDecimal idTwo, java.math.BigDecimal idOne ) throws DAOException {
+	public ModelTestTwoFieldKey loadById( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException {
 		ModelTestTwoFieldKey result = null;
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
 		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
-		query.andEqualParam( COL_ID_TWO, idTwo );
 		query.andEqualParam( COL_ID_ONE, idOne );
+		query.andEqualParam( COL_ID_TWO, idTwo );
 		result = daoHelper.loadOneHelper( query, this.getRse() );
 		return result;
 	}
 
 	@Override
-	public BasicDaoResult<ModelTestTwoFieldKey> deleteById( DAOContext context, java.math.BigDecimal idTwo, java.math.BigDecimal idOne ) throws DAOException {
+	public BasicDaoResult<ModelTestTwoFieldKey> deleteById( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException {
 		BasicDaoResult<ModelTestTwoFieldKey> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
 		DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );
-		query.andWhereParam( COL_ID_TWO, idTwo );
 		query.andWhereParam( COL_ID_ONE, idOne );
+		query.andWhereParam( COL_ID_TWO, idTwo );
 		int res = daoHelper.update( query );
 		this.evaluteSqlUpdateResult(res, null, result);
 		return result;
@@ -113,8 +113,8 @@ public class DataEntityTestTwoFieldKeyFacade extends BasicDataFacade<ModelTestTw
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_INFO, model.getInfo() );
-		query.andWhereParam( COL_ID_TWO, model.getIdTwo() );
 		query.andWhereParam( COL_ID_ONE, model.getIdOne() );
+		query.andWhereParam( COL_ID_TWO, model.getIdTwo() );
 		int res = daoHelper.update( query );
 		this.evaluteSqlUpdateResult(res, model, result);
 		return result;

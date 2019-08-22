@@ -18,6 +18,24 @@ public interface ModelAddress {
 	// custom code end ( code below here will be overwritten )
 
 	/**
+	 * Getter method for property : User (nullable: yes)
+	 *
+	 * relation to entity : USER
+	 *
+	 * @return the value of User
+	 */
+	ModelUser getUser();
+
+	/**
+	 * Setter method for property : User (nullable: yes)
+	 *
+	 * relation to entity : USER
+	 *
+	 * @param value the value of User
+	 */
+	void setUser( ModelUser value );
+
+	/**
 	 * Getter method for property : id (nullable: no)
 	 *
 	 * Address system id

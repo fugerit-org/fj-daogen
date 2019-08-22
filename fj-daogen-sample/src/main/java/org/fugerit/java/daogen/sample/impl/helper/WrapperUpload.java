@@ -34,6 +34,9 @@ public class WrapperUpload extends BasicWrapper<ModelUpload> implements ModelUpl
 		return res;
 	}
 
+	/*
+	 * fields generated for entity attributes 
+	 */
 	@Override
 	public void setId( java.math.BigDecimal value ) {
 		this.unwrapModel().setId( value );

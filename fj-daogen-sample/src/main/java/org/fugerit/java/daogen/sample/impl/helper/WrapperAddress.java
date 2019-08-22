@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.sample.impl.helper;
 
 import org.fugerit.java.core.db.daogen.BasicWrapper;
 import org.fugerit.java.daogen.sample.def.model.ModelAddress;
+import org.fugerit.java.daogen.sample.def.model.ModelUser;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -34,6 +35,23 @@ public class WrapperAddress extends BasicWrapper<ModelAddress> implements ModelA
 		return res;
 	}
 
+	/*
+	 * fields generated for relations 
+	 */
+
+	@Override
+	public void setUser( ModelUser value ) {
+		this.unwrapModel().setUser( value );
+	}
+
+	@Override
+	public ModelUser getUser() {
+		return this.unwrapModel().getUser();
+	}
+
+	/*
+	 * fields generated for entity attributes 
+	 */
 	@Override
 	public void setId( java.math.BigDecimal value ) {
 		this.unwrapModel().setId( value );

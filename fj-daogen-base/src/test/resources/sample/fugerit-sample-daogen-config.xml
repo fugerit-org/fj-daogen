@@ -26,6 +26,10 @@
 	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"
 	default-sequence="seq_id_fugerit"
 	>
+
+  <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many"/>
+  <relation id="addressToUser" name="USER" from="PUBLIC.FUGERIT.ADDRESS" to="PUBLIC.FUGERIT.USER" mode="one"/>
+	
   <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT">
     <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
     <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>

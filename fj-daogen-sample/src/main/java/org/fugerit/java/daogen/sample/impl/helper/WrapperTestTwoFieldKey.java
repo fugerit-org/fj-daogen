@@ -34,6 +34,9 @@ public class WrapperTestTwoFieldKey extends BasicWrapper<ModelTestTwoFieldKey> i
 		return res;
 	}
 
+	/*
+	 * fields generated for entity attributes 
+	 */
 	@Override
 	public void setIdOne( java.math.BigDecimal value ) {
 		this.unwrapModel().setIdOne( value );

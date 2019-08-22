@@ -16,6 +16,7 @@ import org.fugerit.java.core.db.metadata.IndexModel;
 import org.fugerit.java.core.db.metadata.MetaDataUtils;
 import org.fugerit.java.core.db.metadata.TableModel;
 import org.fugerit.java.core.lang.helpers.StringUtils;
+import org.fugerit.java.core.util.collection.ListMapStringKey;
 import org.fugerit.java.core.xml.dom.DOMIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,7 @@ public class DaogenConfigDump {
 		DocumentBuilder builder = dbf.newDocumentBuilder();
 		Document doc = builder.newDocument();
 		Element root = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ROOT );
+		ListMapStringKey<DaogenCatalogRelation> relations = new ListMapStringKey<>();
 		for ( TableModel tableModel : dbModel.getTableList() ) {
 			Element currentEntityTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ENTITY );
 			currentEntityTag.setAttribute( DaogenCatalogEntity.ATT_ID , tableModel.getTableId().toIdString() );
@@ -71,6 +73,14 @@ public class DaogenConfigDump {
 			for ( ForeignKeyModel foreignKeyModel : tableModel.getForeignKeyList() ) {
 				logger.info( "foreign key : "+foreignKeyModel );
 				fk.add( foreignKeyModel.getForeignTableId().toIdString() );
+				DaogenCatalogRelation relation = new DaogenCatalogRelation();
+				relation.setName( tableModel.getTableId().getTableName()+"_"+foreignKeyModel.getForeignTableId().getTableName() );
+				relation.setMode( DaogenCatalogRelation.MODE_ONE );
+				relation.setFrom( tableModel.getTableId().toIdString() );
+				relation.setTo( foreignKeyModel.getForeignTableId().toIdString() );
+				relation.setId( relation.getFrom()+"_"+relation.getTo() );
+				relation.setComment( "Dump generated relation" );
+				relations.add( relation );
 			}
 			if ( !fk.isEmpty() ) {
 				currentEntityTag.setAttribute( "foreignKeys" , StringUtils.concat( ",", fk ) );
@@ -93,6 +103,16 @@ public class DaogenConfigDump {
 				currentFieldTag.setAttribute( DaogenCatalogField.ATT_JAVA_TYPE , columnModel.getJavaType() );
 				currentEntityTag.appendChild( currentFieldTag );
 			}
+		}
+		for ( DaogenCatalogRelation rel : relations ) {
+			Element currentRelationTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_RELATION );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_ID , rel.getId() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_NAME , rel.getName() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_FROM , rel.getFrom() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_TO , rel.getTo() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_MODE , rel.getMode() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_COMMENT , rel.getComment() );
+			root.appendChild( currentRelationTag );
 		}
 		DOMIO.writeDOMIndent( root , writer );
 	}

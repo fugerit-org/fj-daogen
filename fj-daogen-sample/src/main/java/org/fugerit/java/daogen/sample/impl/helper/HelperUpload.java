@@ -22,6 +22,9 @@ public class HelperUpload extends BasicHelper implements ModelUpload {
 
 	private static final long serialVersionUID = 618353454393L;
 
+	/*
+	 * fields generated for entity attributes 
+	 */
 	private java.math.BigDecimal id;
 
 	@Override

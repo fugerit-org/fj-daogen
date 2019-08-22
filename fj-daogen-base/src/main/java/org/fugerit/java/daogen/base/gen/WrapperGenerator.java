@@ -6,6 +6,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
+import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 
 public class WrapperGenerator extends DaogenBasicGenerator {
@@ -25,6 +26,10 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 		this.setExtendsClass( this.getClassBaseWrapper()+"<"+this.getEntityModelName()+">" );
 		this.setImplementsInterface( this.getEntityModelName() );
+		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
+			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
+			this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+DaogenCatalogConstants.modelName( entityTo ) );
+		}
 	}
 
 	@Override
@@ -45,6 +50,36 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( "	}" );
 		this.getWriter().println();
 		
+		if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
+			this.getWriter().println( "	/*" );
+			this.getWriter().println( "	 * fields generated for relations " );
+			this.getWriter().println( "	 */" );
+			this.getWriter().println();
+			for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
+				DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
+				String baseType = DaogenCatalogConstants.modelName( entityTo );
+				String className = GeneratorNameHelper.toClassName( relation.getName() );
+				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
+					baseType = "java.util.List<"+baseType+">";
+				}
+				// metodo set
+				this.getWriter().println( "	@Override" );
+				this.getWriter().println( "	public void set"+className+"( "+baseType+" value ) {" );
+				this.getWriter().println( "		this.unwrapModel().set"+className+"( value );" );
+				this.getWriter().println( "	}" );
+				this.getWriter().println();
+				// metodo get
+				this.getWriter().println( "	@Override" );
+				this.getWriter().println( "	public "+baseType+" get"+className+"() {" );
+				this.getWriter().println( "		return this.unwrapModel().get"+className+"();" );
+				this.getWriter().println( "	}" );
+				this.getWriter().println();
+			}
+		}
+		
+		this.getWriter().println( "	/*" );
+		this.getWriter().println( "	 * fields generated for entity attributes " );
+		this.getWriter().println( "	 */" );
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			// property 
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );

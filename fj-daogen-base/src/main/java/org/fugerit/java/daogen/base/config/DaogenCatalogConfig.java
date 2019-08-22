@@ -3,9 +3,14 @@ package org.fugerit.java.daogen.base.config;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.CustomListCatalogConfig;
+import org.fugerit.java.core.cfg.xml.XmlBeanHelper;
 import org.fugerit.java.core.io.helper.StreamHelper;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
+import org.fugerit.java.core.util.collection.ListMapStringKey;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogField, DaogenCatalogEntity> {
 
@@ -15,16 +20,22 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	
 	public static final String ATT_DAOGEN_FIELD = "field";
 	
+	public static final String ATT_DAOGEN_RELATION= "relation";
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5491328999494021347L;
 
+	private ListMapStringKey<DaogenCatalogRelation> relations;
+
+	
 	public DaogenCatalogConfig() {
 		super( ATT_DAOGEN_ENTITY, ATT_DAOGEN_FIELD );
 		this.getGeneralProps().setProperty( ATT_TYPE , DaogenCatalogField.class.getName() );
 		this.getGeneralProps().setProperty( ATT_LIST_TYPE , DaogenCatalogEntity.class.getName() );
 		this.classConfig = new Properties();
+		this.relations = new ListMapStringKey<>();
 	}
 	
 	public String getGeneralProp( String key ) {
@@ -54,6 +65,27 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		return config;
 	}
 	
+	
+	
+	@Override
+	public void configure(Element tag) throws ConfigException {
+		super.configure(tag);
+		// load relations 
+		NodeList relationTags = tag.getElementsByTagName( ATT_DAOGEN_RELATION );
+		for ( int k=0; k<relationTags.getLength(); k++ ) {
+			Element relationTag = (Element) relationTags.item( k );
+			DaogenCatalogRelation relation = new DaogenCatalogRelation();
+			try {
+				XmlBeanHelper.setFromElement( relation , relationTag );
+				this.getRelations().add( relation );
+				DaogenCatalogEntity entity = this.getListMap( relation.getFrom() );
+				entity.getRelations().add( relation );
+			} catch (Exception e) {
+				throw new ConfigException( e );
+			}
+		}
+	}
+
 	private Properties classConfig;
 
 	public Properties getClassConfig() {
@@ -70,6 +102,10 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 
 	public DaogenGeneratorCatalog getGeneratorCatalog() {
 		return generatorCatalog;
+	}
+	
+	public ListMapStringKey<DaogenCatalogRelation> getRelations() {
+		return relations;
 	}
 	
 }
