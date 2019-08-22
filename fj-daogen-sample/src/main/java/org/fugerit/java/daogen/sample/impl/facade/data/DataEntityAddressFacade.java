@@ -116,7 +116,7 @@ public class DataEntityAddressFacade extends BasicDataFacade<ModelAddress> imple
 		BasicDaoResult<ModelAddress> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelAddress> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_ID_USER, model.getIdUser() );
 		query.addSetParam( COL_DATE_INSERT, model.getDateInsert() );

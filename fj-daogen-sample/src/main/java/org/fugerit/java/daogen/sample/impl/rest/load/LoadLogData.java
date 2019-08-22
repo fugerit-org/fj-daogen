@@ -34,7 +34,7 @@ import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
  */
 @Stateless
 @Path("/logdata/load")
-public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper {
+public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServiceProviderHelper<ModelLogData> {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
@@ -51,7 +51,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 		EntityLogDataFacade facade = factory.getEntityLogDataFacade();
 			BasicDaoResult<ModelLogData> resultFacade = facade.loadAll( context );
 			SimpleServiceResult<List<ModelLogData>>  result = SimpleServiceResult.newDefaultResult( resultFacade.getList() );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadLogData - getAll - "+e, e );
 		}
@@ -100,7 +100,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			BigDecimal value = new BigDecimal(id);
 			SimpleServiceResult<List<ModelLogData>>  result = loadById( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadLogData - getAllId - "+e, e );
 		}
@@ -131,7 +131,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
 			String value = info;
 			SimpleServiceResult<List<ModelLogData>>  result = loadByInfo( context, value );
-			res = Response.ok( result ).build();
+			res = this.createResponseFromList( result );
 		} catch(Exception e) {
 			logger.error("ERRORE - REST- LoadLogData - getAllInfo - "+e, e );
 		}

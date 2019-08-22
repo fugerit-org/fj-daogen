@@ -10,7 +10,7 @@ import org.fugerit.java.core.db.daogen.SimpleServiceProvider;
 import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade;
 
-public class ServiceProviderHelper extends SimpleServiceProvider {
+public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
 
 	/**
 	 * 
