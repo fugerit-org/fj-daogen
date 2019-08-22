@@ -8,6 +8,7 @@ public class DaogenCatalogRelation extends BasicIdConfigType {
 	public static final String ATT_NAME = "name";
 	public static final String ATT_FROM = "from";
 	public static final String ATT_TO = "to";
+	public static final String ATT_KEY = "key";
 	public static final String ATT_COMMENT = "comment";
 	public static final String ATT_MODE = "mode";
 	
@@ -27,8 +28,10 @@ public class DaogenCatalogRelation extends BasicIdConfigType {
 	
 	private String name;
 	
+	private String key;
+	
 	private String comment;
-
+	
 	public String getFrom() {
 		return from;
 	}
@@ -67,6 +70,14 @@ public class DaogenCatalogRelation extends BasicIdConfigType {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 }

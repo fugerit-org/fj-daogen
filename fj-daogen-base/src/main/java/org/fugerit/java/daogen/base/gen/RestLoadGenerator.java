@@ -7,9 +7,9 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
+import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
-import org.fugerit.java.daogen.base.config.DaogenGeneratorCatalog;
 
 public class RestLoadGenerator extends DaogenBasicGenerator {
 
@@ -88,6 +88,20 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		"+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
 			this.getWriter().println( "		"+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
 			this.getWriter().println( "		"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
+			this.getWriter().println( "		if ( result.getContent() != null ) {" );
+			for ( DaogenCatalogRelation rel : this.getCurrentEntity().getRelations() ) {
+				DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( rel.getTo() );
+				GeneratorKeyHelper relKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , entityTo, entityTo.getPrimaryKey() ).setForLoadInterface();
+				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( rel.getMode() ) && relKeyHelper.getKeyFields().size() == 1 ) {
+					String javaName = GeneratorNameHelper.toClassName( rel.getKey() );
+					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+".loadBy"+javaName+"( context, result.getContent().get"+GeneratorNameHelper.toClassName( this.getCurrentEntity().getPrimaryKey() )+"() ).getContent()";
+					this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
+				} else {
+					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, result.getContent().get"+GeneratorNameHelper.toClassName( rel.getKey() )+"() ).getContent()";
+					this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
+				}
+			}
+			this.getWriter().println( "		}" );
 			this.getWriter().println( "		return result;" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println( );

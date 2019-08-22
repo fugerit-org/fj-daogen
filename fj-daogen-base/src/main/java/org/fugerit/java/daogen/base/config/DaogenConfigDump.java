@@ -81,6 +81,11 @@ public class DaogenConfigDump {
 				relation.setId( relation.getFrom()+"_"+relation.getTo() );
 				relation.setComment( "Dump generated relation" );
 				relations.add( relation );
+				List<String> currentKey = new ArrayList<>();
+				for ( ColumnModel col : foreignKeyModel.internalColumnList( tableModel ) ) {
+					currentKey.add( col.getName() );
+				}
+				relation.setKey( StringUtils.concat( ",", currentKey ) );
 			}
 			if ( !fk.isEmpty() ) {
 				currentEntityTag.setAttribute( "foreignKeys" , StringUtils.concat( ",", fk ) );
@@ -110,6 +115,7 @@ public class DaogenConfigDump {
 			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_NAME , rel.getName() );
 			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_FROM , rel.getFrom() );
 			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_TO , rel.getTo() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_KEY, rel.getKey() );
 			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_MODE , rel.getMode() );
 			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_COMMENT , rel.getComment() );
 			root.appendChild( currentRelationTag );

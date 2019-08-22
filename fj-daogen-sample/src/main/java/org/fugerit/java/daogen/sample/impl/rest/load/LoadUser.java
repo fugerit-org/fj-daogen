@@ -67,6 +67,9 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 		EntityUserFacade facade = factory.getEntityUserFacade();
 		ModelUser model = facade.loadById( context , id );
 		SimpleServiceResult<ModelUser>  result = SimpleServiceResult.newDefaultResult( model );
+		if ( result.getContent() != null ) {
+			result.getContent().setUserAddresses(LoadAddress.loadByIdUser( context, result.getContent().getId() ).getContent());
+		}
 		return result;
 	}
 

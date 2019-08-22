@@ -27,8 +27,8 @@
 	default-sequence="seq_id_fugerit"
 	>
 
-  <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many"/>
-  <relation id="addressToUser" name="USER" from="PUBLIC.FUGERIT.ADDRESS" to="PUBLIC.FUGERIT.USER" mode="one"/>
+  <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>
+  <relation id="addressToUser" name="USER" from="PUBLIC.FUGERIT.ADDRESS" to="PUBLIC.FUGERIT.USER" mode="one" key="ID_USER"/>
 	
   <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT">
     <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>

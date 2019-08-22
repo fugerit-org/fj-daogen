@@ -1,7 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
 import java.util.List;
-import java.math.BigDecimal;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -63,6 +62,31 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 		return res;
 	}
 
+	public static SimpleServiceResult<ModelAddress> loadByIdDeepWorker( DAOContext context, java.math.BigDecimal id ) throws DAOException {
+		FugeritLogicFacade factory = (FugeritLogicFacade) context.getAttribute(FugeritLogicFacade.ATT_NAME );
+		EntityAddressFacade facade = factory.getEntityAddressFacade();
+		ModelAddress model = facade.loadById( context , id );
+		SimpleServiceResult<ModelAddress>  result = SimpleServiceResult.newDefaultResult( model );
+		if ( result.getContent() != null ) {
+			result.getContent().setUser(LoadUser.loadByIdWorker( context, result.getContent().getIdUser() ).getContent());
+		}
+		return result;
+	}
+
+	@GET
+	@Path("/deep/id/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByIDdeep(@PathParam( "id") String id) throws Exception {
+		Response res = null;
+		try (CloseableDAOContext context = this.newDefaultContext() ) {
+			SimpleServiceResult<ModelAddress>  result = loadByIdDeepWorker( context, new java.math.BigDecimal(id) );
+			res = this.createResponseFromObject( result );
+		} catch(Exception e) {
+			logger.error("ERRORE - REST- LoadAddress - getByID - "+e, e );
+		}
+		return res;
+	}
+
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -100,22 +124,6 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 
 	/**
 	 * Service method to load entity of type ModelAddress.
-	 * Property id is being used as filter
-	 * 
-	 * @param context	DAO context
-	 * @param current	Tee value of property id to use as a filter
-	 * @return			the result found
-	 * @throws DAOException		in case of any issue
-	 */
-	public static SimpleServiceResult<List<ModelAddress>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperAddress model = new HelperAddress();
-		model.setId( current );
-		SimpleServiceResult<List<ModelAddress>>  result = loadByModelWorker( context , model );
-		return result;
-	}
-
-	/**
-	 * Service method to load entity of type ModelAddress.
 	 * Property idUser is being used as filter
 	 * 
 	 * @param context	DAO context
@@ -136,7 +144,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 	public Response getAllIdUser(@PathParam( "id_user" ) String idUser) throws Exception {
 		Response res = null;
 		try (CloseableDAOContext context = this.newDefaultContext() ) {
-			BigDecimal value = new BigDecimal(idUser);
+			java.math.BigDecimal value = new java.math.BigDecimal(idUser);
 			SimpleServiceResult<List<ModelAddress>>  result = loadByIdUser( context, value );
 			res = this.createResponseFromList( result );
 		} catch(Exception e) {

@@ -67,6 +67,8 @@ public class LoadUpload extends org.fugerit.java.daogen.sample.helper.ServicePro
 		EntityUploadFacade facade = factory.getEntityUploadFacade();
 		ModelUpload model = facade.loadById( context , id );
 		SimpleServiceResult<ModelUpload>  result = SimpleServiceResult.newDefaultResult( model );
+		if ( result.getContent() != null ) {
+		}
 		return result;
 	}
 
