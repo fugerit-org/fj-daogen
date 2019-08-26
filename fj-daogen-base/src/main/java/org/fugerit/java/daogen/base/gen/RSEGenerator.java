@@ -39,6 +39,7 @@ public class RSEGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( "		"+this.getEntityHelperName()+" current = new "+this.getEntityHelperName()+"();" );
 		
 		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
+		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
 		
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			String columnName = field.getId();
@@ -61,6 +62,9 @@ public class RSEGenerator extends DaogenBasicGenerator {
 			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
 				extratMethod = blobHandlerType+".newHandlerPreload( rs.getBlob( \""+columnName+"\" ) ) ";	
 				tryCatch = true;
+			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+				extratMethod = clobHandlerType+".newHandlerPreload( rs.getClob( \""+columnName+"\" ) ) ";	
+				tryCatch = true;				
 			} else {
 				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
 			}

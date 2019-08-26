@@ -11,4 +11,6 @@
 <entry key="model_java.sql.Timestamp">java.util.Date</entry>
 <entry key="model_java.sql.Blob">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
 <entry key="model_oracle.sql.BLOB">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
+<entry key="model_java.sql.Clob">org.fugerit.java.core.db.daogen.CharArrayDataHandler</entry>
+<entry key="model_oracle.sql.CLOB">org.fugerit.java.core.db.daogen.CharArrayDataHandler</entry>
 </properties>

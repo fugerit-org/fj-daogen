@@ -82,6 +82,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 		boolean containsBlob = false;
 		
 		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
+		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
 		
 		// readSQL()
 		this.getWriter().println( "	@Override" );
@@ -101,6 +102,9 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
 				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() )";
 				containsBlob = true;
+			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.clobToCharHandler( (java.sql.Clob) stream.readObject() )";
+				containsBlob = true;				
 			} else {
 				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
 			}
@@ -129,6 +133,8 @@ public class StructGenerator extends DaogenBasicGenerator {
 				extratMethod = "stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( FIELD-TOKEN ) )";
 			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
 				extratMethod = "// blob must be writtern separately : FIELD-TOKEN";
+			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+				extratMethod = "// clob must be writtern separately : FIELD-TOKEN";				
 			} else {
 				throw new DAOException( "Type : "+columnType+" not handled yet!" );
 			}
