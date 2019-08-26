@@ -76,7 +76,6 @@
 	<modules>
 		<module>fj-daogen-base</module>
 		<module>fj-daogen-sample</module>
-		<module>fj-daogen-sample-web</module>
 		<module>fj-daogen-tool</module>
 	</modules>
 
