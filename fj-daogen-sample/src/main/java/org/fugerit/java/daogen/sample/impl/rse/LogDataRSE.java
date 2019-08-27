@@ -1,10 +1,10 @@
 package org.fugerit.java.daogen.sample.impl.rse;
 
-import org.fugerit.java.daogen.sample.def.model.ModelLogData;
 import java.sql.ResultSet;
-import org.fugerit.java.daogen.sample.impl.helper.HelperLogData;
 import java.sql.SQLException;
 import org.fugerit.java.core.db.daogen.BasicRSExtractor;
+import org.fugerit.java.daogen.sample.def.model.ModelLogData;
+import org.fugerit.java.daogen.sample.impl.helper.HelperLogData;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )

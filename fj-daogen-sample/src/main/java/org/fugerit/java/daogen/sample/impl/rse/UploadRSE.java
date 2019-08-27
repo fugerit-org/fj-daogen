@@ -1,9 +1,9 @@
 package org.fugerit.java.daogen.sample.impl.rse;
 
-import org.fugerit.java.daogen.sample.def.model.ModelUpload;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.fugerit.java.core.db.daogen.BasicRSExtractor;
+import org.fugerit.java.daogen.sample.def.model.ModelUpload;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUpload;
 
 // custom import start ( code above here will be overwritten )
