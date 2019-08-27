@@ -1,8 +1,8 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.StringUtils;
@@ -44,7 +44,7 @@ public class GeneratorKeyHelper implements Serializable {
 		this.key = key;
 		if ( StringUtils.isNotEmpty( key ) ) {
 			String[] split =  key.split( "," );
-			this.keyFields = new HashSet<String>();
+			this.keyFields = new TreeSet<String>();
 			for ( int k=0; k<split.length; k++ ) {
 				this.keyFields.add( split[k] );	
 			}
