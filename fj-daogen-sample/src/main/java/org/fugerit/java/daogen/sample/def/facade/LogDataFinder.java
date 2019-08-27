@@ -1,7 +1,7 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
-import org.fugerit.java.core.db.daogen.BaseIdFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelLogData;
+import org.fugerit.java.core.db.daogen.BaseIdFinder;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )

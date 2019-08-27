@@ -1,23 +1,22 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.fugerit.java.core.db.daogen.DAOContext;
 import org.fugerit.java.core.db.daogen.CloseableDAOContext;
-import org.fugerit.java.core.db.dao.DAOException;
-import org.fugerit.java.core.db.daogen.BasicDaoResult;
-import org.fugerit.java.core.db.daogen.SimpleServiceResult;
-import org.fugerit.java.daogen.sample.def.model.ModelUser;
-import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
-import org.fugerit.java.daogen.sample.def.facade.UserFinder;
+import java.util.List;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserFacade;
+import org.fugerit.java.core.db.daogen.SimpleServiceResult;
+import javax.ws.rs.Path;
+import org.fugerit.java.core.db.daogen.DAOContext;
+import javax.ws.rs.GET;
 import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
+import javax.ws.rs.core.MediaType;
+import org.fugerit.java.daogen.sample.def.facade.UserFinder;
+import javax.ejb.Stateless;
+import org.fugerit.java.core.db.dao.DAOException;
+import javax.ws.rs.PathParam;
+import org.fugerit.java.daogen.sample.def.model.ModelUser;
+import javax.ws.rs.Produces;
+import org.fugerit.java.core.db.daogen.BasicDaoResult;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -132,7 +131,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByUsername( DAOContext context, java.lang.String current ) throws DAOException {
-		HelperUser model = new HelperUser();
+		org.fugerit.java.daogen.sample.impl.helper.HelperUser model = new org.fugerit.java.daogen.sample.impl.helper.HelperUser();
 		model.setUsername( current );
 		SimpleServiceResult<List<ModelUser>>  result = loadByModelWorker( context , model );
 		return result;
@@ -163,7 +162,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByPassword( DAOContext context, java.lang.String current ) throws DAOException {
-		HelperUser model = new HelperUser();
+		org.fugerit.java.daogen.sample.impl.helper.HelperUser model = new org.fugerit.java.daogen.sample.impl.helper.HelperUser();
 		model.setPassword( current );
 		SimpleServiceResult<List<ModelUser>>  result = loadByModelWorker( context , model );
 		return result;
@@ -194,7 +193,7 @@ public class LoadUser extends org.fugerit.java.daogen.sample.helper.ServiceProvi
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelUser>> loadByState( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperUser model = new HelperUser();
+		org.fugerit.java.daogen.sample.impl.helper.HelperUser model = new org.fugerit.java.daogen.sample.impl.helper.HelperUser();
 		model.setState( current );
 		SimpleServiceResult<List<ModelUser>>  result = loadByModelWorker( context , model );
 		return result;

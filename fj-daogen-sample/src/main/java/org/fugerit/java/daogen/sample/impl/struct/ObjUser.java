@@ -1,15 +1,15 @@
 package org.fugerit.java.daogen.sample.impl.struct;
 
-import org.fugerit.java.core.db.daogen.StructMapper;
-import org.fugerit.java.daogen.sample.def.model.ModelUser;
-import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
+import java.sql.SQLInput;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperUser;
 import java.util.Map;
-import java.util.HashMap;
-import java.sql.SQLData;
-import java.sql.SQLInput;
-import java.sql.SQLOutput;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
+import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
+import java.sql.SQLData;
+import org.fugerit.java.daogen.sample.def.model.ModelUser;
+import org.fugerit.java.core.db.daogen.StructMapper;
+import java.util.HashMap;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )

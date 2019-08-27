@@ -1,23 +1,22 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.fugerit.java.core.db.daogen.DAOContext;
 import org.fugerit.java.core.db.daogen.CloseableDAOContext;
-import org.fugerit.java.core.db.dao.DAOException;
-import org.fugerit.java.core.db.daogen.BasicDaoResult;
+import java.util.List;
 import org.fugerit.java.core.db.daogen.SimpleServiceResult;
-import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
-import org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey;
-import org.fugerit.java.daogen.sample.def.facade.TestTwoFieldKeyFinder;
-import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
+import javax.ws.rs.Path;
+import org.fugerit.java.core.db.daogen.DAOContext;
+import javax.ws.rs.GET;
 import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
+import javax.ws.rs.core.MediaType;
+import javax.ejb.Stateless;
+import org.fugerit.java.core.db.dao.DAOException;
+import javax.ws.rs.PathParam;
+import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
+import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
+import org.fugerit.java.daogen.sample.def.facade.TestTwoFieldKeyFinder;
+import javax.ws.rs.Produces;
+import org.fugerit.java.core.db.daogen.BasicDaoResult;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -131,7 +130,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelTestTwoFieldKey>> loadByIdOne( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperTestTwoFieldKey model = new HelperTestTwoFieldKey();
+		org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey model = new org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey();
 		model.setIdOne( current );
 		SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByModelWorker( context , model );
 		return result;
@@ -162,7 +161,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelTestTwoFieldKey>> loadByIdTwo( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperTestTwoFieldKey model = new HelperTestTwoFieldKey();
+		org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey model = new org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey();
 		model.setIdTwo( current );
 		SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByModelWorker( context , model );
 		return result;
@@ -193,7 +192,7 @@ public class LoadTestTwoFieldKey extends org.fugerit.java.daogen.sample.helper.S
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelTestTwoFieldKey>> loadByInfo( DAOContext context, java.lang.String current ) throws DAOException {
-		HelperTestTwoFieldKey model = new HelperTestTwoFieldKey();
+		org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey model = new org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey();
 		model.setInfo( current );
 		SimpleServiceResult<List<ModelTestTwoFieldKey>>  result = loadByModelWorker( context , model );
 		return result;

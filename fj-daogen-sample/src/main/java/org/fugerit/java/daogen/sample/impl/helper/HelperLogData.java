@@ -1,7 +1,7 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
-import org.fugerit.java.core.db.daogen.BasicHelper;
 import org.fugerit.java.daogen.sample.def.model.ModelLogData;
+import org.fugerit.java.core.db.daogen.BasicHelper;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )

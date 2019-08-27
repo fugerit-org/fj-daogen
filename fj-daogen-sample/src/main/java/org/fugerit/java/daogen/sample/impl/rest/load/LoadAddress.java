@@ -1,23 +1,22 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
+import org.fugerit.java.daogen.sample.def.facade.AddressFinder;
+import javax.ws.rs.core.Response;
+import org.fugerit.java.core.db.daogen.CloseableDAOContext;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.ws.rs.GET;
+import org.fugerit.java.core.db.daogen.SimpleServiceResult;
 import javax.ws.rs.Path;
+import org.fugerit.java.core.db.daogen.DAOContext;
+import javax.ws.rs.GET;
+import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
+import javax.ws.rs.core.MediaType;
+import javax.ejb.Stateless;
+import org.fugerit.java.core.db.dao.DAOException;
+import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
+import org.fugerit.java.daogen.sample.def.model.ModelAddress;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import org.fugerit.java.core.db.daogen.DAOContext;
-import org.fugerit.java.core.db.daogen.CloseableDAOContext;
-import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.db.daogen.BasicDaoResult;
-import org.fugerit.java.core.db.daogen.SimpleServiceResult;
-import org.fugerit.java.daogen.sample.def.model.ModelAddress;
-import org.fugerit.java.daogen.sample.impl.helper.HelperAddress;
-import org.fugerit.java.daogen.sample.def.facade.AddressFinder;
-import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
-import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -132,7 +131,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelAddress>> loadByIdUser( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperAddress model = new HelperAddress();
+		org.fugerit.java.daogen.sample.impl.helper.HelperAddress model = new org.fugerit.java.daogen.sample.impl.helper.HelperAddress();
 		model.setIdUser( current );
 		SimpleServiceResult<List<ModelAddress>>  result = loadByModelWorker( context , model );
 		return result;
@@ -163,7 +162,7 @@ public class LoadAddress extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelAddress>> loadByInfo( DAOContext context, java.lang.String current ) throws DAOException {
-		HelperAddress model = new HelperAddress();
+		org.fugerit.java.daogen.sample.impl.helper.HelperAddress model = new org.fugerit.java.daogen.sample.impl.helper.HelperAddress();
 		model.setInfo( current );
 		SimpleServiceResult<List<ModelAddress>>  result = loadByModelWorker( context , model );
 		return result;

@@ -48,6 +48,19 @@ public class DaogenClassConfigHelper {
 		return simpleName;
 	}
 	
+	public static String fullName( DaogenCatalogConfig config, String base ) {
+		logger.info( "props > "+config.getClassConfig() );
+		String classPropKey = base+"."+DAO_BASE_CLASS;
+		String pacakgePropKey = base+"."+DAO_BASE_PACKAGE;
+		String simpleName = config.getClassConfig().getProperty( classPropKey );
+		String packageName = config.getClassConfig().getProperty( pacakgePropKey );
+		if ( simpleName == null || packageName == null ) {
+			throw new RuntimeException( "Daogen class configuration not set properly" );
+		}
+		String fullName = packageName+"."+simpleName;
+		return fullName;
+	}
+	
 }
 
 

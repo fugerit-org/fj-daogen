@@ -1,23 +1,22 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
+import org.fugerit.java.daogen.sample.def.facade.EntityLogDataFacade;
+import org.fugerit.java.daogen.sample.def.facade.LogDataFinder;
+import javax.ws.rs.core.Response;
+import org.fugerit.java.core.db.daogen.CloseableDAOContext;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.ws.rs.GET;
+import org.fugerit.java.core.db.daogen.SimpleServiceResult;
 import javax.ws.rs.Path;
+import org.fugerit.java.core.db.daogen.DAOContext;
+import javax.ws.rs.GET;
+import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
+import javax.ws.rs.core.MediaType;
+import org.fugerit.java.daogen.sample.def.model.ModelLogData;
+import javax.ejb.Stateless;
+import org.fugerit.java.core.db.dao.DAOException;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import org.fugerit.java.core.db.daogen.DAOContext;
-import org.fugerit.java.core.db.daogen.CloseableDAOContext;
-import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.db.daogen.BasicDaoResult;
-import org.fugerit.java.core.db.daogen.SimpleServiceResult;
-import org.fugerit.java.daogen.sample.def.model.ModelLogData;
-import org.fugerit.java.daogen.sample.impl.helper.HelperLogData;
-import org.fugerit.java.daogen.sample.def.facade.LogDataFinder;
-import org.fugerit.java.daogen.sample.def.facade.EntityLogDataFacade;
-import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -85,7 +84,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelLogData>> loadById( DAOContext context, java.math.BigDecimal current ) throws DAOException {
-		HelperLogData model = new HelperLogData();
+		org.fugerit.java.daogen.sample.impl.helper.HelperLogData model = new org.fugerit.java.daogen.sample.impl.helper.HelperLogData();
 		model.setId( current );
 		SimpleServiceResult<List<ModelLogData>>  result = loadByModelWorker( context , model );
 		return result;
@@ -116,7 +115,7 @@ public class LoadLogData extends org.fugerit.java.daogen.sample.helper.ServicePr
 	 * @throws DAOException		in case of any issue
 	 */
 	public static SimpleServiceResult<List<ModelLogData>> loadByInfo( DAOContext context, java.lang.String current ) throws DAOException {
-		HelperLogData model = new HelperLogData();
+		org.fugerit.java.daogen.sample.impl.helper.HelperLogData model = new org.fugerit.java.daogen.sample.impl.helper.HelperLogData();
 		model.setInfo( current );
 		SimpleServiceResult<List<ModelLogData>>  result = loadByModelWorker( context , model );
 		return result;

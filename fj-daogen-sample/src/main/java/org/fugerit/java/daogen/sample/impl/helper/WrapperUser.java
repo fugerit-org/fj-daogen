@@ -1,8 +1,8 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
-import org.fugerit.java.core.db.daogen.BasicWrapper;
-import org.fugerit.java.daogen.sample.def.model.ModelUser;
 import org.fugerit.java.daogen.sample.def.model.ModelAddress;
+import org.fugerit.java.daogen.sample.def.model.ModelUser;
+import org.fugerit.java.core.db.daogen.BasicWrapper;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
