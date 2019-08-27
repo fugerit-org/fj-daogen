@@ -10,6 +10,8 @@
 		<version>0.1.7</version>
 	</parent>
 
+	<packaging>maven-plugin</packaging>
+
 	<name>fj-daogen-maven-plugin</name>
 	
 	<description>Maven plugin implementing code generation for DaoGen Framework (fj-daogen:generate)</description>
