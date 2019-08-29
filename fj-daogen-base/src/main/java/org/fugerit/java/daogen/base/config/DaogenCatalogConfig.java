@@ -1,6 +1,9 @@
 package org.fugerit.java.daogen.base.config;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -36,6 +39,7 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		this.getGeneralProps().setProperty( ATT_LIST_TYPE , DaogenCatalogEntity.class.getName() );
 		this.classConfig = new Properties();
 		this.relations = new ListMapStringKey<>();
+		this.generatorCatalogs = new ArrayList<DaogenGeneratorCatalog>();
 	}
 	
 	public String getGeneralProp( String key ) {
@@ -60,7 +64,17 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		try ( InputStream is = StreamHelper.resolveStream( pathGeneratorCatalog ) ) {
 			DaogenGeneratorCatalog generatorCatalog = new DaogenGeneratorCatalog();
 			DaogenGeneratorCatalog.load( is , generatorCatalog );
-			config.generatorCatalog = generatorCatalog;
+			config.getGeneratorCatalogs().add( generatorCatalog );
+			if ( !DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT.equalsIgnoreCase( pathGeneratorCatalog ) ) {
+				String extendsDefault = generatorCatalog.getGeneralProps().getProperty(  DaogenGeneratorCatalog.KEY_EXTENDS_DEFAULT );
+				if ( "true".equalsIgnoreCase( extendsDefault ) ) {
+					try ( InputStream isDef = StreamHelper.resolveStream( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT ) ) {
+						DaogenGeneratorCatalog generatorCatalogDef = new DaogenGeneratorCatalog();
+						DaogenGeneratorCatalog.load( isDef , generatorCatalogDef );
+						config.getGeneratorCatalogs().add( generatorCatalogDef );
+					}
+				}
+			}
 		}
 		return config;
 	}
@@ -98,12 +112,12 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		return typeMapper;
 	}
 	
-	private DaogenGeneratorCatalog generatorCatalog;
+	private List<DaogenGeneratorCatalog> generatorCatalogs;
 
-	public DaogenGeneratorCatalog getGeneratorCatalog() {
-		return generatorCatalog;
+	public Collection<DaogenGeneratorCatalog> getGeneratorCatalogs() {
+		return generatorCatalogs;
 	}
-	
+
 	public ListMapStringKey<DaogenCatalogRelation> getRelations() {
 		return relations;
 	}

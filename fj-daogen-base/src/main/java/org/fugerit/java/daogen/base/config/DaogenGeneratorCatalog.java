@@ -6,6 +6,8 @@ import org.fugerit.java.core.cfg.xml.ListMapConfig;
 
 public class DaogenGeneratorCatalog extends FactoryCatalog {
 
+	public final static String KEY_EXTENDS_DEFAULT = "extends-default";
+	
 	/**
 	 * 
 	 */

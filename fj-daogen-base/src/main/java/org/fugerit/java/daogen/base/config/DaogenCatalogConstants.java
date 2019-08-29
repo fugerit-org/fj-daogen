@@ -7,8 +7,8 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_BASE_SRC_FOLDER = "base-src-folder";
 	
 	public static final String GEN_PROP_SRC_MAIN_JAVA =		 "src-main-java";
-	public static final String GEN_PROP_SRC_MAIN_RESOURCES = "src-test-java";
-	public static final String GEN_PROP_SRC_TEST_JAVA = 	 "src-main-resources";
+	public static final String GEN_PROP_SRC_MAIN_RESOURCES = "src-main-resources";
+	public static final String GEN_PROP_SRC_TEST_JAVA = 	 "src-test-java";
 	public static final String GEN_PROP_SRC_TEST_RESOURCES = "src-test-resources";
 	
 	public static final String GEN_PROP_GENERATOR_CATALOG = "generator-catalog";

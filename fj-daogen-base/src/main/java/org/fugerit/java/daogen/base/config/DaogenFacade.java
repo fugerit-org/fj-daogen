@@ -25,14 +25,12 @@ public class DaogenFacade {
 		gen.write();
 	}
 	
-	public static void generate( InputStream fis ) throws ConfigException {
-		try {
-			DaogenCatalogConfig daogenConfig = DaogenCatalogConfig.loadConfig( fis );
-			List<String> entityIdList = new ArrayList<String>( daogenConfig.getIdSet() );
-			Collections.sort( entityIdList );
-			DaogenGeneratorCatalog generatorCatalog = daogenConfig.getGeneratorCatalog();
-			for ( String entityId : entityIdList ) {
-				DaogenCatalogEntity entity = daogenConfig.getListMap( entityId );
+	private static void generate( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog ) throws Exception {
+		List<String> entityIdList = new ArrayList<String>( daogenConfig.getIdSet() );
+		Collections.sort( entityIdList );
+		for ( String entityId : entityIdList ) {
+			DaogenCatalogEntity entity = daogenConfig.getListMap( entityId );
+			if ( generatorCatalog.getEntityGenerators() != null ) {
 				for ( FactoryType dataType : generatorCatalog.getEntityGenerators() ) {
 					if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 						DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
@@ -41,12 +39,24 @@ public class DaogenFacade {
 					}
 				}
 			}
+		}
+		if ( generatorCatalog.getFactoryGenerators() != null ) {
 			for ( FactoryType dataType : generatorCatalog.getFactoryGenerators() ) {
 				if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 					DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
 					generator.init( daogenConfig, null );	
 					generageFile( generator );	
 				}
+			}
+		}
+	}
+	
+	
+	public static void generate( InputStream fis ) throws ConfigException {
+		try {
+			DaogenCatalogConfig daogenConfig = DaogenCatalogConfig.loadConfig( fis );
+			for ( DaogenGeneratorCatalog generatorCatalog : daogenConfig.getGeneratorCatalogs() ) {
+				generate(daogenConfig, generatorCatalog);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
