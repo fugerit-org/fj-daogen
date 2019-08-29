@@ -1,6 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.SimpleJavaGenerator;
@@ -11,9 +12,29 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
+
+	@Override
+	public void write() throws IOException {
+		if ( this.skipWrite ) {
+			logger.info( "Skip writing this generator : "+this );
+		} else {
+			super.write();
+		}
+	}
+
 	private DaogenCatalogConfig daogenConfig;
 	
 	private DaogenCatalogEntity currentEntity;
+
+	private boolean skipWrite = false;
+	
+	public boolean isSkipWrite() {
+		return skipWrite;
+	}
+
+	public void setSkipWrite(boolean skipWrite) {
+		this.skipWrite = skipWrite;
+	}
 
 	public static String fullObjectName( String packageName, String simpleClassName ) {
 		return packageName+"."+simpleClassName;
