@@ -85,6 +85,7 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 		}
 		this.getWriter().println( "		}" );
 		this.getWriter().println( "		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); " );
+		this.getWriter().println( "		result.evaluateResultFromList(); " );
 		this.getWriter().println( "		return result;" );
 		this.getWriter().println( "	}" );
 		this.getWriter().println();		
