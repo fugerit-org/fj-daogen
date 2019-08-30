@@ -13,4 +13,6 @@
 <entry key="model_oracle.sql.BLOB">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
 <entry key="model_java.sql.Clob">org.fugerit.java.core.db.daogen.CharArrayDataHandler</entry>
 <entry key="model_oracle.sql.CLOB">org.fugerit.java.core.db.daogen.CharArrayDataHandler</entry>
+<entry key="model_oracle.jdbc.OracleBlob">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
+<entry key="model_oracle.jdbc.OracleClob">org.fugerit.java.core.db.daogen.CharArrayDataHandler</entry>
 </properties>
