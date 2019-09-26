@@ -67,6 +67,7 @@ public class DataEntityAddressFacade extends BasicDataFacade<ModelAddress> imple
 			query.andEqualParam( COL_INFO, model.getInfo() );
 		}
 		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
+		result.evaluateResultFromList(); 
 		return result;
 	}
 

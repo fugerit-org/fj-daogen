@@ -60,6 +60,7 @@ public class DataEntityLogDataFacade extends BasicDataFacade<ModelLogData> imple
 			query.andEqualParam( COL_INFO, model.getInfo() );
 		}
 		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
+		result.evaluateResultFromList(); 
 		return result;
 	}
 

@@ -65,6 +65,7 @@ public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> impleme
 			query.andEqualParam( COL_CONTENT, model.getContent() );
 		}
 		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
+		result.evaluateResultFromList(); 
 		return result;
 	}
 
