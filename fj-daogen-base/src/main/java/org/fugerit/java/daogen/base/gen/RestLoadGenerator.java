@@ -1,7 +1,11 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.ConcatHelper;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
@@ -99,7 +103,13 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+".loadBy"+javaName+"( context, result.getContent().get"+GeneratorNameHelper.toClassName( this.getCurrentEntity().getPrimaryKey() )+"() ).getContent()";
 					this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
 				} else {
-					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, result.getContent().get"+GeneratorNameHelper.toClassName( rel.getKey() )+"() ).getContent()";
+					GeneratorKeyHelper relKeyHelper1 = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), rel.getKey() ).setForLoadInterface();
+					List<String> keyList = new ArrayList<String>();
+					for ( String currentFieldKey : relKeyHelper1.getKeyFields() ) {
+						keyList.add( "result.getContent().get"+GeneratorNameHelper.toClassName( currentFieldKey )+"()" );
+					}
+					String keyFields = ConcatHelper.concat( "," , keyList.toArray( new String[0] ) );
+					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+keyFields+" ).getContent()";
 					this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
 				}
 			}
