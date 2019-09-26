@@ -62,6 +62,7 @@ public class DataEntityTestTwoFieldKeyFacade extends BasicDataFacade<ModelTestTw
 			query.andEqualParam( COL_INFO, model.getInfo() );
 		}
 		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
+		result.evaluateResultFromList(); 
 		return result;
 	}
 

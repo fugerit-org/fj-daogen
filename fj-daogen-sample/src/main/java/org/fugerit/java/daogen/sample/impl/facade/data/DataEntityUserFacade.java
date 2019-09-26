@@ -71,6 +71,7 @@ public class DataEntityUserFacade extends BasicDataFacade<ModelUser> implements 
 			query.andEqualParam( COL_STATE, model.getState() );
 		}
 		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
+		result.evaluateResultFromList(); 
 		return result;
 	}
 
