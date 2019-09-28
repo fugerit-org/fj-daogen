@@ -1,0 +1,59 @@
+swagger: '2.0'
+info:
+  description: 'Comments : '
+  title: 'OpenAPI load specification for PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY'
+  version: '1.0.0'
+host: localhost:9080
+schemes:
+  - http
+basePath: /ansc-app/jaxrs/testtwofieldkey/load
+paths:
+  /idOne/{idOne}/idTwo/{idTwo}:
+    get:
+      summary: Get PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY by primary key
+      parameters:
+        - in: path
+          name: id_one
+          required: true
+          type: string
+          description: Value of field ID_ONE
+        - in: path
+          name: id_two
+          required: true
+          type: string
+          description: Value of field ID_TWO
+      responses:
+        '200':
+          description: Success response
+          schema:
+            type: object
+            properties:
+              id_one:
+                type: string
+                example: ''
+              id_two:
+                type: string
+                example: ''
+              info:
+                type: string
+                example: ''
+  /all:
+    get:
+      summary: Get all PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY
+      responses:
+        '200':
+          description: Success response
+          schema:
+              type: array
+              items: 
+                type: object
+                properties:
+                  id_one:
+                    type: string
+                    example: ''
+                  id_two:
+                    type: string
+                    example: ''
+                  info:
+                    type: string
+                    example: ''

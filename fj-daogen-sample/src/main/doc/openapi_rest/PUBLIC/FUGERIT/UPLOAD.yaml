@@ -1,0 +1,60 @@
+swagger: '2.0'
+info:
+  description: 'Comments : Contains upload blob'
+  title: 'OpenAPI load specification for PUBLIC.FUGERIT.UPLOAD'
+  version: '1.0.0'
+host: localhost:9080
+schemes:
+  - http
+basePath: /ansc-app/jaxrs/upload/load
+paths:
+  /id/{id}:
+    get:
+      summary: Get PUBLIC.FUGERIT.UPLOAD by primary key
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: Value of field ID
+      responses:
+        '200':
+          description: Success response
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                example: ''
+              date_insert:
+                type: string
+                example: ''
+              date_update:
+                type: string
+                example: ''
+              content:
+                type: string
+                example: ''
+  /all:
+    get:
+      summary: Get all PUBLIC.FUGERIT.UPLOAD
+      responses:
+        '200':
+          description: Success response
+          schema:
+              type: array
+              items: 
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: ''
+                  date_insert:
+                    type: string
+                    example: ''
+                  date_update:
+                    type: string
+                    example: ''
+                  content:
+                    type: string
+                    example: ''

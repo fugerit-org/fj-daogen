@@ -10,5 +10,10 @@
 		<data id="rest" description="Comment for rest" xml="true"
 			mode="cl" path="config/template/comments_rest.xml"/>								
 	</data-list>
+
+	<data-list id="docgen">
+		<data id="openapi" description="OpenAPI generation" xml="true"
+			mode="cl" path="config/template/openapi_rest.xml"/>								
+	</data-list>
 	
 </data-catalog-config>

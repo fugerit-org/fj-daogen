@@ -7,6 +7,7 @@
 	src-test-java="src/test/java"
 	src-main-resources="src/main/resources"
 	src-test-resources="src/test/resources"
+	src-doc-openapi="src/main/doc/openapi_rest"
 	class-config="cl://config/daogen_default_class_config.xml"
 	type-mapper="org.fugerit.java.daogen.base.config.DaogenTypeMapper"
 	type-map-config="cl://config/daogen_default_type_mapping.xml"
@@ -25,6 +26,8 @@
 	factory-def="org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade"
 	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"
 	default-sequence="seq_id_fugerit"
+	openapi_host="localhost:9080"
+	openapi_path="/ansc-app/jaxrs"
 	>
 
   <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>

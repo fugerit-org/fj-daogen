@@ -26,7 +26,10 @@
     	info="package-facade-data-impl"/>   
     <data id="RestLoadGenerator" 
     	type="org.fugerit.java.daogen.base.gen.RestLoadGenerator"
-    	info="package-rest-load"/>      	 	
+    	info="package-rest-load"/>  
+    <data id="DocOpenAPIRestGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.DocOpenAPIRestGenerator"
+    	info="src-doc-openapi"/>     	    	 	
   </factory>
   <factory id="factory_generators">
     <data id="FactoryDefGenerator" 

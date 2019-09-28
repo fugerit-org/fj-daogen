@@ -8,9 +8,13 @@ import java.text.MessageFormat;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.PropertyCatalog;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DaogenCustomCode {
 
+	private static final Logger logger = LoggerFactory.getLogger( DaogenCustomCode.class );
+	
 	public static final String ID_LIST_COMMENTS = "comments";
 	
 	public static final String ID_COMMENTS_COMMON = "common";
@@ -56,6 +60,11 @@ public class DaogenCustomCode {
 	
 	public static void addCommentRest( String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
 		addComment( ID_COMMENTS_REST, key, indent, pw, params);
+	}
+	
+	public static void addDocGenOpenAPI( String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
+		logger.info( "JEY "+key );
+		addCustomCode( "docgen", "openapi", key, indent, pw, params);
 	}
 	
 	private static PropertyCatalog instance = null;

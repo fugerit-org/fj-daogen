@@ -1,0 +1,78 @@
+swagger: '2.0'
+info:
+  description: 'Comments : Contains users data'
+  title: 'OpenAPI load specification for PUBLIC.FUGERIT.USER'
+  version: '1.0.0'
+host: localhost:9080
+schemes:
+  - http
+basePath: /ansc-app/jaxrs/user/load
+paths:
+  /id/{id}:
+    get:
+      summary: Get PUBLIC.FUGERIT.USER by primary key
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: Value of field ID
+      responses:
+        '200':
+          description: Success response
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                example: ''
+              username:
+                type: string
+                example: ''
+              password:
+                type: string
+                example: ''
+              last_login:
+                type: string
+                example: ''
+              date_insert:
+                type: string
+                example: ''
+              date_update:
+                type: string
+                example: ''
+              state:
+                type: string
+                example: ''
+  /all:
+    get:
+      summary: Get all PUBLIC.FUGERIT.USER
+      responses:
+        '200':
+          description: Success response
+          schema:
+              type: array
+              items: 
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: ''
+                  username:
+                    type: string
+                    example: ''
+                  password:
+                    type: string
+                    example: ''
+                  last_login:
+                    type: string
+                    example: ''
+                  date_insert:
+                    type: string
+                    example: ''
+                  date_update:
+                    type: string
+                    example: ''
+                  state:
+                    type: string
+                    example: ''
