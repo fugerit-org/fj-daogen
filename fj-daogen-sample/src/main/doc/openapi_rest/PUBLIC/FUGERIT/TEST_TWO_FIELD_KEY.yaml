@@ -1,59 +1,57 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
+  title: OpenAPI load specification for PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY'
   description: 'Comments : '
-  title: 'OpenAPI load specification for PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY'
   version: '1.0.0'
-host: localhost:9080
-schemes:
-  - http
-basePath: /ansc-app/jaxrs/testtwofieldkey/load
+servers:
+  - url: http://localhost:9080/fugerit-sample-web/jax-rs/testtwofieldkey/load
+    description: Local Development server
 paths:
   /idOne/{idOne}/idTwo/{idTwo}:
     get:
       summary: Get PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY by primary key
       parameters:
-        - in: path
-          name: id_one
+        - name: id_one
+          in: path
           required: true
-          type: string
           description: Value of field ID_ONE
-        - in: path
-          name: id_two
+          schema:
+            type: string
+        - name: id_two
+          in: path
           required: true
-          type: string
           description: Value of field ID_TWO
+          schema:
+            type: string
       responses:
         '200':
           description: Success response
-          schema:
-            type: object
-            properties:
-              id_one:
-                type: string
-                example: ''
-              id_two:
-                type: string
-                example: ''
-              info:
-                type: string
-                example: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestTwoFieldKey'
   /all:
     get:
       summary: Get all PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY
       responses:
         '200':
           description: Success response
-          schema:
-              type: array
-              items: 
-                type: object
-                properties:
-                  id_one:
-                    type: string
-                    example: ''
-                  id_two:
-                    type: string
-                    example: ''
-                  info:
-                    type: string
-                    example: ''
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/TestTwoFieldKey'
+components: 
+  schemas: 
+    TestTwoFieldKey: 
+      properties:
+        id_one:
+          type: string
+          example: ''
+        id_two:
+          type: string
+          example: ''
+        info:
+          type: string
+          example: ''

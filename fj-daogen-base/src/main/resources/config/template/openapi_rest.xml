@@ -16,4 +16,16 @@ basePath: {4}
 paths:
 </entry>
 
+<entry key="openapi.swagger.info.v3">
+openapi: 3.0.0
+info:
+  title: {1}'
+  description: '{0}'
+  version: '{2}'
+servers:
+  - url: {3}{4}
+    description: Local Development server
+paths:
+</entry>
+
 </properties>

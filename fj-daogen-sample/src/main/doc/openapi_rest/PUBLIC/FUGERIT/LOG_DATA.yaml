@@ -1,12 +1,11 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
+  title: OpenAPI load specification for PUBLIC.FUGERIT.LOG_DATA'
   description: 'Comments : '
-  title: 'OpenAPI load specification for PUBLIC.FUGERIT.LOG_DATA'
   version: '1.0.0'
-host: localhost:9080
-schemes:
-  - http
-basePath: /ansc-app/jaxrs/logdata/load
+servers:
+  - url: http://localhost:9080/fugerit-sample-web/jax-rs/logdata/load
+    description: Local Development server
 paths:
   /all:
     get:
@@ -14,17 +13,22 @@ paths:
       responses:
         '200':
           description: Success response
-          schema:
-              type: array
-              items: 
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: ''
-                  log_time:
-                    type: string
-                    example: ''
-                  info:
-                    type: string
-                    example: ''
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/LogData'
+components: 
+  schemas: 
+    LogData: 
+      properties:
+        id:
+          type: string
+          example: ''
+        log_time:
+          type: string
+          example: ''
+        info:
+          type: string
+          example: ''

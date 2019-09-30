@@ -1,66 +1,57 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
+  title: OpenAPI load specification for PUBLIC.FUGERIT.ADDRESS'
   description: 'Comments : Contains addresses data'
-  title: 'OpenAPI load specification for PUBLIC.FUGERIT.ADDRESS'
   version: '1.0.0'
-host: localhost:9080
-schemes:
-  - http
-basePath: /ansc-app/jaxrs/address/load
+servers:
+  - url: http://localhost:9080/fugerit-sample-web/jax-rs/address/load
+    description: Local Development server
 paths:
   /id/{id}:
     get:
       summary: Get PUBLIC.FUGERIT.ADDRESS by primary key
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
-          type: string
           description: Value of field ID
+          schema:
+            type: string
       responses:
         '200':
           description: Success response
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-                example: ''
-              id_user:
-                type: string
-                example: ''
-              date_insert:
-                type: string
-                example: ''
-              date_update:
-                type: string
-                example: ''
-              info:
-                type: string
-                example: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
   /all:
     get:
       summary: Get all PUBLIC.FUGERIT.ADDRESS
       responses:
         '200':
           description: Success response
-          schema:
-              type: array
-              items: 
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: ''
-                  id_user:
-                    type: string
-                    example: ''
-                  date_insert:
-                    type: string
-                    example: ''
-                  date_update:
-                    type: string
-                    example: ''
-                  info:
-                    type: string
-                    example: ''
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/Address'
+components: 
+  schemas: 
+    Address: 
+      properties:
+        id:
+          type: string
+          example: ''
+        id_user:
+          type: string
+          example: ''
+        date_insert:
+          type: string
+          example: ''
+        date_update:
+          type: string
+          example: ''
+        info:
+          type: string
+          example: ''

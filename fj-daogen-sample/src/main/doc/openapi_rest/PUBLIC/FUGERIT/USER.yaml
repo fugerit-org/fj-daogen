@@ -1,78 +1,63 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
+  title: OpenAPI load specification for PUBLIC.FUGERIT.USER'
   description: 'Comments : Contains users data'
-  title: 'OpenAPI load specification for PUBLIC.FUGERIT.USER'
   version: '1.0.0'
-host: localhost:9080
-schemes:
-  - http
-basePath: /ansc-app/jaxrs/user/load
+servers:
+  - url: http://localhost:9080/fugerit-sample-web/jax-rs/user/load
+    description: Local Development server
 paths:
   /id/{id}:
     get:
       summary: Get PUBLIC.FUGERIT.USER by primary key
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
-          type: string
           description: Value of field ID
+          schema:
+            type: string
       responses:
         '200':
           description: Success response
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-                example: ''
-              username:
-                type: string
-                example: ''
-              password:
-                type: string
-                example: ''
-              last_login:
-                type: string
-                example: ''
-              date_insert:
-                type: string
-                example: ''
-              date_update:
-                type: string
-                example: ''
-              state:
-                type: string
-                example: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
   /all:
     get:
       summary: Get all PUBLIC.FUGERIT.USER
       responses:
         '200':
           description: Success response
-          schema:
-              type: array
-              items: 
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: ''
-                  username:
-                    type: string
-                    example: ''
-                  password:
-                    type: string
-                    example: ''
-                  last_login:
-                    type: string
-                    example: ''
-                  date_insert:
-                    type: string
-                    example: ''
-                  date_update:
-                    type: string
-                    example: ''
-                  state:
-                    type: string
-                    example: ''
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/User'
+components: 
+  schemas: 
+    User: 
+      properties:
+        id:
+          type: string
+          example: ''
+        username:
+          type: string
+          example: ''
+        password:
+          type: string
+          example: ''
+        last_login:
+          type: string
+          example: ''
+        date_insert:
+          type: string
+          example: ''
+        date_update:
+          type: string
+          example: ''
+        state:
+          type: string
+          example: ''

@@ -1,60 +1,54 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
+  title: OpenAPI load specification for PUBLIC.FUGERIT.UPLOAD'
   description: 'Comments : Contains upload blob'
-  title: 'OpenAPI load specification for PUBLIC.FUGERIT.UPLOAD'
   version: '1.0.0'
-host: localhost:9080
-schemes:
-  - http
-basePath: /ansc-app/jaxrs/upload/load
+servers:
+  - url: http://localhost:9080/fugerit-sample-web/jax-rs/upload/load
+    description: Local Development server
 paths:
   /id/{id}:
     get:
       summary: Get PUBLIC.FUGERIT.UPLOAD by primary key
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
-          type: string
           description: Value of field ID
+          schema:
+            type: string
       responses:
         '200':
           description: Success response
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-                example: ''
-              date_insert:
-                type: string
-                example: ''
-              date_update:
-                type: string
-                example: ''
-              content:
-                type: string
-                example: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Upload'
   /all:
     get:
       summary: Get all PUBLIC.FUGERIT.UPLOAD
       responses:
         '200':
           description: Success response
-          schema:
-              type: array
-              items: 
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: ''
-                  date_insert:
-                    type: string
-                    example: ''
-                  date_update:
-                    type: string
-                    example: ''
-                  content:
-                    type: string
-                    example: ''
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/Upload'
+components: 
+  schemas: 
+    Upload: 
+      properties:
+        id:
+          type: string
+          example: ''
+        date_insert:
+          type: string
+          example: ''
+        date_update:
+          type: string
+          example: ''
+        content:
+          type: string
+          example: ''

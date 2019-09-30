@@ -26,8 +26,8 @@
 	factory-def="org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade"
 	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"
 	default-sequence="seq_id_fugerit"
-	openapi_host="localhost:9080"
-	openapi_path="/ansc-app/jaxrs"
+	openapi_host="http://localhost:9080"
+	openapi_path="/fugerit-sample-web/jax-rs"
 	>
 
   <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>
