@@ -24,8 +24,7 @@ public class ModelGenerator extends DaogenBasicGenerator {
 				STYLE_INTERFACE, daogenConfig, entity );
 	}
 
-	@Override
-	public void generateBody() throws Exception {
+	private void generateRelations() throws Exception {
 		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
 			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
 			String baseType = DaogenCatalogConstants.modelName( entityTo );
@@ -41,6 +40,14 @@ public class ModelGenerator extends DaogenBasicGenerator {
 			this.println( "	void set"+className+"( "+baseType+" value );" );
 			this.println();
 		}
+	}	
+	
+	@Override
+	public void generateBody() throws Exception {
+		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
+		if ( !relationLast ) {
+			this.generateRelations();
+		}
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
 			String className = GeneratorNameHelper.toClassName( field.getId() );
@@ -53,6 +60,9 @@ public class ModelGenerator extends DaogenBasicGenerator {
 					DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, field.getNullable(), field.getComments() );
 			this.println( "	void set"+className+"( "+type+" value );" );
 			this.println();
+		}
+		if ( relationLast ) {
+			this.generateRelations();
 		}
 	}
 

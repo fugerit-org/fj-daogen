@@ -12,6 +12,8 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_SRC_TEST_RESOURCES = "src-test-resources";
 	public static final String GEN_PROP_SRC_DOC_OPENAPI =    "src-doc-openapi";
 	
+	public static final String GEN_PROP_RELATIONS_LAST =    "relations-last";
+	
 	public static final String GEN_PROP_GENERATOR_CATALOG = "generator-catalog";
 	public static final String GEN_PROP_GENERATOR_CATALOG_DEFAULT = "cl://config/default-generator-catalog.xml";
 			

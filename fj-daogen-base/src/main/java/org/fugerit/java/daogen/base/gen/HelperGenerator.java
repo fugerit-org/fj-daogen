@@ -32,9 +32,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		}
 	}
 
-	@Override
-	public void generateBody() throws Exception {
-		this.addSerialVerUID();
+	private void generateRelations() {
 		if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
 			this.getWriter().println( "	/*" );
 			this.getWriter().println( "	 * fields generated for relations " );
@@ -64,6 +62,15 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				this.getWriter().println();
 			}
 		}
+	}
+	
+	@Override
+	public void generateBody() throws Exception {
+		this.addSerialVerUID();
+		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
+		if ( !relationLast ) {
+			this.generateRelations();
+		}
 		this.getWriter().println( "	/*" );
 		this.getWriter().println( "	 * fields generated for entity attributes " );
 		this.getWriter().println( "	 */" );
@@ -86,6 +93,9 @@ public class HelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		return this."+javaProperty+";" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println();
+		}
+		if ( relationLast ) {
+			this.generateRelations();
 		}
 		// metodo toString()
 		this.getWriter().println( "	@Override" );

@@ -31,25 +31,8 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 			this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+DaogenCatalogConstants.modelName( entityTo ) );
 		}
 	}
-
-	@Override
-	public void generateBody() throws Exception {
-		this.addSerialVerUID();
-		
-		this.getWriter().println( "	public "+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
-		this.getWriter().println( "		super( wrapped );" );
-		this.getWriter().println( "	}" );
-		this.getWriter().println();
-		
-		this.getWriter().println( "	public "+this.getEntityModelName()+" unwrap( "+this.getEntityWrapperName()+" wrapper ) {" );
-		this.getWriter().println( "		"+this.getEntityModelName()+" res = wrapper;" );
-		this.getWriter().println( "		while ( res != null && res instanceof "+this.getEntityWrapperName()+" ) { " );
-		this.getWriter().println( "			res = (("+this.getEntityWrapperName()+")res).unwrapModel();" );
-		this.getWriter().println( "		}" );
-		this.getWriter().println( "		return res;" );
-		this.getWriter().println( "	}" );
-		this.getWriter().println();
-		
+	
+	private void generateRelations() {
 		if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
 			this.getWriter().println( "	/*" );
 			this.getWriter().println( "	 * fields generated for relations " );
@@ -76,6 +59,30 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 				this.getWriter().println();
 			}
 		}
+	}
+
+	@Override
+	public void generateBody() throws Exception {
+		this.addSerialVerUID();
+		
+		this.getWriter().println( "	public "+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
+		this.getWriter().println( "		super( wrapped );" );
+		this.getWriter().println( "	}" );
+		this.getWriter().println();
+		
+		this.getWriter().println( "	public "+this.getEntityModelName()+" unwrap( "+this.getEntityWrapperName()+" wrapper ) {" );
+		this.getWriter().println( "		"+this.getEntityModelName()+" res = wrapper;" );
+		this.getWriter().println( "		while ( res != null && res instanceof "+this.getEntityWrapperName()+" ) { " );
+		this.getWriter().println( "			res = (("+this.getEntityWrapperName()+")res).unwrapModel();" );
+		this.getWriter().println( "		}" );
+		this.getWriter().println( "		return res;" );
+		this.getWriter().println( "	}" );
+		this.getWriter().println();
+		
+		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
+		if ( !relationLast ) {
+			this.generateRelations();
+		}
 		
 		this.getWriter().println( "	/*" );
 		this.getWriter().println( "	 * fields generated for entity attributes " );
@@ -96,6 +103,10 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		return this.unwrapModel().get"+javaSuffix+"();" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println();
+		}
+		
+		if ( relationLast ) {
+			this.generateRelations();
 		}
 
 	}
