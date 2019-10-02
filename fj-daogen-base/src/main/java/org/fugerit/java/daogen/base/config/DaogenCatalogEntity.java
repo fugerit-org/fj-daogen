@@ -20,6 +20,8 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	public static final String ATT_PRIMARY_KEY = "primaryKey";
 	public static final String ATT_FOREIGN_KEYS = "foreigneys";
 	public static final String ATT_COMMENTS = "comments";
+	public static final String ATT_SEQUENCE_NAME = "sequenceName";
+	public static final String ATT_ORDER_BY = "orderBy";
 	
 	/**
 	 * 
@@ -43,6 +45,26 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	private String primaryKey;
 	
 	private String foreignKeys;
+	
+	private String sequenceName;
+	
+	private String orderBy;
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public String getSequenceName() {
+		return sequenceName;
+	}
+
+	public void setSequenceName(String sequenceName) {
+		this.sequenceName = sequenceName;
+	}
 
 	public String getForeignKeys() {
 		return foreignKeys;
@@ -108,6 +130,8 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_PRIMARY_KEY, this.getPrimaryKey() ) );
 		 list.add( StringUtils.concat( ":" , ATT_FOREIGN_KEYS, this.getForeignKeys() ) );
 		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
+		 list.add( StringUtils.concat( ":" , ATT_SEQUENCE_NAME, this.getSequenceName() ) );
+		 list.add( StringUtils.concat( ":" , ATT_ORDER_BY, this.getOrderBy() ) );
 		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}

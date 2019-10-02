@@ -55,6 +55,10 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( "	}");
 		this.getWriter().println();
 		String sequenceName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DEFAULT_SEQUENCE );
+		if ( StringUtils.isNotEmpty( this.getCurrentEntity().getSequenceName() ) )  {
+			sequenceName = this.getCurrentEntity().getSequenceName();
+		}
+		String defaultOrderBy = this.getCurrentEntity().getOrderBy();
 		if ( StringUtils.isNotEmpty( sequenceName ) ) {
 			this.getWriter().println( " 	public final static String SEQUENCE_NAME = \""+sequenceName+"\";" );
 			this.getWriter().println();	
@@ -64,6 +68,10 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( " 	}" );
 			this.getWriter().println();	
 		}
+		if ( StringUtils.isNotEmpty( defaultOrderBy ) ) {
+			this.getWriter().println( " 	private final static String DEFAULT_ORDER_BY = \""+defaultOrderBy+"\";" );
+			this.getWriter().println();	
+		}		
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			this.getWriter().println( " 	public final static String "+columnConstantName( field.getId() )+ " = \""+field.getId()+"\";" );
 		}
@@ -84,6 +92,9 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "			query.andEqualParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
 		}
 		this.getWriter().println( "		}" );
+		if ( StringUtils.isNotEmpty( defaultOrderBy ) ) {
+			this.getWriter().println( "		query.addOrderBy( DEFAULT_ORDER_BY );" );
+		}
 		this.getWriter().println( "		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); " );
 		this.getWriter().println( "		result.evaluateResultFromList(); " );
 		this.getWriter().println( "		return result;" );
