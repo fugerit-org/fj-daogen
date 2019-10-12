@@ -10,9 +10,13 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GeneratorKeyHelper implements Serializable {
 
+	private final static Logger logger = LoggerFactory.getLogger( GeneratorKeyHelper.class );
+	
 	/**
 	 * 
 	 */
@@ -65,8 +69,15 @@ public class GeneratorKeyHelper implements Serializable {
 					this.restBuilder.append( ", " );
 					this.pathParams.append( ", " );
 				}
-				String fieldName = GeneratorNameHelper.toPropertyName( currentField );
-				String javaType = config.getTypeMapper().mapForModel( field );
+				String fieldName = null;
+				String javaType = null;
+				try {
+					fieldName = GeneratorNameHelper.toPropertyName( currentField );
+					javaType = config.getTypeMapper().mapForModel( field );
+				} catch (Exception e) {
+					logger.info( "Error on field "+fieldName );
+					throw e;
+				}
 				this.keyBuilder.append( javaType );
 				this.keyBuilder.append( " " );
 				this.keyBuilder.append( fieldName );
