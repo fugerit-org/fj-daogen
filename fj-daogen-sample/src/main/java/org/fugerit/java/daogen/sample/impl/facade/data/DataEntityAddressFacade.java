@@ -21,4 +21,5 @@ public class DataEntityAddressFacade extends DataEntityAddressFacadeHelper imple
 
 	private static final long serialVersionUID = 209491675380L;
 
+	// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)
 }
