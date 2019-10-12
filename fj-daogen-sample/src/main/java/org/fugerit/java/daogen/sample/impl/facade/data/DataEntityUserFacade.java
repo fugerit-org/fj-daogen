@@ -21,4 +21,5 @@ public class DataEntityUserFacade extends DataEntityUserFacadeHelper implements 
 
 	private static final long serialVersionUID = 576230448583L;
 
+	// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)
 }

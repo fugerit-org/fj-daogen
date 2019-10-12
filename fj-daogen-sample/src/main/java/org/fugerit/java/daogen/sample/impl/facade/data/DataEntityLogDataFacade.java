@@ -21,4 +21,5 @@ public class DataEntityLogDataFacade extends DataEntityLogDataFacadeHelper imple
 
 	private static final long serialVersionUID = 84221996652L;
 
+	// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)
 }
