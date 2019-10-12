@@ -1,18 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.facade.data;
 
-import org.fugerit.java.core.db.dao.DAOException;
-import org.fugerit.java.core.db.daogen.BasicDAOHelper;
-import org.fugerit.java.core.db.daogen.BasicDaoResult;
-import org.fugerit.java.core.db.daogen.BasicDataFacade;
-import org.fugerit.java.core.db.daogen.DAOContext;
-import org.fugerit.java.core.db.daogen.DeleteHelper;
-import org.fugerit.java.core.db.daogen.InsertHelper;
-import org.fugerit.java.core.db.daogen.SelectHelper;
-import org.fugerit.java.core.db.daogen.UpdateHelper;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserDataFacade;
-import org.fugerit.java.daogen.sample.def.facade.UserDataFinder;
-import org.fugerit.java.daogen.sample.def.model.ModelUserData;
-import org.fugerit.java.daogen.sample.impl.rse.UserDataRSE;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -26,115 +14,11 @@ import org.fugerit.java.daogen.sample.impl.rse.UserDataRSE;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class DataEntityUserDataFacade extends BasicDataFacade<ModelUserData> implements EntityUserDataFacade {
+public class DataEntityUserDataFacade extends DataEntityUserDataFacadeHelper implements EntityUserDataFacade {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
 	private static final long serialVersionUID = 414347890163L;
-
-	public DataEntityUserDataFacade() {
-		super( "PUBLIC.FUGERIT.USER", UserDataRSE.DEFAULT );
-	}
-
- 	public final static String SEQUENCE_NAME = "seq_id_fugerit";
-
- 	@Override
- 	public String getSequenceName() {
- 		return SEQUENCE_NAME;
- 	}
-
- 	public final static String COL_ID = "ID";
- 	public final static String COL_USERNAME = "USERNAME";
- 	public final static String COL_PASSWORD = "PASSWORD";
- 	public final static String COL_LAST_LOGIN = "LAST_LOGIN";
- 	public final static String COL_DATE_INSERT = "DATE_INSERT";
- 	public final static String COL_DATE_UPDATE = "DATE_UPDATE";
- 	public final static String COL_STATE = "STATE";
-
-	/* loadAll( context ) is inherited from BasicDataFacade */
-
-	@Override
-	public BasicDaoResult<ModelUserData> loadAllByFinder( DAOContext context, UserDataFinder finder ) throws DAOException {
-		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
-		query.andEqualParam( COL_ID, finder.getId() );
-		if ( finder.getModel() != null ) {
-			ModelUserData model = finder.getModel();
-			query.andEqualParam( COL_ID, model.getId() );
-			query.andEqualParam( COL_USERNAME, model.getUsername() );
-			query.andEqualParam( COL_PASSWORD, model.getPassword() );
-			query.andEqualParam( COL_LAST_LOGIN, model.getLastLogin() );
-			query.andEqualParam( COL_DATE_INSERT, model.getDateInsert() );
-			query.andEqualParam( COL_DATE_UPDATE, model.getDateUpdate() );
-			query.andEqualParam( COL_STATE, model.getState() );
-		}
-		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
-		result.evaluateResultFromList(); 
-		return result;
-	}
-
-	@Override
-	public BasicDaoResult<ModelUserData> create( DAOContext context, ModelUserData model ) throws DAOException {
-		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		if ( model.getId() == null ) { 
-			model.setId( this.generateId( context ) ); 
-		} 
-		//  default-column-time-insert : true - i will set insert time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
-		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
-		query.addParam( COL_ID, model.getId() );
-		query.addParam( COL_USERNAME, model.getUsername() );
-		query.addParam( COL_PASSWORD, model.getPassword() );
-		query.addParam( COL_LAST_LOGIN, model.getLastLogin() );
-		query.addParam( COL_DATE_INSERT, model.getDateInsert() );
-		query.addParam( COL_DATE_UPDATE, model.getDateUpdate() );
-		query.addParam( COL_STATE, model.getState() );
-		int res = daoHelper.update( query );
-		this.evaluteSqlUpdateResult(res, model, result);
-		return result;
-	}
-
-	@Override
-	public ModelUserData loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
-		ModelUserData result = null;
-		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
-		query.andEqualParam( COL_ID, id );
-		result = daoHelper.loadOneHelper( query, this.getRse() );
-		return result;
-	}
-
-	@Override
-	public BasicDaoResult<ModelUserData> deleteById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
-		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );
-		query.andWhereParam( COL_ID, id );
-		int res = daoHelper.update( query );
-		this.evaluteSqlUpdateResult(res, null, result);
-		return result;
-	}
-
-	@Override
-	public BasicDaoResult<ModelUserData> updateById( DAOContext context, ModelUserData model ) throws DAOException {
-		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		//  default-column-time-update : true - i will set update time
-		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
-		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
-		query.addSetParam( COL_USERNAME, model.getUsername() );
-		query.addSetParam( COL_PASSWORD, model.getPassword() );
-		query.addSetParam( COL_LAST_LOGIN, model.getLastLogin() );
-		query.addSetParam( COL_DATE_INSERT, model.getDateInsert() );
-		query.addSetParam( COL_DATE_UPDATE, model.getDateUpdate() );
-		query.addSetParam( COL_STATE, model.getState() );
-		query.andWhereParam( COL_ID, model.getId() );
-		int res = daoHelper.update( query );
-		this.evaluteSqlUpdateResult(res, model, result);
-		return result;
-	}
 
 }

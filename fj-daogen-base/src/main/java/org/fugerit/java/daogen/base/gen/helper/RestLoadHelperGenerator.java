@@ -1,4 +1,4 @@
-package org.fugerit.java.daogen.base.gen;
+package org.fugerit.java.daogen.base.gen.helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,14 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
+import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
+import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
+import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
 
-public class RestLoadGenerator extends DaogenBasicGenerator {
+public class RestLoadHelperGenerator extends DaogenBasicGenerator {
 
-	public static final String KEY = RestLoadGenerator.class.getSimpleName();
+	public static final String KEY = RestLoadHelperGenerator.class.getSimpleName();
 	
 	@Override
 	public String getKey() {
@@ -27,11 +31,10 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 	private String helperClass = null;
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
-		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
-				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD ), DaogenCatalogConstants.restLoadName( entity ) ), 
+		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ), 
+				DaogenHelperGenerator.toHelperClassName( fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD ), DaogenCatalogConstants.restLoadName( entity ) ) ), 
 				STYLE_CLASS, daogenConfig, entity );
 		this.getImportList().add( "java.util.List" );
-		this.getImportList().add( "javax.ejb.Stateless" );
 		this.getImportList().add( "javax.ws.rs.GET" );
 		this.getImportList().add( "javax.ws.rs.Path" );
 		this.getImportList().add( "javax.ws.rs.PathParam" );
@@ -52,13 +55,6 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 			this.getImportList().add( facadeDef );	
 		}
 		this.setExtendsClass( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_REST_SERVICE )+"<"+this.getEntityModelName()+">" );
-	}
-
-	@Override
-	protected void beforeClass() {
-		String urlBase = this.getCurrentEntity().getName().replaceAll( "_" , "" ).toLowerCase();
-		this.getWriter().println( "@Stateless" );
-		this.getWriter().println( "@Path(\"/"+urlBase+"/load\")" );
 	}
 
 	@Override

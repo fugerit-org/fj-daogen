@@ -1,5 +1,6 @@
 <generator-catalog>
-  <factory id="entity_generators">
+
+  <factory id="entity_generators_base">
     <data id="ModelGenerator" 
     	type="org.fugerit.java.daogen.base.gen.ModelGenerator"
     	info="package-model"/>
@@ -15,22 +16,47 @@
     <data id="FinderGenerator" 
     	type="org.fugerit.java.daogen.base.gen.FinderGenerator"
     	info="package-facade-def"/>
-    <data id="FacadeDefGenerator" 
-    	type="org.fugerit.java.daogen.base.gen.FacadeDefGenerator"
-    	info="package-facade-def"/>
     <data id="RSEGenerator" 
     	type="org.fugerit.java.daogen.base.gen.RSEGenerator"
     	info="package-rse"/>
+    <data id="DocOpenAPIRestGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.DocOpenAPIV3RestGenerator"
+    	info="src-doc-openapi"/>     	    	 	
+  </factory>
+
+  <factory id="entity_generators" extends="entity_generators_base">
+    <data id="FacadeDefGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.FacadeDefGenerator"
+    	info="package-facade-def"/>  
     <data id="FacadeImplDataGenerator" 
     	type="org.fugerit.java.daogen.base.gen.FacadeImplDataGenerator"
     	info="package-facade-data-impl"/>   
     <data id="RestLoadGenerator" 
     	type="org.fugerit.java.daogen.base.gen.RestLoadGenerator"
     	info="package-rest-load"/>  
-    <data id="DocOpenAPIRestGenerator" 
-    	type="org.fugerit.java.daogen.base.gen.DocOpenAPIV3RestGenerator"
-    	info="src-doc-openapi"/>     	    	 	
   </factory>
+
+  <factory id="entity_generators_helper" extends="entity_generators_base">
+    <data id="FacadeDefHelperGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FacadeDefHelperGenerator"
+    	info="package-facade-def"/>  
+    <data id="FacadeDefRelGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FacadeDefRealGenerator"
+    	info="package-facade-def"/>      	
+    <data id="FacadeImplDataHelperGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FacadeImplDataHelperGenerator"
+    	info="package-facade-data-impl"/>  
+    <data id="FacadeImplDataRealGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FacadeImplDataRealGenerator"
+    	info="package-facade-data-impl"/>      	 
+    <data id="RestLoadHelperGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.RestLoadHelperGenerator"
+    	info="package-rest-load"/>  
+    <data id="RestLoadRealGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.RestLoadRealGenerator"
+    	info="package-rest-load"/>     	
+  </factory>
+
   <factory id="factory_generators">
     <data id="FactoryDefGenerator" 
     	type="org.fugerit.java.daogen.base.gen.FactoryDefGenerator"
@@ -39,4 +65,20 @@
     	type="org.fugerit.java.daogen.base.gen.FactoryDataImplGenerator"
     	info="factory-data-impl"/>        	 	
   </factory>  
+    
+  <factory id="factory_generators_helper">
+    <data id="FactoryDefHelperGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FactoryDefHelperGenerator"
+    	info="factory-def"/>     
+    <data id="FactoryDefRealGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FactoryDefRealGenerator"
+    	info="factory-def"/>   
+    <data id="FactoryDataImplHelperGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FactoryDataImplHelperGenerator"
+    	info="factory-data-impl"/>  
+    <data id="FactoryDataImplRealGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.FactoryDataImplRealGenerator"
+    	info="factory-data-impl"/>        	      	 	
+  </factory>  
+  
 </generator-catalog>

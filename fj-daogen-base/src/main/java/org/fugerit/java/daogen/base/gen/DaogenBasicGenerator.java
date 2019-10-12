@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.io.FileIO;
 import org.fugerit.java.core.javagen.SimpleJavaGenerator;
 import org.fugerit.java.core.util.collection.KeyObject;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
@@ -12,6 +13,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
+	protected static String REAL_CLASS_COMMENT = "\t// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
 
 	@Override
 	public void write() throws IOException {
@@ -20,6 +22,16 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		} else {
 			super.write();
 		}
+	}
+	
+	protected boolean checkSkipRealClass() throws IOException {
+		if ( this.getJavaFile().exists() ) {
+			String content = FileIO.readString( this.getJavaFile() );
+			if ( content.contains( REAL_CLASS_COMMENT ) ) {
+				this.setSkipWrite( true );
+			}
+		}
+		return this.isSkipWrite();
 	}
 
 	private DaogenCatalogConfig daogenConfig;
@@ -42,7 +54,13 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 
 	public abstract void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException;
 	
+	
 	public void init( String sourceFolder, String fullObjectBName, String javaStyle, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
+		if ( DaogenCatalogConstants.GEN_PROP_SRC_HELPERS_MAIN.equalsIgnoreCase( sourceFolder ) ) {
+			sourceFolder = daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA );
+		} else if ( DaogenCatalogConstants.GEN_PROP_SRC_HELPERS_GEN.equalsIgnoreCase( sourceFolder ) ) {
+			sourceFolder = "target/generated-sources/daogen/";
+		}
 		super.init( new File( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER ), sourceFolder ), fullObjectBName, javaStyle, daogenConfig.getGeneralProps() );
 		this.daogenConfig = daogenConfig;
 		this.currentEntity = entity;

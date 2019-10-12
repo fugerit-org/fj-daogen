@@ -1,4 +1,4 @@
-package org.fugerit.java.daogen.base.gen;
+package org.fugerit.java.daogen.base.gen.helper;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
@@ -8,10 +8,14 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
+import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
+import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
+import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
 
-public class FacadeImplDataGenerator extends DaogenBasicGenerator {
+public class FacadeImplDataHelperGenerator extends DaogenBasicGenerator {
 
-	public static final String KEY = FacadeImplDataGenerator.class.getSimpleName();
+	public static final String KEY = FacadeImplDataHelperGenerator.class.getSimpleName();
 	
 	@Override
 	public String getKey() {
@@ -19,13 +23,13 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 	}
 
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
-		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
-				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DATA_IMPL ), DaogenCatalogConstants.facadeImplDataName( entity ) ), 
+		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ), 
+				DaogenHelperGenerator.toHelperClassName( fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DATA_IMPL ), DaogenCatalogConstants.facadeImplDataName( entity ) ) ), 
 				STYLE_CLASS, daogenConfig, entity );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_RSE )+"."+this.getEntityRSEName() );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+this.getEntityFinderName() );
-		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+this.getEntityFacadeDefName() );
+		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+DaogenHelperGenerator.toHelperClassName( this.getEntityFacadeDefName() ) );
 		this.setClassDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CONTEXT_BASE, this.getImportList() ) );
 		this.setClassDaoHelper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_DAOHELPER_BASE, this.getImportList() ) );
 		this.setClassDataFacade( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_DATAFACADE_BASE, this.getImportList() ) );
@@ -37,7 +41,7 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 		}
 		this.setClassDaoException( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_EXCEPTION_BASE, this.getImportList() ) );
 		this.setClassBaseResult( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_RESULT_BASE, this.getImportList() ) );
-		this.setImplementsInterface( this.getEntityFacadeDefName() );
+		this.setImplementsInterface( DaogenHelperGenerator.toHelperClassName( this.getEntityFacadeDefName() ) );
 		this.setExtendsClass( this.getClassDataFacade()+"<"+this.getEntityModelName()+">" );
 	}
 
@@ -64,7 +68,7 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 		this.addSerialVerUID();
 		String autoSetDateInsert = this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT );
 		String autoSetDateUpdate = this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE );
-		this.getWriter().println( "	public "+this.getEntityFacadeDataImplName()+"() {" );
+		this.getWriter().println( "	public "+DaogenHelperGenerator.toHelperClassName( this.getEntityFacadeDataImplName() )+"() {" );
 		String fullTableName = toFullTableName( this.getCurrentEntity() );
 		this.getWriter().println( "		super( \""+fullTableName+"\", "+this.getEntityRSEName()+".DEFAULT );");
 		this.getWriter().println( "	}");

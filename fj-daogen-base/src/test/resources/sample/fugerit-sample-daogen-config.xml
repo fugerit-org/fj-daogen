@@ -7,6 +7,7 @@
 	src-test-java="src/test/java"
 	src-main-resources="src/main/resources"
 	src-test-resources="src/test/resources"
+	src-helpers="SRC-MAIN-JAVA"
 	src-doc-openapi="src/main/doc/openapi_rest"
 	class-config="cl://config/daogen_default_class_config.xml"
 	type-mapper="org.fugerit.java.daogen.base.config.DaogenTypeMapper"

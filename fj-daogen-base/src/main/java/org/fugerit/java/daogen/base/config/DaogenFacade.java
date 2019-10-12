@@ -30,8 +30,8 @@ public class DaogenFacade {
 		Collections.sort( entityIdList );
 		for ( String entityId : entityIdList ) {
 			DaogenCatalogEntity entity = daogenConfig.getListMap( entityId );
-			if ( generatorCatalog.getEntityGenerators() != null ) {
-				for ( FactoryType dataType : generatorCatalog.getEntityGenerators() ) {
+			if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
+				for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
 					if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 						DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
 						generator.init( daogenConfig, entity );	
@@ -40,8 +40,8 @@ public class DaogenFacade {
 				}
 			}
 		}
-		if ( generatorCatalog.getFactoryGenerators() != null ) {
-			for ( FactoryType dataType : generatorCatalog.getFactoryGenerators() ) {
+		if ( generatorCatalog.getFactoryGenerators( daogenConfig ) != null ) {
+			for ( FactoryType dataType : generatorCatalog.getFactoryGenerators( daogenConfig ) ) {
 				if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 					DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
 					generator.init( daogenConfig, null );	

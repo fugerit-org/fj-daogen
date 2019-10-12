@@ -1,4 +1,4 @@
-package org.fugerit.java.daogen.base.gen;
+package org.fugerit.java.daogen.base.gen.helper;
 
 import java.util.Iterator;
 
@@ -8,10 +8,12 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
+import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
-public class FactoryDataImplGenerator extends DaogenBasicGenerator {
+public class FactoryDataImplHelperGenerator extends DaogenBasicGenerator {
 
-	public static final String KEY = FactoryDataImplGenerator.class.getSimpleName();
+	public static final String KEY = FactoryDataImplHelperGenerator.class.getSimpleName();
 	
 	@Override
 	public String getKey() {
@@ -19,8 +21,8 @@ public class FactoryDataImplGenerator extends DaogenBasicGenerator {
 	}
 
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
-		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
-				daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DATA_IMPL ), 
+		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ),
+				DaogenHelperGenerator.toHelperClassName(daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DATA_IMPL ) ), 
 				STYLE_CLASS, daogenConfig, null );
 		String packageFacade = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF );
 		String packageFacadeImpl = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DATA_IMPL );
@@ -32,7 +34,7 @@ public class FactoryDataImplGenerator extends DaogenBasicGenerator {
 			this.getImportList().add( packageFacade+"."+DaogenCatalogConstants.facadeDefName( current ) );
 			this.getImportList().add( packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current ) );
 		}
-		this.setImplementsInterface( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
+		this.setImplementsInterface( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF )+"Helper" );
 	}
 
 
@@ -52,6 +54,10 @@ public class FactoryDataImplGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		return this."+propertyName+";" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println();
+			this.getWriter().println( "	protected void set"+facadeName+"( "+facadeName+" facade ) throws "+this.getClassDaoException()+" {" );
+			this.getWriter().println( "		this."+propertyName+" = facade;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println();			
 		}
 	}
 

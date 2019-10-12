@@ -1,4 +1,4 @@
-package org.fugerit.java.daogen.base.gen;
+package org.fugerit.java.daogen.base.gen.helper;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.lang.helpers.StringUtils;
@@ -7,10 +7,13 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
+import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
+import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
 
-public class FacadeDefGenerator extends DaogenBasicGenerator {
+public class FacadeDefHelperGenerator extends DaogenBasicGenerator {
 
-	public static final String KEY = FacadeDefGenerator.class.getSimpleName();
+	public static final String KEY = FacadeDefHelperGenerator.class.getSimpleName();
 	
 	@Override
 	public String getKey() {
@@ -23,8 +26,8 @@ public class FacadeDefGenerator extends DaogenBasicGenerator {
 	public static final String METHOD_UPDATE_BY_PK = "updateById";
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
-		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
-				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ), DaogenCatalogConstants.facadeDefName( entity ) ), 
+		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ),
+				DaogenHelperGenerator.toHelperClassName( fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ), DaogenCatalogConstants.facadeDefName( entity ) ) ), 
 				STYLE_INTERFACE, daogenConfig, entity );
 		this.setClassDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CONTEXT_BASE, this.getImportList() ) );
 		this.setClassDaoException( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_EXCEPTION_BASE, this.getImportList() ) );
