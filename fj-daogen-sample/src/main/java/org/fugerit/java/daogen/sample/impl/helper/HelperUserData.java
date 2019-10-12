@@ -1,14 +1,13 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
 import org.fugerit.java.core.db.daogen.BasicHelper;
-import org.fugerit.java.daogen.sample.def.model.ModelAddress;
-import org.fugerit.java.daogen.sample.def.model.ModelUser;
+import org.fugerit.java.daogen.sample.def.model.ModelUserData;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
 /**
- * HelperAddress, version : 1.0.0
+ * HelperUserData, version : 1.0.0
  *
  * author: fugerit
  *
@@ -16,28 +15,12 @@ import org.fugerit.java.daogen.sample.def.model.ModelUser;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class HelperAddress extends BasicHelper implements ModelAddress {
+public class HelperUserData extends BasicHelper implements ModelUserData {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 102956265348L;
-
-	/*
-	 * fields generated for relations 
-	 */
-
-	private ModelUser User;
-
-	@Override
-	public void setUser( ModelUser value ) {
-		this.User = value;
-	}
-
-	@Override
-	public ModelUser getUser() {
-		return this.User;
-	}
+	private static final long serialVersionUID = 321604260603L;
 
 	/*
 	 * fields generated for entity attributes 
@@ -54,16 +37,40 @@ public class HelperAddress extends BasicHelper implements ModelAddress {
 		return this.id;
 	}
 
-	private java.math.BigDecimal idUser;
+	private java.lang.String username;
 
 	@Override
-	public void setIdUser( java.math.BigDecimal value ) {
-		this.idUser = value;
+	public void setUsername( java.lang.String value ) {
+		this.username = value;
 	}
 
 	@Override
-	public java.math.BigDecimal getIdUser() {
-		return this.idUser;
+	public java.lang.String getUsername() {
+		return this.username;
+	}
+
+	private java.lang.String password;
+
+	@Override
+	public void setPassword( java.lang.String value ) {
+		this.password = value;
+	}
+
+	@Override
+	public java.lang.String getPassword() {
+		return this.password;
+	}
+
+	private java.util.Date lastLogin;
+
+	@Override
+	public void setLastLogin( java.util.Date value ) {
+		this.lastLogin = value;
+	}
+
+	@Override
+	public java.util.Date getLastLogin() {
+		return this.lastLogin;
 	}
 
 	private java.util.Date dateInsert;
@@ -90,16 +97,16 @@ public class HelperAddress extends BasicHelper implements ModelAddress {
 		return this.dateUpdate;
 	}
 
-	private java.lang.String info;
+	private java.math.BigDecimal state;
 
 	@Override
-	public void setInfo( java.lang.String value ) {
-		this.info = value;
+	public void setState( java.math.BigDecimal value ) {
+		this.state = value;
 	}
 
 	@Override
-	public java.lang.String getInfo() {
-		return this.info;
+	public java.math.BigDecimal getState() {
+		return this.state;
 	}
 
 	@Override
@@ -108,14 +115,18 @@ public class HelperAddress extends BasicHelper implements ModelAddress {
 		buffer.append( this.getClass().getSimpleName() );
 		buffer.append( "[id=" );
 		buffer.append( this.getId() );
-		buffer.append( ",idUser=" );
-		buffer.append( this.getIdUser() );
+		buffer.append( ",username=" );
+		buffer.append( this.getUsername() );
+		buffer.append( ",password=" );
+		buffer.append( this.getPassword() );
+		buffer.append( ",lastLogin=" );
+		buffer.append( this.getLastLogin() );
 		buffer.append( ",dateInsert=" );
 		buffer.append( this.getDateInsert() );
 		buffer.append( ",dateUpdate=" );
 		buffer.append( this.getDateUpdate() );
-		buffer.append( ",info=" );
-		buffer.append( this.getInfo() );
+		buffer.append( ",state=" );
+		buffer.append( this.getState() );
 		buffer.append( "]" );
 		return buffer.toString();
 	}

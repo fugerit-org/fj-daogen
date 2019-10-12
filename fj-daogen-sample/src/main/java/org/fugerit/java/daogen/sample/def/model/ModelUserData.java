@@ -4,7 +4,7 @@ package org.fugerit.java.daogen.sample.def.model;
 // custom import end ( code below here will be overwritten )
 
 /**
- * ModelUpload, version : 1.0.0
+ * ModelUserData, version : 1.0.0
  *
  * author: fugerit
  *
@@ -12,7 +12,7 @@ package org.fugerit.java.daogen.sample.def.model;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public interface ModelUpload {
+public interface ModelUserData {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
@@ -20,7 +20,7 @@ public interface ModelUpload {
 	/**
 	 * Getter method for property : id (nullable: no)
 	 *
-	 * 
+	 * User system id
 	 *
 	 * @return the value of id
 	 */
@@ -29,11 +29,65 @@ public interface ModelUpload {
 	/**
 	 * Setter method for property : id (nullable: no)
 	 *
-	 * 
+	 * User system id
 	 *
 	 * @param value the value of id
 	 */
 	void setId( java.math.BigDecimal value );
+
+	/**
+	 * Getter method for property : username (nullable: no)
+	 *
+	 * User chosen id
+	 *
+	 * @return the value of username
+	 */
+	java.lang.String getUsername();
+
+	/**
+	 * Setter method for property : username (nullable: no)
+	 *
+	 * User chosen id
+	 *
+	 * @param value the value of username
+	 */
+	void setUsername( java.lang.String value );
+
+	/**
+	 * Getter method for property : password (nullable: no)
+	 *
+	 * Password hash
+	 *
+	 * @return the value of password
+	 */
+	java.lang.String getPassword();
+
+	/**
+	 * Setter method for property : password (nullable: no)
+	 *
+	 * Password hash
+	 *
+	 * @param value the value of password
+	 */
+	void setPassword( java.lang.String value );
+
+	/**
+	 * Getter method for property : lastLogin (nullable: yes)
+	 *
+	 * Time of last user login
+	 *
+	 * @return the value of lastLogin
+	 */
+	java.util.Date getLastLogin();
+
+	/**
+	 * Setter method for property : lastLogin (nullable: yes)
+	 *
+	 * Time of last user login
+	 *
+	 * @param value the value of lastLogin
+	 */
+	void setLastLogin( java.util.Date value );
 
 	/**
 	 * Getter method for property : dateInsert (nullable: yes)
@@ -72,21 +126,21 @@ public interface ModelUpload {
 	void setDateUpdate( java.util.Date value );
 
 	/**
-	 * Getter method for property : content (nullable: yes)
+	 * Getter method for property : state (nullable: no)
 	 *
-	 * 
+	 * 1 active, 0 not active
 	 *
-	 * @return the value of content
+	 * @return the value of state
 	 */
-	org.fugerit.java.core.db.daogen.ByteArrayDataHandler getContent();
+	java.math.BigDecimal getState();
 
 	/**
-	 * Setter method for property : content (nullable: yes)
+	 * Setter method for property : state (nullable: no)
 	 *
-	 * 
+	 * 1 active, 0 not active
 	 *
-	 * @param value the value of content
+	 * @param value the value of state
 	 */
-	void setContent( org.fugerit.java.core.db.daogen.ByteArrayDataHandler value );
+	void setState( java.math.BigDecimal value );
 
 }

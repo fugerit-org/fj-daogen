@@ -1,13 +1,13 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
 import org.fugerit.java.core.db.daogen.BaseIdFinder;
-import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
+import org.fugerit.java.daogen.sample.def.model.ModelUserData;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
 /**
- * TestTwoFieldKeyFinder, version : 1.0.0
+ * UserDataFinder, version : 1.0.0
  *
  * author: fugerit
  *
@@ -15,21 +15,34 @@ import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class TestTwoFieldKeyFinder extends BaseIdFinder {
+public class UserDataFinder extends BaseIdFinder {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 772549612012L;
+	private static final long serialVersionUID = 338411557691L;
 
-	private ModelTestTwoFieldKey model;
+	private ModelUserData model;
 
-	public void setModel( ModelTestTwoFieldKey model ) {
+	public void setModel( ModelUserData model ) {
 		this.model = model;
 	}
 
-	public ModelTestTwoFieldKey getModel() {
+	public ModelUserData getModel() {
 		return this.model;
+	}
+
+	/**
+	 *Factory method to create a new finder 
+	 *
+	 * @param id		id to wrap in the finder
+	 *
+	 * @return	the finder
+	 */
+	public static UserDataFinder newInstance( java.math.BigDecimal id ) { 
+		UserDataFinder finder = new UserDataFinder();
+		finder.setId( id );
+		return finder;
 	}
 
 	/**
@@ -39,9 +52,9 @@ public class TestTwoFieldKeyFinder extends BaseIdFinder {
 	 *
 	 * @return	the finder
 	 */
-	public static TestTwoFieldKeyFinder newInstance( ModelTestTwoFieldKey model ) { 
-		TestTwoFieldKeyFinder finder = new TestTwoFieldKeyFinder();
-		// default id not available for this entity
+	public static UserDataFinder newInstance( ModelUserData model ) { 
+		UserDataFinder finder = new UserDataFinder();
+		finder.setId( model.getId() );
 		finder.setModel( model );
 		return finder;
 	}

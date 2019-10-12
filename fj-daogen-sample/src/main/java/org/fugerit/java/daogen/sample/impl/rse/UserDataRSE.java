@@ -3,14 +3,14 @@ package org.fugerit.java.daogen.sample.impl.rse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.fugerit.java.core.db.daogen.BasicRSExtractor;
-import org.fugerit.java.daogen.sample.def.model.ModelUser;
-import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
+import org.fugerit.java.daogen.sample.def.model.ModelUserData;
+import org.fugerit.java.daogen.sample.impl.helper.HelperUserData;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
 /**
- * UserRSE, version : 1.0.0
+ * UserDataRSE, version : 1.0.0
  *
  * author: fugerit
  *
@@ -18,18 +18,18 @@ import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class UserRSE extends BasicRSExtractor<ModelUser> {
+public class UserDataRSE extends BasicRSExtractor<ModelUserData> {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 577630883979L;
+	private static final long serialVersionUID = 673296869401L;
 
-	public static final UserRSE DEFAULT = new UserRSE();
+	public static final UserDataRSE DEFAULT = new UserDataRSE();
 
 	@Override
-	public ModelUser extractNext( ResultSet rs ) throws SQLException { 
-		HelperUser current = new HelperUser();
+	public ModelUserData extractNext( ResultSet rs ) throws SQLException { 
+		HelperUserData current = new HelperUserData();
 		current.setId( rs.getBigDecimal( "ID" )  );
 		current.setUsername( rs.getString( "USERNAME" )  );
 		current.setPassword( rs.getString( "PASSWORD" )  );

@@ -22,6 +22,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	public static final String ATT_COMMENTS = "comments";
 	public static final String ATT_SEQUENCE_NAME = "sequenceName";
 	public static final String ATT_ORDER_BY = "orderBy";
+	public static final String ATT_MAP_TO_TABLE = "mapToTable";
 	
 	/**
 	 * 
@@ -49,6 +50,8 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	private String sequenceName;
 	
 	private String orderBy;
+	
+	private String mapToTable;
 
 	public String getOrderBy() {
 		return orderBy;
@@ -114,6 +117,14 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		this.name = name;
 	}
 	
+	public String getMapToTable() {
+		return mapToTable;
+	}
+
+	public void setMapToTable(String mapToTable) {
+		this.mapToTable = mapToTable;
+	}
+
 	public String toClassName() {
 		return GeneratorNameHelper.toClassName( this.getName() );
 	}
@@ -132,6 +143,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
 		 list.add( StringUtils.concat( ":" , ATT_SEQUENCE_NAME, this.getSequenceName() ) );
 		 list.add( StringUtils.concat( ":" , ATT_ORDER_BY, this.getOrderBy() ) );
+		 list.add( StringUtils.concat( ":" , ATT_MAP_TO_TABLE, this.getMapToTable() ) );
 		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}

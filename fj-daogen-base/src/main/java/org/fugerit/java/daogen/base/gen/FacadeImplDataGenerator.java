@@ -45,13 +45,28 @@ public class FacadeImplDataGenerator extends DaogenBasicGenerator {
 		return "COL_"+col.toUpperCase();
 	}
 
+	public static String toFullTableName( DaogenCatalogEntity entity ) {
+		String tableName = entity.getName();
+		if ( StringUtils.isNotEmpty( entity.getMapToTable() ) ) {
+			tableName = entity.getMapToTable();
+		}
+		if ( StringUtils.isNotEmpty( entity.getSchema() ) ) {
+			tableName= entity.getSchema()+"."+tableName;
+		}
+		if ( StringUtils.isNotEmpty( entity.getCatalog() ) ) {
+			tableName= entity.getCatalog()+"."+tableName;
+		}
+		return tableName;
+	}
+	
 	@Override
 	public void generateBody() throws Exception {
 		this.addSerialVerUID();
 		String autoSetDateInsert = this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT );
 		String autoSetDateUpdate = this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE );
 		this.getWriter().println( "	public "+this.getEntityFacadeDataImplName()+"() {" );
-		this.getWriter().println( "		super( \""+this.getCurrentEntity().getId()+"\", "+this.getEntityRSEName()+".DEFAULT );");
+		String fullTableName = toFullTableName( this.getCurrentEntity() );
+		this.getWriter().println( "		super( \""+fullTableName+"\", "+this.getEntityRSEName()+".DEFAULT );");
 		this.getWriter().println( "	}");
 		this.getWriter().println();
 		String sequenceName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DEFAULT_SEQUENCE );

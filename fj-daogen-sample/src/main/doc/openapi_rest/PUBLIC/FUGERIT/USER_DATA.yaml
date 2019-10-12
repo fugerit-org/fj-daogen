@@ -1,15 +1,15 @@
 openapi: 3.0.0
 info:
-  title: OpenAPI load specification for PUBLIC.FUGERIT.UPLOAD'
-  description: 'Comments : Contains upload blob'
+  title: OpenAPI load specification for PUBLIC.FUGERIT.USER_DATA'
+  description: 'Comments : Contains users data'
   version: '1.0.0'
 servers:
-  - url: http://localhost:9080/fugerit-sample-web/jax-rs/upload/load
+  - url: http://localhost:9080/fugerit-sample-web/jax-rs/userdata/load
     description: Local Development server
 paths:
   /id/{id}:
     get:
-      summary: Get PUBLIC.FUGERIT.UPLOAD by primary key
+      summary: Get PUBLIC.FUGERIT.USER_DATA by primary key
       parameters:
         - name: id
           in: path
@@ -23,10 +23,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Upload'
+                $ref: '#/components/schemas/UserData'
   /all:
     get:
-      summary: Get all PUBLIC.FUGERIT.UPLOAD
+      summary: Get all PUBLIC.FUGERIT.USER_DATA
       responses:
         '200':
           description: Success response
@@ -35,12 +35,21 @@ paths:
               schema:
                   type: array
                   items: 
-                    $ref: '#/components/schemas/Upload'
+                    $ref: '#/components/schemas/UserData'
 components: 
   schemas: 
-    Upload: 
+    UserData: 
       properties:
         id:
+          type: string
+          example: ''
+        username:
+          type: string
+          example: ''
+        password:
+          type: string
+          example: ''
+        last_login:
           type: string
           example: ''
         date_insert:
@@ -49,6 +58,6 @@ components:
         date_update:
           type: string
           example: ''
-        content:
+        state:
           type: string
           example: ''

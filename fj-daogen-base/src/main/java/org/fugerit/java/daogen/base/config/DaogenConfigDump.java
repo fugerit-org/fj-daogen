@@ -14,6 +14,7 @@ import org.fugerit.java.core.db.metadata.DataBaseModel;
 import org.fugerit.java.core.db.metadata.ForeignKeyModel;
 import org.fugerit.java.core.db.metadata.IndexModel;
 import org.fugerit.java.core.db.metadata.MetaDataUtils;
+import org.fugerit.java.core.db.metadata.TableId;
 import org.fugerit.java.core.db.metadata.TableModel;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.collection.ListMapStringKey;
@@ -40,6 +41,10 @@ public class DaogenConfigDump {
 	}
 	
 	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList ) throws Exception {
+		dumpConfig(cf, params, writer, tableNameList, new Properties());
+	}
+	
+	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws Exception {
 		String catalog = params.getProperty( PARAM_CATALOG );
 		String schema = params.getProperty( PARAM_SCHEMA );
 		DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList );
@@ -50,6 +55,13 @@ public class DaogenConfigDump {
 		ListMapStringKey<DaogenCatalogRelation> relations = new ListMapStringKey<>();
 		for ( TableModel tableModel : dbModel.getTableList() ) {
 			Element currentEntityTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ENTITY );
+			String tableName = tableModel.getName();
+			String mapToTable = mapToTables.getProperty( tableName );
+			if ( mapToTable != null ) {
+				TableId tableId = tableModel.getTableId();
+				tableId.setTableName( mapToTable );
+				addIfNotEmpty( DaogenCatalogEntity.ATT_MAP_TO_TABLE , tableName, currentEntityTag );
+			}
 			currentEntityTag.setAttribute( DaogenCatalogEntity.ATT_ID , tableModel.getTableId().toIdString() );
 			addIfNotEmpty( DaogenCatalogEntity.ATT_NAME , tableModel.getName(), currentEntityTag );
 			addIfNotEmpty( DaogenCatalogEntity.ATT_SCHEMA , tableModel.getSchema(), currentEntityTag );

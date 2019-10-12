@@ -1,13 +1,13 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
 import org.fugerit.java.core.db.daogen.BasicWrapper;
-import org.fugerit.java.daogen.sample.def.model.ModelUpload;
+import org.fugerit.java.daogen.sample.def.model.ModelUserData;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
 /**
- * WrapperUpload, version : 1.0.0
+ * WrapperUserData, version : 1.0.0
  *
  * author: fugerit
  *
@@ -15,21 +15,21 @@ import org.fugerit.java.daogen.sample.def.model.ModelUpload;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class WrapperUpload extends BasicWrapper<ModelUpload> implements ModelUpload {
+public class WrapperUserData extends BasicWrapper<ModelUserData> implements ModelUserData {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 714845245143L;
+	private static final long serialVersionUID = 647032161858L;
 
-	public WrapperUpload( ModelUpload wrapped ) {
+	public WrapperUserData( ModelUserData wrapped ) {
 		super( wrapped );
 	}
 
-	public ModelUpload unwrap( WrapperUpload wrapper ) {
-		ModelUpload res = wrapper;
-		while ( res != null && res instanceof WrapperUpload ) { 
-			res = ((WrapperUpload)res).unwrapModel();
+	public ModelUserData unwrap( WrapperUserData wrapper ) {
+		ModelUserData res = wrapper;
+		while ( res != null && res instanceof WrapperUserData ) { 
+			res = ((WrapperUserData)res).unwrapModel();
 		}
 		return res;
 	}
@@ -45,6 +45,36 @@ public class WrapperUpload extends BasicWrapper<ModelUpload> implements ModelUpl
 	@Override
 	public java.math.BigDecimal getId() {
 		return this.unwrapModel().getId();
+	}
+
+	@Override
+	public void setUsername( java.lang.String value ) {
+		this.unwrapModel().setUsername( value );
+	}
+
+	@Override
+	public java.lang.String getUsername() {
+		return this.unwrapModel().getUsername();
+	}
+
+	@Override
+	public void setPassword( java.lang.String value ) {
+		this.unwrapModel().setPassword( value );
+	}
+
+	@Override
+	public java.lang.String getPassword() {
+		return this.unwrapModel().getPassword();
+	}
+
+	@Override
+	public void setLastLogin( java.util.Date value ) {
+		this.unwrapModel().setLastLogin( value );
+	}
+
+	@Override
+	public java.util.Date getLastLogin() {
+		return this.unwrapModel().getLastLogin();
 	}
 
 	@Override
@@ -68,13 +98,13 @@ public class WrapperUpload extends BasicWrapper<ModelUpload> implements ModelUpl
 	}
 
 	@Override
-	public void setContent( org.fugerit.java.core.db.daogen.ByteArrayDataHandler value ) {
-		this.unwrapModel().setContent( value );
+	public void setState( java.math.BigDecimal value ) {
+		this.unwrapModel().setState( value );
 	}
 
 	@Override
-	public org.fugerit.java.core.db.daogen.ByteArrayDataHandler getContent() {
-		return this.unwrapModel().getContent();
+	public java.math.BigDecimal getState() {
+		return this.unwrapModel().getState();
 	}
 
 }

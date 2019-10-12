@@ -5,11 +5,13 @@ import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityLogDataFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUploadFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityUserDataFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityAddressFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityLogDataFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityTestTwoFieldKeyFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUploadFacade;
+import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserDataFacade;
 import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserFacade;
 
 // custom import start ( code above here will be overwritten )
@@ -62,6 +64,13 @@ public class FugeritDataLogicFacade implements org.fugerit.java.daogen.sample.de
 	@Override
 	public EntityUserFacade getEntityUserFacade() throws DAOException {
 		return this.entityuserfacade;
+	}
+
+	private EntityUserDataFacade entityuserdatafacade = new DataEntityUserDataFacade();
+
+	@Override
+	public EntityUserDataFacade getEntityUserDataFacade() throws DAOException {
+		return this.entityuserdatafacade;
 	}
 
 }

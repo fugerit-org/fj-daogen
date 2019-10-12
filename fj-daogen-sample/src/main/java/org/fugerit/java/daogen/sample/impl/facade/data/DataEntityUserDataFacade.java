@@ -9,16 +9,16 @@ import org.fugerit.java.core.db.daogen.DeleteHelper;
 import org.fugerit.java.core.db.daogen.InsertHelper;
 import org.fugerit.java.core.db.daogen.SelectHelper;
 import org.fugerit.java.core.db.daogen.UpdateHelper;
-import org.fugerit.java.daogen.sample.def.facade.EntityUploadFacade;
-import org.fugerit.java.daogen.sample.def.facade.UploadFinder;
-import org.fugerit.java.daogen.sample.def.model.ModelUpload;
-import org.fugerit.java.daogen.sample.impl.rse.UploadRSE;
+import org.fugerit.java.daogen.sample.def.facade.EntityUserDataFacade;
+import org.fugerit.java.daogen.sample.def.facade.UserDataFinder;
+import org.fugerit.java.daogen.sample.def.model.ModelUserData;
+import org.fugerit.java.daogen.sample.impl.rse.UserDataRSE;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
 /**
- * DataEntityUploadFacade, version : 1.0.0
+ * DataEntityUserDataFacade, version : 1.0.0
  *
  * author: fugerit
  *
@@ -26,15 +26,15 @@ import org.fugerit.java.daogen.sample.impl.rse.UploadRSE;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> implements EntityUploadFacade {
+public class DataEntityUserDataFacade extends BasicDataFacade<ModelUserData> implements EntityUserDataFacade {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 484214149679L;
+	private static final long serialVersionUID = 414347890163L;
 
-	public DataEntityUploadFacade() {
-		super( "PUBLIC.FUGERIT.UPLOAD", UploadRSE.DEFAULT );
+	public DataEntityUserDataFacade() {
+		super( "PUBLIC.FUGERIT.USER", UserDataRSE.DEFAULT );
 	}
 
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
@@ -45,24 +45,30 @@ public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> impleme
  	}
 
  	public final static String COL_ID = "ID";
+ 	public final static String COL_USERNAME = "USERNAME";
+ 	public final static String COL_PASSWORD = "PASSWORD";
+ 	public final static String COL_LAST_LOGIN = "LAST_LOGIN";
  	public final static String COL_DATE_INSERT = "DATE_INSERT";
  	public final static String COL_DATE_UPDATE = "DATE_UPDATE";
- 	public final static String COL_CONTENT = "CONTENT";
+ 	public final static String COL_STATE = "STATE";
 
 	/* loadAll( context ) is inherited from BasicDataFacade */
 
 	@Override
-	public BasicDaoResult<ModelUpload> loadAllByFinder( DAOContext context, UploadFinder finder ) throws DAOException {
-		BasicDaoResult<ModelUpload> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUpload> daoHelper = new BasicDAOHelper<>( context );
+	public BasicDaoResult<ModelUserData> loadAllByFinder( DAOContext context, UserDataFinder finder ) throws DAOException {
+		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
+		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
 		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
 		query.andEqualParam( COL_ID, finder.getId() );
 		if ( finder.getModel() != null ) {
-			ModelUpload model = finder.getModel();
+			ModelUserData model = finder.getModel();
 			query.andEqualParam( COL_ID, model.getId() );
+			query.andEqualParam( COL_USERNAME, model.getUsername() );
+			query.andEqualParam( COL_PASSWORD, model.getPassword() );
+			query.andEqualParam( COL_LAST_LOGIN, model.getLastLogin() );
 			query.andEqualParam( COL_DATE_INSERT, model.getDateInsert() );
 			query.andEqualParam( COL_DATE_UPDATE, model.getDateUpdate() );
-			query.andEqualParam( COL_CONTENT, model.getContent() );
+			query.andEqualParam( COL_STATE, model.getState() );
 		}
 		daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); 
 		result.evaluateResultFromList(); 
@@ -70,9 +76,9 @@ public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> impleme
 	}
 
 	@Override
-	public BasicDaoResult<ModelUpload> create( DAOContext context, ModelUpload model ) throws DAOException {
-		BasicDaoResult<ModelUpload> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUpload> daoHelper = new BasicDAOHelper<>( context );
+	public BasicDaoResult<ModelUserData> create( DAOContext context, ModelUserData model ) throws DAOException {
+		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
+		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
 		if ( model.getId() == null ) { 
 			model.setId( this.generateId( context ) ); 
 		} 
@@ -80,18 +86,21 @@ public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> impleme
 		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID, model.getId() );
+		query.addParam( COL_USERNAME, model.getUsername() );
+		query.addParam( COL_PASSWORD, model.getPassword() );
+		query.addParam( COL_LAST_LOGIN, model.getLastLogin() );
 		query.addParam( COL_DATE_INSERT, model.getDateInsert() );
 		query.addParam( COL_DATE_UPDATE, model.getDateUpdate() );
-		query.addParam( COL_CONTENT, model.getContent() );
+		query.addParam( COL_STATE, model.getState() );
 		int res = daoHelper.update( query );
 		this.evaluteSqlUpdateResult(res, model, result);
 		return result;
 	}
 
 	@Override
-	public ModelUpload loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
-		ModelUpload result = null;
-		BasicDAOHelper<ModelUpload> daoHelper = new BasicDAOHelper<>( context );
+	public ModelUserData loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
+		ModelUserData result = null;
+		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
 		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
 		query.andEqualParam( COL_ID, id );
 		result = daoHelper.loadOneHelper( query, this.getRse() );
@@ -99,9 +108,9 @@ public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> impleme
 	}
 
 	@Override
-	public BasicDaoResult<ModelUpload> deleteById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
-		BasicDaoResult<ModelUpload> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUpload> daoHelper = new BasicDAOHelper<>( context );
+	public BasicDaoResult<ModelUserData> deleteById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
+		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
+		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
 		DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );
 		query.andWhereParam( COL_ID, id );
 		int res = daoHelper.update( query );
@@ -110,15 +119,18 @@ public class DataEntityUploadFacade extends BasicDataFacade<ModelUpload> impleme
 	}
 
 	@Override
-	public BasicDaoResult<ModelUpload> updateById( DAOContext context, ModelUpload model ) throws DAOException {
-		BasicDaoResult<ModelUpload> result = new BasicDaoResult<>();
-		BasicDAOHelper<ModelUpload> daoHelper = new BasicDAOHelper<>( context );
+	public BasicDaoResult<ModelUserData> updateById( DAOContext context, ModelUserData model ) throws DAOException {
+		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
+		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
 		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
+		query.addSetParam( COL_USERNAME, model.getUsername() );
+		query.addSetParam( COL_PASSWORD, model.getPassword() );
+		query.addSetParam( COL_LAST_LOGIN, model.getLastLogin() );
 		query.addSetParam( COL_DATE_INSERT, model.getDateInsert() );
 		query.addSetParam( COL_DATE_UPDATE, model.getDateUpdate() );
-		query.addSetParam( COL_CONTENT, model.getContent() );
+		query.addSetParam( COL_STATE, model.getState() );
 		query.andWhereParam( COL_ID, model.getId() );
 		int res = daoHelper.update( query );
 		this.evaluteSqlUpdateResult(res, model, result);
