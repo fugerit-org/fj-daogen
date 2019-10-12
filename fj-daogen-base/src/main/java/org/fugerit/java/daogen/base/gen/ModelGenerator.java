@@ -27,18 +27,24 @@ public class ModelGenerator extends DaogenBasicGenerator {
 	private void generateRelations() throws Exception {
 		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
 			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
-			String baseType = DaogenCatalogConstants.modelName( entityTo );
-			String className = GeneratorNameHelper.toClassName( relation.getName() );
-			String propertyName = GeneratorNameHelper.toClassName( relation.getName() );
-			if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
-				baseType = "java.util.List<"+baseType+">";
+			try {
+				String baseType = DaogenCatalogConstants.modelName( entityTo );
+				String className = GeneratorNameHelper.toClassName( relation.getName() );
+				String propertyName = GeneratorNameHelper.toClassName( relation.getName() );
+				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
+					baseType = "java.util.List<"+baseType+">";
+				}
+				DaogenCustomCode.addCommentCommon( "comments.common.getter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
+				this.println( "	"+baseType+" get"+className+"();" );
+				this.println();
+				DaogenCustomCode.addCommentCommon( "comments.common.setter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
+				this.println( "	void set"+className+"( "+baseType+" value );" );
+				this.println();	
+			} catch (Exception e) {
+				logger.error( "error on relation : "+relation.getId() );
+				throw e;
 			}
-			DaogenCustomCode.addCommentCommon( "comments.common.getter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
-			this.println( "	"+baseType+" get"+className+"();" );
-			this.println();
-			DaogenCustomCode.addCommentCommon( "comments.common.setter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
-			this.println( "	void set"+className+"( "+baseType+" value );" );
-			this.println();
+			
 		}
 	}	
 	

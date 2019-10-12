@@ -22,7 +22,9 @@ public class FactoryDataImplRealGenerator extends DaogenBasicGenerator {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
 				daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DATA_IMPL ), 
 				STYLE_CLASS, daogenConfig, null );
+		String factoryName = daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF );
 		this.setExtendsClass( DaogenHelperGenerator.toHelperClassName( this.getJavaName() ) );
+		this.setImplementsInterface( factoryName  );
 		try {
 			this.checkSkipRealClass();
 		} catch (IOException e) {
