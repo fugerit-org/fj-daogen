@@ -104,7 +104,7 @@ public class DocOpenAPIV3RestGenerator extends DaogenBasicGenerator {
 	private void printObjectWithBasicIndent( int indent ) {
 		this.printlnWithTabs( indent, "properties:" );
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-			this.printlnWithTabs( indent+1, field.getId().toLowerCase()+":" );
+			this.printlnWithTabs( indent+1, GeneratorNameHelper.toPropertyName( field.getId().toLowerCase() )+":" );
 			this.printlnWithTabs( indent+2, "type: string" );
 			this.printlnWithTabs( indent+2, "example: ''" );
 		}
