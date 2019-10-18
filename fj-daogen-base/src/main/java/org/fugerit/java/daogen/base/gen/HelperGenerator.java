@@ -42,7 +42,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
 				String baseType = DaogenCatalogConstants.modelName( entityTo );
 				String className = GeneratorNameHelper.toClassName( relation.getName() );
-				String propertyName = GeneratorNameHelper.toClassName( relation.getName() );
+				String propertyName = GeneratorNameHelper.toPropertyName( relation.getName() );
 				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
 					baseType = "java.util.List<"+baseType+">";
 				}
