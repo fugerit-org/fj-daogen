@@ -56,13 +56,14 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 
 	@Override
 	protected void beforeClass() {
+		super.beforeClass();
 		String urlBase = this.getCurrentEntity().getName().replaceAll( "_" , "" ).toLowerCase();
 		this.getWriter().println( "@Stateless" );
 		this.getWriter().println( "@Path(\"/"+urlBase+"/load\")" );
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		String factoryClassName = GeneratorNameHelper.classFromPackage( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 		// load by id

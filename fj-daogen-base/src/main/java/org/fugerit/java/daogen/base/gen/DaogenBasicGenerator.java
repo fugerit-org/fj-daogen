@@ -2,6 +2,8 @@ package org.fugerit.java.daogen.base.gen;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.io.FileIO;
@@ -34,6 +36,17 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return this.isSkipWrite();
 	}
 
+	public DaogenBasicGenerator() {
+		this.decorators = new ArrayList<DaogenBasicDecorator>();
+	}
+	
+	private List<DaogenBasicDecorator> decorators;
+	
+	
+	public List<DaogenBasicDecorator> getDecorators() {
+		return decorators;
+	}
+
 	private DaogenCatalogConfig daogenConfig;
 	
 	private DaogenCatalogEntity currentEntity;
@@ -64,9 +77,16 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		super.init( new File( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER ), sourceFolder ), fullObjectBName, javaStyle, daogenConfig.getGeneralProps() );
 		this.daogenConfig = daogenConfig;
 		this.currentEntity = entity;
+		for ( DaogenBasicDecorator decorator : this.getDecorators() ) {
+			try {
+				decorator.addImports();
+			} catch (Exception e) {
+				throw new RuntimeException( e );
+			}
+		}
 	}
 
-	protected DaogenCatalogConfig getDaogenConfig() {
+	public DaogenCatalogConfig getDaogenConfig() {
 		return daogenConfig;
 	}
 
@@ -83,49 +103,67 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	}
 
 	@Override
-	public abstract void generateBody() throws Exception;
+	public void generateBody() throws Exception {
+		for ( DaogenBasicDecorator decorator : this.getDecorators() ) {
+			try {
+				decorator.addBeforeClassBody();
+			} catch (Exception e) {
+				throw new RuntimeException( e );
+			}
+		}
+		this.generateDaogenBody();
+		for ( DaogenBasicDecorator decorator : this.getDecorators() ) {
+			try {
+				decorator.addAfterClassBody();
+			} catch (Exception e) {
+				throw new RuntimeException( e );
+			}
+		}
+	}
 	
-	protected String getBaseName() {
+	public abstract void generateDaogenBody() throws Exception;
+	
+	public String getBaseName() {
 		return DaogenCatalogConstants.modelName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityModelName() {
+	public String getEntityModelName() {
 		return DaogenCatalogConstants.modelName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityRSEName() {
+	public String getEntityRSEName() {
 		return DaogenCatalogConstants.rseName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityHelperName() {
+	public String getEntityHelperName() {
 		return DaogenCatalogConstants.helperName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityWrapperName() {
+	public String getEntityWrapperName() {
 		return DaogenCatalogConstants.wrapperName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityFacadeDefName() {
+	public String getEntityFacadeDefName() {
 		return DaogenCatalogConstants.facadeDefName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityFacadeDataImplName() {
+	public String getEntityFacadeDataImplName() {
 		return DaogenCatalogConstants.facadeImplDataName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityFinderName() {
+	public String getEntityFinderName() {
 		return DaogenCatalogConstants.finderlName( this.getCurrentEntity() );
 	}
 	
-	protected String getEntityStructName() {
+	public String getEntityStructName() {
 		return DaogenCatalogConstants.structName( this.getDaogenConfig(), this.getCurrentEntity() );
 	}
 	
-	protected String getSQLStructName() {
+	public String getSQLStructName() {
 		return DaogenCatalogConstants.structPrefix( this.getDaogenConfig() )+this.getCurrentEntity().getName();
 	}
 	
-	protected String getEntityBaseResult() {
+	public String getEntityBaseResult() {
 		return this.getClassBaseResult()+"<"+this.getEntityModelName()+">";
 	}
 	
@@ -161,7 +199,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	private String classServiceResult;
 
-	protected String getClassDaogenContext() {
+	public String getClassDaogenContext() {
 		return classDaogenContext;
 	}
 
@@ -169,7 +207,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classDaogenContext = classDaogenContext;
 	}
 
-	protected String getClassDaoException() {
+	public String getClassDaoException() {
 		return classDaoException;
 	}
 
@@ -177,7 +215,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classDaoException = classDaoException;
 	}
 
-	protected String getClassBaseFinder() {
+	public String getClassBaseFinder() {
 		return classBaseFinder;
 	}
 
@@ -185,7 +223,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classBaseFinder = classBaseFinder;
 	}
 
-	protected String getClassBaseResult() {
+	public String getClassBaseResult() {
 		return classBaseResult;
 	}
 
@@ -193,7 +231,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classBaseResult = classBaseResult;
 	}
 
-	protected String getClassBaseHelper() {
+	public String getClassBaseHelper() {
 		return classBaseHelper;
 	}
 
@@ -201,7 +239,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classBaseHelper = classBaseHelper;
 	}
 
-	protected String getClassBaseWrapper() {
+	public String getClassBaseWrapper() {
 		return classBaseWrapper;
 	}
 
@@ -209,7 +247,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classBaseWrapper = classBaseWrapper;
 	}
 
-	protected String getClassDaoHelper() {
+	public String getClassDaoHelper() {
 		return classDaoHelper;
 	}
 
@@ -217,7 +255,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classDaoHelper = classDaoHelper;
 	}
 
-	protected String getClassSelectHelper() {
+	public String getClassSelectHelper() {
 		return classSelectHelper;
 	}
 
@@ -225,7 +263,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classSelectHelper = classSelectHelper;
 	}
 
-	protected String getClassInsertHelper() {
+	public String getClassInsertHelper() {
 		return classInsertHelper;
 	}
 
@@ -233,7 +271,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classInsertHelper = classInsertHelper;
 	}
 
-	protected String getClassUpdateHelper() {
+	public String getClassUpdateHelper() {
 		return classUpdateHelper;
 	}
 
@@ -241,7 +279,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classUpdateHelper = classUpdateHelper;
 	}
 
-	protected String getClassDeleteHelper() {
+	public String getClassDeleteHelper() {
 		return classDeleteHelper;
 	}
 
@@ -249,7 +287,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classDeleteHelper = classDeleteHelper;
 	}
 
-	protected String getClassRSEHelper() {
+	public String getClassRSEHelper() {
 		return classRSEHelper;
 	}
 
@@ -257,7 +295,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classRSEHelper = classRSEHelper;
 	}
 
-	protected String getClassDataFacade() {
+	public String getClassDataFacade() {
 		return classDataFacade;
 	}
 
@@ -265,7 +303,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classDataFacade = classDataFacade;
 	}
 
-	protected String getClassStructMapper() {
+	public String getClassStructMapper() {
 		return classStructMapper;
 	}
 
@@ -273,7 +311,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classStructMapper = classStructMapper;
 	}
 
-	protected String getClassCloseableDaogenContext() {
+	public String getClassCloseableDaogenContext() {
 		return classCloseableDaogenContext;
 	}
 
@@ -281,12 +319,25 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.classCloseableDaogenContext = classCloseableDaogenContext;
 	}
 
-	protected String getClassServiceResult() {
+	public String getClassServiceResult() {
 		return classServiceResult;
 	}
 
 	protected void setClassServiceResult(String classServiceResult) {
 		this.classServiceResult = classServiceResult;
 	}
+
+	@Override
+	protected void beforeClass() {
+		for ( DaogenBasicDecorator decorator : this.getDecorators() ) {
+			try {
+				decorator.addBeforeClass();	
+			} catch (Exception e) {
+				throw new RuntimeException( e );
+			}
+		}
+	}
+	
+	
 
 }

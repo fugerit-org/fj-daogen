@@ -81,7 +81,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 	}
 	
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		if ( this.isModeReal() ) {
 			this.generateRealClass();

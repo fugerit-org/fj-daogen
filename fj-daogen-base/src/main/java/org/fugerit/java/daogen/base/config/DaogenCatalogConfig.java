@@ -59,6 +59,15 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		DaogenTypeMapper typeMapper = (DaogenTypeMapper)ClassHelper.newInstance( typeMapperClass );
 		typeMapper.init( config );
 		config.typeMapper = typeMapper;
+		// decorator catalog
+		String pathDecoratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG_DEFAULT );
+		DaogenDecoratorCatalog daogenDecoratorCatalog = new DaogenDecoratorCatalog();
+		if ( pathDecoratorCatalog != null ) {
+			try ( InputStream is = StreamHelper.resolveStream( pathDecoratorCatalog )  ) {
+				daogenDecoratorCatalog.configureXML( is );
+			}
+		}
+		config.setDecoratorCatalog( daogenDecoratorCatalog );
 		// generator catalog
 		String pathGeneratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT );
 		try ( InputStream is = StreamHelper.resolveStream( pathGeneratorCatalog ) ) {
@@ -120,6 +129,17 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 
 	public ListMapStringKey<DaogenCatalogRelation> getRelations() {
 		return relations;
+	}
+	
+	private DaogenDecoratorCatalog decoratorCatalog;
+
+
+	public DaogenDecoratorCatalog getDecoratorCatalog() {
+		return decoratorCatalog;
+	}
+
+	public void setDecoratorCatalog(DaogenDecoratorCatalog decoratorCatalog) {
+		this.decoratorCatalog = decoratorCatalog;
 	}
 	
 }

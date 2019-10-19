@@ -37,7 +37,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		this.getWriter().println( "	public "+this.getEntityStructName()+"( "+this.getEntityModelName()+" wrapped ) {" );
 		this.getWriter().println( "		super( wrapped );" );

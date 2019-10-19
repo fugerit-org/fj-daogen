@@ -36,7 +36,7 @@ public class FinderGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		this.getWriter().println( "	private "+this.getEntityModelName()+" model;" );
 		this.getWriter().println();

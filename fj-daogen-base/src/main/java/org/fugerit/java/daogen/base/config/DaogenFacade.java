@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.config;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.FactoryType;
 import org.fugerit.java.core.javagen.JavaGenerator;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
+import org.fugerit.java.daogen.base.gen.DaogenBasicDecorator;
 import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,13 @@ public class DaogenFacade {
 				for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
 					if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 						DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
+						Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
+						if ( decorators != null ) {
+							for ( FactoryType decoratorType : decorators ) {
+								DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
+								decorator.init( generator );
+							}
+						}
 						generator.init( daogenConfig, entity );	
 						generageFile( generator );	
 					}
