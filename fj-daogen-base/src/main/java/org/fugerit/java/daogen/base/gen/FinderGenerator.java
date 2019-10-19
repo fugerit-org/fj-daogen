@@ -1,9 +1,12 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.math.BigDecimal;
+
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
+import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 
 public class FinderGenerator extends DaogenBasicGenerator {
@@ -20,9 +23,16 @@ public class FinderGenerator extends DaogenBasicGenerator {
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ), DaogenCatalogConstants.finderlName( entity ) ), 
 				STYLE_INTERFACE, daogenConfig, entity );
 		this.setJavaStyle( STYLE_CLASS );
-		this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_BASEFINDER_BASE, this.getImportList() ) );
+		DaogenCatalogField idField = entity.get( DaogenCatalogEntity.DEFAULT_ID_FIELD );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
-		this.setExtendsClass( this.getClassBaseFinder() );
+		if ( idField == null || idField.getJavaType().equalsIgnoreCase( BigDecimal.class.getName() ) ) {
+			this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_BASEFINDER_BASE, this.getImportList() ) );	
+			this.setExtendsClass( this.getClassBaseFinder() );
+		} else {
+			String type = this.getDaogenConfig().getTypeMapper().mapForModel( idField );
+			this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_GENERICFINDER_BASE, this.getImportList() ) );
+			this.setExtendsClass( this.getClassBaseFinder()+"<"+type+">" );
+		}
 	}
 
 	@Override
@@ -39,6 +49,8 @@ public class FinderGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( "	}"  );
 		this.getWriter().println();
 		if ( this.getCurrentEntity().containsDefaultId() ) {
+			DaogenCatalogField idField = this.getCurrentEntity().get( DaogenCatalogEntity.DEFAULT_ID_FIELD );
+			String type = this.getDaogenConfig().getTypeMapper().mapForModel( idField );
 			this.getWriter().println( "	/**" );
 			this.getWriter().println( "	 *Factory method to create a new finder " );
 			this.getWriter().println( "	 *" );	
@@ -46,7 +58,7 @@ public class FinderGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "	 *" );	
 			this.getWriter().println( "	 * @return	the finder" );	
 			this.getWriter().println( "	 */" );
-			this.getWriter().println( "	public static "+this.getEntityFinderName()+" newInstance( java.math.BigDecimal id ) { " );
+			this.getWriter().println( "	public static "+this.getEntityFinderName()+" newInstance( "+type+" id ) { " );
 			this.getWriter().println( "		"+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );
 			this.getWriter().println( "		finder.setId( id );" );
 			this.getWriter().println( "		return finder;" );

@@ -17,6 +17,7 @@ public class DaogenClassConfigHelper {
 	public static final String DAO_CLOSEABLECONTEXT_BASE = "dao.closeablecontext";
 	public static final String DAO_EXCEPTION_BASE = "dao.exception";
 	public static final String DAO_BASEFINDER_BASE = "dao.basefinder";
+	public static final String DAO_GENERICFINDER_BASE = "dao.genericfinder";
 	public static final String DAO_RESULT_BASE = "dao.result";
 	public static final String DAO_SERVICERESULT_BASE = "dao.serviceresult";
 	public static final String DAO_HELPER_BASE = "dao.helper";

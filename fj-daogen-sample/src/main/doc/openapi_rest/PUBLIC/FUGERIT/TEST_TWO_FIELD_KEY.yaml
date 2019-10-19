@@ -46,10 +46,10 @@ components:
   schemas: 
     TestTwoFieldKey: 
       properties:
-        id_one:
+        idOne:
           type: string
           example: ''
-        id_two:
+        idTwo:
           type: string
           example: ''
         info:

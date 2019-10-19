@@ -13,6 +13,8 @@
 <!-- base finder -->
 <entry key="dao.basefinder.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.basefinder.class">BaseIdFinder</entry>
+<entry key="dao.genericfinder.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.genericfinder.class">GenericIdFinder</entry>
 <!-- base result -->
 <entry key="dao.result.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.result.class">BasicDaoResult</entry>

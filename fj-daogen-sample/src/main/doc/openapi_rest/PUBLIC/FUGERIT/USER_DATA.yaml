@@ -49,13 +49,13 @@ components:
         password:
           type: string
           example: ''
-        last_login:
+        lastLogin:
           type: string
           example: ''
-        date_insert:
+        dateInsert:
           type: string
           example: ''
-        date_update:
+        dateUpdate:
           type: string
           example: ''
         state:

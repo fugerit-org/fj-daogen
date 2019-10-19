@@ -43,13 +43,13 @@ components:
         id:
           type: string
           example: ''
-        id_user:
+        idUser:
           type: string
           example: ''
-        date_insert:
+        dateInsert:
           type: string
           example: ''
-        date_update:
+        dateUpdate:
           type: string
           example: ''
         info:
