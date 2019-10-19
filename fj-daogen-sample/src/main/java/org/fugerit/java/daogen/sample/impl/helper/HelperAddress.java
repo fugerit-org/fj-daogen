@@ -27,16 +27,16 @@ public class HelperAddress extends BasicHelper implements ModelAddress {
 	 * fields generated for relations 
 	 */
 
-	private ModelUser User;
+	private ModelUser user;
 
 	@Override
 	public void setUser( ModelUser value ) {
-		this.User = value;
+		this.user = value;
 	}
 
 	@Override
 	public ModelUser getUser() {
-		return this.User;
+		return this.user;
 	}
 
 	/*

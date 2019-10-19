@@ -43,10 +43,10 @@ components:
         id:
           type: string
           example: ''
-        date_insert:
+        dateInsert:
           type: string
           example: ''
-        date_update:
+        dateUpdate:
           type: string
           example: ''
         content:

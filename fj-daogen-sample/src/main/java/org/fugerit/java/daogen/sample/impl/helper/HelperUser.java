@@ -27,16 +27,16 @@ public class HelperUser extends BasicHelper implements ModelUser {
 	 * fields generated for relations 
 	 */
 
-	private java.util.List<ModelAddress> UserAddresses;
+	private java.util.List<ModelAddress> userAddresses;
 
 	@Override
 	public void setUserAddresses( java.util.List<ModelAddress> value ) {
-		this.UserAddresses = value;
+		this.userAddresses = value;
 	}
 
 	@Override
 	public java.util.List<ModelAddress> getUserAddresses() {
-		return this.UserAddresses;
+		return this.userAddresses;
 	}
 
 	/*
