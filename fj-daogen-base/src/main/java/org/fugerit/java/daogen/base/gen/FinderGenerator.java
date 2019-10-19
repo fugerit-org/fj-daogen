@@ -25,7 +25,7 @@ public class FinderGenerator extends DaogenBasicGenerator {
 		this.setJavaStyle( STYLE_CLASS );
 		DaogenCatalogField idField = entity.get( DaogenCatalogEntity.DEFAULT_ID_FIELD );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
-		if ( idField == null || idField.getJavaType().equalsIgnoreCase( BigDecimal.class.getName() ) ) {
+		if ( idField == null || this.getDaogenConfig().getTypeMapper().mapForModel( idField ).equalsIgnoreCase( BigDecimal.class.getName() ) ) {
 			this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_BASEFINDER_BASE, this.getImportList() ) );	
 			this.setExtendsClass( this.getClassBaseFinder() );
 		} else {

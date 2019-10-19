@@ -25,7 +25,7 @@ public interface FugeritLogicFacadeHelper {
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	public static final String ATT_NAME = "org.fugerit.java.daogen.sample.def.facade";
+	public static final String ATT_NAME = "FugeritLogicFacadeHelper";
 
 	/**
 	 * Facade incapsulating persistance for entity : ADDRESS
