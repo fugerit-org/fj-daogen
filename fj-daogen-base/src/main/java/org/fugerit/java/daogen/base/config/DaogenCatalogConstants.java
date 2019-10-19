@@ -20,6 +20,9 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_GENERATOR_CATALOG = "generator-catalog";
 	public static final String GEN_PROP_GENERATOR_CATALOG_DEFAULT = "cl://config/default-generator-catalog.xml";
 			
+	public static final String GEN_PROP_DECORATOR_CATALOG = "decorator-catalog";
+	public static final String GEN_PROP_DECORATOR_CATALOG_DEFAULT = "cl://config/default-decorator-catalog.xml";
+	
 	public static final String GEN_PROP_CLASS_CONFIG = "class-config";
 	public static final String GEN_PROP_CLASS_CONFIG_DEFAULT = "cl://config/daogen_default_class_config.xml";
 	

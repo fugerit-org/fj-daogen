@@ -11,7 +11,7 @@ import org.fugerit.java.daogen.base.config.DaogenCustomCode;
 
 public class ModelGenerator extends DaogenBasicGenerator {
 
-	public static final String KEY = "ModelGenerator";
+	public static final String KEY = ModelGenerator.class.getSimpleName();
 	
 	@Override
 	public String getKey() {
@@ -49,7 +49,7 @@ public class ModelGenerator extends DaogenBasicGenerator {
 	}	
 	
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
 		if ( !relationLast ) {
 			this.generateRelations();

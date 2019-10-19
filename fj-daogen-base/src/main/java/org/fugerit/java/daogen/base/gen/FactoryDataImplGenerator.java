@@ -54,7 +54,7 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
 		} else {

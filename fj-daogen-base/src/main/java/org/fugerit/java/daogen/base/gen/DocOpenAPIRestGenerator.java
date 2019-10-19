@@ -32,7 +32,7 @@ public class DocOpenAPIRestGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		// donothing()
 	}
 	

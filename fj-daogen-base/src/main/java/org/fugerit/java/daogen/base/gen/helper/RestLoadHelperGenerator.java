@@ -58,7 +58,7 @@ public class RestLoadHelperGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		String factoryClassName = GeneratorNameHelper.classFromPackage( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 		// load by id

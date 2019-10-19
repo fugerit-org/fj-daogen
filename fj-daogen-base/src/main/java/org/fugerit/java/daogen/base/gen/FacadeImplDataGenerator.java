@@ -81,7 +81,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 	}
 	
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
@@ -167,6 +167,13 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 						this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
 						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
 					}
+					if ( autoSetDateUpdate != null ) {
+						DaogenCatalogField colDataUpdate = this.getCurrentEntity().get( autoSetDateUpdate );
+						if ( colDataUpdate != null ) {
+							this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
+							this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( model.get"+GeneratorNameHelper.toClassName( colData.getId() )+"() ); " );	
+						}
+					}	
 				}
 				this.getWriter().println( "		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
 				for ( DaogenCatalogField field : this.getCurrentEntity() ) {

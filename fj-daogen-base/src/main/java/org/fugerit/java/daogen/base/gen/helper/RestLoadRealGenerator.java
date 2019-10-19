@@ -34,13 +34,14 @@ public class RestLoadRealGenerator extends DaogenBasicGenerator {
 
 	@Override
 	protected void beforeClass() {
+		super.beforeClass();
 		String urlBase = this.getCurrentEntity().getName().replaceAll( "_" , "" ).toLowerCase();
 		this.getWriter().println( "@Stateless" );
 		this.getWriter().println( "@Path(\"/"+urlBase+"/load\")" );
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		this.println( REAL_CLASS_COMMENT );
 	}

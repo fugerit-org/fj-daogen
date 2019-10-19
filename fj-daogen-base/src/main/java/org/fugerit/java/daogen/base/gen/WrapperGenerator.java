@@ -62,7 +62,7 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		
 		this.getWriter().println( "	public "+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );

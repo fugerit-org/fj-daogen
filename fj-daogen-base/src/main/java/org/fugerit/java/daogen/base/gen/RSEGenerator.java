@@ -30,7 +30,7 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
 		this.getWriter().println( "	public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
 		this.getWriter().println();
