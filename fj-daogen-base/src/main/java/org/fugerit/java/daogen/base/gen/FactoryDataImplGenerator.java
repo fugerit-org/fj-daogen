@@ -31,6 +31,7 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 					STYLE_CLASS, daogenConfig, null );		
 		}
 		// config
+		String baseName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF );
 		if ( this.isModeReal() ) {
 			this.configRealClass();
 		} else {
@@ -44,12 +45,11 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 				this.getImportList().add( packageFacade+"."+DaogenCatalogConstants.facadeDefName( current ) );
 				this.getImportList().add( packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current ) );
 			}
-			String baseName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF );
 			if ( this.isModeHelper() ) {
 				baseName = DaogenHelperGenerator.toHelperClassName( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 			}
-			this.setImplementsInterface( baseName );
-		}		
+		}	
+		this.setImplementsInterface( baseName );
 	}
 
 
