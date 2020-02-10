@@ -23,6 +23,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	public static final String ATT_SEQUENCE_NAME = "sequenceName";
 	public static final String ATT_ORDER_BY = "orderBy";
 	public static final String ATT_MAP_TO_TABLE = "mapToTable";
+	public static final String ATT_QUERY_VIEW = "queryView";	// DEFAULT TO "SELECT * FROM ${catalog.schema.name}"
 	
 	/**
 	 * 
@@ -52,6 +53,8 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	private String orderBy;
 	
 	private String mapToTable;
+	
+	private String queryView;
 
 	public String getOrderBy() {
 		return orderBy;
@@ -125,6 +128,14 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		this.mapToTable = mapToTable;
 	}
 
+	public String getQueryView() {
+		return queryView;
+	}
+
+	public void setQueryView(String queryView) {
+		this.queryView = queryView;
+	}
+
 	public String toClassName() {
 		return GeneratorNameHelper.toClassName( this.getName() );
 	}
@@ -144,6 +155,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_SEQUENCE_NAME, this.getSequenceName() ) );
 		 list.add( StringUtils.concat( ":" , ATT_ORDER_BY, this.getOrderBy() ) );
 		 list.add( StringUtils.concat( ":" , ATT_MAP_TO_TABLE, this.getMapToTable() ) );
+		 list.add( StringUtils.concat( ":" , ATT_QUERY_VIEW, this.getQueryView() ) );
 		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}
