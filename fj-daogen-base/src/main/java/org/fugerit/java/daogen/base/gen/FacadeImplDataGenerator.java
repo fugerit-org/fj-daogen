@@ -94,7 +94,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 			this.getWriter().println( "	public "+superType+"() {" );
 			String fullTableName = toFullTableName( this.getCurrentEntity() );
-			this.getWriter().println( "		super( \""+fullTableName+"\", "+this.getEntityRSEName()+".DEFAULT );");
+			String queryView = "null";
+			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getQueryView() ) ) {
+				queryView = "\""+this.getCurrentEntity().getQueryView()+"\"";
+			}
+			this.getWriter().println( "		super( \""+fullTableName+"\", "+this.getEntityRSEName()+".DEFAULT, "+queryView+" );");
 			this.getWriter().println( "	}");
 			this.getWriter().println();
 			String sequenceName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DEFAULT_SEQUENCE );
@@ -125,7 +129,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( "	public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws DAOException {" );
 			this.getWriter().println( "		"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
 			this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-			this.getWriter().println( "		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );" );
+			this.getWriter().println( "		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
 			if ( this.getCurrentEntity().containsDefaultId() ) {
 				this.getWriter().println( "		query.andEqualParam( COL_ID, finder.getId() );" );	
 			}
@@ -189,7 +193,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println( "	public "+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
 				this.getWriter().println( "		"+this.getEntityModelName()+" result = null;" );
 				this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-				this.getWriter().println( "		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );" );
+				this.getWriter().println( "		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
 				for ( String currentField : primaryKeyHelper.getKeyFields() ) {
 					this.getWriter().println( "		query.andEqualParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
 				}

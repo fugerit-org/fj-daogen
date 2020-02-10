@@ -88,8 +88,6 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		return config;
 	}
 	
-	
-	
 	@Override
 	public void configure(Element tag) throws ConfigException {
 		super.configure(tag);

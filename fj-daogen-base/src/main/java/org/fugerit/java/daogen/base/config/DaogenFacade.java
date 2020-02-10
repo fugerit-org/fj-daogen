@@ -32,6 +32,7 @@ public class DaogenFacade {
 		Collections.sort( entityIdList );
 		for ( String entityId : entityIdList ) {
 			DaogenCatalogEntity entity = daogenConfig.getListMap( entityId );
+			logger.info( "Describe : "+entity.getId()+" -> "+entity.describe() );
 			if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
 				for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
 					if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
