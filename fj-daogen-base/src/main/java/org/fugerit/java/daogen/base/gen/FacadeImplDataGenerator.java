@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.gen;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
@@ -181,7 +182,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				}
 				this.getWriter().println( "		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
 				for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-					this.getWriter().println( "		query.addParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
+					if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
+						this.getWriter().println( "		query.addParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
+					} else {
+						this.getWriter().println( "		// skipping selectOnly field : "+field.getId() );		
+					}
 				}
 				this.getWriter().println( "		int res = daoHelper.update( query );" );
 				this.getWriter().println( "		this.evaluteSqlUpdateResult(res, model, result);" );
@@ -230,7 +235,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println( "		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 				for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 					if ( !primaryKeyHelper.getKeyFields().contains( field.getId() ) ) {
-						this.getWriter().println( "		query.addSetParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );	
+						if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
+							this.getWriter().println( "		query.addSetParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );		
+						} else {
+							this.getWriter().println( "		// skipping selectOnly field : "+field.getId() );		
+						}
 					}
 				}
 				for ( String currentField : primaryKeyHelper.getKeyFields() ) {

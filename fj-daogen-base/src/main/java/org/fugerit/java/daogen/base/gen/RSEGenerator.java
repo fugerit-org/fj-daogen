@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.gen;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -46,6 +47,13 @@ public class RSEGenerator extends DaogenBasicGenerator {
 			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 			String extratMethod = null;
+			String indent = "";
+			boolean unsafe = BooleanUtils.isTrue( field.getUnsafe() );
+			if ( unsafe ) {
+				this.getWriter().println( "		// unsafe field (error will be only printed)" );
+				this.getWriter().println( "		try { " );
+				indent = "	";
+			}
 			boolean tryCatch = false;
 			if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
 				extratMethod = "rs.getString( \""+columnName+"\" ) ";
@@ -69,13 +77,18 @@ public class RSEGenerator extends DaogenBasicGenerator {
 				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
 			}
 			if ( tryCatch ) {
-				this.getWriter().println( "		try { " );
-				this.getWriter().println( "			current.set"+javaSuffix+"( "+extratMethod+" );" );
-				this.getWriter().println( "		} catch (Exception e) {" );
-				this.getWriter().println( "			throw new SQLException( \"Errore estrazione campo : "+columnName+"\", e );" );
-				this.getWriter().println( "		}" );
+				this.getWriter().println( indent+"		try { " );
+				this.getWriter().println( indent+"			current.set"+javaSuffix+"( "+extratMethod+" );" );
+				this.getWriter().println( indent+"		} catch (Exception e) {" );
+				this.getWriter().println( indent+"			throw new SQLException( \"Errore estrazione campo : "+columnName+"\", e );" );
+				this.getWriter().println( indent+"		}" );
 			} else {
-				this.getWriter().println( "		current.set"+javaSuffix+"( "+extratMethod+" );" );
+				this.getWriter().println( indent+"		current.set"+javaSuffix+"( "+extratMethod+" );" );
+			}
+			if ( unsafe ) {
+				this.getWriter().println( "		} catch (Exception e1) {" );
+				this.getWriter().println( "			logger.warn( \"Exception handling field '{}' -> {}\", \""+columnName+"\", e1 );" );
+				this.getWriter().println( "		}" );
 			}
 		}
 		this.getWriter().println( "		return current;" );
