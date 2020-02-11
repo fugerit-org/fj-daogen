@@ -34,7 +34,7 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 	private static final long serialVersionUID = 774302858231L;
 
 	public DataEntityUserFacadeHelper() {
-		super( "PUBLIC.FUGERIT.USER", UserRSE.DEFAULT );
+		super( "PUBLIC.FUGERIT.USER", UserRSE.DEFAULT, null );
 	}
 
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
@@ -58,7 +58,7 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 	public BasicDaoResult<ModelUser> loadAllByFinder( DAOContext context, UserFinder finder ) throws DAOException {
 		BasicDaoResult<ModelUser> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelUser> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
+		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
 		query.andEqualParam( COL_ID, finder.getId() );
 		if ( finder.getModel() != null ) {
 			ModelUser model = finder.getModel();
@@ -84,6 +84,8 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 		} 
 		//  default-column-time-insert : true - i will set insert time
 		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		//  default-column-time-update : true - i will set update time
+		model.setDateUpdate( model.getDateInsert() ); 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID, model.getId() );
 		query.addParam( COL_USERNAME, model.getUsername() );
@@ -101,7 +103,7 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 	public ModelUser loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		ModelUser result = null;
 		BasicDAOHelper<ModelUser> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
+		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
 		query.andEqualParam( COL_ID, id );
 		result = daoHelper.loadOneHelper( query, this.getRse() );
 		return result;

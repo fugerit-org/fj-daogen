@@ -34,7 +34,7 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 	private static final long serialVersionUID = 426075792345L;
 
 	public DataEntityTestTwoFieldKeyFacadeHelper() {
-		super( "PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY", TestTwoFieldKeyRSE.DEFAULT );
+		super( "PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY", TestTwoFieldKeyRSE.DEFAULT, null );
 	}
 
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
@@ -54,7 +54,7 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 	public BasicDaoResult<ModelTestTwoFieldKey> loadAllByFinder( DAOContext context, TestTwoFieldKeyFinder finder ) throws DAOException {
 		BasicDaoResult<ModelTestTwoFieldKey> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
+		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
 		if ( finder.getModel() != null ) {
 			ModelTestTwoFieldKey model = finder.getModel();
 			query.andEqualParam( COL_ID_ONE, model.getIdOne() );
@@ -89,7 +89,7 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 	public ModelTestTwoFieldKey loadById( DAOContext context, java.math.BigDecimal idOne, java.math.BigDecimal idTwo ) throws DAOException {
 		ModelTestTwoFieldKey result = null;
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
+		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
 		query.andEqualParam( COL_ID_ONE, idOne );
 		query.andEqualParam( COL_ID_TWO, idTwo );
 		result = daoHelper.loadOneHelper( query, this.getRse() );
