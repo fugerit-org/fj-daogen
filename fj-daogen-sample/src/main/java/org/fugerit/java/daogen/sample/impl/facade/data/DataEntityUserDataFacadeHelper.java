@@ -34,7 +34,7 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 	private static final long serialVersionUID = 826402211465L;
 
 	public DataEntityUserDataFacadeHelper() {
-		super( "PUBLIC.FUGERIT.USER", UserDataRSE.DEFAULT );
+		super( "PUBLIC.FUGERIT.USER", UserDataRSE.DEFAULT, null );
 	}
 
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
@@ -58,7 +58,7 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 	public BasicDaoResult<ModelUserData> loadAllByFinder( DAOContext context, UserDataFinder finder ) throws DAOException {
 		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
+		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
 		query.andEqualParam( COL_ID, finder.getId() );
 		if ( finder.getModel() != null ) {
 			ModelUserData model = finder.getModel();
@@ -84,6 +84,8 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 		} 
 		//  default-column-time-insert : true - i will set insert time
 		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		//  default-column-time-update : true - i will set update time
+		model.setDateUpdate( model.getDateInsert() ); 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID, model.getId() );
 		query.addParam( COL_USERNAME, model.getUsername() );
@@ -101,7 +103,7 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 	public ModelUserData loadById( DAOContext context, java.math.BigDecimal id ) throws DAOException {
 		ModelUserData result = null;
 		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
-		SelectHelper query = daoHelper.newSelectHelper( this.getTableName() );
+		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
 		query.andEqualParam( COL_ID, id );
 		result = daoHelper.loadOneHelper( query, this.getRse() );
 		return result;
