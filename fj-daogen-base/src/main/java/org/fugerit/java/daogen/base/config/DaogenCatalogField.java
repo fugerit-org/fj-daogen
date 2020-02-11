@@ -33,6 +33,10 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	
 	private String nullable;
 	
+	private String unsafe;
+	
+	private String selectOnly;
+	
 	public String getComments() {
 		return comments;
 	}
@@ -79,6 +83,22 @@ public class DaogenCatalogField extends BasicIdConfigType {
 
 	public void setNullable(String nullable) {
 		this.nullable = nullable;
+	}
+
+	public String getUnsafe() {
+		return unsafe;
+	}
+
+	public void setUnsafe(String unsafe) {
+		this.unsafe = unsafe;
+	}
+
+	public String getSelectOnly() {
+		return selectOnly;
+	}
+
+	public void setSelectOnly(String selectOnly) {
+		this.selectOnly = selectOnly;
 	}
 
 	public String describe() {
