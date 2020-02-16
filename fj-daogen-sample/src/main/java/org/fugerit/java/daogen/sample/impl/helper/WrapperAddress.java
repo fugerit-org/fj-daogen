@@ -102,4 +102,9 @@ public class WrapperAddress extends BasicWrapper<ModelAddress> implements ModelA
 		return this.unwrapModel().getInfo();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.unwrapModel().isEmpty();
+	}
+
 }

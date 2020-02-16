@@ -77,4 +77,9 @@ public class WrapperUpload extends BasicWrapper<ModelUpload> implements ModelUpl
 		return this.unwrapModel().getContent();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.unwrapModel().isEmpty();
+	}
+
 }

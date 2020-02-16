@@ -2,6 +2,8 @@ package org.fugerit.java.daogen.base.gen;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.compare.CheckEmptyHelper;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -119,6 +121,25 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( "		return buffer.toString();" );
 		this.getWriter().println( "	}" );
 		this.getWriter().println();
+		if ( BooleanUtils.isTrue( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) ) ) {
+			this.getWriter().println( "	@Override" );
+			this.getWriter().println( "	public boolean isEmpty() {" );
+			String start = "";
+			String end = "";
+			for ( int k=0; k<this.getCurrentEntity().size(); k++ ) {
+				String javaSuffix = GeneratorNameHelper.toClassName( this.getCurrentEntity().get( k ).getId() );
+				if ( k == 0 ) {
+					start = "return ";
+				} else if ( k == this.getCurrentEntity().size()-1 ) {
+					end = ";";
+				} else {
+					start = " && ";
+				}
+				this.getWriter().println( "		"+start+" ( "+CheckEmptyHelper.class.getName()+".isEmpty( this.get"+javaSuffix+"() ) )"+end );
+			}
+			this.getWriter().println( "	}" );
+			this.getWriter().println();	
+		}
 	}
 
 	

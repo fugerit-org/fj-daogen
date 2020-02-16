@@ -67,4 +67,9 @@ public class WrapperTestTwoFieldKey extends BasicWrapper<ModelTestTwoFieldKey> i
 		return this.unwrapModel().getInfo();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.unwrapModel().isEmpty();
+	}
+
 }

@@ -107,4 +107,9 @@ public class WrapperUserData extends BasicWrapper<ModelUserData> implements Mode
 		return this.unwrapModel().getState();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.unwrapModel().isEmpty();
+	}
+
 }
