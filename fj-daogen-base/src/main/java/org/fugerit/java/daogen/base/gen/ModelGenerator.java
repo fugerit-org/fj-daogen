@@ -2,6 +2,8 @@ package org.fugerit.java.daogen.base.gen;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.compare.CheckEmpty;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -22,6 +24,9 @@ public class ModelGenerator extends DaogenBasicGenerator {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL ), DaogenCatalogConstants.modelName( entity ) ), 
 				STYLE_INTERFACE, daogenConfig, entity );
+		if ( BooleanUtils.isTrue( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) ) ) {
+			this.setExtendsClass( CheckEmpty.class.getName() );	
+		}
 	}
 
 	private void generateRelations() throws Exception {

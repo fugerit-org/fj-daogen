@@ -75,4 +75,11 @@ public class HelperLogData extends BasicHelper implements ModelLogData {
 		return buffer.toString();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return  ( org.fugerit.java.core.lang.compare.CheckEmptyHelper.isEmpty( this.getId() ) )
+		 &&  ( org.fugerit.java.core.lang.compare.CheckEmptyHelper.isEmpty( this.getLogTime() ) )
+		 &&  ( org.fugerit.java.core.lang.compare.CheckEmptyHelper.isEmpty( this.getInfo() ) );
+	}
+
 }

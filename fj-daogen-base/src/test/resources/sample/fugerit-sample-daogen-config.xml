@@ -29,6 +29,7 @@
 	default-sequence="seq_id_fugerit"
 	openapi_host="http://localhost:9080"
 	openapi_path="/fugerit-sample-web/jax-rs"
+	check-empty-interface="1"
 	>
 
   <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>

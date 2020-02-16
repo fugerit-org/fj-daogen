@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.gen;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -109,6 +110,14 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 			this.generateRelations();
 		}
 
+		if ( BooleanUtils.isTrue( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) ) ) {
+			this.getWriter().println( "	@Override" );
+			this.getWriter().println( "	public boolean isEmpty() {" );
+			this.getWriter().println( "		return this.unwrapModel().isEmpty();" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println();	
+		}
+		
 	}
 
 	

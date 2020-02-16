@@ -50,7 +50,7 @@ public class DaogenCatalogConstants {
 	
 	public static final String GEN_PROP_DEFAULT_SEQUENCE = "default-sequence";
 	
-	
+	public static final String GEN_PROP_CHECK_EMPTY_INTERFACE = "check-empty-interface";
 	
 	public static final String PREFIX_MODEL = "Model";
 	

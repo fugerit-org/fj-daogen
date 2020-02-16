@@ -122,4 +122,9 @@ public class WrapperUser extends BasicWrapper<ModelUser> implements ModelUser {
 		return this.unwrapModel().getState();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.unwrapModel().isEmpty();
+	}
+
 }

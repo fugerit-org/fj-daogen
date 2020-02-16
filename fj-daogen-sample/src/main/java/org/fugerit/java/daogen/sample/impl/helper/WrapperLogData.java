@@ -67,4 +67,9 @@ public class WrapperLogData extends BasicWrapper<ModelLogData> implements ModelL
 		return this.unwrapModel().getInfo();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.unwrapModel().isEmpty();
+	}
+
 }
