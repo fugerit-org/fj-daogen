@@ -131,6 +131,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				if ( k == 0 ) {
 					start = "return ";
 				} else if ( k == this.getCurrentEntity().size()-1 ) {
+					start = " && ";
 					end = ";";
 				} else {
 					start = " && ";
