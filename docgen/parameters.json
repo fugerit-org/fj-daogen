@@ -1,0 +1,37 @@
+{
+	"title" : "Mars (Fugerit DAOGEN A.P.I.)",
+	"name": "Mars",
+	"version" : "0.3.4.12",
+	"date" : "03/03/2020",
+	"organization" : {
+		"name" : "Fugerit Org",
+		"url" : "https://www.fugerit.org"
+	},
+	"author" : {
+		"name" : "Matteo a.k.a. Fugerit79",
+		"url" : "https://github.com/fugerit79"
+	},
+	"owner" : {
+		"name" : "Matteo a.k.a. Fugerit79",
+		"url" : "https://github.com/fugerit79"
+	},
+	"contributors" : [
+		{
+			"name" : "Daneel",
+			"url" : "https://github.com/daneeldeveloper"
+		}
+	],
+	"website" : {
+		"name" : "Mars Git Repository",
+		"url" : "https://github.com/fugerit-org/fj-daogen"
+	},
+	"backlink" : {
+		"name" : "",
+		"url" : ""
+	},
+	"module" : "Mars",
+	"id" : "F003",
+	"summary" : "Documentation for Mars (Fugerit DAOGEN A.P.I.), Framework for generating model and persistence A.P.I. Provides tools for dumping configuration from relational database.",
+	"marking" : "",
+	"legalese" : ""
+}

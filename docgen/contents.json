@@ -1,0 +1,12 @@
+[
+	{
+		"heading" : "Documentation for project Mars (Fugerit DAOGEN A.P.I.)",
+		"column" : 1,
+		"pages" : [
+			{
+				"title": "Mars Overview",
+				"source": "index.md"
+			}
+		]
+	}
+]
