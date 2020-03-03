@@ -6,7 +6,23 @@
 			{
 				"title": "Mars Overview",
 				"source": "index.md"
-			}
+			},
+			{
+				"title": "Configuration reference",
+				"source": "config.md"
+			},
+			{
+				"title": "Configuration dump",
+				"source": "dump.md"
+			},			
+			{
+				"title": "Resouces",
+				"source": "resources.md"
+			},						
+			{
+				"title": "Examples",
+				"source": "examples.md"
+			}			
 		]
 	}
 ]
