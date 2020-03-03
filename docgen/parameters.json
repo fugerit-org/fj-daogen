@@ -22,12 +22,12 @@
 		}
 	],
 	"website" : {
-		"name" : "Mars Home Page",
-		"url" : "https://www.fugerit.org/wp/index.php/fugerit-coding-org/fugerit-mars/"
+		"name" : "Mars Git Repository",
+		"url" : "https://github.com/fugerit-org/fj-daogen"
 	},
 	"backlink" : {
-		"name" : "",
-		"url" : ""
+		"name" : "Mars Home Page",
+		"url" : "https://www.fugerit.org/wp/index.php/fugerit-coding-org/fugerit-mars/"
 	},
 	"module" : "Mars",
 	"id" : "F003",
