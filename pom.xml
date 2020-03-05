@@ -10,7 +10,7 @@
 
 	<name>fj-daogen</name>
 	<description>Fugerit Java Data Access Generation API (DAOGEN)</description>
-	<url>http://www.fugerit.org/java/</url>
+	<url>https://www.fugerit.org/perm/mars</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +25,7 @@
 	    <mvn-javadoc-version>3.1.0</mvn-javadoc-version>
 	    <mvn-jar-version>3.1.2</mvn-jar-version>
 	    <mvn-shade-version>3.2.1</mvn-shade-version>	    
+	    <mvn-dependency-version>3.1.1</mvn-dependency-version>
 	    <!-- dependancy library versions -->    
 	    <slf4j-version>1.7.26</slf4j-version>		
 	    <poi-version>4.1.0</poi-version>
@@ -46,18 +47,23 @@
 		</license>
 	</licenses>
 
+	<organization>
+		<url>https://www.fugerit.org</url>
+		<name>Fugerit</name>
+	</organization>
+
 	<developers>
 		<developer>
 			<name>Matteo a.k.a. Fugerit</name>
 			<email>m@fugerit.org</email>
 			<organization>Fugerit</organization>
-			<organizationUrl>http://www.fugerit.org</organizationUrl>
+			<organizationUrl>https://www.fugerit.org</organizationUrl>
 		</developer>
 		<developer>
 			<name>Daneel</name>
 			<email>d@fugerit.org</email>
 			<organization>Fugerit</organization>
-			<organizationUrl>http://www.fugerit.org</organizationUrl>
+			<organizationUrl>https://www.fugerit.org</organizationUrl>
 		</developer>
 	</developers>
 
@@ -230,6 +236,34 @@
 		</profile>
 
 		<profile>
+			<id>dep</id>
+			<build>
+				<plugins>
+				   <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-dependency-plugin</artifactId>
+			        <version>${mvn-dependency-version}</version>
+			        <executions>
+			          <execution>
+			            <id>copy-dependencies</id>
+			            <phase>package</phase>
+			            <goals>
+			              <goal>copy-dependencies</goal>
+			            </goals>
+			            <configuration>
+			              <outputDirectory>${project.build.directory}/dependancy/lib</outputDirectory>
+			              <overWriteReleases>false</overWriteReleases>
+			              <overWriteSnapshots>false</overWriteSnapshots>
+			              <overWriteIfNewer>true</overWriteIfNewer>
+			            </configuration>
+			          </execution>
+			        </executions>
+			      </plugin>							
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
 			<id>test</id>
 			<properties>
 			    <maven.test.skip>false</maven.test.skip>
@@ -308,24 +342,5 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<!-- 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.3</version>
-			</plugin>
-		</plugins>
-	</reporting>
-	 -->
-
-	<organization>
-		<url>http://www.fugerit.org</url>
-		<name>Fugerit</name>
-	</organization>
-	
-	
 	
 </project>

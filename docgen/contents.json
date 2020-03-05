@@ -1,6 +1,6 @@
 [
 	{
-		"heading" : "Documentation for project Mars (Fugerit DAOGEN A.P.I.)",
+		"heading" : "Quick Start",
 		"column" : 1,
 		"pages" : [
 			{
@@ -8,21 +8,61 @@
 				"source": "index.md"
 			},
 			{
-				"title": "Configuration reference",
-				"source": "config.md"
-			},
-			{
-				"title": "Configuration dump",
-				"source": "dump.md"
+				"title": "Installation",
+				"source": "qs_install.md"
 			},			
 			{
-				"title": "Resouces",
-				"source": "resources.md"
+				"title": "Dump configuration",
+				"source": "qs_dump.md"
+			},			
+			{
+				"title": "Usage",
+				"source": "qs_config.md"
 			},						
 			{
-				"title": "Examples",
-				"source": "examples.md"
+				"title": "Notes",
+				"source": "qs_notes.md"
 			}			
 		]
-	}
+	},
+	{
+		"heading" : "User Guide",
+		"column" : 2,
+		"pages" : [
+			{
+				"title": "Introduction",
+				"source": "ug_intro.md"
+			},		
+			{
+				"title": "Configuration reference",
+				"source": "ug_config.md"
+			},			
+			{
+				"title": "Configuration dump",
+				"source": "ug_dump.md"
+			},
+			{
+				"title": "Customize Mars",
+				"source": "ug_custom.md"
+			},				
+			{
+				"title": "Examples",
+				"source": "ug_examples.md"
+			}
+		]
+	},
+	{
+		"heading" : "Help",
+		"column" : 3,
+		"pages" : [
+			{
+				"title": "Why another persistance framework?",
+				"source": "help_whymars.md"
+			},
+			{
+				"title": "Troubleshooting",
+				"source": "help_troubleshooting.md"
+			}
+		]
+	}		
 ]
