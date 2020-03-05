@@ -1,4 +1,4 @@
-﻿0.3.5
------
+﻿0.3.5.1
+-------
 + Added documentation using [DocGen](http://mtmacdonald.github.io/docgen/docs/index.html). You can find it in docgen folder of the project or [online](https://www.fugerit.org/data/java/doc/mars/index.html)
 + Added maven profile 'dep' to activate maven-dependancy plugin and copy all lib in target/dependancy/lib
