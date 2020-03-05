@@ -25,3 +25,5 @@ Requirements :
 Some useful resources : 
 * [Mars Git Repository](https://github.com/fugerit-org/fj-daogen)
 * [Quickstart Maven project](https://github.com/fugerit-org/fj-daogen-quickstart)
+
+NOTE : Especially Quickstart Maven Project is an expanded 'playable' version of this quickstart.
