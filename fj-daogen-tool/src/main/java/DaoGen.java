@@ -1,14 +1,19 @@
-package org.fugerit.java.daogen.base.tool;
-
 import java.util.Properties;
 
 import org.fugerit.java.core.cli.ArgUtils;
+import org.fugerit.java.daogen.base.tool.DaoGenToolHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DaoGenTool {
+/**
+ * 
+ * 
+ * @author fugerit79
+ *
+ */
+public class DaoGen {
 
-	private static final Logger logger = LoggerFactory.getLogger( DaoGenTool.class ); 
+	private static final Logger logger = LoggerFactory.getLogger( DaoGen.class ); 
 
 	public static void main( String[] args ) {
 		int exit = 0;

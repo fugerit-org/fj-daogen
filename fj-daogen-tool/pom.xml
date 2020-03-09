@@ -101,6 +101,43 @@
 	<profiles>
 	
 		<profile>
+			<id>singlepackage</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jar-plugin</artifactId>
+						<version>${mvn-jar-version}</version>
+						<configuration>
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<mainClass>DaoGen</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</plugin>				
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<version>${mvn-shade-version}</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>shade</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<finalName>dist-${project.artifactId}-${project.version}</finalName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>	
+	
+		<profile>
 			<id>full</id>
 			<build>
 				<plugins>
