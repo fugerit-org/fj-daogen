@@ -2,6 +2,10 @@
 --------------------
 + Changed reference to fj-core version (removed support for fj-test module)
 
+0.4.0.1 (2020-04-01) [deprecated]
+--------------------
++ Better use 0.4.0.2
+
 0.4.0.0 (2020-03-31)
 --------------------
 + Java 8 is now the minimum version supported
