@@ -1,4 +1,8 @@
-﻿0.4.0.4 (2020-04-01)
+﻿0.4.0.5 (2020-04-02)
+--------------------
++ Added constants for TABLE_NAME and QUERY_VIEW in FacadeImplDataGenerator
+
+0.4.0.4 (2020-04-01)
 --------------------
 + changed reference to fj-core 0.7.0.4
 
