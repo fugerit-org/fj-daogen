@@ -33,8 +33,10 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 
 	private static final long serialVersionUID = 826402211465L;
 
+	public final static String TABLE_NAME = "PUBLIC.FUGERIT.USER";
+
 	public DataEntityUserDataFacadeHelper() {
-		super( "PUBLIC.FUGERIT.USER", UserDataRSE.DEFAULT, null );
+		super( TABLE_NAME, UserDataRSE.DEFAULT, null );
 	}
 
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";

@@ -33,8 +33,10 @@ public class DataEntityUploadFacadeHelper extends BasicDataFacade<ModelUpload> i
 
 	private static final long serialVersionUID = 783597393751L;
 
+	public final static String TABLE_NAME = "PUBLIC.FUGERIT.UPLOAD";
+
 	public DataEntityUploadFacadeHelper() {
-		super( "PUBLIC.FUGERIT.UPLOAD", UploadRSE.DEFAULT, null );
+		super( TABLE_NAME, UploadRSE.DEFAULT, null );
 	}
 
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";

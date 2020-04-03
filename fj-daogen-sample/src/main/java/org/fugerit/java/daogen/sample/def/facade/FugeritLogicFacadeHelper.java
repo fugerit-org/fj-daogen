@@ -1,6 +1,12 @@
 package org.fugerit.java.daogen.sample.def.facade;
 
 import org.fugerit.java.core.db.dao.DAOException;
+import org.fugerit.java.daogen.sample.def.facade.EntityAddressFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityLogDataFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityUploadFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityUserDataFacade;
+import org.fugerit.java.daogen.sample.def.facade.EntityUserFacade;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
