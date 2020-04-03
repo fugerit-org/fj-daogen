@@ -36,7 +36,7 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	/**
 	 * This ensures that source code generated in different systems are always with the same line separator
 	 * (So that source control will not consider them different, if there are no other change)
-	 * Default value is @see {@link CustomPrintWriter.WINDOWS_LINE_SEPARATOR}
+	 * Default value is CustomPrintWriter.WINDOWS_LINE_SEPARATOR
 	 */
 	public static final String DEFAULT_LINE_SEPARATOR = CustomPrintWriter.WINDOWS_LINE_SEPARATOR;
 	
