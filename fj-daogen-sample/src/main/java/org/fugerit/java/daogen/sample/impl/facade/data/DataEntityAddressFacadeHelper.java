@@ -33,7 +33,7 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 
 	private static final long serialVersionUID = 455376671618L;
 
-	public final static String TABLE_NAME = "PUBLIC.FUGERIT.ADDRESS";
+	private final static String TABLE_NAME = "PUBLIC.FUGERIT.ADDRESS";
 
 	public DataEntityAddressFacadeHelper() {
 		super( TABLE_NAME, AddressRSE.DEFAULT, null );

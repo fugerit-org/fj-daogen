@@ -1,4 +1,9 @@
-﻿0.4.0.5 (2020-04-02)
+﻿0.4.0.6 (2020-04-03)
+--------------------
++ Constants TABLE_NAME and QUERY_VIEW in FacadeImplDataGenerator, use DataEntityUtils from fj-core
++ changed reference to fj-core 0.7.0.7
+
+0.4.0.5 (2020-04-02) [deprecated]
 --------------------
 + Added constants for TABLE_NAME and QUERY_VIEW in FacadeImplDataGenerator
 

@@ -1,8 +1,8 @@
 {
 	"title" : "Mars (Fugerit DAOGEN A.P.I.)",
 	"name": "Mars",
-	"version" : "0.4.0.5",
-	"date" : "02/04/2020",
+	"version" : "0.4.0.6",
+	"date" : "03/04/2020",
 	"organization" : {
 		"name" : "Fugerit Org",
 		"url" : "https://www.fugerit.org"

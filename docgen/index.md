@@ -12,6 +12,8 @@ Optionally is possible to :
 - Dump the configuration directly from an existing data source
 - Customize the generated artifacts for your need
 
+**Note : Starting from version 0.7.0.0, minimum required java version changed to 1.8**
+
 Even though there are plenty of framework for handling persistence in java, 
 the last point is the key reason why Mars was developed, to keep more control 
 on the generated artifacts and modify it at a lower (less abstract) level.  

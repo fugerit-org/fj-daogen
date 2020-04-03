@@ -95,11 +95,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 			
 			String fullTableName = toFullTableName( this.getCurrentEntity() );
-			this.getWriter().println( "	public final static String TABLE_NAME = \""+fullTableName+"\";" );
+			this.getWriter().println( "	private final static String TABLE_NAME = \""+fullTableName+"\";" );
 			this.getWriter().println();
 			String queryViewInit = null;
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getQueryView() ) ) {
-				this.getWriter().println( "	public final static String QUERY_VIEW = \""+this.getCurrentEntity().getQueryView()+"\";" );
+				this.getWriter().println( "	private final static String QUERY_VIEW = \""+this.getCurrentEntity().getQueryView()+"\";" );
 				this.getWriter().println();
 				queryViewInit = "QUERY_VIEW";
 			}

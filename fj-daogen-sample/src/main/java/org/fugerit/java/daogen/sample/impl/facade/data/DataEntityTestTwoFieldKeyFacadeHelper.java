@@ -33,7 +33,7 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 
 	private static final long serialVersionUID = 426075792345L;
 
-	public final static String TABLE_NAME = "PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY";
+	private final static String TABLE_NAME = "PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY";
 
 	public DataEntityTestTwoFieldKeyFacadeHelper() {
 		super( TABLE_NAME, TestTwoFieldKeyRSE.DEFAULT, null );

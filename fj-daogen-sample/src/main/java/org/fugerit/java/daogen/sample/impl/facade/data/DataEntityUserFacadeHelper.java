@@ -33,7 +33,7 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 
 	private static final long serialVersionUID = 774302858231L;
 
-	public final static String TABLE_NAME = "PUBLIC.FUGERIT.USER";
+	private final static String TABLE_NAME = "PUBLIC.FUGERIT.USER";
 
 	public DataEntityUserFacadeHelper() {
 		super( TABLE_NAME, UserRSE.DEFAULT, null );

@@ -30,7 +30,7 @@ public class DataEntityLogDataFacadeHelper extends BasicDataFacade<ModelLogData>
 
 	private static final long serialVersionUID = 63742904079L;
 
-	public final static String TABLE_NAME = "PUBLIC.FUGERIT.LOG_DATA";
+	private final static String TABLE_NAME = "PUBLIC.FUGERIT.LOG_DATA";
 
 	public DataEntityLogDataFacadeHelper() {
 		super( TABLE_NAME, LogDataRSE.DEFAULT, null );
