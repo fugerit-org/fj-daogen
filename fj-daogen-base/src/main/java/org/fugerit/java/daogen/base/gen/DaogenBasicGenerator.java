@@ -74,7 +74,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		} else if ( DaogenCatalogConstants.GEN_PROP_SRC_HELPERS_GEN.equalsIgnoreCase( sourceFolder ) ) {
 			sourceFolder = "target/generated-sources/daogen/";
 		}
-		super.init( new File( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER ), sourceFolder ), fullObjectBName, javaStyle, daogenConfig.getGeneralProps() );
+		super.init( new File( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER ), sourceFolder ), fullObjectBName, javaStyle, daogenConfig.getGeneralProps(), daogenConfig.getLineSeparator() );
 		this.daogenConfig = daogenConfig;
 		this.currentEntity = entity;
 		for ( DaogenBasicDecorator decorator : this.getDecorators() ) {

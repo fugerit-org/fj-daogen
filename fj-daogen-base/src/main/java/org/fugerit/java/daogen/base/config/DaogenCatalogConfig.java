@@ -9,6 +9,7 @@ import java.util.Properties;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.CustomListCatalogConfig;
 import org.fugerit.java.core.cfg.xml.XmlBeanHelper;
+import org.fugerit.java.core.io.helper.CustomPrintWriter;
 import org.fugerit.java.core.io.helper.StreamHelper;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
 import org.fugerit.java.core.util.collection.ListMapStringKey;
@@ -32,6 +33,12 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 
 	private ListMapStringKey<DaogenCatalogRelation> relations;
 
+	/**
+	 * This ensures that source code generated in different systems are always with the same line separator
+	 * (So that source control will not consider them different, if there are no other change)
+	 * Default value is @see {@link CustomPrintWriter.WINDOWS_LINE_SEPARATOR}
+	 */
+	public static final String DEFAULT_LINE_SEPARATOR = CustomPrintWriter.WINDOWS_LINE_SEPARATOR;
 	
 	public DaogenCatalogConfig() {
 		super( ATT_DAOGEN_ENTITY, ATT_DAOGEN_FIELD );
@@ -40,6 +47,7 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		this.classConfig = new Properties();
 		this.relations = new ListMapStringKey<>();
 		this.generatorCatalogs = new ArrayList<DaogenGeneratorCatalog>();
+		this.lineSeparator = DEFAULT_LINE_SEPARATOR;
 	}
 	
 	public String getGeneralProp( String key ) {
@@ -138,6 +146,16 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 
 	public void setDecoratorCatalog(DaogenDecoratorCatalog decoratorCatalog) {
 		this.decoratorCatalog = decoratorCatalog;
+	}
+	
+	private String lineSeparator;
+
+	public String getLineSeparator() {
+		return lineSeparator;
+	}
+
+	public void setLineSeparator(String lineSeparator) {
+		this.lineSeparator = lineSeparator;
 	}
 	
 }

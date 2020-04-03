@@ -89,7 +89,7 @@ public class GeneratorKeyHelper implements Serializable {
 				} else {
 					this.paramBuilder.append( " part of the key" );
 				}
-				this.paramBuilder.append( System.lineSeparator() );
+				this.paramBuilder.append( this.config.getLineSeparator() );
 				this.forwardBuilder.append( fieldName );
 				// rest data
 				if ( javaType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
