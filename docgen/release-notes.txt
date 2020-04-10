@@ -1,4 +1,8 @@
-﻿0.4.0.7 (2020-04-03)
+﻿0.4.0.8 (2020-04-10)
+--------------------
++ Fix auto update column on FacadeImplDataGenerator
+
+0.4.0.7 (2020-04-03)
 --------------------
 + Code generations always use Windows line separator now
 
