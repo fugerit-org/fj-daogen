@@ -81,7 +81,7 @@ public class DataEntityUploadFacadeHelper extends BasicDataFacade<ModelUpload> i
 		//  default-column-time-insert : true - i will set insert time
 		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		//  default-column-time-update : true - i will set update time
-		model.setDateUpdate( model.getDateInsert() ); 
+		model.setDateUpdate( model.getDateUpdate() ); 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID, model.getId() );
 		query.addParam( COL_DATE_INSERT, model.getDateInsert() );

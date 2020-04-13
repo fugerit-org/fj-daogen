@@ -36,20 +36,19 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 			this.configRealClass();
 		} else {
 			String packageFacade = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF );
-			String packageFacadeImpl = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DATA_IMPL );
+			
 			this.setClassDaoException( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_EXCEPTION_BASE, this.getImportList() ) );
 			Iterator<String> itEntity = this.getDaogenConfig().getIdSet().iterator();
 			while ( itEntity.hasNext() ) {
 				String currentId = itEntity.next();
 				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
 				this.getImportList().add( packageFacade+"."+DaogenCatalogConstants.facadeDefName( current ) );
-				this.getImportList().add( packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current ) );
 			}
 			if ( this.isModeHelper() ) {
 				baseName = DaogenHelperGenerator.toHelperClassName( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 			}
 		}	
-		this.setImplementsInterface( baseName );
+		this.setImplementsInterface( baseName+", java.io.Serializable" );
 	}
 
 
@@ -58,14 +57,28 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
 		} else {
+			this.addSerialVerUID();
+			this.getWriter().println();
+			this.getWriter().println( "	public "+this.getJavaName()+"() {");
 			Iterator<String> itEntity = this.getDaogenConfig().getIdSet().iterator();
+			String packageFacadeImpl = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DATA_IMPL );
 			while ( itEntity.hasNext() ) {
 				String currentId = itEntity.next();
 				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
 				String facadeName = DaogenCatalogConstants.facadeDefName( current );
-				String facadeNameImpl = DaogenCatalogConstants.facadeImplDataName( current );
+				String facadeNameImpl = packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current );
 				String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
-				this.getWriter().println( "	private "+facadeName+" "+propertyName+" = new "+facadeNameImpl+"();" );
+				this.getWriter().println( "		this."+propertyName+" = new "+facadeNameImpl+"();" ) ;
+			}
+			this.getWriter().println( "	}");
+			this.getWriter().println();
+			itEntity = this.getDaogenConfig().getIdSet().iterator();
+			while ( itEntity.hasNext() ) {
+				String currentId = itEntity.next();
+				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
+				String facadeName = DaogenCatalogConstants.facadeDefName( current );
+				String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
+				this.getWriter().println( "	private "+facadeName+" "+propertyName+";" );
 				this.getWriter().println();
 				this.getWriter().println( "	@Override" );
 				this.getWriter().println( "	public "+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+" {" );

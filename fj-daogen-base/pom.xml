@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.fugerit.java</groupId>
 		<artifactId>fj-daogen</artifactId>
-		<version>0.4.0.8</version>
+		<version>0.4.1.0</version>
 	</parent>
 
 	<name>fj-daogen-base</name>
@@ -39,49 +39,9 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- logging -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
 		<dependency>
 		    <groupId>commons-dbcp</groupId>
 		    <artifactId>commons-dbcp</artifactId>
-		</dependency>		
-		
-		<!-- for testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>test</scope>
-		</dependency>			
-	
-		<dependency>
-			<groupId>org.fugerit.java</groupId>
-			<artifactId>fj-core</artifactId>
-			<type>test-jar</type>
-			<scope>test</scope>
 		</dependency>					
 
 	</dependencies>

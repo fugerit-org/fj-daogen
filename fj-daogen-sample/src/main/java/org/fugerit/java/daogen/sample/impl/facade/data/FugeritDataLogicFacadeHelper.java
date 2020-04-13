@@ -7,12 +7,6 @@ import org.fugerit.java.daogen.sample.def.facade.EntityTestTwoFieldKeyFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUploadFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserDataFacade;
 import org.fugerit.java.daogen.sample.def.facade.EntityUserFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityAddressFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityLogDataFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityTestTwoFieldKeyFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUploadFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserDataFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserFacade;
 
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
@@ -26,12 +20,24 @@ import org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserFacade;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacadeHelper {
+public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacadeHelper, java.io.Serializable {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private EntityAddressFacade entityaddressfacade = new DataEntityAddressFacade();
+	private static final long serialVersionUID = 434639213864L;
+
+
+	public FugeritDataLogicFacadeHelper() {
+		this.entityaddressfacade = new org.fugerit.java.daogen.sample.impl.facade.data.DataEntityAddressFacade();
+		this.entitylogdatafacade = new org.fugerit.java.daogen.sample.impl.facade.data.DataEntityLogDataFacade();
+		this.entitytesttwofieldkeyfacade = new org.fugerit.java.daogen.sample.impl.facade.data.DataEntityTestTwoFieldKeyFacade();
+		this.entityuploadfacade = new org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUploadFacade();
+		this.entityuserfacade = new org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserFacade();
+		this.entityuserdatafacade = new org.fugerit.java.daogen.sample.impl.facade.data.DataEntityUserDataFacade();
+	}
+
+	private EntityAddressFacade entityaddressfacade;
 
 	@Override
 	public EntityAddressFacade getEntityAddressFacade() throws DAOException {
@@ -42,7 +48,7 @@ public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sam
 		this.entityaddressfacade = facade;
 	}
 
-	private EntityLogDataFacade entitylogdatafacade = new DataEntityLogDataFacade();
+	private EntityLogDataFacade entitylogdatafacade;
 
 	@Override
 	public EntityLogDataFacade getEntityLogDataFacade() throws DAOException {
@@ -53,7 +59,7 @@ public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sam
 		this.entitylogdatafacade = facade;
 	}
 
-	private EntityTestTwoFieldKeyFacade entitytesttwofieldkeyfacade = new DataEntityTestTwoFieldKeyFacade();
+	private EntityTestTwoFieldKeyFacade entitytesttwofieldkeyfacade;
 
 	@Override
 	public EntityTestTwoFieldKeyFacade getEntityTestTwoFieldKeyFacade() throws DAOException {
@@ -64,7 +70,7 @@ public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sam
 		this.entitytesttwofieldkeyfacade = facade;
 	}
 
-	private EntityUploadFacade entityuploadfacade = new DataEntityUploadFacade();
+	private EntityUploadFacade entityuploadfacade;
 
 	@Override
 	public EntityUploadFacade getEntityUploadFacade() throws DAOException {
@@ -75,7 +81,7 @@ public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sam
 		this.entityuploadfacade = facade;
 	}
 
-	private EntityUserFacade entityuserfacade = new DataEntityUserFacade();
+	private EntityUserFacade entityuserfacade;
 
 	@Override
 	public EntityUserFacade getEntityUserFacade() throws DAOException {
@@ -86,7 +92,7 @@ public class FugeritDataLogicFacadeHelper implements org.fugerit.java.daogen.sam
 		this.entityuserfacade = facade;
 	}
 
-	private EntityUserDataFacade entityuserdatafacade = new DataEntityUserDataFacade();
+	private EntityUserDataFacade entityuserdatafacade;
 
 	@Override
 	public EntityUserDataFacade getEntityUserDataFacade() throws DAOException {
