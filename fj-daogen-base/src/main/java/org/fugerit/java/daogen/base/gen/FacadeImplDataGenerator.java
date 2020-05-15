@@ -172,20 +172,25 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 						}
 					}
 				}
+				DaogenCatalogField colData = null;
+				DaogenCatalogField colDataUpdate = null;
 				if ( autoSetDateInsert != null ) {
-					DaogenCatalogField colData = this.getCurrentEntity().get( autoSetDateInsert );
-					if ( colData != null ) {
-						this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
-						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );
-					}
+					colData = this.getCurrentEntity().get( autoSetDateInsert );
 				}
 				if ( autoSetDateUpdate != null ) {
-					DaogenCatalogField colDataUpdate = this.getCurrentEntity().get( autoSetDateUpdate );
-					if ( colDataUpdate != null ) {
-						this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( model.get"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"() ); " );	
-					}
-				}	
+					colDataUpdate = this.getCurrentEntity().get( autoSetDateUpdate );
+				}
+				if ( colData != null || colDataUpdate != null ) {
+					this.getWriter().println( "		java.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );" );	
+				}
+				if ( colData != null ) {
+					this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
+					this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( currentTime ); " );
+				}
+				if ( colDataUpdate != null ) {
+					this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
+					this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( currentTime ); " );	
+				}
 				this.getWriter().println( "		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
 				for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 					if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
@@ -231,12 +236,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println( "	public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 				this.getWriter().println( "		"+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 				this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-				if ( autoSetDateUpdate != null ) {
-					DaogenCatalogField colData = this.getCurrentEntity().get( autoSetDateUpdate );
-					if ( colData != null ) {
-						this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
-					}
+				if ( colData != null ) {
+					this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
+					this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
 				}
 				this.getWriter().println( "		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 				for ( DaogenCatalogField field : this.getCurrentEntity() ) {
