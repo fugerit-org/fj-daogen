@@ -80,10 +80,11 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 		if ( model.getId() == null ) { 
 			model.setId( this.generateId( context ) ); 
 		} 
+		java.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );
 		//  default-column-time-insert : true - i will set insert time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateInsert( currentTime ); 
 		//  default-column-time-update : true - i will set update time
-		model.setDateUpdate( model.getDateUpdate() ); 
+		model.setDateUpdate( currentTime ); 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID, model.getId() );
 		query.addParam( COL_ID_USER, model.getIdUser() );
@@ -121,7 +122,7 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 		BasicDaoResult<ModelAddress> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelAddress> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
-		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_ID_USER, model.getIdUser() );
 		query.addSetParam( COL_DATE_INSERT, model.getDateInsert() );

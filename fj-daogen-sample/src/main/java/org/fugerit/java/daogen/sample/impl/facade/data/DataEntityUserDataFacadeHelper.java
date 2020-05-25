@@ -84,10 +84,11 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 		if ( model.getId() == null ) { 
 			model.setId( this.generateId( context ) ); 
 		} 
+		java.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );
 		//  default-column-time-insert : true - i will set insert time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateInsert( currentTime ); 
 		//  default-column-time-update : true - i will set update time
-		model.setDateUpdate( model.getDateUpdate() ); 
+		model.setDateUpdate( currentTime ); 
 		InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );
 		query.addParam( COL_ID, model.getId() );
 		query.addParam( COL_USERNAME, model.getUsername() );
@@ -127,7 +128,7 @@ public class DataEntityUserDataFacadeHelper extends BasicDataFacade<ModelUserDat
 		BasicDaoResult<ModelUserData> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelUserData> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
-		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_USERNAME, model.getUsername() );
 		query.addSetParam( COL_PASSWORD, model.getPassword() );
