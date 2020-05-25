@@ -1,4 +1,9 @@
-﻿0.4.1.1 (2020-05-15)
+﻿0.4.1.2 (2020-05-25)
+--------------------
++ Added decorator for FugeritImpl annotate
++ Changed fj-core version to 0.7.2.8 
+
+0.4.1.1 (2020-05-15)
 --------------------
 + Changed fj-core version from 0.7.0.9 to 0.7.7.1
 + Corrected a bug in set date update for FacadeImplDataGenerator
