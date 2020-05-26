@@ -1,5 +1,7 @@
 package org.fugerit.java.daogen.sample.def.model;
 
+import org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey;
+
 // custom import start ( code above here will be overwritten )
 // custom import end ( code below here will be overwritten )
 
@@ -12,6 +14,7 @@ package org.fugerit.java.daogen.sample.def.model;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
+@org.fugerit.java.core.lang.annotate.DefineImpl(as = HelperTestTwoFieldKey.class)
 public interface ModelTestTwoFieldKey extends org.fugerit.java.core.lang.compare.CheckEmpty {
 
 	// custom code start ( code above here will be overwritten )

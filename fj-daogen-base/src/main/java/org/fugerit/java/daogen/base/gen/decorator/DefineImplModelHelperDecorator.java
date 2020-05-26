@@ -1,10 +1,11 @@
 package org.fugerit.java.daogen.base.gen.decorator;
 
+import org.fugerit.java.core.lang.annotate.DefineImpl;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.gen.DaogenBasicDecorator;
 import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
-public class FugeritImplModelHelperDecorator extends DaogenBasicDecorator {
+public class DefineImplModelHelperDecorator extends DaogenBasicDecorator {
 
 	@Override
 	public void init(DaogenBasicGenerator generator) {
@@ -14,7 +15,7 @@ public class FugeritImplModelHelperDecorator extends DaogenBasicDecorator {
 	@Override
 	public void addBeforeClass() throws Exception {
 		super.addBeforeClass();		
-		this.accessGenerator().println( "@org.fugerit.java.core.lang.annotate.FugeritImpl(as = "+this.accessGenerator().getEntityHelperName()+".class)" );
+		this.accessGenerator().println( "@"+DefineImpl.class.getName()+"(as = "+this.accessGenerator().getEntityHelperName()+".class)" );
 	}
 
 	@Override

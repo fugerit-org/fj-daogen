@@ -13,6 +13,7 @@
 	type-mapper="org.fugerit.java.daogen.base.config.DaogenTypeMapper"
 	type-map-config="cl://config/daogen_default_type_mapping.xml"
 	generator-catalog="cl://config/default-generator-catalog.xml"
+	decorator-catalog="cl://config/default-decorator-catalog.xml"
 	default-column-time-insert="DATE_INSERT"
 	default-column-time-update="DATE_UPDATE"
 	struct_prefix="OBJ_"

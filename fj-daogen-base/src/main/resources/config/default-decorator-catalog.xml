@@ -1,9 +1,9 @@
 <decorator-catalog>
 
-  <factory id="JacksonJsonDeserializeModelHelperDecorator">
-    <data id="JacksonJsonDeserializeModelHelperDecorator" 
-    	type="org.fugerit.java.daogen.base.gen.decorator.JacksonJsonDeserializeModelHelperDecorator"
-    	info="package-model"/>
+  <factory id="ModelGenerator">
+    <data id="FugeritImplModelHelperDecorator" 
+    	type="org.fugerit.java.daogen.base.gen.decorator.DefineImplModelHelperDecorator"
+    	info="package-model"/>          	
   </factory>
   
 </decorator-catalog>
