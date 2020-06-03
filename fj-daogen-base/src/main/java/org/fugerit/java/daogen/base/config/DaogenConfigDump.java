@@ -34,6 +34,10 @@ public class DaogenConfigDump {
 	public static final String PARAM_CATALOG = "catalog";
 	public static final String PARAM_SCHEMA = "schema";
 	
+	public static final String PARAM_ENTITY_TYPE = "entity-types";
+	public static final String PARAM_ENTITY_TYPE_ALL = "all";
+	public static final String PARAM_ENTITY_TYPE_DEFAULT = PARAM_ENTITY_TYPE_ALL;
+	
 	private static void addIfNotEmpty( String attName, String attValue, Element tag ) {
 		if ( StringUtils.isNotEmpty( attValue ) ) {
 			tag.setAttribute( attName , attValue );
@@ -47,7 +51,12 @@ public class DaogenConfigDump {
 	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws Exception {
 		String catalog = params.getProperty( PARAM_CATALOG );
 		String schema = params.getProperty( PARAM_SCHEMA );
-		DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList );
+		String paramEntityType = params.getProperty( PARAM_ENTITY_TYPE , PARAM_ENTITY_TYPE_DEFAULT );
+		String[] types = { paramEntityType };
+		if ( PARAM_ENTITY_TYPE_ALL.equalsIgnoreCase( paramEntityType )  ) {
+			types = MetaDataUtils.TYPES_ALL;
+		}
+		DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList, types );
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = dbf.newDocumentBuilder();
 		Document doc = builder.newDocument();
