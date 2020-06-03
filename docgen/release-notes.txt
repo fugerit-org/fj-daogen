@@ -1,4 +1,4 @@
-﻿0.4.1.6 (2020-06-03)
+﻿0.4.1.7 (2020-06-03)
 --------------------
 + Changed fj-core version to 0.7.3.4
 + Added supporto for dumping VIEW configuration
