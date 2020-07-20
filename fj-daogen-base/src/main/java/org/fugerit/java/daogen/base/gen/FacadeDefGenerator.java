@@ -8,6 +8,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
 import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 
@@ -92,11 +93,17 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 				GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
 				methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_LOAD_BY_PK, this.getEntityModelName(), "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+" for entity : "+this.getEntityModelName() );
-				DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );
-				this.getWriter().println( "	"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
-				this.getWriter().println();
-				methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_DELETE_BY_PK, this.getEntityBaseResult(), "Delete result (resultCode=0, delete ok)", "Delete method by "+PRIMARY_KEY+" for entity : "+this.getEntityModelName() );
-				methodByKey( primaryKeyHelper.setForUpdateInterface(), PRIMARY_KEY, METHOD_UPDATE_BY_PK, this.getEntityBaseResult(), "Update result (resultCode=0, update ok)", "Delete method by "+PRIMARY_KEY+" for entity : "+this.getEntityModelName() );
+				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
+					DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );
+					this.getWriter().println( "	"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
+					this.getWriter().println();
+				}
+				if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {
+					methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_DELETE_BY_PK, this.getEntityBaseResult(), "Delete result (resultCode=0, delete ok)", "Delete method by "+PRIMARY_KEY+" for entity : "+this.getEntityModelName() );	
+				}
+				if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
+					methodByKey( primaryKeyHelper.setForUpdateInterface(), PRIMARY_KEY, METHOD_UPDATE_BY_PK, this.getEntityBaseResult(), "Update result (resultCode=0, update ok)", "Delete method by "+PRIMARY_KEY+" for entity : "+this.getEntityModelName() );	
+				}
 			}
 		}
 	}

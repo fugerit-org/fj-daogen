@@ -1,7 +1,12 @@
-﻿0.4.1.7 (2020-06-03)
+﻿0.4.1.8 (2020-07-20)
+--------------------
++ Changed fj-core version to 0.7.3.6
++ Added configuration option to create only parte of enity facade (enitut.facadeMode)
+
+0.4.1.7 (2020-06-03)
 --------------------
 + Changed fj-core version to 0.7.3.4
-+ Added supporto for dumping VIEW configuration
++ Added support for dumping VIEW configuration
 
 0.4.1.5 (2020-05-26)
 --------------------

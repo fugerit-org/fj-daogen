@@ -24,6 +24,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	public static final String ATT_ORDER_BY = "orderBy";
 	public static final String ATT_MAP_TO_TABLE = "mapToTable";
 	public static final String ATT_QUERY_VIEW = "queryView";	// DEFAULT TO "SELECT * FROM ${catalog.schema.name}"
+	public static final String ATT_FACADE_MODE = "facadeMode";
 	
 	/**
 	 * 
@@ -55,6 +56,8 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	private String mapToTable;
 	
 	private String queryView;
+	
+	private String facadeMode;
 
 	public String getOrderBy() {
 		return orderBy;
@@ -140,6 +143,14 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		return GeneratorNameHelper.toClassName( this.getName() );
 	}
 
+	public String getFacadeMode() {
+		return facadeMode;
+	}
+
+	public void setFacadeMode(String facadeMode) {
+		this.facadeMode = facadeMode;
+	}
+
 	public ListMapStringKey<DaogenCatalogRelation> getRelations() {
 		return relations;
 	}
@@ -156,6 +167,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_ORDER_BY, this.getOrderBy() ) );
 		 list.add( StringUtils.concat( ":" , ATT_MAP_TO_TABLE, this.getMapToTable() ) );
 		 list.add( StringUtils.concat( ":" , ATT_QUERY_VIEW, this.getQueryView() ) );
+		 list.add( StringUtils.concat( ":" , ATT_FACADE_MODE, this.getFacadeMode() ) );
 		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}
