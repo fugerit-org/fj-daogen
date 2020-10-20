@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fugerit.java.core.cfg.xml.BasicIdConfigType;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 
 public class DaogenCatalogField extends BasicIdConfigType {
@@ -15,6 +16,8 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	public static final String ATT_SIZE = "size";
 	public static final String ATT_NULLABLE = "nullable";
 	public static final String ATT_COMMENTS = "comments";
+	public static final String ATT_UDT = "udt";
+	public static final String ATT_STRUCT_TYPE = "structType";
 	
 	/**
 	 * 
@@ -36,6 +39,14 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	private String unsafe;
 	
 	private String selectOnly;
+	
+	private String udt;
+
+	private String structType;
+
+	public boolean isUserType() {
+		return BooleanUtils.isTrue( this.getUdt() );
+	}
 	
 	public String getComments() {
 		return comments;
@@ -101,6 +112,22 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		this.selectOnly = selectOnly;
 	}
 
+	public String getUdt() {
+		return udt;
+	}
+
+	public void setUdt(String udt) {
+		this.udt = udt;
+	}
+
+	public String getStructType() {
+		return structType;
+	}
+
+	public void setStructType(String structType) {
+		this.structType = structType;
+	}
+	
 	public String describe() {
 		 List<String> list = new ArrayList<String>();
 		 list.add( StringUtils.concat( ":" , ATT_SQL_TYPE, this.getSqlType() ) );
@@ -109,6 +136,8 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		 list.add( StringUtils.concat( ":" , ATT_SIZE, this.getSize() ) );
 		 list.add( StringUtils.concat( ":" , ATT_NULLABLE, this.getNullable() ) );
 		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
+		 list.add( StringUtils.concat( ":" , ATT_UDT, this.getUdt() ) );
+		 list.add( StringUtils.concat( ":" , ATT_STRUCT_TYPE, this.getStructType() ) );
 		 return StringUtils.concat(  ",", list );
 	}
 	

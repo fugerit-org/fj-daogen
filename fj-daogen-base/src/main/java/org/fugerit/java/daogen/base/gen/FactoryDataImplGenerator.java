@@ -9,6 +9,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 
@@ -42,7 +43,9 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 			while ( itEntity.hasNext() ) {
 				String currentId = itEntity.next();
 				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
-				this.getImportList().add( packageFacade+"."+DaogenCatalogConstants.facadeDefName( current ) );
+				if ( FacadeGeneratorUtils.isFacadeGenerate( current ) ) {
+					this.getImportList().add( packageFacade+"."+DaogenCatalogConstants.facadeDefName( current ) );
+				}
 			}
 			if ( this.isModeHelper() ) {
 				baseName = DaogenHelperGenerator.toHelperClassName( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
@@ -65,10 +68,12 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 			while ( itEntity.hasNext() ) {
 				String currentId = itEntity.next();
 				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
-				String facadeName = DaogenCatalogConstants.facadeDefName( current );
-				String facadeNameImpl = packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current );
-				String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
-				this.getWriter().println( "		this."+propertyName+" = new "+facadeNameImpl+"();" ) ;
+				if ( FacadeGeneratorUtils.isFacadeGenerate( current ) ) {
+					String facadeName = DaogenCatalogConstants.facadeDefName( current );
+					String facadeNameImpl = packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current );
+					String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
+					this.getWriter().println( "		this."+propertyName+" = new "+facadeNameImpl+"();" ) ;	
+				}
 			}
 			this.getWriter().println( "	}");
 			this.getWriter().println();
@@ -76,19 +81,21 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 			while ( itEntity.hasNext() ) {
 				String currentId = itEntity.next();
 				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
-				String facadeName = DaogenCatalogConstants.facadeDefName( current );
-				String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
-				this.getWriter().println( "	private "+facadeName+" "+propertyName+";" );
-				this.getWriter().println();
-				this.getWriter().println( "	@Override" );
-				this.getWriter().println( "	public "+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+" {" );
-				this.getWriter().println( "		return this."+propertyName+";" );
-				this.getWriter().println( "	}" );
-				this.getWriter().println();
-				this.getWriter().println( "	protected void set"+facadeName+"( "+facadeName+" facade ) throws "+this.getClassDaoException()+" {" );
-				this.getWriter().println( "		this."+propertyName+" = facade;" );
-				this.getWriter().println( "	}" );
-				this.getWriter().println();			
+				if ( FacadeGeneratorUtils.isFacadeGenerate( current ) ) {
+					String facadeName = DaogenCatalogConstants.facadeDefName( current );
+					String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
+					this.getWriter().println( "	private "+facadeName+" "+propertyName+";" );
+					this.getWriter().println();
+					this.getWriter().println( "	@Override" );
+					this.getWriter().println( "	public "+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( "		return this."+propertyName+";" );
+					this.getWriter().println( "	}" );
+					this.getWriter().println();
+					this.getWriter().println( "	protected void set"+facadeName+"( "+facadeName+" facade ) throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( "		this."+propertyName+" = facade;" );
+					this.getWriter().println( "	}" );
+					this.getWriter().println();				
+				}
 			}
 		}
 	}

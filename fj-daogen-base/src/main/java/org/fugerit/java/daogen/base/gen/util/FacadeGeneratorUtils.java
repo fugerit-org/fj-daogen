@@ -15,6 +15,8 @@ public class FacadeGeneratorUtils {
 	
 	public static final String ATT_ENTITY_FACADE_MODE_UPDATE = "update";
 	
+	public static final String ATT_ENTITY_FACADE_MODE_NONE = "none";
+	
 	public static final String ATT_ENTITY_FACADE_MODE_DEFAULT = ATT_ENTITY_FACADE_MODE_COMPLETE;
 	
 	public static boolean isFacadeModeComplete( DaogenCatalogEntity entity ) {
@@ -40,5 +42,10 @@ public class FacadeGeneratorUtils {
 	private static boolean contains( DaogenCatalogEntity entity, String value ) {
 		return entity.getFacadeMode() != null && entity.getFacadeMode().toLowerCase().contains( value );
 	}
+	
+	public static boolean isFacadeGenerate( DaogenCatalogEntity entity ) {
+		return !ATT_ENTITY_FACADE_MODE_NONE.equalsIgnoreCase( entity.getFacadeMode() );
+	}
+	
 	
 }

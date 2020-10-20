@@ -48,19 +48,7 @@ public class DaogenConfigDump {
 		dumpConfig(cf, params, writer, tableNameList, new Properties());
 	}
 	
-	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws Exception {
-		String catalog = params.getProperty( PARAM_CATALOG );
-		String schema = params.getProperty( PARAM_SCHEMA );
-		String paramEntityType = params.getProperty( PARAM_ENTITY_TYPE , PARAM_ENTITY_TYPE_DEFAULT );
-		String[] types = { paramEntityType };
-		if ( PARAM_ENTITY_TYPE_ALL.equalsIgnoreCase( paramEntityType )  ) {
-			types = MetaDataUtils.TYPES_ALL;
-		}
-		DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList, types );
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = dbf.newDocumentBuilder();
-		Document doc = builder.newDocument();
-		Element root = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ROOT );
+	public static void dumpConfigWorker( DataBaseModel dbModel, Document doc, Element root, Properties mapToTables ) throws Exception {
 		ListMapStringKey<DaogenCatalogRelation> relations = new ListMapStringKey<>();
 		for ( TableModel tableModel : dbModel.getTableList() ) {
 			Element currentEntityTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ENTITY );
@@ -141,6 +129,22 @@ public class DaogenConfigDump {
 			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_COMMENT , rel.getComment() );
 			root.appendChild( currentRelationTag );
 		}
+	}
+	
+	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws Exception {
+		String catalog = params.getProperty( PARAM_CATALOG );
+		String schema = params.getProperty( PARAM_SCHEMA );
+		String paramEntityType = params.getProperty( PARAM_ENTITY_TYPE , PARAM_ENTITY_TYPE_DEFAULT );
+		String[] types = { paramEntityType };
+		if ( PARAM_ENTITY_TYPE_ALL.equalsIgnoreCase( paramEntityType )  ) {
+			types = MetaDataUtils.TYPES_ALL;
+		}
+		DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList, types );
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = dbf.newDocumentBuilder();
+		Document doc = builder.newDocument();
+		Element root = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ROOT );
+		dumpConfigWorker(dbModel, doc, root, mapToTables);
 		DOMIO.writeDOMIndent( root , writer );
 	}
 	

@@ -105,6 +105,8 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
 				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.clobToCharHandler( (java.sql.Clob) stream.readObject() )";
 				containsBlob = true;				
+			} else if ( field.isUserType() ) {
+				extratMethod = " ( ("+ field.getStructType() +") stream.readObject() ) ";
 			} else {
 				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
 			}
@@ -132,9 +134,11 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) || columnType.equalsIgnoreCase( "java.util.Date" ) ) {
 				extratMethod = "stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( FIELD-TOKEN ) )";
 			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
-				extratMethod = "// blob must be writtern separately : FIELD-TOKEN";
+				extratMethod = "// blob must be written separately : FIELD-TOKEN";
 			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
-				extratMethod = "// clob must be writtern separately : FIELD-TOKEN";				
+				extratMethod = "// clob must be written separately : FIELD-TOKEN";	
+			} else if ( field.isUserType() ) {
+				extratMethod = "stream.writeObject( ("+ field.getStructType() +") FIELD-TOKEN )";
 			} else {
 				throw new DAOException( "Type : "+columnType+" not handled yet!" );
 			}

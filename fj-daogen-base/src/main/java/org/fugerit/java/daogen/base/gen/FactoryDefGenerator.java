@@ -8,6 +8,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
+import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 
@@ -48,16 +49,18 @@ public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 			while ( itEntity.hasNext() ) {
 				String currentId = itEntity.next();
 				DaogenCatalogEntity current = this.getDaogenConfig().getListMap( currentId );
-				String facadeName = DaogenCatalogConstants.facadeDefName( current );
-				String packageFacade = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF );
-				this.getWriter().println( "	/**" );
-				this.getWriter().println( "	 * Facade incapsulating persistance for entity : "+current.getName() );
-				this.getWriter().println( "	 *" );
-				this.getWriter().println( "	 * @return	the facade" );
-				this.getWriter().println( "	 * @throws "+this.getClassDaoException()+"	in case of problems" );
-				this.getWriter().println( "	 */" );
-				this.getWriter().println( "	"+packageFacade+"."+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+";" );
-				this.getWriter().println();
+				if ( FacadeGeneratorUtils.isFacadeGenerate( current ) ) {
+					String facadeName = DaogenCatalogConstants.facadeDefName( current );
+					String packageFacade = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF );
+					this.getWriter().println( "	/**" );
+					this.getWriter().println( "	 * Facade incapsulating persistance for entity : "+current.getName() );
+					this.getWriter().println( "	 *" );
+					this.getWriter().println( "	 * @return	the facade" );
+					this.getWriter().println( "	 * @throws "+this.getClassDaoException()+"	in case of problems" );
+					this.getWriter().println( "	 */" );
+					this.getWriter().println( "	"+packageFacade+"."+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+";" );
+					this.getWriter().println();	
+				}
 			}
 		}
 	}
