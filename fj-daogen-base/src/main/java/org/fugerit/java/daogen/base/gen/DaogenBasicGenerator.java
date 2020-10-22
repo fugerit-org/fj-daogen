@@ -8,6 +8,7 @@ import java.util.List;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.io.FileIO;
 import org.fugerit.java.core.javagen.SimpleJavaGenerator;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.collection.KeyObject;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
@@ -160,7 +161,13 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	}
 	
 	public String getSQLStructName() {
-		return DaogenCatalogConstants.structPrefix( this.getDaogenConfig() )+this.getCurrentEntity().getName();
+		String sqlStructName = this.getCurrentEntity().getStructSqlType();
+		if ( DaogenCatalogEntity.ATT_STRUCT_SQL_TYPE_USENAME.equalsIgnoreCase( sqlStructName ) ) {
+			sqlStructName = this.getCurrentEntity().getName();
+		} else if ( StringUtils.isEmpty( sqlStructName ) ) {
+			sqlStructName = DaogenCatalogConstants.structPrefix( this.getDaogenConfig() )+this.getCurrentEntity().getName();
+		}
+		return sqlStructName;
 	}
 	
 	public String getEntityBaseResult() {

@@ -1,4 +1,8 @@
-﻿0.4.1.9 (2020-07-20)
+﻿0.4.1.10 (2020-07-22)
+--------------------
++ Added option for changing struct sql type name in entuty (structSqlType)
+
+0.4.1.9 (2020-07-20)
 --------------------
 + Changed fj-core version to 0.7.3.10
 + Added support for generating complex user types

@@ -26,6 +26,9 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	public static final String ATT_QUERY_VIEW = "queryView";	// DEFAULT TO "SELECT * FROM ${catalog.schema.name}"
 	public static final String ATT_FACADE_MODE = "facadeMode";
 	
+	public static final String ATT_STRUCT_SQL_TYPE = "structSqlType=";
+	public static final String ATT_STRUCT_SQL_TYPE_USENAME = "(USE_NAME)";
+	
 	/**
 	 * 
 	 */
@@ -58,6 +61,8 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 	private String queryView;
 	
 	private String facadeMode;
+	
+	private String structSqlType;
 
 	public String getOrderBy() {
 		return orderBy;
@@ -151,6 +156,14 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		this.facadeMode = facadeMode;
 	}
 
+	public String getStructSqlType() {
+		return structSqlType;
+	}
+
+	public void setStructSqlType(String structSqlType) {
+		this.structSqlType = structSqlType;
+	}
+
 	public ListMapStringKey<DaogenCatalogRelation> getRelations() {
 		return relations;
 	}
@@ -168,6 +181,7 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		 list.add( StringUtils.concat( ":" , ATT_MAP_TO_TABLE, this.getMapToTable() ) );
 		 list.add( StringUtils.concat( ":" , ATT_QUERY_VIEW, this.getQueryView() ) );
 		 list.add( StringUtils.concat( ":" , ATT_FACADE_MODE, this.getFacadeMode() ) );
+		 list.add( StringUtils.concat( ":" , ATT_STRUCT_SQL_TYPE_USENAME, this.getStructSqlType() ) );
 		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}
