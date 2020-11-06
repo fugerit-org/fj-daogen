@@ -8,6 +8,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
+import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 public class FinderGenerator extends DaogenBasicGenerator {
 
@@ -16,6 +17,11 @@ public class FinderGenerator extends DaogenBasicGenerator {
 	@Override
 	public String getKey() {
 		return KEY;
+	}
+	
+	@Override
+	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+		return FacadeGeneratorUtils.isFacadeGenerate( entity );
 	}
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {

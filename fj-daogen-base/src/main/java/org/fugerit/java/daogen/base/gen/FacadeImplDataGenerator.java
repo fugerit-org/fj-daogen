@@ -21,6 +21,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		return KEY;
 	}
 
+	@Override
+	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+		return FacadeGeneratorUtils.isFacadeGenerate( entity );
+	}
+	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
 		// init
 		if ( this.isModeHelper() ) {

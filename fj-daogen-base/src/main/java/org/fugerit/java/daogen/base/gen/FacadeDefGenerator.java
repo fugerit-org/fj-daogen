@@ -24,6 +24,11 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 	public static final String METHOD_DELETE_BY_PK = "deleteById";
 	public static final String METHOD_UPDATE_BY_PK = "updateById";
 	
+	@Override
+	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+		return FacadeGeneratorUtils.isFacadeGenerate( entity );
+	}
+
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
 		// init
 		if ( this.isModeHelper() ) {

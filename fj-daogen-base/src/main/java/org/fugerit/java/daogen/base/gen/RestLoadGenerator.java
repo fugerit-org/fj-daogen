@@ -14,6 +14,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
+import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 public class RestLoadGenerator extends DaogenBasicGenerator {
 
@@ -25,6 +26,11 @@ public class RestLoadGenerator extends DaogenBasicGenerator {
 	}
 
 	private String helperClass = null;
+
+	@Override
+	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+		return FacadeGeneratorUtils.isFacadeGenerate( entity );
+	}
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 

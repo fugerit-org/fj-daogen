@@ -37,6 +37,10 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return this.isSkipWrite();
 	}
 
+	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+		return true;
+	}
+	
 	public DaogenBasicGenerator() {
 		this.decorators = new ArrayList<DaogenBasicDecorator>();
 	}

@@ -39,17 +39,19 @@ public class DaogenFacade {
 				for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
 					if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 						DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
-						Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
-						if ( decorators != null ) {
-							// iterationg over decorators
-							for ( FactoryType decoratorType : decorators ) {
-								DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
-								decorator.init( generator );
+						if ( generator.isGenerate( daogenConfig, entity ) ) {
+							Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
+							if ( decorators != null ) {
+								// iterationg over decorators
+								for ( FactoryType decoratorType : decorators ) {
+									DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
+									decorator.init( generator );
+								}
 							}
+							generator.init( daogenConfig, entity );	
+							// actual generations
+							generageFile( generator );	
 						}
-						generator.init( daogenConfig, entity );	
-						// actual generations
-						generageFile( generator );	
 					}
 				}
 			}
