@@ -4,4 +4,4 @@
 
 ## Index
 
-* [Configuration reference](config/config.md)
+* [Configuration reference](docs/config/config.md)
