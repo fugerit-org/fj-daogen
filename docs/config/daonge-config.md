@@ -26,54 +26,59 @@
 	</tr>
 	<tr>
 		<td>src-main-java</td>
-		<td></td>
-		<td></td>
+		<td>Relative path to ${base-src-folder} for java resources.</td>
+		<td>Default : ${base-src-folder}/src/main/java</td>
 	</tr>
 	<tr>
 		<td>src-test-java</td>
-		<td></td>
-		<td></td>
+		<td>Relative path to ${base-src-folder} for test java resources.</td>
+		<td>Default : ${base-src-folder}/src/test/java</td>
 	</tr>
 	<tr>
 		<td>src-main-resources</td>
-		<td></td>
-		<td></td>
+		<td>Relative path to ${base-src-folder} for resources.</td>
+		<td>Default : ${base-src-folder}/src/main/resources</td>
 	</tr>
 	<tr>
 		<td>src-test-resources</td>
-		<td></td>
-		<td></td>
+		<td>Relative path to ${base-src-folder} for test resources.</td>
+		<td>Default : ${base-src-folder}/src/test/resources</td>
 	</tr>
 	<tr>
 		<td>src-doc-openapi</td>
-		<td></td>
-		<td>default: src/main/doc/openapi_rest</td>
+		<td>Src folder for YAML openapi helper definitions.</td>
+		<td>default: ${base-src-folder}/src/main/doc/openapi_rest</td>
 	</tr>
 	<tr>
 		<td>src-helpers</td>
-		<td></td>
+		<td>Folder for helper classes (default is the same as ${src-main-java})</td>
 		<td>default : SRC-MAIN-JAVA</td>
 	</tr>
 	<tr>
 		<td>class-config</td>
-		<td></td>
+		<td>Basic class for generating code</td>
 		<td>default : cl://config/daogen_default_class_config.xml</td>
 	</tr>
 	<tr>
 		<td>type-mapper</td>
-		<td></td>
-		<td></td>
+		<td>The java2sql TypeMapper</td>
+		<td>Default : org.fugerit.java.daogen.base.config.DaogenTypeMapper</td>
 	</tr>
 	<tr>
 		<td>type-map-config</td>
-		<td></td>
-		<td></td>
+		<td>The mapping for java types</td>
+		<td>Default : cl://config/daogen_default_type_mapping.xml</td>
 	</tr>
 	<tr>
-		<td>generator-catalog=</td>
-		<td></td>
-		<td></td>
+		<td>generator-catalog</td>
+		<td>List o fenerators to use</td>
+		<td>Default : cl://config/default-generator-catalog.xml</td>
 	</tr>
+	<tr>
+		<td>decorator-catalog</td>
+		<td>List of decorators to use</td>
+		<td>Default : cl://config/default-decorator-catalog.xml</td>
+	</tr>		
 	<tr>
 		<td>default-column-time-insert</td>
 		<td></td>
@@ -153,10 +158,5 @@
 		<td>default-sequence</td>
 		<td></td>
 		<td></td>
-	</tr>
-	<tr>
-		<td>decorator-catalog</td>
-		<td></td>
-		<td></td>
-	</tr>							
+	</tr>						
 </table>
