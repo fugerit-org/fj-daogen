@@ -2,8 +2,12 @@
 
 ### File : Generator Catalog <a name="top"/>
 
+This is the reference for [generator-catalog](tag_daogen-config.md#generator-catalog) attribute in [daogen-config](tag_daogen-config.md).
+
 Here is the default genetaor catalog :
 [Default Generator Catalog](../../fj-daogen-base/src/main/resources/config/default-generator-catalog.xml)
+
+Generally speaking generators in the catalog will extends [DaogenBasicGenerator](../code/DaogenBasicGenerator.md)
 
 <table>
 	<tr>
@@ -83,6 +87,13 @@ Here is the default genetaor catalog :
 		<th>Group</th>
 		<td>entity_generators_base</td>
 	</tr>
+	<tr>
+		<th>Resources</th>
+		<td>
+			<a href="../../fj-daogen-base/src/main/java/org/fugerit/java/daogen/base/gen/ModelGenerator.java" target="source">src</a> -
+			<a href="https://www.fugerit.org/data/java/javadoc/fj-daogen-base/org/fugerit/java/daogen/base/gen/ModelGenerator.html" target="javadoc">javadoc</a>
+		</td>
+	</tr>	
 	<tr>
 		<th>Since</th>
 		<td>0.4.1.11</td>

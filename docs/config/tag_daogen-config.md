@@ -66,7 +66,7 @@ This is the reference for 'daogen-config' element configuration and its attribut
 	</tr>
 	<tr>
 		<td><a href="#generator-catalog">generator-catalog</a></td>
-		<td>List o fenerators to use</td>
+		<td>List of generators to use (see <a href="file_generator-catalog.html">Generator Catalog Guide</a>)</td>
 	</tr>
 	<tr>
 		<td><a href="#decorator-catalog">decorator-catalog</a></td>
