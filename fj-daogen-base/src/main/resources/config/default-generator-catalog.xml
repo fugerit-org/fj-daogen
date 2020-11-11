@@ -40,7 +40,7 @@
     <data id="FacadeDefHelperGenerator" 
     	type="org.fugerit.java.daogen.base.gen.helper.FacadeDefHelperGenerator"
     	info="package-facade-def"/>  
-    <data id="FacadeDefRelGenerator" 
+    <data id="FacadeDefRealGenerator" 
     	type="org.fugerit.java.daogen.base.gen.helper.FacadeDefRealGenerator"
     	info="package-facade-def"/>      	
     <data id="FacadeImplDataHelperGenerator" 
