@@ -1,5 +1,14 @@
 <generator-catalog>
 
+<!-- 
+	If daogen-config attribute 'src-helpers' is definied, generator catalogs used will be :
+	entity_generators_helper
+	factory_generators_helper
+	otherwise 
+	entity_generators
+	factory_generators	
+ -->
+
   <factory id="entity_generators_base">
     <data id="ModelGenerator" 
     	type="org.fugerit.java.daogen.base.gen.ModelGenerator"
