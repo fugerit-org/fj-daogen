@@ -4,14 +4,26 @@
 
 This is the reference for [generator-catalog](tag_daogen-config.md#generator-catalog) attribute in [daogen-config](tag_daogen-config.md).
 
-Here is the default genetaor catalog :
-[Default Generator Catalog](../../fj-daogen-base/src/main/resources/config/default-generator-catalog.xml)
+Generator catalog must define 2 generator catalogs : 
+* Entity Catalog, containing list of generators that will be applied for every entity  (entity_generators or entity_generators_helper)
+* Factory Catalog, containing list of generators taht will be applied only once for run (factory_generators or factory_generators_helper)
+
+If daogen-config attribute [src-helpers](tag_daogen-config.md#src-helpers) is definied, generator catalogs used will be :
+* entity_generators_helper
+* factory_generators_helper
+  
+otherwise 
+* entity_generators
+* factory_generators
 
 Generally speaking generators in the catalog will extends [DaogenBasicGenerator](../code/DaogenBasicGenerator.md)
 
+Here is the default genetaor catalog :
+[Default Generator Catalog](../../fj-daogen-base/src/main/resources/config/default-generator-catalog.xml)
+
 <table>
 	<tr>
-		<th colspan="2">Default Entity Generator Catalog</th>
+		<th colspan="2">Default entity_generators_base Catalog</th>
 	</tr>
 	<tr>
 		<th>ID</th>
@@ -44,6 +56,18 @@ Generally speaking generators in the catalog will extends [DaogenBasicGenerator]
 	<tr>
 		<td><a href="#DocOpenAPIRestGenerator">DocOpenAPIRestGenerator</a></td>
 		<td>Gemeratpr fpr sample ${Entity}.yaml to use as basic definition for rest services</td>
+	</tr>														
+</table>
+
+<br/><a href="#top">top</a><br/>
+
+<table>
+	<tr>
+		<th colspan="2">Default entity_generators_helper Catalog</th>
+	</tr>
+	<tr>
+		<th>ID</th>
+		<th>Description</th>
 	</tr>
 	<tr>
 		<td><a href="#FacadeDefHelperGenerator">FacadeDefHelperGenerator</a></td>
