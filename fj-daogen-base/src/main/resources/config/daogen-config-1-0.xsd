@@ -14,7 +14,7 @@
 <daogen-config
 	xmlns="http://daogen.fugerit.org"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://daogen.fugerit.org https://www.fugerit.org/data/java/daogen/xsd/daogen-config-1-0.xsd" > 	
+    xsi:schemaLocation="http://daogen.fugerit.org https://www.fugerit.org/data/java/doc/xsd/daogen-config-1-0.xsd" > 	
 </daogen-config>	
 	
 -->
