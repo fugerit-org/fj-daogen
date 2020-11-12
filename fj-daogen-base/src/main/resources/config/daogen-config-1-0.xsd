@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+
+	/*
+	 * @(#)daogen-config-1-0.xsd
+	 *
+	 * @project    : fj-daogen
+	 * @creation   : 2020-11-12
+	 * @version    : 1.0.0 (2020-11-12)
+	 *
+	 * XSD for fugerit daogen configuration
+	 */
+	
+<daogen-config
+	xmlns="http://daogen.fugerit.org"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://daogen.fugerit.org https://www.fugerit.org/data/java/daogen/xsd/daogen-config-1-0.xsd" > 	
+</daogen-config>	
+	
+-->
+<xsd:schema xmlns='http://www.w3.org/2000/10/XMLSchema'
+	targetNamespace='http://daogen.fugerit.org'
+	xmlns:daogen="http://daogen.fugerit.org"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+
+	<xsd:element name="daogen-config" type="daogen:daogenConfigType">
+		<xsd:annotation>
+			<xsd:documentation></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="daogenConfigType">
+		<xsd:sequence>
+			<xsd:element name="relation" maxOccurs="unbounded" minOccurs="0" type="daogen:relationType"/>
+			<xsd:element name="entity" maxOccurs="unbounded" minOccurs="0" type="daogen:entityType"/>
+		</xsd:sequence>	
+		<xsd:attribute type="xsd:string" name="base-src-folder"/>
+		<xsd:attribute type="xsd:string" name="database-type"/>
+		<xsd:attribute type="xsd:string" name="gen-version"/>
+		<xsd:attribute type="xsd:string" name="gen-author"/>
+		<xsd:attribute type="xsd:string" name="src-main-java"/>
+		<xsd:attribute type="xsd:string" name="src-test-java"/>
+		<xsd:attribute type="xsd:string" name="src-main-resources"/>
+		<xsd:attribute type="xsd:string" name="src-test-resources"/>
+		<xsd:attribute type="xsd:string" name="src-doc-openapi"/>
+		<xsd:attribute type="xsd:string" name="src-helpers"/>
+		<xsd:attribute type="xsd:string" name="class-config"/>
+		<xsd:attribute type="xsd:string" name="type-mapper"/>
+		<xsd:attribute type="xsd:string" name="type-map-config"/>
+		<xsd:attribute type="xsd:string" name="generator-catalog"/>
+		<xsd:attribute type="xsd:string" name="default-column-time-insert"/>
+		<xsd:attribute type="xsd:string" name="default-column-time-update"/>
+		<xsd:attribute type="xsd:string" name="struct-prefix"/>
+		<xsd:attribute type="xsd:string" name="package-model"/>
+		<xsd:attribute type="xsd:string" name="package-helper"/>
+		<xsd:attribute type="xsd:string" name="package-struct"/>
+		<xsd:attribute type="xsd:string" name="package-rse"/>
+		<xsd:attribute type="xsd:string" name="package-facade-def"/>
+		<xsd:attribute type="xsd:string" name="package-facade-data-impl"/>
+		<xsd:attribute type="xsd:string" name="package-rest-load"/>
+		<xsd:attribute type="xsd:string" name="factory-def"/>
+		<xsd:attribute type="xsd:string" name="factory-data-impl"/>
+		<xsd:attribute type="xsd:string" name="base-rest-service"/>
+		<xsd:attribute type="xsd:anyURI" name="openapi_host"/>
+		<xsd:attribute type="xsd:string" name="openapi_path"/>
+		<xsd:attribute type="xsd:string" name="default-sequence"/>
+		<xsd:attribute type="xsd:string" name="decorator-catalog"/>
+	</xsd:complexType>	
+
+       
+	<xsd:complexType name="relationType">
+		<xsd:attribute type="xsd:string" name="id" use="optional"/>
+		<xsd:attribute type="xsd:string" name="name" use="optional"/>
+		<xsd:attribute type="xsd:string" name="from" use="optional"/>
+		<xsd:attribute type="xsd:string" name="to" use="optional"/>
+		<xsd:attribute type="xsd:string" name="mode" use="optional"/>
+		<xsd:attribute type="xsd:string" name="key" use="optional"/>
+    </xsd:complexType>
+
+	<xsd:complexType name="entityType">
+		<xsd:sequence>
+			<xsd:element name="field" maxOccurs="unbounded" minOccurs="0" type="daogen:fieldType"/>
+		</xsd:sequence>
+		<xsd:attribute type="xsd:string" name="comments" use="optional" />
+		<xsd:attribute type="xsd:string" name="id" use="optional" />
+		<xsd:attribute type="xsd:string" name="name" use="optional" />
+		<xsd:attribute type="xsd:string" name="primaryKey" use="optional" />
+		<xsd:attribute type="xsd:string" name="schema" use="optional" />
+		<xsd:attribute type="xsd:string" name="sequenceName" use="optional" />
+		<xsd:attribute type="xsd:string" name="foreignKeys" use="optional" />
+		<xsd:attribute type="xsd:string" name="facadeMode" use="optional" />
+	</xsd:complexType>	
+
+	<xsd:complexType name="fieldType">
+		<xsd:attribute type="xsd:string" name="comments" use="optional" />
+		<xsd:attribute type="xsd:string" name="id" use="optional" />
+		<xsd:attribute type="xsd:string" name="javaType" use="optional" />
+		<xsd:attribute type="xsd:string" name="nullable" use="optional" />
+		<xsd:attribute type="xsd:short" name="size" use="optional" />
+		<xsd:attribute type="xsd:short" name="sqlType" use="optional" />
+		<xsd:attribute type="xsd:string" name="sqlTypeName" use="optional" />
+		<xsd:attribute type="xsd:byte" name="udt" use="optional" />
+		<xsd:attribute type="xsd:string" name="structType" use="optional" />
+	</xsd:complexType>	
+
+</xsd:schema>
