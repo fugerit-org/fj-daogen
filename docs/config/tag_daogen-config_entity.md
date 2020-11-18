@@ -14,7 +14,7 @@ This is the reference for 'entity' element configuration and its attributes.
 	</tr>
 	<tr>
 		<td><a href="#id">id</a></td>
-		<td>Id of the entity (usally [[${catalog}].${schema}].${name}</td>
+		<td>Id of the entity (usually [[${catalog}].${schema}].${name}</td>
 	</tr>
 	<tr>
 		<td><a href="#catalog">catalog</a></td>
@@ -30,7 +30,7 @@ This is the reference for 'entity' element configuration and its attributes.
 	</tr>
 	<tr>
 		<td><a href="#primaryKey">primaryKey</a></td>
-		<td>Field(s) included in the primary key</td>
+		<td>Field(s comma separated) included in the primary key</td>
 	</tr>	
 	<tr>
 		<td><a href="#comments">comments</a></td>
@@ -38,7 +38,7 @@ This is the reference for 'entity' element configuration and its attributes.
 	</tr>	
 	<tr>
 		<td><a href="#sequenceName">sequenceName</a></td>
-		<td>Sequence used for the entity</td>
+		<td>Sequence used for the entity (If present, overrides <a href="tag_daogen-config.html#default-sequence">Attribute default-sequence in daogen-config</a>)</td>
 	</tr>	
 	<tr>
 		<td><a href="#facadeMode">facadeMode</a></td>
