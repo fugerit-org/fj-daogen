@@ -3,11 +3,14 @@ package org.fugerit.java.daogen.base.gen;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.reflect.MethodHelper;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
+import org.fugerit.java.daogen.base.gen.util.PropertyUtils;
+import org.fugerit.java.daogen.base.gen.util.TypeUtils;
 
 public class StructGenerator extends DaogenBasicGenerator {
 
@@ -39,6 +42,10 @@ public class StructGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
+		
+		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
+		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
+		
 		this.getWriter().println( "	public "+this.getEntityStructName()+"( "+this.getEntityModelName()+" wrapped ) {" );
 		this.getWriter().println( "		super( wrapped );" );
 		this.getWriter().println( "	}" );
@@ -80,9 +87,89 @@ public class StructGenerator extends DaogenBasicGenerator {
 		this.getWriter().println();
 
 		boolean containsBlob = false;
+		boolean containsClob = false;
 		
-		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
-		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
+		// blob / clob handling
+		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
+			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+			if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
+				containsBlob = true;
+				PropertyUtils.newProperty( this.getWriter(), field.getId()+"_BLOB", TypeUtils.TYPE_BLOB, false, true );
+			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+				containsClob = true;
+				PropertyUtils.newProperty( this.getWriter(), field.getId()+"_CLOB", TypeUtils.TYPE_CLOB, false, true );
+			}
+		}
+		
+		if ( containsBlob || containsClob ) {
+			// inner property for blob handling
+			this.getWriter().println( "	private boolean areLobsSet = false;" );
+			this.getWriter().println();	
+			// check lobs method
+			this.getWriter().println( "	protected boolean checkLobs() {" );
+			this.getWriter().println( "		// lobs must be set, or lobs properties must be null for writeSQL() to work" );
+			this.getWriter().println( "		boolean check = this.areLobsSet;" );
+			this.getWriter().println( "		if ( !check ) {" );
+			boolean isFirst = true;
+			StringBuilder line = new StringBuilder();
+			line.append( "			check = " );
+			for ( DaogenCatalogField field : this.getCurrentEntity() )  {
+				String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+				if ( columnType.equalsIgnoreCase( blobHandlerType ) || 
+						columnType.equalsIgnoreCase( clobHandlerType ) ) {
+					String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
+					if ( isFirst ) {
+						isFirst = false;
+					} else {
+						line.append( " && " );
+					}
+					line.append( "(this."+MethodHelper.getGetterNameForProperty( propertyName )+"() == null)" );
+				}
+			}
+			line.append( ";" );
+			this.getWriter().println( line );
+			this.getWriter().println( "		}" );
+			this.getWriter().println( "		return check;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println();	
+			// setup lobs method
+			this.getWriter().println( "	public void setupLobs( java.sql.Connection conn ) throws SQLException {" );
+			for ( DaogenCatalogField field : this.getCurrentEntity() )  {
+				String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+				if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
+					String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
+					String propertyNameH = propertyName+"Blob";
+					this.getWriter().println( "		"+MethodHelper.getSetterNameForProperty( propertyNameH )+"( org.fugerit.java.core.db.daogen.LobHelper.createBlob( conn, "+MethodHelper.getGetterNameForProperty( propertyName )+"() ) );" );
+				} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+					String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
+					String propertyNameH = propertyName+"Clob";
+					this.getWriter().println( "		"+MethodHelper.getSetterNameForProperty( propertyNameH )+"( org.fugerit.java.core.db.daogen.LobHelper.createClob( conn, "+MethodHelper.getGetterNameForProperty( propertyName )+"() ) );" );
+				}
+			}
+			this.getWriter().println( "		this.areLobsSet = true;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println();	
+			// wrapper helpers
+			this.getWriter().println( "	public static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model, java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( "		"+this.getEntityStructName()+" res = wrap( model );" );
+			this.getWriter().println( "		if ( res != null ) {" );
+			this.getWriter().println( "			res.setupLobs( conn );" );
+			this.getWriter().println( "		}" );
+			this.getWriter().println( "		return res;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println();
+			this.getWriter().println( "	public static "+this.getEntityStructName()+"[] wrap( "+this.getEntityModelName()+"[] list, java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( "		"+this.getEntityStructName()+"[] res = null;" );
+			this.getWriter().println( "		if ( list != null ) {" );
+			this.getWriter().println( "			res = new "+this.getEntityStructName()+"[ list.length ];" );
+			this.getWriter().println( "			for ( int k=0; k<list.length; k++ ) {" );
+			this.getWriter().println( "				res[k] = wrap( list[k], conn );" );
+			this.getWriter().println( "			}" );
+			this.getWriter().println( "		}" );
+			this.getWriter().println( "		return res;" );
+			this.getWriter().println( "	}" );
+			this.getWriter().println();
+		}
 		
 		// readSQL()
 		this.getWriter().println( "	@Override" );
@@ -101,10 +188,8 @@ public class StructGenerator extends DaogenBasicGenerator {
 				extratMethod = "stream.readTimestamp()";
 			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
 				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() )";
-				containsBlob = true;
 			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
-				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.clobToCharHandler( (java.sql.Clob) stream.readObject() )";
-				containsBlob = true;				
+				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.clobToCharHandler( (java.sql.Clob) stream.readObject() )";			
 			} else if ( field.isUserType() ) {
 				extratMethod = " ( ("+ field.getStructType() +") stream.readObject() ) ";
 			} else {
@@ -113,13 +198,16 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		this.set"+javaSuffix+"( "+extratMethod+" );" );
 		}
 		this.getWriter().println( "	}" );
-		this.getWriter().println();		
-
+		this.getWriter().println();	
+		
 		// readSQL()
 		this.getWriter().println( "	@Override" );
 		this.getWriter().println( "	public void writeSQL(SQLOutput stream) throws SQLException {" );
-		if ( containsBlob ) {
-			this.getWriter().println( "		throwUnsupported( \"Method writeSQL() not implemented for \"+this.getSQLTypeName() );" );
+		if ( containsBlob || containsClob ) {
+			this.getWriter().println( "		if ( !this.checkLobs() ) {" );
+			this.getWriter().println( "			throwUnsupported( \"To use writeSQL() you must invoke setupLobs() for  \"+this.getSQLTypeName() );" );
+			this.getWriter().println( "		}" );
+			this.getWriter().println( "		this.areLobsSet = false;	// clob and blob will be used only once" );
 		}
 		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
 			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
@@ -134,9 +222,11 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) || columnType.equalsIgnoreCase( "java.util.Date" ) ) {
 				extratMethod = "stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( FIELD-TOKEN ) )";
 			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
-				extratMethod = "// blob must be written separately : FIELD-TOKEN";
+				extratMethod = "stream.writeBlob( FIELD-TOKEN )";
+				javaSuffix+= "Blob";
 			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
-				extratMethod = "// clob must be written separately : FIELD-TOKEN";	
+				extratMethod = "stream.writeClob( FIELD-TOKEN )";
+				javaSuffix+= "Clob";
 			} else if ( field.isUserType() ) {
 				extratMethod = "stream.writeObject( ("+ field.getStructType() +") FIELD-TOKEN )";
 			} else {

@@ -1,4 +1,9 @@
-﻿0.4.1.11 (2020-11-06)
+﻿0.4.2.0 (2020-11-21)
+--------------------
++ Changed fj-core version to 0.7.3.11
++ Added support for blob / clob in SQLData.writeSQL() (struct) 
+
+0.4.1.11 (2020-11-06)
 --------------------
 + Added capability for excluding facade generation.
 
