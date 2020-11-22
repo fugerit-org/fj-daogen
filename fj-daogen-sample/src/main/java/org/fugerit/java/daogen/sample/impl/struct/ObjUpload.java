@@ -40,6 +40,8 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 
 	public final static String SQL_TYPE_NAME = "OBJ_UPLOAD";
 
+	public final static ObjUpload MAPPER = new ObjUpload();
+
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
@@ -62,6 +64,51 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 		return res;
 	}
 
+	private transient java.sql.Blob contentBlob;
+
+	public void setContentBlob( java.sql.Blob value ) {
+		this.contentBlob = value;
+	}
+
+	public java.sql.Blob getContentBlob() {
+		return this.contentBlob;
+	}
+
+	private boolean areLobsSet = false;
+
+	protected boolean checkLobs() {
+		// lobs must be set, or lobs properties must be null for writeSQL() to work
+		boolean check = this.areLobsSet;
+		if ( !check ) {
+			check = (this.getContent() == null);
+		}
+		return check;
+	}
+
+	public void setupLobs( java.sql.Connection conn ) throws SQLException {
+		setContentBlob( org.fugerit.java.core.db.daogen.LobHelper.createBlob( conn, getContent() ) );
+		this.areLobsSet = true;
+	}
+
+	public static ObjUpload wrap( ModelUpload model, java.sql.Connection conn ) throws SQLException {
+		ObjUpload res = wrap( model );
+		if ( res != null ) {
+			res.setupLobs( conn );
+		}
+		return res;
+	}
+
+	public static ObjUpload[] wrap( ModelUpload[] list, java.sql.Connection conn ) throws SQLException {
+		ObjUpload[] res = null;
+		if ( list != null ) {
+			res = new ObjUpload[ list.length ];
+			for ( int k=0; k<list.length; k++ ) {
+				res[k] = wrap( list[k], conn );
+			}
+		}
+		return res;
+	}
+
 	@Override
 	public void readSQL(SQLInput stream, String typeName) throws SQLException {
 		this.setId( stream.readBigDecimal() );
@@ -72,11 +119,14 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 
 	@Override
 	public void writeSQL(SQLOutput stream) throws SQLException {
-		throwUnsupported( "Method writeSQL() not implemented for "+this.getSQLTypeName() );
+		if ( !this.checkLobs() ) {
+			throwUnsupported( "To use writeSQL() you must invoke setupLobs() for  "+this.getSQLTypeName() );
+		}
+		this.areLobsSet = false;	// clob and blob will be used only once
 		stream.writeBigDecimal( this.getId() );
 		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
 		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
-		// blob must be writtern separately : this.getContent();
+		stream.writeBlob( this.getContentBlob() );
 	}
 
 }

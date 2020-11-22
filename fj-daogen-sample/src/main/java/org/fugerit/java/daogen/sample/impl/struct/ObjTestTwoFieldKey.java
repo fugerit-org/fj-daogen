@@ -40,6 +40,8 @@ public class ObjTestTwoFieldKey extends WrapperTestTwoFieldKey implements SQLDat
 
 	public final static String SQL_TYPE_NAME = "OBJ_TEST_TWO_FIELD_KEY";
 
+	public final static ObjTestTwoFieldKey MAPPER = new ObjTestTwoFieldKey();
+
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
