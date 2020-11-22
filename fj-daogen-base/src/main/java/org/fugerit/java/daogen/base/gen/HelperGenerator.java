@@ -50,13 +50,13 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				}
 				this.getWriter().println( "	private "+baseType+" "+propertyName+";" );
 				this.getWriter().println();
-				// metodo set
+				// setter metthod
 				this.getWriter().println( "	@Override" );
 				this.getWriter().println( "	public void set"+className+"( "+baseType+" value ) {" );
 				this.getWriter().println( "		this."+propertyName+" = value;" );
 				this.getWriter().println( "	}" );
 				this.getWriter().println();
-				// metodo get
+				// getter method
 				this.getWriter().println( "	@Override" );
 				this.getWriter().println( "	public "+baseType+" get"+className+"() {" );
 				this.getWriter().println( "		return this."+propertyName+";" );
@@ -83,13 +83,13 @@ public class HelperGenerator extends DaogenBasicGenerator {
 			String realJavaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 			this.getWriter().println( "	private "+realJavaType+" "+javaProperty+";" );
 			this.getWriter().println();
-			// metodo set
+			// setter method
 			this.getWriter().println( "	@Override" );
 			this.getWriter().println( "	public void set"+javaSuffix+"( "+realJavaType+" value ) {" );
 			this.getWriter().println( "		this."+javaProperty+" = value;" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println();
-			// metodo get
+			// getter method
 			this.getWriter().println( "	@Override" );
 			this.getWriter().println( "	public "+realJavaType+" get"+javaSuffix+"() {" );
 			this.getWriter().println( "		return this."+javaProperty+";" );
