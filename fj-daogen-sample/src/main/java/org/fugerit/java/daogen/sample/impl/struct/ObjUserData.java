@@ -40,6 +40,8 @@ public class ObjUserData extends WrapperUserData implements SQLData, StructMappe
 
 	public final static String SQL_TYPE_NAME = "OBJ_USER_DATA";
 
+	public final static ObjUserData MAPPER = new ObjUserData();
+
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();

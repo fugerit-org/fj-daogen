@@ -1,4 +1,8 @@
-﻿0.4.2.0 (2020-11-21)
+﻿0.4.2.1 (2020-11-22)
+--------------------
++ Added default type mapper in struct 
+
+0.4.2.0 (2020-11-21)
 --------------------
 + Changed fj-core version to 0.7.3.11
 + Added support for blob / clob in SQLData.writeSQL() (struct) 

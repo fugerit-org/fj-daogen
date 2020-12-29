@@ -40,6 +40,8 @@ public class ObjLogData extends WrapperLogData implements SQLData, StructMapper 
 
 	public final static String SQL_TYPE_NAME = "OBJ_LOG_DATA";
 
+	public final static ObjLogData MAPPER = new ObjLogData();
+
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
 		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
