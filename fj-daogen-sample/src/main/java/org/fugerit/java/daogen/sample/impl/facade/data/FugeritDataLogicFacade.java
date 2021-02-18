@@ -14,6 +14,11 @@ package org.fugerit.java.daogen.sample.impl.facade.data;
  */
 public class FugeritDataLogicFacade extends FugeritDataLogicFacadeHelper {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3428899643186915522L;
+
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
