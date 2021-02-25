@@ -1,4 +1,9 @@
-﻿0.4.2.1 (2020-11-22)
+﻿0.4.2.2 (2021-02-25)
+--------------------
++ Changed fj-core version to 0.7.5.3
++ Modified real class generators to avoid custom part 
+
+0.4.2.1 (2020-11-22)
 --------------------
 + Added default type mapper in struct 
 

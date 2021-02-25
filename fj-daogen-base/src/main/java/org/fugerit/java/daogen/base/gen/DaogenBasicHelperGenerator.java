@@ -3,6 +3,8 @@ package org.fugerit.java.daogen.base.gen;
 import java.io.IOException;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
+import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
 
 public abstract class DaogenBasicHelperGenerator extends DaogenBasicGenerator {
@@ -13,6 +15,14 @@ public abstract class DaogenBasicHelperGenerator extends DaogenBasicGenerator {
 
 	public DaogenBasicHelperGenerator() {
 		this.mode = MODE_FULL;
+	}
+	
+	@Override
+	public void init( String sourceFolder, String fullObjectBName, String javaStyle, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
+		super.init(sourceFolder, fullObjectBName, javaStyle, daogenConfig, entity);
+		if ( this.getMode() == MODE_REAL ) {
+			this.setNoCustomComment( true );
+		}
 	}
 	
 	private int mode;
