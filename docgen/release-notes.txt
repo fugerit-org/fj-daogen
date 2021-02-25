@@ -2,6 +2,7 @@
 --------------------
 + Changed fj-core version to 0.7.5.3
 + Modified real class generators to avoid custom part 
++ fj-daogen-maven-plugin excluded
 
 0.4.2.1 (2020-11-22)
 --------------------
