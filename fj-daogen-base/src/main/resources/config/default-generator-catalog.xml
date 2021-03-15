@@ -64,6 +64,12 @@
     <data id="RestLoadRealGenerator" 
     	type="org.fugerit.java.daogen.base.gen.helper.RestLoadRealGenerator"
     	info="package-rest-load"/>     	
+     <data id="SpringRestLoadHelperGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.SpringBootLoadHelperGenerator"
+    	info="package-spring-rest-load"/>
+     <data id="SpringRestLoadRealGenerator" 
+    	type="org.fugerit.java.daogen.base.gen.helper.SpringBootLoadRealGenerator"
+    	info="package-spring-rest-load"/>    
   </factory>
 
   <factory id="factory_generators">
