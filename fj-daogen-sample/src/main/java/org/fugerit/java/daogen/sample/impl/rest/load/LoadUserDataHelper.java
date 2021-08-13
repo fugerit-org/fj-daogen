@@ -63,8 +63,6 @@ public class LoadUserDataHelper extends org.fugerit.java.daogen.sample.helper.Se
 		EntityUserDataFacade facade = factory.getEntityUserDataFacade();
 		ModelUserData model = facade.loadById( context , id );
 		SimpleServiceResult<ModelUserData>  result = SimpleServiceResult.newDefaultResult( model );
-		if ( result.getContent() != null ) {
-		}
 		return result;
 	}
 

@@ -1,4 +1,8 @@
-﻿0.4.2.3 (2021-03-15)
+﻿0.4.2.4 (2021-08-13)
+--------------------
++ Removed dead code in RestLoadHelperGenerator
+
+0.4.2.3 (2021-03-15)
 --------------------
 + Added initial support for spring boot rest service
 

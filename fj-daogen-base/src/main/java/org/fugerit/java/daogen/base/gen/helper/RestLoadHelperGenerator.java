@@ -99,26 +99,28 @@ public class RestLoadHelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( "		"+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
 			this.getWriter().println( "		"+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
 			this.getWriter().println( "		"+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
-			this.getWriter().println( "		if ( result.getContent() != null ) {" );
-			for ( DaogenCatalogRelation rel : this.getCurrentEntity().getRelations() ) {
-				DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( rel.getTo() );
-				GeneratorKeyHelper relKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , entityTo, entityTo.getPrimaryKey() ).setForLoadInterface();
-				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( rel.getMode() ) && relKeyHelper.getKeyFields().size() == 1 ) {
-					String javaName = GeneratorNameHelper.toClassName( rel.getKey() );
-					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+".loadBy"+javaName+"( context, result.getContent().get"+GeneratorNameHelper.toClassName( this.getCurrentEntity().getPrimaryKey() )+"() ).getContent()";
-					this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
-				} else {
-					GeneratorKeyHelper relKeyHelper1 = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), rel.getKey() ).setForLoadInterface();
-					List<String> keyList = new ArrayList<String>();
-					for ( String currentFieldKey : relKeyHelper1.getKeyFields() ) {
-						keyList.add( "result.getContent().get"+GeneratorNameHelper.toClassName( currentFieldKey )+"()" );
+			if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
+				this.getWriter().println( "		if ( result.getContent() != null ) {" );
+				for ( DaogenCatalogRelation rel : this.getCurrentEntity().getRelations() ) {
+					DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( rel.getTo() );
+					GeneratorKeyHelper relKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , entityTo, entityTo.getPrimaryKey() ).setForLoadInterface();
+					if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( rel.getMode() ) && relKeyHelper.getKeyFields().size() == 1 ) {
+						String javaName = GeneratorNameHelper.toClassName( rel.getKey() );
+						String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+".loadBy"+javaName+"( context, result.getContent().get"+GeneratorNameHelper.toClassName( this.getCurrentEntity().getPrimaryKey() )+"() ).getContent()";
+						this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
+					} else {
+						GeneratorKeyHelper relKeyHelper1 = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), rel.getKey() ).setForLoadInterface();
+						List<String> keyList = new ArrayList<String>();
+						for ( String currentFieldKey : relKeyHelper1.getKeyFields() ) {
+							keyList.add( "result.getContent().get"+GeneratorNameHelper.toClassName( currentFieldKey )+"()" );
+						}
+						String keyFields = ConcatHelper.concat( "," , keyList.toArray( new String[0] ) );
+						String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+keyFields+" ).getContent()";
+						this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
 					}
-					String keyFields = ConcatHelper.concat( "," , keyList.toArray( new String[0] ) );
-					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+keyFields+" ).getContent()";
-					this.getWriter().println( "			result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
 				}
+				this.getWriter().println( "		}" );	
 			}
-			this.getWriter().println( "		}" );
 			this.getWriter().println( "		return result;" );
 			this.getWriter().println( "	}" );
 			this.getWriter().println( );
