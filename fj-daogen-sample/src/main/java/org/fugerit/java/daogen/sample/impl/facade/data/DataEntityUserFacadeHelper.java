@@ -128,7 +128,7 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 		BasicDaoResult<ModelUser> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelUser> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_USERNAME, model.getUsername() );
 		query.addSetParam( COL_PASSWORD, model.getPassword() );
