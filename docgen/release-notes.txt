@@ -1,4 +1,8 @@
-﻿0.4.2.5 (2021-09-16)
+﻿next release
+--------------------
++ Changed fj-core version to 0.7.6.6
+
+0.4.2.5 (2021-09-16)
 --------------------
 + Fix for auto update field
 
