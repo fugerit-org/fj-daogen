@@ -254,9 +254,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 					this.getWriter().println( "	public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 					this.getWriter().println( "		"+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-					if ( colData != null ) {
+					if ( colDataUpdate != null ) {
 						this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
+						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
 					}
 					this.getWriter().println( "		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 					for ( DaogenCatalogField field : this.getCurrentEntity() ) {

@@ -1,4 +1,8 @@
-﻿0.4.2.4 (2021-08-13)
+﻿0.4.2.5 (2021-09-16)
+--------------------
++ Fix for auto update field
+
+0.4.2.4 (2021-08-13)
 --------------------
 + Removed dead code in RestLoadHelperGenerator
 
