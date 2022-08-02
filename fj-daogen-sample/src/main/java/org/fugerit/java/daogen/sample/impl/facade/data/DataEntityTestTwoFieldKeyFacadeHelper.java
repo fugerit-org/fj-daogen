@@ -92,8 +92,12 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 		ModelTestTwoFieldKey result = null;
 		BasicDAOHelper<ModelTestTwoFieldKey> daoHelper = new BasicDAOHelper<>( context );
 		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
-		query.andEqualParam( COL_ID_ONE, idOne );
-		query.andEqualParam( COL_ID_TWO, idTwo );
+		if ( idOne == null  || idTwo == null  ) { 
+			 throw new DAOException( "Null parameter in key java.math.BigDecimal idOne, java.math.BigDecimal idTwo" );
+		} else { 
+			query.andEqualParam( COL_ID_ONE, idOne );
+			query.andEqualParam( COL_ID_TWO, idTwo );
+		}
 		result = daoHelper.loadOneHelper( query, this.getRse() );
 		return result;
 	}

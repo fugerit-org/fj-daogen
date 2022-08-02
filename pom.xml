@@ -5,7 +5,7 @@
 	<groupId>org.fugerit.java</groupId>
 	<artifactId>fj-daogen</artifactId>
 
-	<version>0.4.2.5</version>
+	<version>0.4.2.6</version>
 	<packaging>pom</packaging>
 
 	<name>fj-daogen</name>
