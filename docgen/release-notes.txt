@@ -1,4 +1,9 @@
-﻿0.4.2.6 (2022-09-16)
+﻿0.4.2.7 (2022-08-08)
+--------------------
++ Fix to custom code comment handling
++ Changed fj-core version to 0.7.6.8
+
+0.4.2.6 (2022-08-02)
 --------------------
 + Fix handling null id in loadById()
 + Changed fj-core version to 0.7.6.6
