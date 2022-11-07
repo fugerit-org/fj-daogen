@@ -1,4 +1,9 @@
-﻿0.4.2.7 (2022-08-08)
+﻿0.4.3 (2022-11-07)
+------------------
++ Changed version format to MAJOR.MINOR.PATH
++ Changed fj-core version to 0.7.9
+
+0.4.2.7 (2022-08-08)
 --------------------
 + Fix to custom code comment handling
 + Changed fj-core version to 0.7.6.8
