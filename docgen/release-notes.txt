@@ -1,4 +1,10 @@
-﻿0.4.3 (2022-11-07)
+﻿0.4.4 (2022-11-23)
+------------------
++ Changed fj-core version to 0.8.0
++ Parent pom set to fj-bom 0.2.2
++ Dependancy versions revised
+
+0.4.3 (2022-11-07)
 ------------------
 + Changed version format to MAJOR.MINOR.PATH
 + Changed fj-core version to 0.7.9
