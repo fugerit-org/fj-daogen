@@ -4,10 +4,9 @@ Framework for generating model and persistence A.P.I.
 Provides tools for dumping configuration from relational database.
 A [quickstart](https://github.com/fugerit-org/fj-daogen-quickstart) is available too.
 
-**Note : Starting from version 0.4.0.0, minimum required java version changed to 1.8**
+**Note : Starting from version 0.4+, minimum required java version changed to 1.8**
 
-Useful resources : 
-* [Mars - Fugerit DAOGEN A.P.I.](https://www.fugerit.org/perm/mars/) - Home page to the project
+Useful resources : [github pages documentation](https://marsdocs.fugerit.org/) | [project home page](https://www.fugerit.org/perm/mars) | docgen [home](https://www.fugerit.org/data/java/doc/mars/index.html) | [release notes](https://www.fugerit.org/data/java/doc/mars/release-notes.html)
 
 *About javadoc*  
 Javadoc are far from being complete, but you can find latest version at [https://www.fugerit.org](https://www.fugerit.org/data/java/javadoc/)  
