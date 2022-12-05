@@ -101,7 +101,11 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 		ModelAddress result = null;
 		BasicDAOHelper<ModelAddress> daoHelper = new BasicDAOHelper<>( context );
 		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
-		query.andEqualParam( COL_ID, id );
+		if ( id == null  ) { 
+			 throw new DAOException( "Null parameter in key java.math.BigDecimal id" );
+		} else { 
+			query.andEqualParam( COL_ID, id );
+		}
 		result = daoHelper.loadOneHelper( query, this.getRse() );
 		return result;
 	}
@@ -122,7 +126,7 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 		BasicDaoResult<ModelAddress> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelAddress> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_ID_USER, model.getIdUser() );
 		query.addSetParam( COL_DATE_INSERT, model.getDateInsert() );

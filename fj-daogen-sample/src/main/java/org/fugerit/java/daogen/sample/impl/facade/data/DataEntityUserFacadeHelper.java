@@ -107,7 +107,11 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 		ModelUser result = null;
 		BasicDAOHelper<ModelUser> daoHelper = new BasicDAOHelper<>( context );
 		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );
-		query.andEqualParam( COL_ID, id );
+		if ( id == null  ) { 
+			 throw new DAOException( "Null parameter in key java.math.BigDecimal id" );
+		} else { 
+			query.andEqualParam( COL_ID, id );
+		}
 		result = daoHelper.loadOneHelper( query, this.getRse() );
 		return result;
 	}
@@ -128,7 +132,7 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 		BasicDaoResult<ModelUser> result = new BasicDaoResult<>();
 		BasicDAOHelper<ModelUser> daoHelper = new BasicDAOHelper<>( context );
 		//  default-column-time-update : true - i will set update time
-		model.setDateInsert( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
+		model.setDateUpdate( new java.sql.Timestamp( System.currentTimeMillis() ) ); 
 		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );
 		query.addSetParam( COL_USERNAME, model.getUsername() );
 		query.addSetParam( COL_PASSWORD, model.getPassword() );

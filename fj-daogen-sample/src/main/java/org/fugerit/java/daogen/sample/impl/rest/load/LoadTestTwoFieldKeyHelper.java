@@ -63,8 +63,6 @@ public class LoadTestTwoFieldKeyHelper extends org.fugerit.java.daogen.sample.he
 		EntityTestTwoFieldKeyFacade facade = factory.getEntityTestTwoFieldKeyFacade();
 		ModelTestTwoFieldKey model = facade.loadById( context , idOne, idTwo );
 		SimpleServiceResult<ModelTestTwoFieldKey>  result = SimpleServiceResult.newDefaultResult( model );
-		if ( result.getContent() != null ) {
-		}
 		return result;
 	}
 

@@ -225,9 +225,25 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println( "		"+this.getEntityModelName()+" result = null;" );
 				this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 				this.getWriter().println( "		SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
+				// check key start
+				StringBuilder checkKey = new StringBuilder();
+				int keyCount = 0;
 				for ( String currentField : primaryKeyHelper.getKeyFields() ) {
-					this.getWriter().println( "		query.andEqualParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
+					if ( keyCount != 0 ) {
+						checkKey.append( " || " );	
+					}
+					checkKey.append( GeneratorNameHelper.toPropertyName( currentField ) );
+					checkKey.append( " == null " );
+					keyCount++;
 				}
+				// check key end
+				this.getWriter().println( "		if ( "+checkKey+" ) { " );
+				this.getWriter().println( "			 throw new DAOException( \"Null parameter in key "+primaryKeyHelper.getKeyParams()+"\" );" );
+				this.getWriter().println( "		} else { " );
+				for ( String currentField : primaryKeyHelper.getKeyFields() ) {
+					this.getWriter().println( "			query.andEqualParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
+				}
+				this.getWriter().println( "		}" );
 				this.getWriter().println( "		result = daoHelper.loadOneHelper( query, this.getRse() );" );
 				this.getWriter().println( "		return result;" );
 				this.getWriter().println( "	}" );
@@ -254,9 +270,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 					this.getWriter().println( "	public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 					this.getWriter().println( "		"+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( "		"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-					if ( colData != null ) {
+					if ( colDataUpdate != null ) {
 						this.getWriter().println( "		//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
+						this.getWriter().println( "		model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
 					}
 					this.getWriter().println( "		UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 					for ( DaogenCatalogField field : this.getCurrentEntity() ) {

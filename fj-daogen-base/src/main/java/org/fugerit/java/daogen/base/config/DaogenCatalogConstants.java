@@ -37,6 +37,7 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_PACKAGE_FACADE_DATA_IMPL = 	"package-facade-data-impl";
 	public static final String GEN_PROP_PACKAGE_RSE = 	"package-rse";
 	public static final String GEN_PROP_PACKAGE_STRUCT = 	"package-struct";
+	public static final String GEN_PROP_PACKAGE_SPRING_REST_LOAD = 	"package-spring-rest-load";
 	public static final String GEN_PROP_PACKAGE_REST_LOAD = 	"package-rest-load";
 	public static final String GEN_PROP_BASE_REST_SERVICE = 	"base-rest-service";
 	public static final String GEN_PROP_STRUCT_PREFIX = 	"struct-prefix";

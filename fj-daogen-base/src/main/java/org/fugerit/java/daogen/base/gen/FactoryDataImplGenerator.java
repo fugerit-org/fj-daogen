@@ -58,6 +58,7 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 	@Override
 	public void generateDaogenBody() throws Exception {
 		if ( this.isModeReal() ) {
+			this.addSerialVerUID();
 			this.generateRealClass();
 		} else {
 			this.addSerialVerUID();

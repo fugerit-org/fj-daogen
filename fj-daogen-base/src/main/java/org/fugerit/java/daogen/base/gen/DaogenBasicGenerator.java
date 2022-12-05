@@ -1,7 +1,11 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +21,44 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
 	protected static String REAL_CLASS_COMMENT = "\t// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
+
+	@Override
+	protected void customPartWorker( String startTag, String endTag, String indent ) throws FileNotFoundException, IOException {
+		if ( !this.isNoCustomComment() ) {
+			customPartWorkerDaogen( this.getJavaFile(), this.getWriter(), startTag, endTag, indent );
+		}
+	}
+	
+	public static void customPartWorkerDaogen( File file, PrintWriter writer, String startTag, String endTag, String indent ) throws FileNotFoundException, IOException {
+		customPartWorkerDaogen(file, writer, startTag, endTag, indent, "" );
+	}
+	
+	public static void customPartWorkerDaogen( File file, PrintWriter writer, String startTag, String endTag, String indent, String addIfEmpty ) throws FileNotFoundException, IOException {
+		writer.println( indent+startTag );
+		boolean customCode = false;
+		boolean isEmpty = true;
+		if ( file.exists() ) {
+			try ( BufferedReader reader = new BufferedReader( new FileReader( file ) ) ) {
+				String line = reader.readLine();
+				while ( line != null ) {
+					if ( line.contains( startTag ) && !line.trim().startsWith( "*" ) ) {
+						customCode = true;
+					} else if ( line.contains( endTag ) && !line.trim().startsWith( "*" ) ) {
+						customCode = false;
+					} else if ( customCode ) {
+						writer.println( line );
+						isEmpty = false;
+					}
+					line = reader.readLine();
+				}
+			}
+		}
+		if ( isEmpty ) {
+			writer.print( addIfEmpty );
+		}
+		writer.println( indent+endTag );
+		writer.println();
+	}
 
 	@Override
 	public void write() throws IOException {

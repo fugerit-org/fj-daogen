@@ -2,10 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.fugerit.java</groupId>
+	<parent>
+		<groupId>org.fugerit.java</groupId>
+		<artifactId>fj-bom</artifactId>
+		<version>0.2.2</version>
+		<relativePath></relativePath>
+	</parent>
+
 	<artifactId>fj-daogen</artifactId>
 
-	<version>0.4.2.1</version>
+	<version>0.4.4</version>
 	<packaging>pom</packaging>
 
 	<name>fj-daogen</name>
@@ -19,23 +25,7 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>
 	    <maven.test.skip>true</maven.test.skip>
-		<fj-version>0.7.3.11</fj-version>
-	    <!-- maven plugin versions -->
-	    <mvn-source-version>3.2.1</mvn-source-version>
-	    <mvn-javadoc-version>3.2.0</mvn-javadoc-version>
-	    <mvn-jar-version>3.2.0</mvn-jar-version>
-	    <mvn-shade-version>3.2.2</mvn-shade-version>  
-	    <!-- logging dependancies -->    
-	    <slf4j-version>1.7.30</slf4j-version>	
-	    <!-- release dependancies -->
-	    <nexus-version>1.6.8</nexus-version>
-	    <mvn-gpg-version>1.6</mvn-gpg-version>	
-	    <!-- testing dependancies -->
-	    <poi-version>4.1.2</poi-version>
-	    <dbcp-version>1.4</dbcp-version>
-	    <log4j-slf4j-impl-version>2.13.1</log4j-slf4j-impl-version>	    
-	    <junit-version>4.13.1</junit-version>
-	    <hsqldb-version>2.5.0</hsqldb-version>	 	    
+		<fj-version>0.8.0</fj-version>  		 	    
 	</properties>
 
 	<licenses>
@@ -81,7 +71,9 @@
 
 	<modules>
 		<module>fj-daogen-base</module>
+		<!-- 
 		<module>fj-daogen-maven-plugin</module>
+		 -->
 		<module>fj-daogen-sample</module>
 		<module>fj-daogen-tool</module>
 	</modules>
@@ -158,32 +150,27 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-version}</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j-version}</version>
 			<scope>test</scope>
 		</dependency>	
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-slf4j-impl</artifactId>
-		    <version>${log4j-slf4j-impl-version}</version>
 		    <scope>test</scope>
 		</dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>${hsqldb-version}</version>
             <scope>test</scope>
         </dependency>			
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
 			<scope>test</scope>
 		</dependency>
 
