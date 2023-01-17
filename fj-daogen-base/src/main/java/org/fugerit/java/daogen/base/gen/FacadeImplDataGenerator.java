@@ -120,6 +120,12 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( "		super( TABLE_NAME, "+this.getEntityRSEName()+".DEFAULT, "+queryViewInit+" );");
 			this.getWriter().println( "	}");
 			this.getWriter().println();
+			
+			this.getWriter().println( "	public "+superType+"( String tableName, String queryView ) {" );
+			this.getWriter().println( "		super( tableName, "+this.getEntityRSEName()+".DEFAULT, queryView );");
+			this.getWriter().println( "	}");
+			this.getWriter().println();
+			
 			String sequenceName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DEFAULT_SEQUENCE );
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getSequenceName() ) )  {
 				sequenceName = this.getCurrentEntity().getSequenceName();
