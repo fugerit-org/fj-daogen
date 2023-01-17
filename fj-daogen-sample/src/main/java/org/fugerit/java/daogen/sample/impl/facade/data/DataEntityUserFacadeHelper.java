@@ -39,6 +39,10 @@ public class DataEntityUserFacadeHelper extends BasicDataFacade<ModelUser> imple
 		super( TABLE_NAME, UserRSE.DEFAULT, null );
 	}
 
+	public DataEntityUserFacadeHelper( String tableName, String queryView ) {
+		super( tableName, UserRSE.DEFAULT, queryView );
+	}
+
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override

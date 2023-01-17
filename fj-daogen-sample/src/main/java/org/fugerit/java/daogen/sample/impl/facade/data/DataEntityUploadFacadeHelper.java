@@ -39,6 +39,10 @@ public class DataEntityUploadFacadeHelper extends BasicDataFacade<ModelUpload> i
 		super( TABLE_NAME, UploadRSE.DEFAULT, null );
 	}
 
+	public DataEntityUploadFacadeHelper( String tableName, String queryView ) {
+		super( tableName, UploadRSE.DEFAULT, queryView );
+	}
+
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override

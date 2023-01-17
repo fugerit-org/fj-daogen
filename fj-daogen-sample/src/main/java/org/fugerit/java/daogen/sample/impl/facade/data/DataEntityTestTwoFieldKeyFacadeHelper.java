@@ -39,6 +39,10 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 		super( TABLE_NAME, TestTwoFieldKeyRSE.DEFAULT, null );
 	}
 
+	public DataEntityTestTwoFieldKeyFacadeHelper( String tableName, String queryView ) {
+		super( tableName, TestTwoFieldKeyRSE.DEFAULT, queryView );
+	}
+
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override

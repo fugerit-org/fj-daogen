@@ -39,6 +39,10 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 		super( TABLE_NAME, AddressRSE.DEFAULT, null );
 	}
 
+	public DataEntityAddressFacadeHelper( String tableName, String queryView ) {
+		super( tableName, AddressRSE.DEFAULT, queryView );
+	}
+
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override

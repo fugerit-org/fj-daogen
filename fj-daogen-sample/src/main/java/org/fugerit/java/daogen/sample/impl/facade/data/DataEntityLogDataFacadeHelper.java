@@ -36,6 +36,10 @@ public class DataEntityLogDataFacadeHelper extends BasicDataFacade<ModelLogData>
 		super( TABLE_NAME, LogDataRSE.DEFAULT, null );
 	}
 
+	public DataEntityLogDataFacadeHelper( String tableName, String queryView ) {
+		super( tableName, LogDataRSE.DEFAULT, queryView );
+	}
+
  	public final static String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override
