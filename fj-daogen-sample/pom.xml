@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.fugerit.java</groupId>
 		<artifactId>fj-daogen</artifactId>
-		<version>0.4.5</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<name>fj-daogen-sample</name>
