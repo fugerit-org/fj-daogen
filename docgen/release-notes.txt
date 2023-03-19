@@ -1,4 +1,10 @@
-﻿0.4.4 (2023-01-17)
+﻿1.0.0 (2023-03-19)
+------------------
++ [Dropping 0. version](https://github.com/fugerit-org/fj-lib/issues/5)
++ Parent pom set to fj-bom 0.2.3
++ Changed fj-core version to 8.0.1
+
+0.4.4 (2023-01-17)
 ------------------
 + Changed fj-core version to 0.8.6
 + Parent pom set to fj-bom 0.2.2
