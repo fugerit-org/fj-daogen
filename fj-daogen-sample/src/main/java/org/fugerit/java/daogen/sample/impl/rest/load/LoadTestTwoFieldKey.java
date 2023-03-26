@@ -1,6 +1,5 @@
 package org.fugerit.java.daogen.sample.impl.rest.load;
 
-import javax.ejb.Stateless;
 import javax.ws.rs.Path;
 
 // custom import start ( code above here will be overwritten )
@@ -15,7 +14,6 @@ import javax.ws.rs.Path;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-@Stateless
 @Path("/testtwofieldkey/load")
 public class LoadTestTwoFieldKey extends LoadTestTwoFieldKeyHelper {
 

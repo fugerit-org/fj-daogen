@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.fugerit.java</groupId>
 		<artifactId>fj-daogen</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<name>fj-daogen-base</name>
@@ -31,14 +31,7 @@
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-core</artifactId>
 		</dependency>	
-	
-		<!-- java core dependancies -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
+		
 		<dependency>
 		    <groupId>commons-dbcp</groupId>
 		    <artifactId>commons-dbcp</artifactId>
