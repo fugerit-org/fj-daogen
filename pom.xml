@@ -152,6 +152,12 @@
 		  <artifactId>slf4j-api</artifactId>
 		  <scope>compile</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

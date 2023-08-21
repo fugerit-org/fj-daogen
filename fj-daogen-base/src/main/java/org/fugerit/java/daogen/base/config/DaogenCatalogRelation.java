@@ -72,6 +72,7 @@ public class DaogenCatalogRelation extends BasicIdConfigType {
 		this.comment = comment;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}

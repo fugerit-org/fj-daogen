@@ -2,13 +2,12 @@ package org.fugerit.java.daogen.base.config;
 
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 public class DaogenClassConfigHelper {
 
-	private static Logger logger = LoggerFactory.getLogger( DaogenClassConfigHelper.class );
+	private DaogenClassConfigHelper() {}
 	
 	public static final String DAO_BASE_PACKAGE = "package";
 	public static final String DAO_BASE_CLASS = "class";
@@ -36,7 +35,7 @@ public class DaogenClassConfigHelper {
 	public static final String DAO_STRUCTMAPPER_BASE = "dao.structmapper";
 	
 	public static String addImport( DaogenCatalogConfig config, String base, Collection<String> imports ) {
-		logger.info( "props > "+config.getClassConfig() );
+		log.info( "props > {}", config.getClassConfig() );
 		String classPropKey = base+"."+DAO_BASE_CLASS;
 		String pacakgePropKey = base+"."+DAO_BASE_PACKAGE;
 		String simpleName = config.getClassConfig().getProperty( classPropKey );
@@ -50,7 +49,7 @@ public class DaogenClassConfigHelper {
 	}
 	
 	public static String fullName( DaogenCatalogConfig config, String base ) {
-		logger.info( "props > "+config.getClassConfig() );
+		log.info( "props > {}", config.getClassConfig() );
 		String classPropKey = base+"."+DAO_BASE_CLASS;
 		String pacakgePropKey = base+"."+DAO_BASE_PACKAGE;
 		String simpleName = config.getClassConfig().getProperty( classPropKey );
@@ -58,8 +57,7 @@ public class DaogenClassConfigHelper {
 		if ( simpleName == null || packageName == null ) {
 			throw new RuntimeException( "Daogen class configuration not set properly" );
 		}
-		String fullName = packageName+"."+simpleName;
-		return fullName;
+		return packageName+"."+simpleName;
 	}
 	
 }
