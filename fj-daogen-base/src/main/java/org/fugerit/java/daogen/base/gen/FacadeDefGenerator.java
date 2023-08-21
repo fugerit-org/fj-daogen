@@ -28,6 +28,8 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 	
 	private static final String FOR_ENTITY_LIT = " for entity : ";
 	
+	private static final String PARAM_CONTEXT_LIT = " * @param context";
+	
 	@Override
 	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
 		return FacadeGeneratorUtils.isFacadeGenerate( entity );
@@ -59,7 +61,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( TAB+"/**" );
 		this.getWriter().println( TAB+" * "+comment );
 		this.getWriter().println( TAB+" *" );	
-		this.getWriter().println( TAB+" * @param context"+TAB+"DAO Context" );	
+		this.getWriter().println( TAB+PARAM_CONTEXT_LIT+TAB+"DAO Context" );	
 		this.getWriter().println( keyHelper.getJavadocParams() );	
 		this.getWriter().println( TAB+" *" );
 		this.getWriter().println( TAB+" * @return "+returnJavadoc );	
@@ -81,7 +83,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+"/**" );
 			this.getWriter().println( TAB+" * Method to load all the items for entity : "+this.getEntityModelName() );
 			this.getWriter().println( TAB+" *" );	
-			this.getWriter().println( TAB+" * @param context"+TAB+"DAOContext" );	
+			this.getWriter().println( TAB+PARAM_CONTEXT_LIT+TAB+"DAOContext" );	
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+" * @return search result" );	
 			this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+"in case of errors" );	
@@ -91,7 +93,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+"/**" );
 			this.getWriter().println( TAB+" * Method to load all the items for entity : "+this.getEntityModelName() );
 			this.getWriter().println( TAB+" *" );	
-			this.getWriter().println( TAB+" * @param context"+TAB+"DAOContext" );	
+			this.getWriter().println( TAB+PARAM_CONTEXT_LIT+TAB+"DAOContext" );	
 			this.getWriter().println( TAB+" * @param finder	the finder incapsulating search params" );	
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+" * @return search result" );	

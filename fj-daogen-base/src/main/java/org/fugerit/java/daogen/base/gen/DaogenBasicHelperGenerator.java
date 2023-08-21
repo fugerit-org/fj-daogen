@@ -13,7 +13,7 @@ public abstract class DaogenBasicHelperGenerator extends DaogenBasicGenerator {
 	public static final int MODE_REAL = 2;
 	public static final int MODE_HELPER = 3;
 
-	public DaogenBasicHelperGenerator() {
+	protected DaogenBasicHelperGenerator() {
 		this.mode = MODE_FULL;
 	}
 	
