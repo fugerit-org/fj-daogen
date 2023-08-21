@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.text.MessageFormat;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.cfg.xml.GenericListCatalogConfig;
 import org.fugerit.java.core.cfg.xml.PropertyCatalog;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
 import org.slf4j.Logger;
@@ -73,7 +74,7 @@ public class DaogenCustomCode {
 		if ( instance == null ) {
 			PropertyCatalog config = new PropertyCatalog();
 			try {
-				PropertyCatalog.load( ClassHelper.loadFromDefaultClassLoader( "config/property-catalog-config.xml" ) , config );
+				GenericListCatalogConfig.load( ClassHelper.loadFromDefaultClassLoader( "config/property-catalog-config.xml" ) , config );
 			} catch (Exception e) {
 				throw new ConfigException( e );
 			}
