@@ -10,7 +10,6 @@ import org.fugerit.java.core.util.collection.ListMapStringKey;
 
 public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 
-
 	public static final String DEFAULT_ID_FIELD = "ID";
 	
 	public static final String ATT_ID = "id";
@@ -38,6 +37,13 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		this.relations = new ListMapStringKey<>();
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		return (this == o);
+	}
+
+
+
 	private ListMapStringKey<DaogenCatalogRelation> relations;
 	
 	private String catalog;
