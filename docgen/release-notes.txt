@@ -1,4 +1,10 @@
-﻿1.0.1 (2023-03-26)
+﻿1.1.0 (next)
+------------------
++ [enhancement] update fj-bom version 1.2.3 [1.1.0-rc.1]
++ [enhancement] update fj-core version 8.2.0-rc.3 [1.1.0-rc.1]
++ [enhancement] Added sonar cloud quality gate [1.1.0-rc.1]
+
+1.0.1 (2023-03-26)
 ------------------
 + update fj-bom version 1.0.0
 + update fj-core version 8.0.4

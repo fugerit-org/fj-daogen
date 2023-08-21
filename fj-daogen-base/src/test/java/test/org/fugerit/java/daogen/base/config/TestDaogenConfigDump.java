@@ -13,6 +13,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenConfigDump;
+import org.junit.Assert;
 import org.junit.Test;
 
 import test.org.fugerit.java.MemDBTestBase;
@@ -21,6 +22,7 @@ public class TestDaogenConfigDump extends MemDBTestBase {
 
 	@Test
 	public void testDumpSchema() throws Exception {
+		boolean ok = false;
 		try ( StringWriter writer = new StringWriter() ) {
 			ConnectionFactory cf = new SingleConnectionFactory( this.getConnection() );
 			Properties params = new Properties();
@@ -40,7 +42,9 @@ public class TestDaogenConfigDump extends MemDBTestBase {
 					logger.info( "field : {} ({})", field.toString(), field.describe() );	
 				}
 			}
+			ok = true;
 		}
+		Assert.assertTrue( ok );
 	}
 	
 }

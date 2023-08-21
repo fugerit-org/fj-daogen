@@ -9,7 +9,7 @@ import java.sql.Statement;
 import org.fugerit.java.test.db.helper.MemDBHelper;
 import org.junit.BeforeClass;
 
-public class MemDBTestBase extends BasicTest {
+public class MemDBTestBase extends HelperBase {
 
 	private Connection conn;
 	
