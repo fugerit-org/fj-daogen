@@ -2,6 +2,8 @@ package org.fugerit.java.daogen.base.config;
 
 import java.util.Collection;
 
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -41,7 +43,7 @@ public class DaogenClassConfigHelper {
 		String simpleName = config.getClassConfig().getProperty( classPropKey );
 		String packageName = config.getClassConfig().getProperty( pacakgePropKey );
 		if ( simpleName == null || packageName == null ) {
-			throw new RuntimeException( "Daogen class configuration not set properly" );
+			throw new ConfigRuntimeException( "Daogen class configuration not set properly" );
 		}
 		String fullName = packageName+"."+simpleName;
 		imports.add( fullName );
@@ -55,7 +57,7 @@ public class DaogenClassConfigHelper {
 		String simpleName = config.getClassConfig().getProperty( classPropKey );
 		String packageName = config.getClassConfig().getProperty( pacakgePropKey );
 		if ( simpleName == null || packageName == null ) {
-			throw new RuntimeException( "Daogen class configuration not set properly" );
+			throw new ConfigRuntimeException( "Daogen class configuration not set properly" );
 		}
 		return packageName+"."+simpleName;
 	}

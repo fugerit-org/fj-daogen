@@ -4,6 +4,8 @@ import org.fugerit.java.core.javagen.GeneratorNameHelper;
 
 public class DaogenCatalogConstants {
 
+	private DaogenCatalogConstants() {}
+	
 	public static final String GEN_PROP_BASE_SRC_FOLDER = "base-src-folder";
 	
 	public static final String GEN_PROP_SRC_MAIN_JAVA =		 "src-main-java";
