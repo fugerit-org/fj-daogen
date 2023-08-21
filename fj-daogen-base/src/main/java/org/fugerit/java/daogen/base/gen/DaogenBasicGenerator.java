@@ -2,7 +2,6 @@ package org.fugerit.java.daogen.base.gen;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,20 +31,20 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String AT_OVERRIDE = "@Override";
 	
-	protected static String REAL_CLASS_COMMENT = TAB+"// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
+	protected static final String REAL_CLASS_COMMENT = TAB+"// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
 
 	@Override
-	protected void customPartWorker( String startTag, String endTag, String indent ) throws FileNotFoundException, IOException {
+	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {
 			customPartWorkerDaogen( this.getJavaFile(), this.getWriter(), startTag, endTag, indent );
 		}
 	}
 	
-	public static void customPartWorkerDaogen( File file, PrintWriter writer, String startTag, String endTag, String indent ) throws FileNotFoundException, IOException {
+	public static void customPartWorkerDaogen( File file, PrintWriter writer, String startTag, String endTag, String indent ) throws IOException {
 		customPartWorkerDaogen(file, writer, startTag, endTag, indent, "" );
 	}
 	
-	public static void customPartWorkerDaogen( File file, PrintWriter writer, String startTag, String endTag, String indent, String addIfEmpty ) throws FileNotFoundException, IOException {
+	public static void customPartWorkerDaogen( File file, PrintWriter writer, String startTag, String endTag, String indent, String addIfEmpty ) throws IOException {
 		writer.println( indent+startTag );
 		boolean customCode = false;
 		boolean isEmpty = true;
