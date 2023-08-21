@@ -36,9 +36,9 @@ public class HelperGenerator extends DaogenBasicGenerator {
 
 	private void generateRelations() {
 		if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
-			this.getWriter().println( "\t/*" );
-			this.getWriter().println( "\t * fields generated for relations " );
-			this.getWriter().println( "\t */" );
+			this.getWriter().println( TAB+"/*" );
+			this.getWriter().println( TAB+" * fields generated for relations " );
+			this.getWriter().println( TAB+" */" );
 			this.getWriter().println();
 			for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
 				DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
@@ -48,19 +48,19 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
 					baseType = "java.util.List<"+baseType+">";
 				}
-				this.getWriter().println( "\tprivate "+baseType+" "+propertyName+";" );
+				this.getWriter().println( TAB+"private "+baseType+" "+propertyName+";" );
 				this.getWriter().println();
 				// setter metthod
-				this.getWriter().println( "\t@Override" );
-				this.getWriter().println( "\tpublic void set"+className+"( "+baseType+" value ) {" );
-				this.getWriter().println( "\t\tthis."+propertyName+" = value;" );
-				this.getWriter().println( "\t}" );
+				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+"public void set"+className+"( "+baseType+" value ) {" );
+				this.getWriter().println( TAB_2+"this."+propertyName+" = value;" );
+				this.getWriter().println( TAB+"}" );
 				this.getWriter().println();
 				// getter method
-				this.getWriter().println( "\t@Override" );
-				this.getWriter().println( "\tpublic "+baseType+" get"+className+"() {" );
-				this.getWriter().println( "\t\treturn this."+propertyName+";" );
-				this.getWriter().println( "\t}" );
+				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+"public "+baseType+" get"+className+"() {" );
+				this.getWriter().println( TAB_2+"return this."+propertyName+";" );
+				this.getWriter().println( TAB+"}" );
 				this.getWriter().println();
 			}
 		}
@@ -73,57 +73,57 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		if ( !relationLast ) {
 			this.generateRelations();
 		}
-		this.getWriter().println( "\t/*" );
-		this.getWriter().println( "\t * fields generated for entity attributes " );
-		this.getWriter().println( "\t */" );
+		this.getWriter().println( TAB+"/*" );
+		this.getWriter().println( TAB+" * fields generated for entity attributes " );
+		this.getWriter().println( TAB+" */" );
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			// property 
 			String javaProperty = GeneratorNameHelper.toPropertyName( field.getId() );
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 			String realJavaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
-			this.getWriter().println( "\tprivate "+realJavaType+" "+javaProperty+";" );
+			this.getWriter().println( TAB+"private "+realJavaType+" "+javaProperty+";" );
 			this.getWriter().println();
 			// setter method
-			this.getWriter().println( "\t@Override" );
-			this.getWriter().println( "\tpublic void set"+javaSuffix+"( "+realJavaType+" value ) {" );
-			this.getWriter().println( "\t\tthis."+javaProperty+" = value;" );
-			this.getWriter().println( "\t}" );
+			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+"public void set"+javaSuffix+"( "+realJavaType+" value ) {" );
+			this.getWriter().println( TAB_2+"this."+javaProperty+" = value;" );
+			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
 			// getter method
-			this.getWriter().println( "\t@Override" );
-			this.getWriter().println( "\tpublic "+realJavaType+" get"+javaSuffix+"() {" );
-			this.getWriter().println( "\t\treturn this."+javaProperty+";" );
-			this.getWriter().println( "\t}" );
+			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+"public "+realJavaType+" get"+javaSuffix+"() {" );
+			this.getWriter().println( TAB_2+"return this."+javaProperty+";" );
+			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
 		}
 		if ( relationLast ) {
 			this.generateRelations();
 		}
 		// metodo toString()
-		this.getWriter().println( "\t@Override" );
-		this.getWriter().println( "\tpublic String toString() {" );
-		this.getWriter().println( "\t\tStringBuilder buffer = new StringBuilder();" );
-		this.getWriter().println( "\t\tbuffer.append( this.getClass().getSimpleName() );" );
+		this.getWriter().println( TAB+"@Override" );
+		this.getWriter().println( TAB+"public String toString() {" );
+		this.getWriter().println( TAB_2+"StringBuilder buffer = new StringBuilder();" );
+		this.getWriter().println( TAB_2+"buffer.append( this.getClass().getSimpleName() );" );
 		boolean firstColumn = true;
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 			String javaProperty = GeneratorNameHelper.toPropertyName( field.getId() );
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 			if ( firstColumn ) {
-				this.getWriter().println( "\t\tbuffer.append( \"["+javaProperty+"=\" );" );
+				this.getWriter().println( TAB_2+"buffer.append( \"["+javaProperty+"=\" );" );
 				firstColumn = false;
 			} else {
-				this.getWriter().println( "\t\tbuffer.append( \","+javaProperty+"=\" );" );
+				this.getWriter().println( TAB_2+"buffer.append( \","+javaProperty+"=\" );" );
 			}
 			
-			this.getWriter().println( "\t\tbuffer.append( this.get"+javaSuffix+"() );" );
+			this.getWriter().println( TAB_2+"buffer.append( this.get"+javaSuffix+"() );" );
 		}
-		this.getWriter().println( "\t\tbuffer.append( \"]\" );" );
-		this.getWriter().println( "\t\treturn buffer.toString();" );
-		this.getWriter().println( "\t}" );
+		this.getWriter().println( TAB_2+"buffer.append( \"]\" );" );
+		this.getWriter().println( TAB_2+"return buffer.toString();" );
+		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
 		if ( BooleanUtils.isTrue( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) ) ) {
-			this.getWriter().println( "\t@Override" );
-			this.getWriter().println( "\tpublic boolean isEmpty() {" );
+			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+"public boolean isEmpty() {" );
 			String start = "";
 			String end = "";
 			for ( int k=0; k<this.getCurrentEntity().size(); k++ ) {
@@ -136,9 +136,9 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				} else {
 					start = " && ";
 				}
-				this.getWriter().println( "\t\t"+start+" ( "+CheckEmptyHelper.class.getName()+".isEmpty( this.get"+javaSuffix+"() ) )"+end );
+				this.getWriter().println( TAB_2+""+start+" ( "+CheckEmptyHelper.class.getName()+".isEmpty( this.get"+javaSuffix+"() ) )"+end );
 			}
-			this.getWriter().println( "\t}" );
+			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();	
 		}
 	}
