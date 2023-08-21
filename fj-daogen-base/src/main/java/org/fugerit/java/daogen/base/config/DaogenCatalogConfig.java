@@ -80,14 +80,14 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		String pathGeneratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT );
 		try ( InputStream is = StreamHelper.resolveStream( pathGeneratorCatalog ) ) {
 			DaogenGeneratorCatalog generatorCatalog = new DaogenGeneratorCatalog();
-			DaogenGeneratorCatalog.load( is , generatorCatalog );
+			load( is , generatorCatalog );
 			config.getGeneratorCatalogs().add( generatorCatalog );
 			if ( !DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT.equalsIgnoreCase( pathGeneratorCatalog ) ) {
 				String extendsDefault = generatorCatalog.getGeneralProps().getProperty(  DaogenGeneratorCatalog.KEY_EXTENDS_DEFAULT );
 				if ( "true".equalsIgnoreCase( extendsDefault ) ) {
 					try ( InputStream isDef = StreamHelper.resolveStream( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT ) ) {
 						DaogenGeneratorCatalog generatorCatalogDef = new DaogenGeneratorCatalog();
-						DaogenGeneratorCatalog.load( isDef , generatorCatalogDef );
+						load( isDef , generatorCatalogDef );
 						config.getGeneratorCatalogs().add( generatorCatalogDef );
 					}
 				}
