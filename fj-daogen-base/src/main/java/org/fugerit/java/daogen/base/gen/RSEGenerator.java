@@ -39,11 +39,11 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
-		this.getWriter().println( "\tpublic static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
+		this.getWriter().println( TAB+"public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
 		this.getWriter().println();
-		this.getWriter().println( "\t@Override" );
-		this.getWriter().println( "\tpublic "+this.getEntityModelName()+" extractNext( ResultSet rs ) throws SQLException { " );
-		this.getWriter().println( "\t\t"+this.getEntityHelperName()+" current = new "+this.getEntityHelperName()+"();" );
+		this.getWriter().println( TAB+"@Override" );
+		this.getWriter().println( TAB+"public "+this.getEntityModelName()+" extractNext( ResultSet rs ) throws SQLException { " );
+		this.getWriter().println( TAB_2+""+this.getEntityHelperName()+" current = new "+this.getEntityHelperName()+"();" );
 		
 		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
 		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
@@ -56,9 +56,9 @@ public class RSEGenerator extends DaogenBasicGenerator {
 			String indent = "";
 			boolean unsafe = BooleanUtils.isTrue( field.getUnsafe() );
 			if ( unsafe ) {
-				this.getWriter().println( "\t\t// unsafe field (error will be only printed)" );
-				this.getWriter().println( "\t\ttry { " );
-				indent = "	";
+				this.getWriter().println( TAB_2+"// unsafe field (error will be only printed)" );
+				this.getWriter().println( TAB_2+"try { " );
+				indent = TAB;
 			}
 			boolean tryCatch = false;
 			if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
@@ -83,22 +83,22 @@ public class RSEGenerator extends DaogenBasicGenerator {
 				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
 			}
 			if ( tryCatch ) {
-				this.getWriter().println( indent+"		try { " );
-				this.getWriter().println( indent+"			current.set"+javaSuffix+"( "+extratMethod+" );" );
-				this.getWriter().println( indent+"		} catch (Exception e) {" );
-				this.getWriter().println( indent+"			throw new SQLException( \"Errore estrazione campo : "+columnName+"\", e );" );
-				this.getWriter().println( indent+"		}" );
+				this.getWriter().println( indent+TAB_2+"try { " );
+				this.getWriter().println( indent+TAB_2+"	current.set"+javaSuffix+"( "+extratMethod+" );" );
+				this.getWriter().println( indent+TAB_2+"} catch (Exception e) {" );
+				this.getWriter().println( indent+TAB_2+"	throw new SQLException( \"Errore estrazione campo : "+columnName+"\", e );" );
+				this.getWriter().println( indent+TAB_2+"}" );
 			} else {
-				this.getWriter().println( indent+"		current.set"+javaSuffix+"( "+extratMethod+" );" );
+				this.getWriter().println( indent+TAB_2+"current.set"+javaSuffix+"( "+extratMethod+" );" );
 			}
 			if ( unsafe ) {
-				this.getWriter().println( "\t\t} catch (Exception e1) {" );
-				this.getWriter().println( "\t\t\tlogger.warn( \"Exception handling field '{}' -> {}\", \""+columnName+"\", e1 );" );
-				this.getWriter().println( "\t\t}" );
+				this.getWriter().println( TAB_2+"} catch (Exception e1) {" );
+				this.getWriter().println( TAB_3+"logger.warn( \"Exception handling field '{}' -> {}\", \""+columnName+"\", e1 );" );
+				this.getWriter().println( TAB_2+"}" );
 			}
 		}
-		this.getWriter().println( "\t\treturn current;" );
-		this.getWriter().println( "\t} " );
+		this.getWriter().println( TAB_2+"return current;" );
+		this.getWriter().println( TAB+"} " );
 	}
 
 	
