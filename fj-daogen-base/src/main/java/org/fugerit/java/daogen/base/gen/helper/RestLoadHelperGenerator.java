@@ -35,8 +35,6 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		super(KEY, CONFIG);
 	}
 	
-	private String helperClass = null;
-	
 	@Override
 	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();

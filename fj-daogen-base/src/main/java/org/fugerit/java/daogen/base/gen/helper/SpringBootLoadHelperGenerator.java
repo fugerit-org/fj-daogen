@@ -35,8 +35,6 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	public SpringBootLoadHelperGenerator() {
 		super(KEY, CONFIG);
 	}
-	
-	private String helperClass = null;
 
 	@Override
 	public void generateDaogenBody() throws Exception {

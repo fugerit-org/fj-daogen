@@ -42,7 +42,7 @@ public class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 		return FacadeGeneratorUtils.isFacadeGenerate( entity );
 	}
 	
-	private String helperClass = null;
+	protected String helperClass = null;
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
 		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ), 
