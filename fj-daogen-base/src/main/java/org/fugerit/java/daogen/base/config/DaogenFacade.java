@@ -12,17 +12,16 @@ import org.fugerit.java.core.javagen.JavaGenerator;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
 import org.fugerit.java.daogen.base.gen.DaogenBasicDecorator;
 import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class DaogenFacade {
 
 	private DaogenFacade() {}
 	
-	private static Logger logger = LoggerFactory.getLogger( DaogenFacade.class );
-	
 	private static void generageFile( JavaGenerator gen ) throws Exception {
-		logger.info( "Generating : "+gen );
+		log.info( "Generating : {}", gen );
 		gen.generate();
 		gen.write();
 	}
@@ -33,7 +32,7 @@ public class DaogenFacade {
 		// iterating over entity to generate
 		for ( String entityId : entityIdList ) {
 			DaogenCatalogEntity entity = daogenConfig.getListMap( entityId );
-			logger.info( "Describe : "+entity.getId()+" -> "+entity.describe() );
+			log.info( "Describe : {} -> {}", entity.getId(), entity.describe() );
 			if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
 				// iterating over generators
 				for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
@@ -76,8 +75,7 @@ public class DaogenFacade {
 				generate(daogenConfig, generatorCatalog);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ConfigException( "Error during DAO generation", e );
+			throw ConfigException.convertEx( "Error during DAO generation", e );
 		}
 	}
 	
