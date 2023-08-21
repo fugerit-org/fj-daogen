@@ -7,7 +7,7 @@ import org.fugerit.java.core.lang.helpers.StringUtils;
 
 public class DaogenGeneratorCatalog extends FactoryCatalog {
 
-	public final static String KEY_EXTENDS_DEFAULT = "extends-default";
+	public static final String KEY_EXTENDS_DEFAULT = "extends-default";
 	
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class DaogenGeneratorCatalog extends FactoryCatalog {
 	public ListMapConfig<FactoryType> getEntityGenerators( DaogenCatalogConfig config ) {
 		String id = "entity_generators";
 		if ( StringUtils.isNotEmpty( config.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_HELPERS ) ) ) {
-			id = id+="_helper";
+			id+="_helper";
 		}
 		return this.getListMap( id );
 	}
@@ -25,7 +25,7 @@ public class DaogenGeneratorCatalog extends FactoryCatalog {
 	public ListMapConfig<FactoryType> getFactoryGenerators( DaogenCatalogConfig config ) {
 		String id = "factory_generators";
 		if ( StringUtils.isNotEmpty( config.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_HELPERS ) ) ) {
-			id = id+="_helper";
+			id+="_helper";
 		}
 		return this.getListMap( id );
 	}
