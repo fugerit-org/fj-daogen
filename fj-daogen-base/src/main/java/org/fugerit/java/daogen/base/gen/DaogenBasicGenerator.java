@@ -20,6 +20,8 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
+	protected static final String TAB = "\t";
+	
 	protected static String REAL_CLASS_COMMENT = "\t// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
 
 	@Override

@@ -52,16 +52,16 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 	}
 
 	private void methodByKey( GeneratorKeyHelper keyHelper, String keyName, String methodName, String returnType, String returnJavadoc, String comment ) {
-		this.getWriter().println( "\t/**" );
-		this.getWriter().println( "\t * "+comment );
-		this.getWriter().println( "\t *" );	
-		this.getWriter().println( "\t * @param context	DAO Context" );	
+		this.getWriter().println( TAB+"/**" );
+		this.getWriter().println( TAB+" * "+comment );
+		this.getWriter().println( TAB+" *" );	
+		this.getWriter().println( TAB+" * @param context	DAO Context" );	
 		this.getWriter().println( keyHelper.getJavadocParams() );	
-		this.getWriter().println( "\t *" );	
-		this.getWriter().println( "\t * @return "+returnJavadoc );	
-		this.getWriter().println( "\t * @throws "+this.getClassDaoException()+"			in case of errors" );	
-		this.getWriter().println( "\t */" );
-		this.getWriter().println( "\t"+returnType+" "+methodName+"( "+this.getClassDaogenContext()+" context, "+keyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+";" );
+		this.getWriter().println( TAB+" *" );	
+		this.getWriter().println( TAB+" * @return "+returnJavadoc );	
+		this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"			in case of errors" );	
+		this.getWriter().println( TAB+" */" );
+		this.getWriter().println( TAB+""+returnType+" "+methodName+"( "+this.getClassDaogenContext()+" context, "+keyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+";" );
 		this.getWriter().println();
 	}
 	
@@ -70,37 +70,37 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
 		} else {
-			this.getWriter().println( "\t/*");
-			this.getWriter().println( "\t * NOTE: It is advised to use a finder for incapsulating search params, except searches for primary key.");
-			this.getWriter().println( "\t */");
+			this.getWriter().println( TAB+"/*");
+			this.getWriter().println( TAB+" * NOTE: It is advised to use a finder for incapsulating search params, except searches for primary key.");
+			this.getWriter().println( TAB+" */");
 			this.getWriter().println();
-			this.getWriter().println( "\t/**" );
-			this.getWriter().println( "\t * Method to load all the items for entity : "+this.getEntityModelName() );
-			this.getWriter().println( "\t *" );	
-			this.getWriter().println( "\t * @param context	DAOContext" );	
-			this.getWriter().println( "\t *" );	
-			this.getWriter().println( "\t * @return search result" );	
-			this.getWriter().println( "\t * @throws "+this.getClassDaoException()+"			in case of errors" );	
-			this.getWriter().println( "\t */" );
-			this.getWriter().println( "\t"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAll( "+this.getClassDaogenContext()+" context ) throws "+this.getClassDaoException()+";" );
+			this.getWriter().println( TAB+"/**" );
+			this.getWriter().println( TAB+" * Method to load all the items for entity : "+this.getEntityModelName() );
+			this.getWriter().println( TAB+" *" );	
+			this.getWriter().println( TAB+" * @param context	DAOContext" );	
+			this.getWriter().println( TAB+" *" );	
+			this.getWriter().println( TAB+" * @return search result" );	
+			this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"			in case of errors" );	
+			this.getWriter().println( TAB+" */" );
+			this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAll( "+this.getClassDaogenContext()+" context ) throws "+this.getClassDaoException()+";" );
 			this.getWriter().println();
-			this.getWriter().println( "\t/**" );
-			this.getWriter().println( "\t * Method to load all the items for entity : "+this.getEntityModelName() );
-			this.getWriter().println( "\t *" );	
-			this.getWriter().println( "\t * @param context	DAOContext" );	
-			this.getWriter().println( "\t * @param finder	the finder incapsulating search params" );	
-			this.getWriter().println( "\t *" );	
-			this.getWriter().println( "\t * @return search result" );	
-			this.getWriter().println( "\t * @throws "+this.getClassDaoException()+"			in caso di errori" );	
-			this.getWriter().println( "\t */" );
-			this.getWriter().println( "\t"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws "+this.getClassDaoException()+";" );
+			this.getWriter().println( TAB+"/**" );
+			this.getWriter().println( TAB+" * Method to load all the items for entity : "+this.getEntityModelName() );
+			this.getWriter().println( TAB+" *" );	
+			this.getWriter().println( TAB+" * @param context	DAOContext" );	
+			this.getWriter().println( TAB+" * @param finder	the finder incapsulating search params" );	
+			this.getWriter().println( TAB+" *" );	
+			this.getWriter().println( TAB+" * @return search result" );	
+			this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"			in caso di errori" );	
+			this.getWriter().println( TAB+" */" );
+			this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws "+this.getClassDaoException()+";" );
 			this.getWriter().println();
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 				GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
 				methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_LOAD_BY_PK, this.getEntityModelName(), "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+" for entity : "+this.getEntityModelName() );
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 					DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );
-					this.getWriter().println( "\t"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
+					this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
 					this.getWriter().println();
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {

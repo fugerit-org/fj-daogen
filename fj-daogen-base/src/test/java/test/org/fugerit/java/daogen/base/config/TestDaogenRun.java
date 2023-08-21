@@ -18,6 +18,7 @@ public class TestDaogenRun extends MemDBTestBase {
 			logger.info( "DAOGEN start!" );
 			DaogenFacade.generate( fis );
 			logger.info( "DAOGEN end!" );
+			ok = true;
 		}
 		Assert.assertTrue( ok );
 	}
