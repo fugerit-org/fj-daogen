@@ -19,18 +19,18 @@ public class DocOpenAPIBaseRestGenerator extends DaogenBasicGenerator {
 	
 	public static final int VERSION_DEFAULT = VERSION_V3;
 	
-	public DocOpenAPIBaseRestGenerator(int compatibility) {
+	public DocOpenAPIBaseRestGenerator(String key, int compatibility) {
 		super();
 		this.compatibility = compatibility;
 	}
 
-	private int compatibility;
+	private String key;
 	
-	public static final String KEY = "DocOpenAPIRestGenerator";
+	private int compatibility;
 	
 	@Override
 	public String getKey() {
-		return KEY;
+		return this.key;
 	}
 
 	@Override
