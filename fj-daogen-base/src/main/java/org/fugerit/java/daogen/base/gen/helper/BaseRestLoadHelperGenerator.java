@@ -20,13 +20,13 @@ import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
 import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
 import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
-public class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
+public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 
 	private String key;
 	
 	private BaseRestLoadHelperGeneratorConfig config;
 	
-	public BaseRestLoadHelperGenerator(String key, BaseRestLoadHelperGeneratorConfig config) {
+	protected BaseRestLoadHelperGenerator(String key, BaseRestLoadHelperGeneratorConfig config) {
 		super();
 		this.key = key;
 		this.config = config;
@@ -64,7 +64,15 @@ public class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 		}
 		this.setExtendsClass( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_REST_SERVICE )+LT_LIT+this.getEntityModelName()+GT_LIT );
 	}
-
+	
+	protected abstract void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper );
+	
+	protected abstract void printPrimaryKeyLoaderDeep( GeneratorKeyHelper primaryKeyHelper );
+	
+	protected abstract void printLoadAll( String factoryClassName );
+	
+	protected abstract void printLoadCurrent( String urlName, String propertyName, String javaName, DaogenCatalogField field );
+	
 	@Override
 	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
@@ -81,19 +89,8 @@ public class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+"return result;" );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println( );
-			this.getWriter().println( TAB+"@GET" );
-			this.getWriter().println( TAB+"@Path(\""+primaryKeyHelper.getUrlParams()+"\")" );
-			this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
-			this.getWriter().println( TAB+"public Response getByID("+primaryKeyHelper.getPathParams()+") throws Exception {" );
-			this.getWriter().println( TAB_2+"Response res = null;" );
-			this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-			this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
-			this.getWriter().println( TAB_3+"res = this.createResponseFromObject( result );" );
-			this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-			this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
-			this.getWriter().println( TAB_2+"}" );
-			this.getWriter().println( TAB_2+"return res;" );
-			this.getWriter().println( TAB+"}" );
+			// rest base code
+			this.printPrimaryKeyLoader(primaryKeyHelper);
 			this.getWriter().println( );
 			// deep load
 			this.getWriter().println( TAB+"public static "+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
@@ -126,38 +123,11 @@ public class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+"return result;" );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println( );
-			this.getWriter().println( TAB+"@GET" );
-			this.getWriter().println( TAB+"@Path(\"/deep"+primaryKeyHelper.getUrlParams()+"\")" );
-			this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
-			this.getWriter().println( TAB+"public Response getByIDdeep("+primaryKeyHelper.getPathParams()+") throws Exception {" );
-			this.getWriter().println( TAB_2+"Response res = null;" );
-			this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-			this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
-			this.getWriter().println( TAB_3+"res = this.createResponseFromObject( result );" );
-			this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-			this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
-			this.getWriter().println( TAB_2+"}" );
-			this.getWriter().println( TAB_2+"return res;" );
-			this.getWriter().println( TAB+"}" );
+			this.printPrimaryKeyLoaderDeep(primaryKeyHelper);
 			this.getWriter().println( );			
 		}
 		// load all
-		this.getWriter().println( TAB+"@GET" );
-		this.getWriter().println( TAB+"@Path(\"/all\")" );
-		this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
-		this.getWriter().println( TAB+"public Response getAll() throws Exception {" );
-		this.getWriter().println( TAB_2+"Response res = null;" );
-		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-		this.getWriter().println( TAB_2+""+factoryClassName+" factory = ("+factoryClassName+") context.getAttribute("+factoryClassName+".ATT_NAME );" );
-		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
-		this.getWriter().println( TAB_3+""+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> resultFacade = facade.loadAll( context );" );
-		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = "+this.getClassServiceResult()+".newDefaultResult( resultFacade.getList() );" );
-		this.getWriter().println( TAB_3+"res = this.createResponseFromList( result );" );
-		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getAll - \"+e, e );" );
-		this.getWriter().println( TAB_2+"}" );
-		this.getWriter().println( TAB_2+"return res;" );
-		this.getWriter().println( TAB+"}" );
+		this.printLoadAll(factoryClassName);
 		this.getWriter().println( );
 		// load model worker
 		DaogenCustomCode.addCommentRest( "rest.worker" ,DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName(), this.getEntityModelName(), "model" );
@@ -184,24 +154,7 @@ public class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 				this.getWriter().println( TAB_2+"return result;" );
 				this.getWriter().println( TAB+"}" );
 				this.getWriter().println( );
-				this.getWriter().println( TAB+"@GET" );
-				this.getWriter().println( TAB+"@Path(\"/"+urlName+"/{"+urlName+"}\")" );
-				this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
-				this.getWriter().println( TAB+"public Response getAll"+javaName+"(@PathParam( \""+urlName+"\" ) String "+propertyName+") throws Exception {" );
-				this.getWriter().println( TAB_2+"Response res = null;" );
-				this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-				if ( field.getJavaType().equals( "java.lang.String" ) ) {
-					this.getWriter().println( TAB_3+"String value = "+propertyName+";" );
-				} else {
-					this.getWriter().println( TAB_3+"java.math.BigDecimal value = new java.math.BigDecimal("+propertyName+");" );
-				}
-				this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = loadBy"+javaName+"( context, value );" );
-				this.getWriter().println( TAB_3+"res = this.createResponseFromList( result );" );
-				this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-				this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getAll"+javaName+" - \"+e, e );" );
-				this.getWriter().println( TAB_2+"}" );
-				this.getWriter().println( TAB_2+"return res;" );
-				this.getWriter().println( TAB+"}" );
+				this.printLoadCurrent(urlName, propertyName, javaName, field);
 				this.getWriter().println( );
 			}
 		}	
