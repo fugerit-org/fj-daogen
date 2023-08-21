@@ -37,6 +37,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String REAL_CLASS_COMMENT = TAB+"// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
 
+	protected static final String CONTEXT_LIT = " context, ";
+		
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {

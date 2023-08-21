@@ -23,9 +23,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 	public static final String METHOD_LOAD_BY_PK = "loadById";
 	public static final String METHOD_DELETE_BY_PK = "deleteById";
 	public static final String METHOD_UPDATE_BY_PK = "updateById";
-	
-	private static final String CONTEXT_LIT = " context, ";
-	
+
 	private static final String FOR_ENTITY_LIT = " for entity : ";
 	
 	private static final String PARAM_CONTEXT_LIT = " * @param context";
