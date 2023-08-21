@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.helper;
 
+import org.fugerit.java.core.db.dao.CloseDAOHelper;
 import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.db.daogen.CloseableDAOContext;
 import org.fugerit.java.core.db.daogen.CloseableDAOContextSC;
@@ -27,11 +28,7 @@ public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
 			return context;	
 		} catch (Exception e) {
 			if ( context != null ) {
-				try {
-					context.close();
-				} catch (Exception e1) {
-					logger.info( "Error closing context "+e, e );
-				}
+				CloseDAOHelper.close(context);
 			}
 			throw DAOException.convertEx( e );
 		}
