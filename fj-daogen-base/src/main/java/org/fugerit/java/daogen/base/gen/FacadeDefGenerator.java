@@ -92,7 +92,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+" * Method to load all the items for entity : "+this.getEntityModelName() );
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+PARAM_CONTEXT_LIT+TAB+"DAOContext" );	
-			this.getWriter().println( TAB+" * @param finder	the finder incapsulating search params" );	
+			this.getWriter().println( TAB+" * @param finder"+TAB+"the finder incapsulating search params" );	
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+" * @return search result" );	
 			this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+"in caso di errori" );	
