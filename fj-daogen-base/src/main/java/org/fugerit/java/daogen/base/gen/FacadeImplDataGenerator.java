@@ -107,23 +107,23 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 			
 			String fullTableName = toFullTableName( this.getCurrentEntity() );
-			this.getWriter().println( "\tprivate final static String TABLE_NAME = \""+fullTableName+"\";" );
+			this.getWriter().println( TAB+"private final static String TABLE_NAME = \""+fullTableName+"\";" );
 			this.getWriter().println();
 			String queryViewInit = null;
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getQueryView() ) ) {
-				this.getWriter().println( "\tprivate final static String QUERY_VIEW = \""+this.getCurrentEntity().getQueryView()+"\";" );
+				this.getWriter().println( TAB+"private final static String QUERY_VIEW = \""+this.getCurrentEntity().getQueryView()+"\";" );
 				this.getWriter().println();
 				queryViewInit = "QUERY_VIEW";
 			}
 			
-			this.getWriter().println( "\tpublic "+superType+"() {" );
-			this.getWriter().println( "\t\tsuper( TABLE_NAME, "+this.getEntityRSEName()+".DEFAULT, "+queryViewInit+" );");
-			this.getWriter().println( "\t}");
+			this.getWriter().println( TAB+"public "+superType+"() {" );
+			this.getWriter().println( TAB_2+"super( TABLE_NAME, "+this.getEntityRSEName()+".DEFAULT, "+queryViewInit+" );");
+			this.getWriter().println( TAB+"}");
 			this.getWriter().println();
 			
-			this.getWriter().println( "\tpublic "+superType+"( String tableName, String queryView ) {" );
-			this.getWriter().println( "\t\tsuper( tableName, "+this.getEntityRSEName()+".DEFAULT, queryView );");
-			this.getWriter().println( "\t}");
+			this.getWriter().println( TAB+"public "+superType+"( String tableName, String queryView ) {" );
+			this.getWriter().println( TAB_2+"super( tableName, "+this.getEntityRSEName()+".DEFAULT, queryView );");
+			this.getWriter().println( TAB+"}");
 			this.getWriter().println();
 			
 			String sequenceName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DEFAULT_SEQUENCE );
@@ -148,29 +148,29 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println( " 	public final static String "+columnConstantName( field.getId() )+ " = \""+field.getId()+"\";" );
 			}
 			this.getWriter().println();
-			this.getWriter().println( "\t/* loadAll( context ) is inherited from BasicDataFacade */" );
+			this.getWriter().println( TAB+"/* loadAll( context ) is inherited from BasicDataFacade */" );
 			this.getWriter().println();		
-			this.getWriter().println( "\t@Override" );
-			this.getWriter().println( "\tpublic "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws DAOException {" );
-			this.getWriter().println( "\t\t"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
-			this.getWriter().println( "\t\t"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-			this.getWriter().println( "\t\tSelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
+			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+"public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws DAOException {" );
+			this.getWriter().println( TAB_2+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
+			this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
+			this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
 			if ( this.getCurrentEntity().containsDefaultId() ) {
-				this.getWriter().println( "\t\tquery.andEqualParam( COL_ID, finder.getId() );" );	
+				this.getWriter().println( TAB_2+"query.andEqualParam( COL_ID, finder.getId() );" );	
 			}
-			this.getWriter().println( "\t\tif ( finder.getModel() != null ) {" );
-			this.getWriter().println( "\t\t\t"+this.getEntityModelName()+" model = finder.getModel();" );
+			this.getWriter().println( TAB_2+"if ( finder.getModel() != null ) {" );
+			this.getWriter().println( TAB_3+""+this.getEntityModelName()+" model = finder.getModel();" );
 			for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-				this.getWriter().println( "\t\t\tquery.andEqualParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
+				this.getWriter().println( TAB_3+"query.andEqualParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
 			}
-			this.getWriter().println( "\t\t}" );
+			this.getWriter().println( TAB_2+"}" );
 			if ( StringUtils.isNotEmpty( defaultOrderBy ) ) {
-				this.getWriter().println( "\t\tquery.addOrderBy( DEFAULT_ORDER_BY );" );
+				this.getWriter().println( TAB_2+"query.addOrderBy( DEFAULT_ORDER_BY );" );
 			}
-			this.getWriter().println( "\t\tdaoHelper.loadAllHelper( result.getList(), query, this.getRse() ); " );
-			this.getWriter().println( "\t\tresult.evaluateResultFromList(); " );
-			this.getWriter().println( "\t\treturn result;" );
-			this.getWriter().println( "\t}" );
+			this.getWriter().println( TAB_2+"daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); " );
+			this.getWriter().println( TAB_2+"result.evaluateResultFromList(); " );
+			this.getWriter().println( TAB_2+"return result;" );
+			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();		
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 				GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
@@ -184,53 +184,53 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 					// create
-					this.getWriter().println( "\t@Override" );
-					this.getWriter().println( "\tpublic "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws DAOException {" );
-					this.getWriter().println( "\t\t"+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
-					this.getWriter().println( "\t\t"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
+					this.getWriter().println( TAB+"@Override" );
+					this.getWriter().println( TAB+"public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws DAOException {" );
+					this.getWriter().println( TAB_2+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
+					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 					if ( sequenceName != null ) {
 						for ( String currentField : primaryKeyHelper.getKeyFields() ) {
 							DaogenCatalogField field = this.getCurrentEntity().get( currentField );
 							if ( field.getJavaType().equals( "java.math.BigDecimal" ) || field.getJavaType().equals( "java.lang.Long" ) ) {
 								String className = GeneratorNameHelper.toClassName( currentField );
-								this.getWriter().println( "\t\tif ( model.get"+className+"() == null ) { " );
-								this.getWriter().println( "\t\t\tmodel.set"+className+"( this.generateId( context ) ); " );
-								this.getWriter().println( "\t\t} " );		
+								this.getWriter().println( TAB_2+"if ( model.get"+className+"() == null ) { " );
+								this.getWriter().println( TAB_3+"model.set"+className+"( this.generateId( context ) ); " );
+								this.getWriter().println( TAB_2+"} " );		
 							}
 						}
 					}
 			
 					if ( colData != null || colDataUpdate != null ) {
-						this.getWriter().println( "\t\tjava.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );" );	
+						this.getWriter().println( TAB_2+"java.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );" );	
 					}
 					if ( colData != null ) {
-						this.getWriter().println( "\t\t//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
-						this.getWriter().println( "\t\tmodel.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( currentTime ); " );
+						this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
+						this.getWriter().println( TAB_2+"model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( currentTime ); " );
 					}
 					if ( colDataUpdate != null ) {
-						this.getWriter().println( "\t\t//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( "\t\tmodel.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( currentTime ); " );	
+						this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
+						this.getWriter().println( TAB_2+"model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( currentTime ); " );	
 					}
-					this.getWriter().println( "\t\tInsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
+					this.getWriter().println( TAB_2+"InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
 					for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 						if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
-							this.getWriter().println( "\t\tquery.addParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
+							this.getWriter().println( TAB_2+"query.addParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
 						} else {
-							this.getWriter().println( "\t\t// skipping selectOnly field : "+field.getId() );		
+							this.getWriter().println( TAB_2+"// skipping selectOnly field : "+field.getId() );		
 						}
 					}
-					this.getWriter().println( "\t\tint res = daoHelper.update( query );" );
-					this.getWriter().println( "\t\tthis.evaluteSqlUpdateResult(res, model, result);" );
-					this.getWriter().println( "\t\treturn result;" );
-					this.getWriter().println( "\t}" );
+					this.getWriter().println( TAB_2+"int res = daoHelper.update( query );" );
+					this.getWriter().println( TAB_2+"this.evaluteSqlUpdateResult(res, model, result);" );
+					this.getWriter().println( TAB_2+"return result;" );
+					this.getWriter().println( TAB+"}" );
 					this.getWriter().println();	
 				}
 				// load by primary key
-				this.getWriter().println( "\t@Override" );
-				this.getWriter().println( "\tpublic "+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
-				this.getWriter().println( "\t\t"+this.getEntityModelName()+" result = null;" );
-				this.getWriter().println( "\t\t"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-				this.getWriter().println( "\t\tSelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
+				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+"public "+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+				this.getWriter().println( TAB_2+""+this.getEntityModelName()+" result = null;" );
+				this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
+				this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
 				// check key start
 				StringBuilder checkKey = new StringBuilder();
 				int keyCount = 0;
@@ -243,60 +243,60 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 					keyCount++;
 				}
 				// check key end
-				this.getWriter().println( "\t\tif ( "+checkKey+" ) { " );
-				this.getWriter().println( "\t\t\t throw new DAOException( \"Null parameter in key "+primaryKeyHelper.getKeyParams()+"\" );" );
-				this.getWriter().println( "\t\t} else { " );
+				this.getWriter().println( TAB_2+"if ( "+checkKey+" ) { " );
+				this.getWriter().println( TAB_3+" throw new DAOException( \"Null parameter in key "+primaryKeyHelper.getKeyParams()+"\" );" );
+				this.getWriter().println( TAB_2+"} else { " );
 				for ( String currentField : primaryKeyHelper.getKeyFields() ) {
-					this.getWriter().println( "\t\t\tquery.andEqualParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
+					this.getWriter().println( TAB_3+"query.andEqualParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
 				}
-				this.getWriter().println( "\t\t}" );
-				this.getWriter().println( "\t\tresult = daoHelper.loadOneHelper( query, this.getRse() );" );
-				this.getWriter().println( "\t\treturn result;" );
-				this.getWriter().println( "\t}" );
+				this.getWriter().println( TAB_2+"}" );
+				this.getWriter().println( TAB_2+"result = daoHelper.loadOneHelper( query, this.getRse() );" );
+				this.getWriter().println( TAB_2+"return result;" );
+				this.getWriter().println( TAB+"}" );
 				this.getWriter().println();
 				if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {
 					// delete by primary key
-					this.getWriter().println( "\t@Override" );
-					this.getWriter().println( "\tpublic "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
-					this.getWriter().println( "\t\t"+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
-					this.getWriter().println( "\t\t"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
-					this.getWriter().println( "\t\tDeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );" );
+					this.getWriter().println( TAB+"@Override" );
+					this.getWriter().println( TAB+"public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( TAB_2+""+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
+					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
+					this.getWriter().println( TAB_2+"DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );" );
 					for ( String currentField : primaryKeyHelper.getKeyFields() ) {
-						this.getWriter().println( "\t\tquery.andWhereParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
+						this.getWriter().println( TAB_2+"query.andWhereParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
 					}
-					this.getWriter().println( "\t\tint res = daoHelper.update( query );" );
-					this.getWriter().println( "\t\tthis.evaluteSqlUpdateResult(res, null, result);" );		
-					this.getWriter().println( "\t\treturn result;" );
-					this.getWriter().println( "\t}" );
+					this.getWriter().println( TAB_2+"int res = daoHelper.update( query );" );
+					this.getWriter().println( TAB_2+"this.evaluteSqlUpdateResult(res, null, result);" );		
+					this.getWriter().println( TAB_2+"return result;" );
+					this.getWriter().println( TAB+"}" );
 					this.getWriter().println();	
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
 					// update by primary key
-					this.getWriter().println( "\t@Override" );
-					this.getWriter().println( "\tpublic "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
-					this.getWriter().println( "\t\t"+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
-					this.getWriter().println( "\t\t"+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
+					this.getWriter().println( TAB+"@Override" );
+					this.getWriter().println( TAB+"public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( TAB_2+""+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
+					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 					if ( colDataUpdate != null ) {
-						this.getWriter().println( "\t\t//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( "\t\tmodel.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
+						this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
+						this.getWriter().println( TAB_2+"model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
 					}
-					this.getWriter().println( "\t\tUpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
+					this.getWriter().println( TAB_2+"UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 					for ( DaogenCatalogField field : this.getCurrentEntity() ) {
 						if ( !primaryKeyHelper.getKeyFields().contains( field.getId() ) ) {
 							if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
-								this.getWriter().println( "\t\tquery.addSetParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );		
+								this.getWriter().println( TAB_2+"query.addSetParam( "+columnConstantName( field.getId() )+", model.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );		
 							} else {
-								this.getWriter().println( "\t\t// skipping selectOnly field : "+field.getId() );		
+								this.getWriter().println( TAB_2+"// skipping selectOnly field : "+field.getId() );		
 							}
 						}
 					}
 					for ( String currentField : primaryKeyHelper.getKeyFields() ) {
-						this.getWriter().println( "\t\tquery.andWhereParam( COL_"+currentField.toUpperCase()+", model.get"+GeneratorNameHelper.toClassName( currentField )+"() );" );	
+						this.getWriter().println( TAB_2+"query.andWhereParam( COL_"+currentField.toUpperCase()+", model.get"+GeneratorNameHelper.toClassName( currentField )+"() );" );	
 					}
-					this.getWriter().println( "\t\tint res = daoHelper.update( query );" );
-					this.getWriter().println( "\t\tthis.evaluteSqlUpdateResult(res, model, result);" );
-					this.getWriter().println( "\t\treturn result;" );
-					this.getWriter().println( "\t}" );
+					this.getWriter().println( TAB_2+"int res = daoHelper.update( query );" );
+					this.getWriter().println( TAB_2+"this.evaluteSqlUpdateResult(res, model, result);" );
+					this.getWriter().println( TAB_2+"return result;" );
+					this.getWriter().println( TAB+"}" );
 					this.getWriter().println();					
 				}
 			}			
