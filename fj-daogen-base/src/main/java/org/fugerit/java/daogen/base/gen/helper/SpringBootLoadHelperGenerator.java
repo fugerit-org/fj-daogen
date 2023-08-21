@@ -3,66 +3,40 @@ package org.fugerit.java.daogen.base.gen.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.ConcatHelper;
 import org.fugerit.java.core.lang.helpers.StringUtils;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
-import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
-import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
-import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
 import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
-import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
-public class SpringBootLoadHelperGenerator extends DaogenBasicGenerator {
+public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 
 	public static final String KEY = SpringBootLoadHelperGenerator.class.getSimpleName();
 	
-	@Override
-	public String getKey() {
-		return KEY;
+	private static final BaseRestLoadHelperGeneratorConfig CONFIG = new BaseRestLoadHelperGeneratorConfig();
+	static {
+		List<String> importList = new ArrayList<String>();
+		importList.add( "java.util.List" );
+		importList.add( "javax.servlet.http.HttpServletResponse" );
+		importList.add( "org.springframework.http.ResponseEntity" );
+		importList.add( "org.springframework.web.bind.annotation.PathVariable" );
+		importList.add( "org.springframework.web.bind.annotation.RequestMapping" );
+		importList.add( "org.springframework.web.bind.annotation.RequestMethod" );
+		importList.add( "org.springframework.web.bind.annotation.RequestMethod" );
+		importList.add( "org.springframework.http.MediaType" );
+		CONFIG.setImportList( importList );
 	}
-
-	@Override
-	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
-		return FacadeGeneratorUtils.isFacadeGenerate( entity );
+	
+	public SpringBootLoadHelperGenerator() {
+		super(KEY, CONFIG);
 	}
 	
 	private String helperClass = null;
-	
-	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
-		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ), 
-				DaogenHelperGenerator.toHelperClassName( fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_SPRING_REST_LOAD ), DaogenCatalogConstants.restLoadName( entity ) ) ), 
-				STYLE_CLASS, daogenConfig, entity );
-		this.getImportList().add( "java.util.List" );
-		this.getImportList().add( "javax.servlet.http.HttpServletResponse" );
-		this.getImportList().add( "org.springframework.http.ResponseEntity" );
-		this.getImportList().add( "org.springframework.web.bind.annotation.PathVariable" );
-		this.getImportList().add( "org.springframework.web.bind.annotation.RequestMapping" );
-		this.getImportList().add( "org.springframework.web.bind.annotation.RequestMethod" );
-		this.getImportList().add( "org.springframework.web.bind.annotation.RequestMethod" );
-		this.getImportList().add( "org.springframework.http.MediaType" );
-		this.setClassDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CONTEXT_BASE, this.getImportList() ) );
-		this.setClassCloseableDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CLOSEABLECONTEXT_BASE, this.getImportList() ) );
-		this.setClassDaoException( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_EXCEPTION_BASE, this.getImportList() ) );
-		this.setClassBaseResult( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_RESULT_BASE, this.getImportList() ) );
-		this.setClassServiceResult( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_SERVICERESULT_BASE, this.getImportList() ) );
-		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
-		this.helperClass = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+this.getEntityHelperName();
-		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+this.getEntityFinderName() );
-		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+this.getEntityFacadeDefName() );
-		String facadeDef = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF );
-		if ( facadeDef != null ) {
-			this.getImportList().add( facadeDef );	
-		}
-		this.setExtendsClass( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_REST_SERVICE )+"<"+this.getEntityModelName()+">" );
-	}
 
 	@Override
 	public void generateDaogenBody() throws Exception {
