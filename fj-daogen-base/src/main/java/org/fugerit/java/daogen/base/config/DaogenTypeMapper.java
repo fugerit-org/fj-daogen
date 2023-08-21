@@ -1,6 +1,7 @@
 package org.fugerit.java.daogen.base.config;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -8,7 +9,12 @@ import org.fugerit.java.core.io.helper.StreamHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DaogenTypeMapper {
+public class DaogenTypeMapper implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9010791577199355112L;
 
 	protected static Logger logger = LoggerFactory.getLogger( DaogenTypeMapper.class );
 	
