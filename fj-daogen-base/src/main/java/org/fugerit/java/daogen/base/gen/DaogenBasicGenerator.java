@@ -22,6 +22,10 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 
 	protected static final String TAB = "\t";
 	
+	protected static final String TAB_2 = TAB+TAB;
+	
+	protected static final String TAB_3 = TAB_2+TAB;
+	
 	protected static String REAL_CLASS_COMMENT = "\t// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
 
 	@Override

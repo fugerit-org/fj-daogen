@@ -59,7 +59,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( keyHelper.getJavadocParams() );	
 		this.getWriter().println( TAB+" *" );	
 		this.getWriter().println( TAB+" * @return "+returnJavadoc );	
-		this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"			in case of errors" );	
+		this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+TAB_3+"in case of errors" );	
 		this.getWriter().println( TAB+" */" );
 		this.getWriter().println( TAB+""+returnType+" "+methodName+"( "+this.getClassDaogenContext()+" context, "+keyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+";" );
 		this.getWriter().println();
@@ -80,7 +80,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+" * @param context	DAOContext" );	
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+" * @return search result" );	
-			this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"			in case of errors" );	
+			this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+TAB_3+"in case of errors" );	
 			this.getWriter().println( TAB+" */" );
 			this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAll( "+this.getClassDaogenContext()+" context ) throws "+this.getClassDaoException()+";" );
 			this.getWriter().println();
@@ -91,7 +91,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+" * @param finder	the finder incapsulating search params" );	
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+" * @return search result" );	
-			this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"			in caso di errori" );	
+			this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+TAB_3+"in caso di errori" );	
 			this.getWriter().println( TAB+" */" );
 			this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws "+this.getClassDaoException()+";" );
 			this.getWriter().println();
