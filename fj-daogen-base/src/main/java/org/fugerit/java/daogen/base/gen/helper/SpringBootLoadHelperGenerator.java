@@ -29,33 +29,18 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		super(KEY, CONFIG);
 	}
 
-	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper ) {
-		this.getWriter().println( TAB+"@RequestMapping(value = \""+primaryKeyHelper.getUrlParams()+"\", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )" );
-		this.getWriter().println( TAB+"public ResponseEntity<Object> getByID("+primaryKeyHelper.getPathVarables()+") throws Exception {" );
+	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {
+		this.getWriter().println( TAB+"@RequestMapping(value = \""+deepUrl+primaryKeyHelper.getUrlParams()+"\", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )" );
+		this.getWriter().println( TAB+"public ResponseEntity<Object> getByID"+deepMethod+"("+primaryKeyHelper.getPathVarables()+") throws Exception {" );
 		this.getWriter().println( TAB_2+"ResponseEntity<Object> res = null;" );
 		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
+		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+deepWorker+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
 		this.getWriter().println( TAB_3+"res = ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body( this.createResultFromObject( result ) );" );
 		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
 		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
 		this.getWriter().println( TAB_3+"res = ResponseEntity.status( HttpServletResponse.SC_INTERNAL_SERVER_ERROR ).build();" );
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"return res;" );
-	}
-	
-	protected void printPrimaryKeyLoaderDeep( GeneratorKeyHelper primaryKeyHelper ) {
-		this.getWriter().println( TAB+"@RequestMapping(value = \"/deep"+primaryKeyHelper.getUrlParams()+"\", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )" );
-		this.getWriter().println( TAB+"public ResponseEntity<Object> getByIDdeep("+primaryKeyHelper.getPathVarables()+") throws Exception {" );
-		this.getWriter().println( TAB_2+"ResponseEntity<Object> res = null;" );
-		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<"+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
-		this.getWriter().println( TAB_3+"res = ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body( this.createResultFromObject( result ) );" );
-		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
-		this.getWriter().println( TAB_3+"res = ResponseEntity.status( HttpServletResponse.SC_INTERNAL_SERVER_ERROR ).build();" );
-		this.getWriter().println( TAB_2+"}" );
-		this.getWriter().println( TAB_2+"return res;" );
-		this.getWriter().println( TAB+"}" );
 	}
 	
 	protected void printLoadAll( String factoryClassName ) {

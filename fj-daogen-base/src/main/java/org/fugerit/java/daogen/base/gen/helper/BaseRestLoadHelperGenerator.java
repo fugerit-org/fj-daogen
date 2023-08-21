@@ -65,9 +65,19 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 		this.setExtendsClass( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_REST_SERVICE )+LT_LIT+this.getEntityModelName()+GT_LIT );
 	}
 	
-	protected abstract void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper );
+	private void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, boolean deep ) {
+		String deepUrl = "";
+		String deepMethod = "";
+		String deepWorker = "";
+		if ( deep ) {
+			deepUrl = "/deep";
+			deepMethod = "deep";
+			deepWorker = "Deep";
+		}
+		this.printPrimaryKeyLoader(primaryKeyHelper, deepUrl, deepMethod, deepWorker);
+	}
 	
-	protected abstract void printPrimaryKeyLoaderDeep( GeneratorKeyHelper primaryKeyHelper );
+	protected abstract void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker );
 	
 	protected abstract void printLoadAll( String factoryClassName );
 	
@@ -90,7 +100,7 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println( );
 			// rest base code
-			this.printPrimaryKeyLoader(primaryKeyHelper);
+			this.printPrimaryKeyLoader(primaryKeyHelper, false);
 			this.getWriter().println( );
 			// deep load
 			this.getWriter().println( TAB+"public static "+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
@@ -123,7 +133,7 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+"return result;" );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println( );
-			this.printPrimaryKeyLoaderDeep(primaryKeyHelper);
+			this.printPrimaryKeyLoader(primaryKeyHelper, true);
 			this.getWriter().println( );			
 		}
 		// load all

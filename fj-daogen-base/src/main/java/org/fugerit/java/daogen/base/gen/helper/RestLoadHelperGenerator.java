@@ -28,30 +28,14 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		super(KEY, CONFIG);
 	}
 	
-	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper ) {
+	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {
 		this.getWriter().println( TAB+"@GET" );
-		this.getWriter().println( TAB+"@Path(\""+primaryKeyHelper.getUrlParams()+"\")" );
+		this.getWriter().println( TAB+"@Path(\""+deepUrl+primaryKeyHelper.getUrlParams()+"\")" );
 		this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
-		this.getWriter().println( TAB+"public Response getByID("+primaryKeyHelper.getPathParams()+") throws Exception {" );
+		this.getWriter().println( TAB+"public Response getByID"+deepMethod+"("+primaryKeyHelper.getPathParams()+") throws Exception {" );
 		this.getWriter().println( TAB_2+"Response res = null;" );
 		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
-		this.getWriter().println( TAB_3+"res = this.createResponseFromObject( result );" );
-		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
-		this.getWriter().println( TAB_2+"}" );
-		this.getWriter().println( TAB_2+"return res;" );
-		this.getWriter().println( TAB+"}" );
-	}
-	
-	protected void printPrimaryKeyLoaderDeep( GeneratorKeyHelper primaryKeyHelper ) {
-		this.getWriter().println( TAB+"@GET" );
-		this.getWriter().println( TAB+"@Path(\"/deep"+primaryKeyHelper.getUrlParams()+"\")" );
-		this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
-		this.getWriter().println( TAB+"public Response getByIDdeep("+primaryKeyHelper.getPathParams()+") throws Exception {" );
-		this.getWriter().println( TAB_2+"Response res = null;" );
-		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
-		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( context, "+primaryKeyHelper.getRestParams()+" );" );
+		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+deepWorker+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
 		this.getWriter().println( TAB_3+"res = this.createResponseFromObject( result );" );
 		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
 		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
