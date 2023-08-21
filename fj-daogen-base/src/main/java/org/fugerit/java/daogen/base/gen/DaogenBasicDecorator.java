@@ -1,5 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
+import org.fugerit.java.core.db.dao.DAOException;
+
 public class DaogenBasicDecorator {
 
 	private String generatorId;
@@ -23,19 +25,19 @@ public class DaogenBasicDecorator {
 		generator.getDecorators().add( this );
 	}
 
-	public void addImports() throws Exception {
+	public void addImports() throws DAOException {
 		// do nothing implementation : sub classes should override it if needed
 	}
 	
-	public void addAfterClassBody() throws Exception {
+	public void addAfterClassBody() throws DAOException {
 		// do nothing implementation : sub classes should override it if needed
 	}
 	
-	public void addBeforeClassBody() throws Exception {
+	public void addBeforeClassBody() throws DAOException {
 		// do nothing implementation : sub classes should override it if needed
 	}
 
-	public void addBeforeClass() throws Exception {
+	public void addBeforeClass() throws DAOException {
 		// do nothing implementation : sub classes should override it if needed
 	}
 

@@ -17,6 +17,9 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
 	protected static final String BLANK = " ";
@@ -74,7 +77,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	@Override
 	public void write() throws IOException {
 		if ( this.skipWrite ) {
-			logger.info( "Skip writing this generator : "+this );
+			log.info( "Skip writing this generator : {}", this );
 		} else {
 			super.write();
 		}
