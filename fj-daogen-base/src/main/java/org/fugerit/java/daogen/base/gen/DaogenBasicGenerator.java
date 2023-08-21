@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.io.FileIO;
 import org.fugerit.java.core.javagen.SimpleJavaGenerator;
 import org.fugerit.java.core.lang.helpers.StringUtils;
@@ -142,7 +143,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 			try {
 				decorator.addImports();
 			} catch (Exception e) {
-				throw new RuntimeException( e );
+				throw new ConfigRuntimeException( e );
 			}
 		}
 	}
@@ -169,7 +170,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 			try {
 				decorator.addBeforeClassBody();
 			} catch (Exception e) {
-				throw new RuntimeException( e );
+				throw new ConfigRuntimeException( e );
 			}
 		}
 		this.generateDaogenBody();
@@ -177,7 +178,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 			try {
 				decorator.addAfterClassBody();
 			} catch (Exception e) {
-				throw new RuntimeException( e );
+				throw new ConfigRuntimeException( e );
 			}
 		}
 	}
@@ -400,7 +401,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 			try {
 				decorator.addBeforeClass();	
 			} catch (Exception e) {
-				throw new RuntimeException( e );
+				throw new ConfigRuntimeException( e );
 			}
 		}
 	}
