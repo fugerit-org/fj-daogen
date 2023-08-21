@@ -20,14 +20,15 @@ import org.fugerit.java.core.db.metadata.TableModel;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.collection.ListMapStringKey;
 import org.fugerit.java.core.xml.dom.DOMIO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class DaogenConfigDump {
+import lombok.extern.slf4j.Slf4j;
 
-	private static Logger logger = LoggerFactory.getLogger( DaogenConfigDump.class );
+@Slf4j
+public class DaogenConfigDump {
+	
+	private DaogenConfigDump() {}
 	
 	public static final String PARAM_TABLE_LIST = "table-list";
 	public static final String PARAM_TABLE_LIST_ALL = "*";
@@ -66,10 +67,10 @@ public class DaogenConfigDump {
 			addIfNotEmpty( DaogenCatalogEntity.ATT_CATALOG , tableModel.getCatalog(), currentEntityTag );
 			addIfNotEmpty( DaogenCatalogEntity.ATT_COMMENTS, tableModel.getComment(), currentEntityTag );
 			root.appendChild( currentEntityTag );
-			logger.info( "current table : "+tableModel+" ("+tableModel.getComment()+")" );
+			log.info( "current table : {} ({})", tableModel, tableModel.getComment() );
 			IndexModel primaryKey = tableModel.getPrimaryKey();
 			if ( primaryKey != null ) {
-				logger.info( "primary key : "+primaryKey+" - "+primaryKey.getColumnList().size() );
+				log.info( "primary key : {} - {}", primaryKey, primaryKey.getColumnList().size() );
 				List<String> temp = new ArrayList<String>();
 				for ( ColumnModel columnModel : primaryKey.getColumnList() ) {
 					temp.add( columnModel.getName() );
@@ -77,11 +78,11 @@ public class DaogenConfigDump {
 				currentEntityTag.setAttribute( "primaryKey" , StringUtils.concat( ",", temp ) );
 			}
 			for ( IndexModel indexModel : tableModel.getIndexList() ) {
-				logger.info( "index : "+indexModel );
+				log.info( "index : {}", indexModel );
 			}
 			List<String> fk = new ArrayList<String>();
 			for ( ForeignKeyModel foreignKeyModel : tableModel.getForeignKeyList() ) {
-				logger.info( "foreign key : "+foreignKeyModel );
+				log.info( "foreign key : {}", foreignKeyModel );
 				fk.add( foreignKeyModel.getForeignTableId().toIdString() );
 				DaogenCatalogRelation relation = new DaogenCatalogRelation();
 				relation.setName( tableModel.getTableId().getTableName()+"_"+foreignKeyModel.getForeignTableId().getTableName() );
@@ -101,7 +102,7 @@ public class DaogenConfigDump {
 				currentEntityTag.setAttribute( "foreignKeys" , StringUtils.concat( ",", fk ) );
 			}
 			for ( ColumnModel columnModel : tableModel.getColumnList() ) {
-				logger.info( "column : "+columnModel+" ("+columnModel.getComment()+")" );
+				log.info( "column : {} ({})", columnModel, columnModel.getComment() );
 				Element currentFieldTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_FIELD );
 				currentFieldTag.setAttribute( DaogenCatalogField.ATT_ID , columnModel.getName() );
 				currentFieldTag.setAttribute( DaogenCatalogField.ATT_COMMENTS , columnModel.getComment() );
