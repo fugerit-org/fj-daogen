@@ -132,12 +132,12 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 			String defaultOrderBy = this.getCurrentEntity().getOrderBy();
 			if ( StringUtils.isNotEmpty( sequenceName ) ) {
-				this.getWriter().println( " 	public final static String SEQUENCE_NAME = \""+sequenceName+"\";" );
+				this.getWriter().println( BLANK+TAB+"public final static String SEQUENCE_NAME = \""+sequenceName+"\";" );
 				this.getWriter().println();	
-				this.getWriter().println( " 	@Override" );
-				this.getWriter().println( " 	public String getSequenceName() {" );
-				this.getWriter().println( " 		return SEQUENCE_NAME;" );
-				this.getWriter().println( " 	}" );
+				this.getWriter().println( BLANK+TAB+"@Override" );
+				this.getWriter().println( BLANK+TAB+"public String getSequenceName() {" );
+				this.getWriter().println( BLANK+TAB_2+"return SEQUENCE_NAME;" );
+				this.getWriter().println( BLANK+TAB+"}" );
 				this.getWriter().println();	
 			}
 			if ( StringUtils.isNotEmpty( defaultOrderBy ) ) {

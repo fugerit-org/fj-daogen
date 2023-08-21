@@ -20,6 +20,8 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
+	protected static final String BLANK = " ";
+	
 	protected static final String TAB = "\t";
 	
 	protected static final String TAB_2 = TAB+TAB;
