@@ -118,12 +118,12 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				queryViewInit = "QUERY_VIEW";
 			}
 			
-			this.getWriter().println( TAB+"public "+superType+"() {" );
+			this.getWriter().println( TAB+PUBLIC_LIT+superType+"() {" );
 			this.getWriter().println( TAB_2+"super( TABLE_NAME, "+this.getEntityRSEName()+".DEFAULT, "+queryViewInit+" );");
 			this.getWriter().println( TAB+"}");
 			this.getWriter().println();
 			
-			this.getWriter().println( TAB+"public "+superType+"( String tableName, String queryView ) {" );
+			this.getWriter().println( TAB+PUBLIC_LIT+superType+"( String tableName, String queryView ) {" );
 			this.getWriter().println( TAB_2+"super( tableName, "+this.getEntityRSEName()+".DEFAULT, queryView );");
 			this.getWriter().println( TAB+"}");
 			this.getWriter().println();
@@ -153,7 +153,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+"/* loadAll( context ) is inherited from BasicDataFacade */" );
 			this.getWriter().println();		
 			this.getWriter().println( TAB+AT_OVERRIDE );
-			this.getWriter().println( TAB+"public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityFinderName()+" finder ) throws DAOException {" );
+			this.getWriter().println( TAB+PUBLIC_LIT+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityFinderName()+" finder ) throws DAOException {" );
 			this.getWriter().println( TAB_2+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
 			this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 			this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
@@ -187,7 +187,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 					// create
 					this.getWriter().println( TAB+AT_OVERRIDE );
-					this.getWriter().println( TAB+"public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws DAOException {" );
+					this.getWriter().println( TAB+PUBLIC_LIT+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws DAOException {" );
 					this.getWriter().println( TAB_2+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 					if ( sequenceName != null ) {
@@ -229,7 +229,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				}
 				// load by primary key
 				this.getWriter().println( TAB+AT_OVERRIDE );
-				this.getWriter().println( TAB+"public "+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+				this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
 				this.getWriter().println( TAB_2+""+this.getEntityModelName()+" result = null;" );
 				this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 				this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
@@ -259,7 +259,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {
 					// delete by primary key
 					this.getWriter().println( TAB+AT_OVERRIDE );
-					this.getWriter().println( TAB+"public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
 					this.getWriter().println( TAB_2+""+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 					this.getWriter().println( TAB_2+"DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );" );
@@ -275,7 +275,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
 					// update by primary key
 					this.getWriter().println( TAB+AT_OVERRIDE );
-					this.getWriter().println( TAB+"public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 					this.getWriter().println( TAB_2+""+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 					if ( colDataUpdate != null ) {
