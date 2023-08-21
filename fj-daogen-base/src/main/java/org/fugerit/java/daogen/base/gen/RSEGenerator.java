@@ -39,11 +39,11 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
-		this.getWriter().println( "	public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
+		this.getWriter().println( "\tpublic static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
 		this.getWriter().println();
-		this.getWriter().println( "	@Override" );
-		this.getWriter().println( "	public "+this.getEntityModelName()+" extractNext( ResultSet rs ) throws SQLException { " );
-		this.getWriter().println( "		"+this.getEntityHelperName()+" current = new "+this.getEntityHelperName()+"();" );
+		this.getWriter().println( "\t@Override" );
+		this.getWriter().println( "\tpublic "+this.getEntityModelName()+" extractNext( ResultSet rs ) throws SQLException { " );
+		this.getWriter().println( "\t\t"+this.getEntityHelperName()+" current = new "+this.getEntityHelperName()+"();" );
 		
 		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
 		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
@@ -56,8 +56,8 @@ public class RSEGenerator extends DaogenBasicGenerator {
 			String indent = "";
 			boolean unsafe = BooleanUtils.isTrue( field.getUnsafe() );
 			if ( unsafe ) {
-				this.getWriter().println( "		// unsafe field (error will be only printed)" );
-				this.getWriter().println( "		try { " );
+				this.getWriter().println( "\t\t// unsafe field (error will be only printed)" );
+				this.getWriter().println( "\t\ttry { " );
 				indent = "	";
 			}
 			boolean tryCatch = false;
@@ -92,13 +92,13 @@ public class RSEGenerator extends DaogenBasicGenerator {
 				this.getWriter().println( indent+"		current.set"+javaSuffix+"( "+extratMethod+" );" );
 			}
 			if ( unsafe ) {
-				this.getWriter().println( "		} catch (Exception e1) {" );
-				this.getWriter().println( "			logger.warn( \"Exception handling field '{}' -> {}\", \""+columnName+"\", e1 );" );
-				this.getWriter().println( "		}" );
+				this.getWriter().println( "\t\t} catch (Exception e1) {" );
+				this.getWriter().println( "\t\t\tlogger.warn( \"Exception handling field '{}' -> {}\", \""+columnName+"\", e1 );" );
+				this.getWriter().println( "\t\t}" );
 			}
 		}
-		this.getWriter().println( "		return current;" );
-		this.getWriter().println( "	} " );
+		this.getWriter().println( "\t\treturn current;" );
+		this.getWriter().println( "\t} " );
 	}
 
 	

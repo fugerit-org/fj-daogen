@@ -46,47 +46,47 @@ public class StructGenerator extends DaogenBasicGenerator {
 		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
 		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
 		
-		this.getWriter().println( "	public "+this.getEntityStructName()+"( "+this.getEntityModelName()+" wrapped ) {" );
-		this.getWriter().println( "		super( wrapped );" );
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\tpublic "+this.getEntityStructName()+"( "+this.getEntityModelName()+" wrapped ) {" );
+		this.getWriter().println( "\t\tsuper( wrapped );" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();
-		this.getWriter().println( "	public "+this.getEntityStructName()+"() {" );
-		this.getWriter().println( "		this( new "+this.getEntityHelperName()+"() );" );
-		this.getWriter().println( "	}" );
-		this.getWriter().println();
-		
-		this.getWriter().println( "	public final static String SQL_TYPE_NAME = \""+this.getSQLStructName().toUpperCase()+"\";" );
+		this.getWriter().println( "\tpublic "+this.getEntityStructName()+"() {" );
+		this.getWriter().println( "\t\tthis( new "+this.getEntityHelperName()+"() );" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();
 		
-		this.getWriter().println( "	public final static "+this.getEntityStructName()+" MAPPER = new "+this.getEntityStructName()+"();" );
+		this.getWriter().println( "\tpublic final static String SQL_TYPE_NAME = \""+this.getSQLStructName().toUpperCase()+"\";" );
+		this.getWriter().println();
+		
+		this.getWriter().println( "\tpublic final static "+this.getEntityStructName()+" MAPPER = new "+this.getEntityStructName()+"();" );
 		this.getWriter().println();
 		
 		// obj mapper impl
-		this.getWriter().println( "	@Override" );
-		this.getWriter().println( "	public Map<String, Class<?>> newTypeMapper() throws SQLException {" );
-		this.getWriter().println( "		Map<String, Class<?>> map = new HashMap<String, Class<?>>();" );
-		this.getWriter().println( "		map.put( SQL_TYPE_NAME, "+this.getEntityStructName()+".class );" );
-		this.getWriter().println( "		return map;" );
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\t@Override" );
+		this.getWriter().println( "\tpublic Map<String, Class<?>> newTypeMapper() throws SQLException {" );
+		this.getWriter().println( "\t\tMap<String, Class<?>> map = new HashMap<String, Class<?>>();" );
+		this.getWriter().println( "\t\tmap.put( SQL_TYPE_NAME, "+this.getEntityStructName()+".class );" );
+		this.getWriter().println( "\t\treturn map;" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();
 
 		// SQLData impl
-		this.getWriter().println( "	@Override" );
-		this.getWriter().println( "	public String getSQLTypeName() throws SQLException {" );
-		this.getWriter().println( "		return SQL_TYPE_NAME;" );
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\t@Override" );
+		this.getWriter().println( "\tpublic String getSQLTypeName() throws SQLException {" );
+		this.getWriter().println( "\t\treturn SQL_TYPE_NAME;" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();
 		
 		
-		this.getWriter().println( "	public static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model ) {" );
-		this.getWriter().println( "		"+this.getEntityStructName()+" res = null;" );
-		this.getWriter().println( "		if ( model instanceof "+this.getEntityStructName()+" ) {" );
-		this.getWriter().println( "			res = ("+this.getEntityStructName()+") model;" );
-		this.getWriter().println( "		} else { " );
-		this.getWriter().println( "			res = new "+this.getEntityStructName()+"( model );" );
-		this.getWriter().println( "		}" );
-		this.getWriter().println( "		return res;" );
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\tpublic static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model ) {" );
+		this.getWriter().println( "\t\t"+this.getEntityStructName()+" res = null;" );
+		this.getWriter().println( "\t\tif ( model instanceof "+this.getEntityStructName()+" ) {" );
+		this.getWriter().println( "\t\t\tres = ("+this.getEntityStructName()+") model;" );
+		this.getWriter().println( "\t\t} else { " );
+		this.getWriter().println( "\t\t\tres = new "+this.getEntityStructName()+"( model );" );
+		this.getWriter().println( "\t\t}" );
+		this.getWriter().println( "\t\treturn res;" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();
 
 		boolean containsBlob = false;
@@ -106,13 +106,13 @@ public class StructGenerator extends DaogenBasicGenerator {
 		
 		if ( containsBlob || containsClob ) {
 			// inner property for blob handling
-			this.getWriter().println( "	private boolean areLobsSet = false;" );
+			this.getWriter().println( "\tprivate boolean areLobsSet = false;" );
 			this.getWriter().println();	
 			// check lobs method
-			this.getWriter().println( "	protected boolean checkLobs() {" );
-			this.getWriter().println( "		// lobs must be set, or lobs properties must be null for writeSQL() to work" );
-			this.getWriter().println( "		boolean check = this.areLobsSet;" );
-			this.getWriter().println( "		if ( !check ) {" );
+			this.getWriter().println( "\tprotected boolean checkLobs() {" );
+			this.getWriter().println( "\t\t// lobs must be set, or lobs properties must be null for writeSQL() to work" );
+			this.getWriter().println( "\t\tboolean check = this.areLobsSet;" );
+			this.getWriter().println( "\t\tif ( !check ) {" );
 			boolean isFirst = true;
 			StringBuilder line = new StringBuilder();
 			line.append( "			check = " );
@@ -131,52 +131,52 @@ public class StructGenerator extends DaogenBasicGenerator {
 			}
 			line.append( ";" );
 			this.getWriter().println( line );
-			this.getWriter().println( "		}" );
-			this.getWriter().println( "		return check;" );
-			this.getWriter().println( "	}" );
+			this.getWriter().println( "\t\t}" );
+			this.getWriter().println( "\t\treturn check;" );
+			this.getWriter().println( "\t}" );
 			this.getWriter().println();	
 			// setup lobs method
-			this.getWriter().println( "	public void setupLobs( java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( "\tpublic void setupLobs( java.sql.Connection conn ) throws SQLException {" );
 			for ( DaogenCatalogField field : this.getCurrentEntity() )  {
 				String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 				if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
 					String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
 					String propertyNameH = propertyName+"Blob";
-					this.getWriter().println( "		"+MethodHelper.getSetterNameForProperty( propertyNameH )+"( org.fugerit.java.core.db.daogen.LobHelper.createBlob( conn, "+MethodHelper.getGetterNameForProperty( propertyName )+"() ) );" );
+					this.getWriter().println( "\t\t"+MethodHelper.getSetterNameForProperty( propertyNameH )+"( org.fugerit.java.core.db.daogen.LobHelper.createBlob( conn, "+MethodHelper.getGetterNameForProperty( propertyName )+"() ) );" );
 				} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
 					String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
 					String propertyNameH = propertyName+"Clob";
-					this.getWriter().println( "		"+MethodHelper.getSetterNameForProperty( propertyNameH )+"( org.fugerit.java.core.db.daogen.LobHelper.createClob( conn, "+MethodHelper.getGetterNameForProperty( propertyName )+"() ) );" );
+					this.getWriter().println( "\t\t"+MethodHelper.getSetterNameForProperty( propertyNameH )+"( org.fugerit.java.core.db.daogen.LobHelper.createClob( conn, "+MethodHelper.getGetterNameForProperty( propertyName )+"() ) );" );
 				}
 			}
-			this.getWriter().println( "		this.areLobsSet = true;" );
-			this.getWriter().println( "	}" );
+			this.getWriter().println( "\t\tthis.areLobsSet = true;" );
+			this.getWriter().println( "\t}" );
 			this.getWriter().println();	
 			// wrapper helpers
-			this.getWriter().println( "	public static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model, java.sql.Connection conn ) throws SQLException {" );
-			this.getWriter().println( "		"+this.getEntityStructName()+" res = wrap( model );" );
-			this.getWriter().println( "		if ( res != null ) {" );
-			this.getWriter().println( "			res.setupLobs( conn );" );
-			this.getWriter().println( "		}" );
-			this.getWriter().println( "		return res;" );
-			this.getWriter().println( "	}" );
+			this.getWriter().println( "\tpublic static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model, java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( "\t\t"+this.getEntityStructName()+" res = wrap( model );" );
+			this.getWriter().println( "\t\tif ( res != null ) {" );
+			this.getWriter().println( "\t\t\tres.setupLobs( conn );" );
+			this.getWriter().println( "\t\t}" );
+			this.getWriter().println( "\t\treturn res;" );
+			this.getWriter().println( "\t}" );
 			this.getWriter().println();
-			this.getWriter().println( "	public static "+this.getEntityStructName()+"[] wrap( "+this.getEntityModelName()+"[] list, java.sql.Connection conn ) throws SQLException {" );
-			this.getWriter().println( "		"+this.getEntityStructName()+"[] res = null;" );
-			this.getWriter().println( "		if ( list != null ) {" );
-			this.getWriter().println( "			res = new "+this.getEntityStructName()+"[ list.length ];" );
-			this.getWriter().println( "			for ( int k=0; k<list.length; k++ ) {" );
-			this.getWriter().println( "				res[k] = wrap( list[k], conn );" );
-			this.getWriter().println( "			}" );
-			this.getWriter().println( "		}" );
-			this.getWriter().println( "		return res;" );
-			this.getWriter().println( "	}" );
+			this.getWriter().println( "\tpublic static "+this.getEntityStructName()+"[] wrap( "+this.getEntityModelName()+"[] list, java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( "\t\t"+this.getEntityStructName()+"[] res = null;" );
+			this.getWriter().println( "\t\tif ( list != null ) {" );
+			this.getWriter().println( "\t\t\tres = new "+this.getEntityStructName()+"[ list.length ];" );
+			this.getWriter().println( "\t\t\tfor ( int k=0; k<list.length; k++ ) {" );
+			this.getWriter().println( "\t\t\t\tres[k] = wrap( list[k], conn );" );
+			this.getWriter().println( "\t\t\t}" );
+			this.getWriter().println( "\t\t}" );
+			this.getWriter().println( "\t\treturn res;" );
+			this.getWriter().println( "\t}" );
 			this.getWriter().println();
 		}
 		
 		// readSQL()
-		this.getWriter().println( "	@Override" );
-		this.getWriter().println( "	public void readSQL(SQLInput stream, String typeName) throws SQLException {" );
+		this.getWriter().println( "\t@Override" );
+		this.getWriter().println( "\tpublic void readSQL(SQLInput stream, String typeName) throws SQLException {" );
 		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
 			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
@@ -198,19 +198,19 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else {
 				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
 			}
-			this.getWriter().println( "		this.set"+javaSuffix+"( "+extratMethod+" );" );
+			this.getWriter().println( "\t\tthis.set"+javaSuffix+"( "+extratMethod+" );" );
 		}
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();	
 		
 		// readSQL()
-		this.getWriter().println( "	@Override" );
-		this.getWriter().println( "	public void writeSQL(SQLOutput stream) throws SQLException {" );
+		this.getWriter().println( "\t@Override" );
+		this.getWriter().println( "\tpublic void writeSQL(SQLOutput stream) throws SQLException {" );
 		if ( containsBlob || containsClob ) {
-			this.getWriter().println( "		if ( !this.checkLobs() ) {" );
-			this.getWriter().println( "			throwUnsupported( \"To use writeSQL() you must invoke setupLobs() for  \"+this.getSQLTypeName() );" );
-			this.getWriter().println( "		}" );
-			this.getWriter().println( "		this.areLobsSet = false;	// clob and blob will be used only once" );
+			this.getWriter().println( "\t\tif ( !this.checkLobs() ) {" );
+			this.getWriter().println( "\t\t\tthrowUnsupported( \"To use writeSQL() you must invoke setupLobs() for  \"+this.getSQLTypeName() );" );
+			this.getWriter().println( "\t\t}" );
+			this.getWriter().println( "\t\tthis.areLobsSet = false;	// clob and blob will be used only once" );
 		}
 		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
 			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
@@ -235,9 +235,9 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else {
 				throw new DAOException( "Type : "+columnType+" not handled yet!" );
 			}
-			this.getWriter().println( "		"+extratMethod.replace( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
+			this.getWriter().println( "\t\t"+extratMethod.replace( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
 		}
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();	
 	}
 

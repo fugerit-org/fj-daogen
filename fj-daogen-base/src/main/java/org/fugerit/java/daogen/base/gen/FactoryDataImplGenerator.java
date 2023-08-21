@@ -63,7 +63,7 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 		} else {
 			this.addSerialVerUID();
 			this.getWriter().println();
-			this.getWriter().println( "	public "+this.getJavaName()+"() {");
+			this.getWriter().println( "\tpublic "+this.getJavaName()+"() {");
 			Iterator<String> itEntity = this.getDaogenConfig().getIdSet().iterator();
 			String packageFacadeImpl = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DATA_IMPL );
 			while ( itEntity.hasNext() ) {
@@ -73,10 +73,10 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 					String facadeName = DaogenCatalogConstants.facadeDefName( current );
 					String facadeNameImpl = packageFacadeImpl+"."+DaogenCatalogConstants.facadeImplDataName( current );
 					String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
-					this.getWriter().println( "		this."+propertyName+" = new "+facadeNameImpl+"();" ) ;	
+					this.getWriter().println( "\t\tthis."+propertyName+" = new "+facadeNameImpl+"();" ) ;	
 				}
 			}
-			this.getWriter().println( "	}");
+			this.getWriter().println( "\t}");
 			this.getWriter().println();
 			itEntity = this.getDaogenConfig().getIdSet().iterator();
 			while ( itEntity.hasNext() ) {
@@ -85,16 +85,16 @@ public class FactoryDataImplGenerator extends DaogenBasicHelperGenerator {
 				if ( FacadeGeneratorUtils.isFacadeGenerate( current ) ) {
 					String facadeName = DaogenCatalogConstants.facadeDefName( current );
 					String propertyName = GeneratorNameHelper.toPropertyName( facadeName );
-					this.getWriter().println( "	private "+facadeName+" "+propertyName+";" );
+					this.getWriter().println( "\tprivate "+facadeName+" "+propertyName+";" );
 					this.getWriter().println();
-					this.getWriter().println( "	@Override" );
-					this.getWriter().println( "	public "+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+" {" );
-					this.getWriter().println( "		return this."+propertyName+";" );
-					this.getWriter().println( "	}" );
+					this.getWriter().println( "\t@Override" );
+					this.getWriter().println( "\tpublic "+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( "\t\treturn this."+propertyName+";" );
+					this.getWriter().println( "\t}" );
 					this.getWriter().println();
-					this.getWriter().println( "	protected void set"+facadeName+"( "+facadeName+" facade ) throws "+this.getClassDaoException()+" {" );
-					this.getWriter().println( "		this."+propertyName+" = facade;" );
-					this.getWriter().println( "	}" );
+					this.getWriter().println( "\tprotected void set"+facadeName+"( "+facadeName+" facade ) throws "+this.getClassDaoException()+" {" );
+					this.getWriter().println( "\t\tthis."+propertyName+" = facade;" );
+					this.getWriter().println( "\t}" );
 					this.getWriter().println();				
 				}
 			}

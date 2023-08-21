@@ -44,50 +44,50 @@ public class FinderGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws Exception {
 		this.addSerialVerUID();
-		this.getWriter().println( "	private "+this.getEntityModelName()+" model;" );
+		this.getWriter().println( "\tprivate "+this.getEntityModelName()+" model;" );
 		this.getWriter().println();
-		this.getWriter().println( "	public void setModel( "+this.getEntityModelName()+" model ) {"  );
-		this.getWriter().println( "		this.model = model;"  );
-		this.getWriter().println( "	}"  );
+		this.getWriter().println( "\tpublic void setModel( "+this.getEntityModelName()+" model ) {"  );
+		this.getWriter().println( "\t\tthis.model = model;"  );
+		this.getWriter().println( "\t}"  );
 		this.getWriter().println();
-		this.getWriter().println( "	public "+this.getEntityModelName()+" getModel() {"  );
-		this.getWriter().println( "		return this.model;"  );
-		this.getWriter().println( "	}"  );
+		this.getWriter().println( "\tpublic "+this.getEntityModelName()+" getModel() {"  );
+		this.getWriter().println( "\t\treturn this.model;"  );
+		this.getWriter().println( "\t}"  );
 		this.getWriter().println();
 		if ( this.getCurrentEntity().containsDefaultId() ) {
 			DaogenCatalogField idField = this.getCurrentEntity().get( DaogenCatalogEntity.DEFAULT_ID_FIELD );
 			String type = this.getDaogenConfig().getTypeMapper().mapForModel( idField );
-			this.getWriter().println( "	/**" );
-			this.getWriter().println( "	 *Factory method to create a new finder " );
-			this.getWriter().println( "	 *" );	
-			this.getWriter().println( "	 * @param id		id to wrap in the finder" );	
-			this.getWriter().println( "	 *" );	
-			this.getWriter().println( "	 * @return	the finder" );	
-			this.getWriter().println( "	 */" );
-			this.getWriter().println( "	public static "+this.getEntityFinderName()+" newInstance( "+type+" id ) { " );
-			this.getWriter().println( "		"+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );
-			this.getWriter().println( "		finder.setId( id );" );
-			this.getWriter().println( "		return finder;" );
-			this.getWriter().println( "	}" );
+			this.getWriter().println( "\t/**" );
+			this.getWriter().println( "\t *Factory method to create a new finder " );
+			this.getWriter().println( "\t *" );	
+			this.getWriter().println( "\t * @param id		id to wrap in the finder" );	
+			this.getWriter().println( "\t *" );	
+			this.getWriter().println( "\t * @return	the finder" );	
+			this.getWriter().println( "\t */" );
+			this.getWriter().println( "\tpublic static "+this.getEntityFinderName()+" newInstance( "+type+" id ) { " );
+			this.getWriter().println( "\t\t"+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );
+			this.getWriter().println( "\t\tfinder.setId( id );" );
+			this.getWriter().println( "\t\treturn finder;" );
+			this.getWriter().println( "\t}" );
 			this.getWriter().println();		
 		}
-		this.getWriter().println( "	/**" );
-		this.getWriter().println( "	 * Factory method to create a new finder " );
-		this.getWriter().println( "	 *" );	
-		this.getWriter().println( "	 * @param model		the model to wrap in the finder" );
-		this.getWriter().println( "	 *" );	
-		this.getWriter().println( "	 * @return	the finder" );	
-		this.getWriter().println( "	 */" );
-		this.getWriter().println( "	public static "+this.getEntityFinderName()+" newInstance( "+this.getEntityModelName()+" model ) { " );
-		this.getWriter().println( "		"+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );
+		this.getWriter().println( "\t/**" );
+		this.getWriter().println( "\t * Factory method to create a new finder " );
+		this.getWriter().println( "\t *" );	
+		this.getWriter().println( "\t * @param model		the model to wrap in the finder" );
+		this.getWriter().println( "\t *" );	
+		this.getWriter().println( "\t * @return	the finder" );	
+		this.getWriter().println( "\t */" );
+		this.getWriter().println( "\tpublic static "+this.getEntityFinderName()+" newInstance( "+this.getEntityModelName()+" model ) { " );
+		this.getWriter().println( "\t\t"+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );
 		if ( this.getCurrentEntity().containsDefaultId() ) {
-			this.getWriter().println( "		finder.setId( model.getId() );" );	
+			this.getWriter().println( "\t\tfinder.setId( model.getId() );" );	
 		} else {
-			this.getWriter().println( "		// default id not available for this entity" );
+			this.getWriter().println( "\t\t// default id not available for this entity" );
 		}
-		this.getWriter().println( "		finder.setModel( model );" );
-		this.getWriter().println( "		return finder;" );
-		this.getWriter().println( "	}" );
+		this.getWriter().println( "\t\tfinder.setModel( model );" );
+		this.getWriter().println( "\t\treturn finder;" );
+		this.getWriter().println( "\t}" );
 		this.getWriter().println();			
 	}
 
