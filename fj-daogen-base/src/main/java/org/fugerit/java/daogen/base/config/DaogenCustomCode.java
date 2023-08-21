@@ -9,12 +9,13 @@ import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.GenericListCatalogConfig;
 import org.fugerit.java.core.cfg.xml.PropertyCatalog;
 import org.fugerit.java.core.lang.helpers.ClassHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class DaogenCustomCode {
 
-	private static final Logger logger = LoggerFactory.getLogger( DaogenCustomCode.class );
+	private DaogenCustomCode() {}
 	
 	public static final String ID_LIST_COMMENTS = "comments";
 	
@@ -64,7 +65,7 @@ public class DaogenCustomCode {
 	}
 	
 	public static void addDocGenOpenAPI( String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
-		logger.info( "JEY "+key );
+		log.info( "JEY {}", key );
 		addCustomCode( "docgen", "openapi", key, indent, pw, params);
 	}
 	
