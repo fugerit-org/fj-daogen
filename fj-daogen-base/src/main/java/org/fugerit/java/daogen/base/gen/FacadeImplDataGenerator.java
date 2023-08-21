@@ -134,7 +134,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			if ( StringUtils.isNotEmpty( sequenceName ) ) {
 				this.getWriter().println( BLANK+TAB+"public final static String SEQUENCE_NAME = \""+sequenceName+"\";" );
 				this.getWriter().println();	
-				this.getWriter().println( BLANK+TAB+"@Override" );
+				this.getWriter().println( BLANK+TAB+AT_OVERRIDE );
 				this.getWriter().println( BLANK+TAB+"public String getSequenceName() {" );
 				this.getWriter().println( BLANK+TAB_2+"return SEQUENCE_NAME;" );
 				this.getWriter().println( BLANK+TAB+"}" );
@@ -150,7 +150,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println();
 			this.getWriter().println( TAB+"/* loadAll( context ) is inherited from BasicDataFacade */" );
 			this.getWriter().println();		
-			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+"public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+" context, "+this.getEntityFinderName()+" finder ) throws DAOException {" );
 			this.getWriter().println( TAB_2+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
 			this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
@@ -184,7 +184,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 					// create
-					this.getWriter().println( TAB+"@Override" );
+					this.getWriter().println( TAB+AT_OVERRIDE );
 					this.getWriter().println( TAB+"public "+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws DAOException {" );
 					this.getWriter().println( TAB_2+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
@@ -226,7 +226,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 					this.getWriter().println();	
 				}
 				// load by primary key
-				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+AT_OVERRIDE );
 				this.getWriter().println( TAB+"public "+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
 				this.getWriter().println( TAB_2+""+this.getEntityModelName()+" result = null;" );
 				this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
@@ -256,7 +256,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println();
 				if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {
 					// delete by primary key
-					this.getWriter().println( TAB+"@Override" );
+					this.getWriter().println( TAB+AT_OVERRIDE );
 					this.getWriter().println( TAB+"public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
 					this.getWriter().println( TAB_2+""+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
@@ -272,7 +272,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
 					// update by primary key
-					this.getWriter().println( TAB+"@Override" );
+					this.getWriter().println( TAB+AT_OVERRIDE );
 					this.getWriter().println( TAB+"public "+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+" context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 					this.getWriter().println( TAB_2+""+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+"<>();" );
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
