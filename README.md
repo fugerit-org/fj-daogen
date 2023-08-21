@@ -11,3 +11,5 @@ Useful resources : [github pages documentation](https://marsdocs.fugerit.org/) |
 *About javadoc*  
 Javadoc are far from being complete, but you can find latest version at [https://www.fugerit.org](https://www.fugerit.org/data/java/javadoc/)  
 Note that, being an open source project hosted on maven central, you can find release javadoc on [javadoc.io](https://javadoc.io/doc/org.fugerit.java/fj-daogen-base/)
+
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=fugerit-org_fj-daogen)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-daogen)
