@@ -40,7 +40,11 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	protected static final String CONTEXT_LIT = " context, ";
 	
 	protected static final String PUBLIC_LIT = "public ";
-		
+	
+	protected static final String GT_LIT = ">";
+	
+	protected static final String LT_LIT = "<";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {
