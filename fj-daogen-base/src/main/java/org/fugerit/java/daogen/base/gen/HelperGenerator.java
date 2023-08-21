@@ -51,13 +51,13 @@ public class HelperGenerator extends DaogenBasicGenerator {
 				this.getWriter().println( TAB+"private "+baseType+" "+propertyName+";" );
 				this.getWriter().println();
 				// setter metthod
-				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+AT_OVERRIDE );
 				this.getWriter().println( TAB+"public void set"+className+"( "+baseType+" value ) {" );
 				this.getWriter().println( TAB_2+"this."+propertyName+" = value;" );
 				this.getWriter().println( TAB+"}" );
 				this.getWriter().println();
 				// getter method
-				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+AT_OVERRIDE );
 				this.getWriter().println( TAB+"public "+baseType+" get"+className+"() {" );
 				this.getWriter().println( TAB_2+"return this."+propertyName+";" );
 				this.getWriter().println( TAB+"}" );
@@ -84,13 +84,13 @@ public class HelperGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB+"private "+realJavaType+" "+javaProperty+";" );
 			this.getWriter().println();
 			// setter method
-			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+"public void set"+javaSuffix+"( "+realJavaType+" value ) {" );
 			this.getWriter().println( TAB_2+"this."+javaProperty+" = value;" );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
 			// getter method
-			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+"public "+realJavaType+" get"+javaSuffix+"() {" );
 			this.getWriter().println( TAB_2+"return this."+javaProperty+";" );
 			this.getWriter().println( TAB+"}" );
@@ -100,7 +100,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 			this.generateRelations();
 		}
 		// metodo toString()
-		this.getWriter().println( TAB+"@Override" );
+		this.getWriter().println( TAB+AT_OVERRIDE );
 		this.getWriter().println( TAB+"public String toString() {" );
 		this.getWriter().println( TAB_2+"StringBuilder buffer = new StringBuilder();" );
 		this.getWriter().println( TAB_2+"buffer.append( this.getClass().getSimpleName() );" );
@@ -122,7 +122,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
 		if ( BooleanUtils.isTrue( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) ) ) {
-			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+"public boolean isEmpty() {" );
 			String start = "";
 			String end = "";
