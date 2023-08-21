@@ -23,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implements KeyObject<String> {
 
-	protected static final String BLANK = " ";
+	public static final String BLANK = " ";
 	
-	protected static final String TAB = "\t";
+	public static final String TAB = "\t";
 	
-	protected static final String TAB_2 = TAB+TAB;
+	public static final String TAB_2 = TAB+TAB;
 	
-	protected static final String TAB_3 = TAB_2+TAB;
+	public static final String TAB_3 = TAB_2+TAB;
 	
 	protected static final String JD_THROWS = " * @throws ";
 	

@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.gen.util;
 
 import org.fugerit.java.core.io.helper.CustomPrintWriter;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
 public class PropertyUtils {
 
@@ -20,23 +21,23 @@ public class PropertyUtils {
 		if ( modTransient ) {
 			addTransient = "transient ";
 		}
-		writer.println( "	private "+addTransient+realJavaType+" "+javaProperty+";" );
+		writer.println( DaogenBasicGenerator.TAB+"private "+addTransient+realJavaType+" "+javaProperty+";" );
 		writer.println();
 		// setter method
 		if ( override ) {
-			writer.println( "	@Override" );	
+			writer.println( DaogenBasicGenerator.TAB+"@Override" );	
 		}
-		writer.println( "	public void set"+javaSuffix+"( "+realJavaType+" value ) {" );
-		writer.println( "		this."+javaProperty+" = value;" );
-		writer.println( "	}" );
+		writer.println( DaogenBasicGenerator.TAB+"public void set"+javaSuffix+"( "+realJavaType+" value ) {" );
+		writer.println( DaogenBasicGenerator.TAB_2+"this."+javaProperty+" = value;" );
+		writer.println( DaogenBasicGenerator.TAB+"}" );
 		writer.println();
 		// getter method
 		if ( override ) {
-			writer.println( "	@Override" );	
+			writer.println( DaogenBasicGenerator.TAB+"@Override" );	
 		}
-		writer.println( "	public "+realJavaType+" get"+javaSuffix+"() {" );
-		writer.println( "		return this."+javaProperty+";" );
-		writer.println( "	}" );
+		writer.println( DaogenBasicGenerator.TAB+"public "+realJavaType+" get"+javaSuffix+"() {" );
+		writer.println( DaogenBasicGenerator.TAB_2+"return this."+javaProperty+";" );
+		writer.println( DaogenBasicGenerator.TAB+"}" );
 		writer.println();
 	}
 	
