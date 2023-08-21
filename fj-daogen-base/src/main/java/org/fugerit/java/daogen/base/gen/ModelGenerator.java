@@ -11,6 +11,9 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenCustomCode;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ModelGenerator extends DaogenBasicGenerator {
 
 	public static final String KEY = ModelGenerator.class.getSimpleName();
@@ -46,7 +49,7 @@ public class ModelGenerator extends DaogenBasicGenerator {
 				this.println( "	void set"+className+"( "+baseType+" value );" );
 				this.println();	
 			} catch (Exception e) {
-				logger.error( "error on relation : "+relation.getId() );
+				log.error( "error on relation : {}", relation.getId() );
 				throw e;
 			}
 			
