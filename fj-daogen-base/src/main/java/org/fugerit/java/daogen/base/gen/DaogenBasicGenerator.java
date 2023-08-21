@@ -97,7 +97,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return true;
 	}
 	
-	public DaogenBasicGenerator() {
+	protected DaogenBasicGenerator() {
 		this.decorators = new ArrayList<DaogenBasicDecorator>();
 	}
 	
