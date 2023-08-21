@@ -8,6 +8,7 @@ import java.util.Properties;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.db.connect.ConnectionFactory;
 import org.fugerit.java.core.db.metadata.ColumnModel;
 import org.fugerit.java.core.db.metadata.DataBaseModel;
@@ -44,11 +45,11 @@ public class DaogenConfigDump {
 		}
 	}
 	
-	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList ) throws Exception {
+	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList ) throws ConfigException {
 		dumpConfig(cf, params, writer, tableNameList, new Properties());
 	}
 	
-	public static void dumpConfigWorker( DataBaseModel dbModel, Document doc, Element root, Properties mapToTables ) throws Exception {
+	public static void dumpConfigWorker( DataBaseModel dbModel, Document doc, Element root, Properties mapToTables ) throws ConfigException {
 		ListMapStringKey<DaogenCatalogRelation> relations = new ListMapStringKey<>();
 		for ( TableModel tableModel : dbModel.getTableList() ) {
 			Element currentEntityTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ENTITY );
@@ -131,21 +132,25 @@ public class DaogenConfigDump {
 		}
 	}
 	
-	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws Exception {
-		String catalog = params.getProperty( PARAM_CATALOG );
-		String schema = params.getProperty( PARAM_SCHEMA );
-		String paramEntityType = params.getProperty( PARAM_ENTITY_TYPE , PARAM_ENTITY_TYPE_DEFAULT );
-		String[] types = { paramEntityType };
-		if ( PARAM_ENTITY_TYPE_ALL.equalsIgnoreCase( paramEntityType )  ) {
-			types = MetaDataUtils.TYPES_ALL;
+	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws ConfigException {
+		try {
+			String catalog = params.getProperty( PARAM_CATALOG );
+			String schema = params.getProperty( PARAM_SCHEMA );
+			String paramEntityType = params.getProperty( PARAM_ENTITY_TYPE , PARAM_ENTITY_TYPE_DEFAULT );
+			String[] types = { paramEntityType };
+			if ( PARAM_ENTITY_TYPE_ALL.equalsIgnoreCase( paramEntityType )  ) {
+				types = MetaDataUtils.TYPES_ALL;
+			}
+			DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList, types );
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			Document doc = builder.newDocument();
+			Element root = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ROOT );
+			dumpConfigWorker(dbModel, doc, root, mapToTables);
+			DOMIO.writeDOMIndent( root , writer );
+		} catch (Exception e) {
+			throw ConfigException.convertExMethod( "dumpConfig", e );
 		}
-		DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList, types );
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = dbf.newDocumentBuilder();
-		Document doc = builder.newDocument();
-		Element root = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_ROOT );
-		dumpConfigWorker(dbModel, doc, root, mapToTables);
-		DOMIO.writeDOMIndent( root , writer );
 	}
 	
 }
