@@ -43,7 +43,7 @@ public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
 		} else {
-			this.getWriter().println( "\tpublic static final String ATT_NAME = \""+this.getJavaName()+"\";" );
+			this.getWriter().println( TAB+"public static final String ATT_NAME = \""+this.getJavaName()+"\";" );
 			this.getWriter().println();
 			Iterator<String> itEntity = this.getDaogenConfig().getIdSet().iterator();
 			while ( itEntity.hasNext() ) {
@@ -52,13 +52,13 @@ public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 				if ( FacadeGeneratorUtils.isFacadeGenerate( current ) ) {
 					String facadeName = DaogenCatalogConstants.facadeDefName( current );
 					String packageFacade = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF );
-					this.getWriter().println( "\t/**" );
-					this.getWriter().println( "\t * Facade incapsulating persistance for entity : "+current.getName() );
-					this.getWriter().println( "\t *" );
-					this.getWriter().println( "\t * @return	the facade" );
-					this.getWriter().println( "\t * @throws "+this.getClassDaoException()+"	in case of problems" );
-					this.getWriter().println( "\t */" );
-					this.getWriter().println( "\t"+packageFacade+"."+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+";" );
+					this.getWriter().println( TAB+"/**" );
+					this.getWriter().println( TAB+" * Facade incapsulating persistance for entity : "+current.getName() );
+					this.getWriter().println( TAB+" *" );
+					this.getWriter().println( TAB+" * @return	the facade" );
+					this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"	in case of problems" );
+					this.getWriter().println( TAB+" */" );
+					this.getWriter().println( TAB+""+packageFacade+"."+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+";" );
 					this.getWriter().println();	
 				}
 			}
