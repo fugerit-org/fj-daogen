@@ -25,15 +25,15 @@ public class DaogenCustomCode {
 	
 	public static final String NO_INDENT = "";
 	
-	public static final String INDENT_1 = "	";
+	public static final String INDENT_1 = String.valueOf( '\u0009' );
 	
 	public static void addCustomCode( String catalog, String holder, String key, String indent, PrintWriter pw, Object... params ) throws ConfigException {
 		try {
 			String propValue = getInstance().getProperty( catalog , holder, key );
-			String content = propValue.trim().replaceAll( "'" , "''" );
+			String content = propValue.trim().replace( "'" , "''" );
 			String newContent = MessageFormat.format( content , params );
-			newContent = newContent.replaceAll( "OPB", "{" );
-			newContent = newContent.replaceAll( "CLB", "}" );
+			newContent = newContent.replace( "OPB", "{" );
+			newContent = newContent.replace( "CLB", "}" );
 			try ( BufferedReader reader = new BufferedReader( new StringReader( newContent ) ) ) {
 				String line = reader.readLine();
 				while ( line != null ) {

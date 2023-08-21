@@ -24,19 +24,19 @@ public class DaogenBasicDecorator {
 	}
 
 	public void addImports() throws Exception {
-		
+		// do nothing implementation : sub classes should override it if needed
 	}
 	
 	public void addAfterClassBody() throws Exception {
-		
+		// do nothing implementation : sub classes should override it if needed
 	}
 	
 	public void addBeforeClassBody() throws Exception {
-		
+		// do nothing implementation : sub classes should override it if needed
 	}
 
 	public void addBeforeClass() throws Exception {
-		
+		// do nothing implementation : sub classes should override it if needed
 	}
 
 }

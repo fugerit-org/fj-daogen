@@ -42,7 +42,7 @@ public class SpringBootLoadRealGenerator extends DaogenBasicGenerator {
 	@Override
 	protected void beforeClass() {
 		super.beforeClass();
-		String urlBase = this.getCurrentEntity().getName().replaceAll( "_" , "" ).toLowerCase();
+		String urlBase = this.getCurrentEntity().getName().replace( "_" , "" ).toLowerCase();
 		this.getWriter().println( "@RestController" );
 		this.getWriter().println( "@RequestMapping(\"/"+urlBase+"/load\")" );
 	}

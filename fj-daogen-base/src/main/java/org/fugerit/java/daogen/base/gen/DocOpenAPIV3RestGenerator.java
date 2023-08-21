@@ -47,7 +47,7 @@ public class DocOpenAPIV3RestGenerator extends DaogenBasicGenerator {
 	
 	@Override	
 	public void generate() throws Exception {
-		String urlBase = "/"+this.getCurrentEntity().getName().replaceAll( "_" , "" ).toLowerCase()+"/load";
+		String urlBase = "/"+this.getCurrentEntity().getName().replace( "_" , "" ).toLowerCase()+"/load";
 		String description = "Comments : "+prepareText( this.getCurrentEntity().getComments() );
 		String title = "OpenAPI load specification for "+prepareText( this.getCurrentEntity().getId() );
 		String version = prepareText( this.getDaogenConfig().getGeneralProp( "gen-version" ) );

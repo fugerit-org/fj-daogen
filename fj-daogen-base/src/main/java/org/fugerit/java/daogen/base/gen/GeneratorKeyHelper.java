@@ -165,7 +165,7 @@ public class GeneratorKeyHelper implements Serializable {
 	}
 	
 	public String getPathVarables() {
-		return this.getPathParams().replaceAll( "@PathParam" , "@PathVariable" );
+		return this.getPathParams().replace( "@PathParam" , "@PathVariable" );
 	}
 	
 }

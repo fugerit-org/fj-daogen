@@ -235,7 +235,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else {
 				throw new DAOException( "Type : "+columnType+" not handled yet!" );
 			}
-			this.getWriter().println( "		"+extratMethod.replaceAll( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
+			this.getWriter().println( "		"+extratMethod.replace( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
 		}
 		this.getWriter().println( "	}" );
 		this.getWriter().println();	
