@@ -16,6 +16,8 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 
 	public static final String KEY = FacadeImplDataGenerator.class.getSimpleName();
 	
+	private static final String MODEL_SET_LOT = "model.set";
+	
 	@Override
 	public String getKey() {
 		return KEY;
@@ -194,7 +196,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 							if ( field.getJavaType().equals( "java.math.BigDecimal" ) || field.getJavaType().equals( "java.lang.Long" ) ) {
 								String className = GeneratorNameHelper.toClassName( currentField );
 								this.getWriter().println( TAB_2+"if ( model.get"+className+"() == null ) { " );
-								this.getWriter().println( TAB_3+"model.set"+className+"( this.generateId( context ) ); " );
+								this.getWriter().println( TAB_3+MODEL_SET_LOT+className+"( this.generateId( context ) ); " );
 								this.getWriter().println( TAB_2+"} " );		
 							}
 						}
@@ -205,11 +207,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 					}
 					if ( colData != null ) {
 						this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
-						this.getWriter().println( TAB_2+"model.set"+GeneratorNameHelper.toClassName( colData.getId() )+"( currentTime ); " );
+						this.getWriter().println( TAB_2+MODEL_SET_LOT+GeneratorNameHelper.toClassName( colData.getId() )+"( currentTime ); " );
 					}
 					if ( colDataUpdate != null ) {
 						this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( TAB_2+"model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( currentTime ); " );	
+						this.getWriter().println( TAB_2+MODEL_SET_LOT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( currentTime ); " );	
 					}
 					this.getWriter().println( TAB_2+"InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
 					for ( DaogenCatalogField field : this.getCurrentEntity() ) {
@@ -278,7 +280,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 					this.getWriter().println( TAB_2+""+this.getClassDaoHelper()+"<"+this.getEntityModelName()+"> daoHelper = new "+this.getClassDaoHelper()+"<>( context );" );
 					if ( colDataUpdate != null ) {
 						this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-						this.getWriter().println( TAB_2+"model.set"+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
+						this.getWriter().println( TAB_2+MODEL_SET_LOT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
 					}
 					this.getWriter().println( TAB_2+"UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 					for ( DaogenCatalogField field : this.getCurrentEntity() ) {
