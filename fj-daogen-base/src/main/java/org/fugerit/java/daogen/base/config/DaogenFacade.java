@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.FactoryType;
@@ -68,15 +69,30 @@ public class DaogenFacade {
 	}
 	
 	
-	public static void generate( InputStream fis ) throws ConfigException {
+	public static void generate( InputStream fis, Properties overrideProperties ) throws ConfigException {
 		try {
 			DaogenCatalogConfig daogenConfig = DaogenCatalogConfig.loadConfig( fis );
+			if ( overrideProperties != null ) {
+				log.info( "override properties -> {}", overrideProperties );
+				for ( Object k : overrideProperties.keySet() ) {
+					String key = k.toString();
+					String value = overrideProperties.getProperty(key);
+					log.info( "ovverride {} -> {}", key, value );
+					daogenConfig.getGeneralProps().setProperty(key, value);
+				}
+				daogenConfig.getGeneralProps().keySet().stream().sorted().forEach( 
+						k -> log.info( "prop key : {} value : {}", k, daogenConfig.getGeneralProps().getProperty( k.toString() ) ) );
+			}
 			for ( DaogenGeneratorCatalog generatorCatalog : daogenConfig.getGeneratorCatalogs() ) {
 				generate(daogenConfig, generatorCatalog);
 			}
 		} catch (Exception e) {
 			throw ConfigException.convertEx( "Error during DAO generation", e );
 		}
+	}
+	
+	public static void generate( InputStream fis ) throws ConfigException {
+		generate(fis, null);
 	}
 	
 }

@@ -4,6 +4,7 @@
       <pluginExecutionFilter>
         <goals>
           <goal>compile</goal>
+          <goal>generate</goal>
         </goals>
       </pluginExecutionFilter>
       <action>

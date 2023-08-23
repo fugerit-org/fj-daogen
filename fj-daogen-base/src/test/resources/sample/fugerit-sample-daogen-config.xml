@@ -1,5 +1,5 @@
  <daogen-config
-	base-src-folder="../fj-daogen-sample"
+	base-src-folder="target/daogen-run"
 	database-type="oracle"
 	gen-version="1.0.0"
 	gen-author="fugerit"

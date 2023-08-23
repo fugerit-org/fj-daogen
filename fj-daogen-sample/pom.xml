@@ -13,6 +13,11 @@
 	<name>fj-daogen-sample</name>
 	<description></description>
 
+	<properties>
+		<gen.base.dir>${project.basedir}</gen.base.dir>
+		<generated.source.daogen>target/generated-sources/daogen</generated.source.daogen>
+	</properties>
+
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
@@ -22,6 +27,49 @@
 	</licenses>
 	
 	<build>
+		
+		<plugins>
+			
+			<plugin>
+				<groupId>org.fugerit.java</groupId>
+				<artifactId>fj-daogen-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>daogen</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<daogenConfig>${project.basedir}/src/main/daogen/fugerit-sample-daogen-config.xml</daogenConfig>
+					<genBaseDir>${gen.base.dir}</genBaseDir>
+					<generatedSourceHelper>${generated.source.daogen}</generatedSourceHelper>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+		                    <sources>
+		                    	<source>${gen.base.dir}/${generated.source.daogen}</source>
+		                    </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			
+		</plugins>
 		
 	</build>
 
