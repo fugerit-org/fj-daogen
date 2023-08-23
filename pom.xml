@@ -11,7 +11,7 @@
 
 	<artifactId>fj-daogen</artifactId>
 
-	<version>1.1.0-rc.4</version>
+	<version>1.1.0-rc.5</version>
 	<packaging>pom</packaging>
 
 	<name>fj-daogen</name>
@@ -72,9 +72,7 @@
 
 	<modules>
 		<module>fj-daogen-base</module>
-		<!-- 
 		<module>fj-daogen-maven-plugin</module>
-		 -->
 		<module>fj-daogen-sample</module>
 		<module>fj-daogen-tool</module>
 	</modules>
@@ -130,13 +128,6 @@
 		<pluginManagement>
 		
 			<plugins>
-
-				<!-- 
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.5.1</version>
-				</plugin>
-				 -->
 			
 			</plugins>
 		
