@@ -64,7 +64,7 @@ public abstract class DaogenBasicHelperGenerator extends DaogenBasicGenerator {
 		}
 	}
 	
-	protected void generateRealClass() throws ConfigException {
+	protected void generateRealClass() throws IOException {
 		this.println( REAL_CLASS_COMMENT );
 	}
 	

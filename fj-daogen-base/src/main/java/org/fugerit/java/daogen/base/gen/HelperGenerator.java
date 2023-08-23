@@ -1,5 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
+
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.compare.CheckEmptyHelper;
@@ -67,7 +69,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 	}
 	
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
 		if ( !relationLast ) {

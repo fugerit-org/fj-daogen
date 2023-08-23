@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -42,7 +43,7 @@ public class FinderGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		this.getWriter().println( TAB+"private "+this.getEntityModelName()+" model;" );
 		this.getWriter().println();

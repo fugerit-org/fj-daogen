@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.base.gen.helper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	protected abstract void printLoadCurrent( String urlName, String propertyName, String javaName, DaogenCatalogField field );
 	
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		String factoryClassName = GeneratorNameHelper.classFromPackage( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 		// load by id

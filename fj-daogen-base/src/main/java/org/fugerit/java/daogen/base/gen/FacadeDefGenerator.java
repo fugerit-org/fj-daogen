@@ -1,5 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
+
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
@@ -70,7 +72,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 	}
 	
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
 		} else {
@@ -103,7 +105,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 				GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
 				methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_LOAD_BY_PK, this.getEntityModelName(), "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
-					DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );
+					DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );	
 					this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
 					this.getWriter().println();
 				}

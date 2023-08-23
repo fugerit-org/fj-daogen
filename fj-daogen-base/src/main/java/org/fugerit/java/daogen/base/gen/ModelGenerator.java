@@ -1,6 +1,9 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
+
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.io.helper.HelperIOException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.compare.CheckEmpty;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
@@ -32,7 +35,7 @@ public class ModelGenerator extends DaogenBasicGenerator {
 		}
 	}
 
-	private void generateRelations() throws Exception {
+	private void generateRelations() throws IOException {
 		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
 			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
 			try {
@@ -50,14 +53,14 @@ public class ModelGenerator extends DaogenBasicGenerator {
 				this.println();	
 			} catch (Exception e) {
 				log.error( "error on relation : {}", relation.getId() );
-				throw e;
+				throw HelperIOException.convertEx( e );
 			}
 			
 		}
 	}	
 	
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
 		if ( !relationLast ) {
 			this.generateRelations();

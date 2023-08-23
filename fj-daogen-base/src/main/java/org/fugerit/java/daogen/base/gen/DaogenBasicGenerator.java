@@ -173,7 +173,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	}
 
 	@Override
-	public void generateBody() throws Exception {
+	public void generateBody() throws IOException {
 		for ( DaogenBasicDecorator decorator : this.getDecorators() ) {
 			try {
 				decorator.addBeforeClassBody();
@@ -191,7 +191,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		}
 	}
 	
-	public abstract void generateDaogenBody() throws Exception;
+	public abstract void generateDaogenBody() throws IOException;
 	
 	public String getBaseName() {
 		return DaogenCatalogConstants.modelName( this.getCurrentEntity() );

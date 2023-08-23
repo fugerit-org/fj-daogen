@@ -1,7 +1,9 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
+
 import org.fugerit.java.core.cfg.ConfigException;
-import org.fugerit.java.core.db.dao.DAOException;
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.reflect.MethodHelper;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
@@ -40,7 +42,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		
 		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
@@ -196,7 +198,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else if ( field.isUserType() ) {
 				extratMethod = " ( ("+ field.getStructType() +") stream.readObject() ) ";
 			} else {
-				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
+				throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
 			}
 			this.getWriter().println( TAB_2+"this.set"+javaSuffix+"( "+extratMethod+" );" );
 		}
@@ -233,7 +235,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			} else if ( field.isUserType() ) {
 				extratMethod = "stream.writeObject( ("+ field.getStructType() +") FIELD-TOKEN )";
 			} else {
-				throw new DAOException( "Type : "+columnType+" not handled yet!" );
+				throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
 			}
 			this.getWriter().println( TAB_2+""+extratMethod.replace( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
 		}

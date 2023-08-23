@@ -74,7 +74,7 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		this.println( REAL_CLASS_COMMENT );
 	}

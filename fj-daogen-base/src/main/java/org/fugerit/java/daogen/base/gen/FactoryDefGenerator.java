@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -39,7 +40,7 @@ public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		if ( this.isModeReal() ) {
 			this.generateRealClass();
 		} else {

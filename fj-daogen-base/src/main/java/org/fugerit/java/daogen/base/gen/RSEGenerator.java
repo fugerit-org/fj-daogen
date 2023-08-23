@@ -1,6 +1,9 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
+
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
@@ -37,7 +40,7 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		this.getWriter().println( TAB+"public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
 		this.getWriter().println();
@@ -80,7 +83,7 @@ public class RSEGenerator extends DaogenBasicGenerator {
 				extratMethod = clobHandlerType+".newHandlerPreload( rs.getClob( \""+columnName+"\" ) ) ";	
 				tryCatch = true;				
 			} else {
-				throw new ConfigException( "Type : "+columnType+" not handled yet!" );
+				throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
 			}
 			if ( tryCatch ) {
 				this.getWriter().println( indent+TAB_2+"try { " );

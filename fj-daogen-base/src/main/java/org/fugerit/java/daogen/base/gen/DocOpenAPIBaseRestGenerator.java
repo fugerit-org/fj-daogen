@@ -1,6 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
@@ -44,7 +45,7 @@ public class DocOpenAPIBaseRestGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		// donothing()
 	}
 	
@@ -57,7 +58,7 @@ public class DocOpenAPIBaseRestGenerator extends DaogenBasicGenerator {
 	}
 	
 	@Override	
-	public void generate() throws Exception {
+	public void generate() throws IOException {
 		String urlBase = "/"+this.getCurrentEntity().getName().replace( "_" , "" ).toLowerCase()+"/load";
 		String description = "Comments : "+prepareText( this.getCurrentEntity().getComments() );
 		String title = "OpenAPI load specification for "+prepareText( this.getCurrentEntity().getId() );

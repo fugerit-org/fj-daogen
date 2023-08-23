@@ -1,5 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
+import java.io.IOException;
+
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
@@ -63,7 +65,7 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 	}
 
 	@Override
-	public void generateDaogenBody() throws Exception {
+	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		
 		this.getWriter().println( TAB+"public "+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
