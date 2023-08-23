@@ -55,11 +55,15 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	}
 	
 	public static DaogenCatalogConfig loadConfig( InputStream input ) throws Exception {
+		return loadConfig( input, DaogenCatalogConfig.class );
+	}
+	
+	public static DaogenCatalogConfig loadConfig( InputStream input, Class<?> c ) throws Exception {
 		DaogenCatalogConfig config = new DaogenCatalogConfig();
 		load( input , config );
 		// class config
 		String classConfigPath = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG, DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG_DEFAULT );
-		try ( InputStream is = StreamHelper.resolveStream( classConfigPath ) ) {
+		try ( InputStream is = StreamHelper.resolveStream( classConfigPath, null, c ) ) {
 			config.classConfig.loadFromXML( is );
 		}
 		// type mapper
@@ -71,21 +75,21 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		String pathDecoratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG_DEFAULT );
 		DaogenGeneratorCatalog daogenDecoratorCatalog = new DaogenGeneratorCatalog();
 		if ( pathDecoratorCatalog != null ) {
-			try ( InputStream is = StreamHelper.resolveStream( pathDecoratorCatalog )  ) {
+			try ( InputStream is = StreamHelper.resolveStream( pathDecoratorCatalog, null, c )  ) {
 				daogenDecoratorCatalog.configureXML( is );
 			}
 		}
 		config.setDecoratorCatalog( daogenDecoratorCatalog );
 		// generator catalog
 		String pathGeneratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT );
-		try ( InputStream is = StreamHelper.resolveStream( pathGeneratorCatalog ) ) {
+		try ( InputStream is = StreamHelper.resolveStream( pathGeneratorCatalog, null, c ) ) {
 			DaogenGeneratorCatalog generatorCatalog = new DaogenGeneratorCatalog();
 			load( is , generatorCatalog );
 			config.getGeneratorCatalogs().add( generatorCatalog );
 			if ( !DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT.equalsIgnoreCase( pathGeneratorCatalog ) ) {
 				String extendsDefault = generatorCatalog.getGeneralProps().getProperty(  DaogenGeneratorCatalog.KEY_EXTENDS_DEFAULT );
 				if ( "true".equalsIgnoreCase( extendsDefault ) ) {
-					try ( InputStream isDef = StreamHelper.resolveStream( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT ) ) {
+					try ( InputStream isDef = StreamHelper.resolveStream( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT, null, c ) ) {
 						DaogenGeneratorCatalog generatorCatalogDef = new DaogenGeneratorCatalog();
 						load( isDef , generatorCatalogDef );
 						config.getGeneratorCatalogs().add( generatorCatalogDef );
