@@ -33,7 +33,7 @@ public class DataEntityUploadFacadeHelper extends BasicDataFacade<ModelUpload> i
 
 	private static final long serialVersionUID = 783597393751L;
 
-	private final static String TABLE_NAME = "PUBLIC.FUGERIT.UPLOAD";
+	private static final String TABLE_NAME = "PUBLIC.FUGERIT.UPLOAD";
 
 	public DataEntityUploadFacadeHelper() {
 		super( TABLE_NAME, UploadRSE.DEFAULT, null );
@@ -43,17 +43,17 @@ public class DataEntityUploadFacadeHelper extends BasicDataFacade<ModelUpload> i
 		super( tableName, UploadRSE.DEFAULT, queryView );
 	}
 
- 	public final static String SEQUENCE_NAME = "seq_id_fugerit";
+ 	public static final String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override
  	public String getSequenceName() {
  		return SEQUENCE_NAME;
  	}
 
- 	public final static String COL_ID = "ID";
- 	public final static String COL_DATE_INSERT = "DATE_INSERT";
- 	public final static String COL_DATE_UPDATE = "DATE_UPDATE";
- 	public final static String COL_CONTENT = "CONTENT";
+ 	public static final String COL_ID = "ID";
+ 	public static final String COL_DATE_INSERT = "DATE_INSERT";
+ 	public static final String COL_DATE_UPDATE = "DATE_UPDATE";
+ 	public static final String COL_CONTENT = "CONTENT";
 
 	/* loadAll( context ) is inherited from BasicDataFacade */
 

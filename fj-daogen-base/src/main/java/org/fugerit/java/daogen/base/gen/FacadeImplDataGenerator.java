@@ -111,11 +111,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 			
 			String fullTableName = toFullTableName( this.getCurrentEntity() );
-			this.getWriter().println( TAB+"private final static String TABLE_NAME = \""+fullTableName+"\";" );
+			this.getWriter().println( TAB+"private static final String TABLE_NAME = \""+fullTableName+"\";" );
 			this.getWriter().println();
 			String queryViewInit = null;
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getQueryView() ) ) {
-				this.getWriter().println( TAB+"private final static String QUERY_VIEW = \""+this.getCurrentEntity().getQueryView()+"\";" );
+				this.getWriter().println( TAB+"private static final String QUERY_VIEW = \""+this.getCurrentEntity().getQueryView()+"\";" );
 				this.getWriter().println();
 				queryViewInit = "QUERY_VIEW";
 			}
@@ -136,7 +136,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 			String defaultOrderBy = this.getCurrentEntity().getOrderBy();
 			if ( StringUtils.isNotEmpty( sequenceName ) ) {
-				this.getWriter().println( BLANK+TAB+"public final static String SEQUENCE_NAME = \""+sequenceName+"\";" );
+				this.getWriter().println( BLANK+TAB+"public static final String SEQUENCE_NAME = \""+sequenceName+"\";" );
 				this.getWriter().println();	
 				this.getWriter().println( BLANK+TAB+AT_OVERRIDE );
 				this.getWriter().println( BLANK+TAB+"public String getSequenceName() {" );
@@ -145,11 +145,11 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				this.getWriter().println();	
 			}
 			if ( StringUtils.isNotEmpty( defaultOrderBy ) ) {
-				this.getWriter().println( " 	protected final static String DEFAULT_ORDER_BY = \""+defaultOrderBy+"\";" );
+				this.getWriter().println( " 	protected static final String DEFAULT_ORDER_BY = \""+defaultOrderBy+"\";" );
 				this.getWriter().println();	
 			}		
 			for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-				this.getWriter().println( " 	public final static String "+columnConstantName( field.getId() )+ " = \""+field.getId()+"\";" );
+				this.getWriter().println( " 	public static final String "+columnConstantName( field.getId() )+ " = \""+field.getId()+"\";" );
 			}
 			this.getWriter().println();
 			this.getWriter().println( TAB+"/* loadAll( context ) is inherited from BasicDataFacade */" );

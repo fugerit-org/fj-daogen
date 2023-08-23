@@ -30,7 +30,7 @@ public class DataEntityLogDataFacadeHelper extends BasicDataFacade<ModelLogData>
 
 	private static final long serialVersionUID = 63742904079L;
 
-	private final static String TABLE_NAME = "PUBLIC.FUGERIT.LOG_DATA";
+	private static final String TABLE_NAME = "PUBLIC.FUGERIT.LOG_DATA";
 
 	public DataEntityLogDataFacadeHelper() {
 		super( TABLE_NAME, LogDataRSE.DEFAULT, null );
@@ -40,16 +40,16 @@ public class DataEntityLogDataFacadeHelper extends BasicDataFacade<ModelLogData>
 		super( tableName, LogDataRSE.DEFAULT, queryView );
 	}
 
- 	public final static String SEQUENCE_NAME = "seq_id_fugerit";
+ 	public static final String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override
  	public String getSequenceName() {
  		return SEQUENCE_NAME;
  	}
 
- 	public final static String COL_ID = "ID";
- 	public final static String COL_LOG_TIME = "LOG_TIME";
- 	public final static String COL_INFO = "INFO";
+ 	public static final String COL_ID = "ID";
+ 	public static final String COL_LOG_TIME = "LOG_TIME";
+ 	public static final String COL_INFO = "INFO";
 
 	/* loadAll( context ) is inherited from BasicDataFacade */
 

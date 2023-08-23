@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class GeneratorKeyHelper implements Serializable {
 
-	private final static Logger logger = LoggerFactory.getLogger( GeneratorKeyHelper.class );
+	private static final Logger logger = LoggerFactory.getLogger( GeneratorKeyHelper.class );
 	
 	/**
 	 * 

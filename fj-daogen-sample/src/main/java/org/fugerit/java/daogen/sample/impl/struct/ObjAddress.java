@@ -38,9 +38,9 @@ public class ObjAddress extends WrapperAddress implements SQLData, StructMapper 
 		this( new HelperAddress() );
 	}
 
-	public final static String SQL_TYPE_NAME = "OBJ_ADDRESS";
+	public static final String SQL_TYPE_NAME = "OBJ_ADDRESS";
 
-	public final static ObjAddress MAPPER = new ObjAddress();
+	public static final ObjAddress MAPPER = new ObjAddress();
 
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {

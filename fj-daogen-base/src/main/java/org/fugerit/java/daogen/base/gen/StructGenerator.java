@@ -57,10 +57,10 @@ public class StructGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
 		
-		this.getWriter().println( TAB+"public final static String SQL_TYPE_NAME = \""+this.getSQLStructName().toUpperCase()+"\";" );
+		this.getWriter().println( TAB+"public static final String SQL_TYPE_NAME = \""+this.getSQLStructName().toUpperCase()+"\";" );
 		this.getWriter().println();
 		
-		this.getWriter().println( TAB+"public final static "+this.getEntityStructName()+" MAPPER = new "+this.getEntityStructName()+"();" );
+		this.getWriter().println( TAB+"public static final "+this.getEntityStructName()+" MAPPER = new "+this.getEntityStructName()+"();" );
 		this.getWriter().println();
 		
 		// obj mapper impl

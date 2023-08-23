@@ -33,7 +33,7 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 
 	private static final long serialVersionUID = 455376671618L;
 
-	private final static String TABLE_NAME = "PUBLIC.FUGERIT.ADDRESS";
+	private static final String TABLE_NAME = "PUBLIC.FUGERIT.ADDRESS";
 
 	public DataEntityAddressFacadeHelper() {
 		super( TABLE_NAME, AddressRSE.DEFAULT, null );
@@ -43,18 +43,18 @@ public class DataEntityAddressFacadeHelper extends BasicDataFacade<ModelAddress>
 		super( tableName, AddressRSE.DEFAULT, queryView );
 	}
 
- 	public final static String SEQUENCE_NAME = "seq_id_fugerit";
+ 	public static final String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override
  	public String getSequenceName() {
  		return SEQUENCE_NAME;
  	}
 
- 	public final static String COL_ID = "ID";
- 	public final static String COL_ID_USER = "ID_USER";
- 	public final static String COL_DATE_INSERT = "DATE_INSERT";
- 	public final static String COL_DATE_UPDATE = "DATE_UPDATE";
- 	public final static String COL_INFO = "INFO";
+ 	public static final String COL_ID = "ID";
+ 	public static final String COL_ID_USER = "ID_USER";
+ 	public static final String COL_DATE_INSERT = "DATE_INSERT";
+ 	public static final String COL_DATE_UPDATE = "DATE_UPDATE";
+ 	public static final String COL_INFO = "INFO";
 
 	/* loadAll( context ) is inherited from BasicDataFacade */
 

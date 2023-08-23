@@ -38,9 +38,9 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 		this( new HelperUpload() );
 	}
 
-	public final static String SQL_TYPE_NAME = "OBJ_UPLOAD";
+	public static final String SQL_TYPE_NAME = "OBJ_UPLOAD";
 
-	public final static ObjUpload MAPPER = new ObjUpload();
+	public static final ObjUpload MAPPER = new ObjUpload();
 
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {

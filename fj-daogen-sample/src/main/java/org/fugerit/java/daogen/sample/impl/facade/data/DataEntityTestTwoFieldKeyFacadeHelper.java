@@ -33,7 +33,7 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 
 	private static final long serialVersionUID = 426075792345L;
 
-	private final static String TABLE_NAME = "PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY";
+	private static final String TABLE_NAME = "PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY";
 
 	public DataEntityTestTwoFieldKeyFacadeHelper() {
 		super( TABLE_NAME, TestTwoFieldKeyRSE.DEFAULT, null );
@@ -43,16 +43,16 @@ public class DataEntityTestTwoFieldKeyFacadeHelper extends BasicDataFacade<Model
 		super( tableName, TestTwoFieldKeyRSE.DEFAULT, queryView );
 	}
 
- 	public final static String SEQUENCE_NAME = "seq_id_fugerit";
+ 	public static final String SEQUENCE_NAME = "seq_id_fugerit";
 
  	@Override
  	public String getSequenceName() {
  		return SEQUENCE_NAME;
  	}
 
- 	public final static String COL_ID_ONE = "ID_ONE";
- 	public final static String COL_ID_TWO = "ID_TWO";
- 	public final static String COL_INFO = "INFO";
+ 	public static final String COL_ID_ONE = "ID_ONE";
+ 	public static final String COL_ID_TWO = "ID_TWO";
+ 	public static final String COL_INFO = "INFO";
 
 	/* loadAll( context ) is inherited from BasicDataFacade */
 

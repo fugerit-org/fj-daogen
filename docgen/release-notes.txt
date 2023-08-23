@@ -1,5 +1,6 @@
 ﻿1.1.0 (next)
 ------------------
++ [enhancement] Updated generation for 'static final' modifier order [1.1.0-rc.3]
 + [enhancement] Code review for fj-core 8.2.0-rc.6 [1.1.0-rc.2]
 + [enhancement] update fj-core version 8.2.0-rc.6 [1.1.0-rc.2]
 + [enhancement] update fj-bom version 1.2.3 [1.1.0-rc.1]
