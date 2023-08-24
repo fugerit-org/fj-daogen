@@ -103,6 +103,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	}
 
 	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+		log.trace( "daogenConfig:{}, entity:{}", daogenConfig, entity );
 		return true;
 	}
 	

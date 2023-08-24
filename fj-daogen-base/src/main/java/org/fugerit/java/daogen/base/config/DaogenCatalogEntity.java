@@ -3,12 +3,15 @@ package org.fugerit.java.daogen.base.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fugerit.java.core.cfg.xml.ListMapConfig;
+import org.fugerit.java.core.cfg.xml.IdConfigType;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.collection.ListMapStringKey;
 
-public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
+import lombok.Getter;
+import lombok.Setter;
+
+public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> implements IdConfigType {
 
 	public static final String DEFAULT_ID_FIELD = "ID";
 	
@@ -42,9 +45,9 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		return (this == o);
 	}
 
-
-
 	private ListMapStringKey<DaogenCatalogRelation> relations;
+
+	@Getter @Setter private String id;
 	
 	private String catalog;
 	
@@ -174,21 +177,23 @@ public class DaogenCatalogEntity extends ListMapConfig<DaogenCatalogField> {
 		return relations;
 	}
 
+	private static final String SEP = ":";
+	
 	public String describe() {
 		 List<String> list = new ArrayList<String>();
-		 list.add( StringUtils.concat( ":" , ATT_NAME, this.getName() ) );
-		 list.add( StringUtils.concat( ":" , ATT_SCHEMA, this.getSchema() ) );
-		 list.add( StringUtils.concat( ":" , ATT_CATALOG, this.getCatalog() ) );
-		 list.add( StringUtils.concat( ":" , ATT_PRIMARY_KEY, this.getPrimaryKey() ) );
-		 list.add( StringUtils.concat( ":" , ATT_FOREIGN_KEYS, this.getForeignKeys() ) );
-		 list.add( StringUtils.concat( ":" , ATT_COMMENTS, this.getComments() ) );
-		 list.add( StringUtils.concat( ":" , ATT_SEQUENCE_NAME, this.getSequenceName() ) );
-		 list.add( StringUtils.concat( ":" , ATT_ORDER_BY, this.getOrderBy() ) );
-		 list.add( StringUtils.concat( ":" , ATT_MAP_TO_TABLE, this.getMapToTable() ) );
-		 list.add( StringUtils.concat( ":" , ATT_QUERY_VIEW, this.getQueryView() ) );
-		 list.add( StringUtils.concat( ":" , ATT_FACADE_MODE, this.getFacadeMode() ) );
-		 list.add( StringUtils.concat( ":" , ATT_STRUCT_SQL_TYPE_USENAME, this.getStructSqlType() ) );
-		 list.add( StringUtils.concat( ":" , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
+		 list.add( StringUtils.concat( SEP , ATT_NAME, this.getName() ) );
+		 list.add( StringUtils.concat( SEP , ATT_SCHEMA, this.getSchema() ) );
+		 list.add( StringUtils.concat( SEP , ATT_CATALOG, this.getCatalog() ) );
+		 list.add( StringUtils.concat( SEP , ATT_PRIMARY_KEY, this.getPrimaryKey() ) );
+		 list.add( StringUtils.concat( SEP , ATT_FOREIGN_KEYS, this.getForeignKeys() ) );
+		 list.add( StringUtils.concat( SEP , ATT_COMMENTS, this.getComments() ) );
+		 list.add( StringUtils.concat( SEP , ATT_SEQUENCE_NAME, this.getSequenceName() ) );
+		 list.add( StringUtils.concat( SEP , ATT_ORDER_BY, this.getOrderBy() ) );
+		 list.add( StringUtils.concat( SEP , ATT_MAP_TO_TABLE, this.getMapToTable() ) );
+		 list.add( StringUtils.concat( SEP , ATT_QUERY_VIEW, this.getQueryView() ) );
+		 list.add( StringUtils.concat( SEP , ATT_FACADE_MODE, this.getFacadeMode() ) );
+		 list.add( StringUtils.concat( SEP , ATT_STRUCT_SQL_TYPE_USENAME, this.getStructSqlType() ) );
+		 list.add( StringUtils.concat( SEP , DaogenCatalogConfig.ATT_DAOGEN_RELATION, this.getRelations().toString() ) );
 		 return StringUtils.concat(  ",", list );
 	}
 	
