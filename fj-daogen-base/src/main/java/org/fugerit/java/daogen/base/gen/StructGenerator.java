@@ -41,13 +41,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 		this.setExtendsClass( this.getEntityWrapperName() );
 	}
 
-	@Override
-	public void generateDaogenBody() throws IOException {
-		this.addSerialVerUID();
-		
-		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
-		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
-		
+	private void generateDaogenBodyStart() {
 		this.getWriter().println( TAB+"public "+this.getEntityStructName()+"( "+this.getEntityModelName()+" wrapped ) {" );
 		this.getWriter().println( TAB_2+"super( wrapped );" );
 		this.getWriter().println( TAB+"}" );
@@ -90,22 +84,9 @@ public class StructGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB_2+"return res;" );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
-
-		boolean containsBlob = false;
-		boolean containsClob = false;
-		
-		// blob / clob handling
-		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
-			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
-			if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
-				containsBlob = true;
-				PropertyUtils.newProperty( this.getWriter(), field.getId()+"_BLOB", TypeUtils.TYPE_BLOB, false, true );
-			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
-				containsClob = true;
-				PropertyUtils.newProperty( this.getWriter(), field.getId()+"_CLOB", TypeUtils.TYPE_CLOB, false, true );
-			}
-		}
-		
+	}
+	
+	private void generateDaogenBodyLob( boolean containsBlob, boolean containsClob, String blobHandlerType, String clobHandlerType ) {
 		if ( containsBlob || containsClob ) {
 			// inner property for blob handling
 			this.getWriter().println( TAB+"private boolean areLobsSet = false;" );
@@ -175,32 +156,89 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
 		}
+	}
+	
+	private void handleField1( DaogenCatalogField field, String blobHandlerType, String clobHandlerType ) {
+		String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+		String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
+		String extratMethod = null;
+		if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
+			extratMethod = "stream.readString()";
+		} else 	if ( columnType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
+			extratMethod = "stream.readBigDecimal()";
+		} else 	if ( columnType.equalsIgnoreCase( "java.sql.Date" ) ) {
+			extratMethod = "stream.readDate()";
+		} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) || columnType.equalsIgnoreCase( "java.util.Date" ) ) {
+			extratMethod = "stream.readTimestamp()";
+		} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
+			extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() )";
+		} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+			extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.clobToCharHandler( (java.sql.Clob) stream.readObject() )";			
+		} else if ( field.isUserType() ) {
+			extratMethod = " ( ("+ field.getStructType() +") stream.readObject() ) ";
+		} else {
+			throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
+		}
+		this.getWriter().println( TAB_2+"this.set"+javaSuffix+"( "+extratMethod+" );" );
+	}
+	
+	private void handleField2( DaogenCatalogField field, String blobHandlerType, String clobHandlerType ) {
+		String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+		String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
+		String extratMethod = null;
+		if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
+			extratMethod = "stream.writeString( FIELD-TOKEN )";
+		} else 	if ( columnType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
+			extratMethod = "stream.writeBigDecimal( FIELD-TOKEN )";
+		} else 	if ( columnType.equalsIgnoreCase( "java.sql.Date" ) ) {
+			extratMethod = "stream.writeDate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlDate( FIELD-TOKEN ) )";
+		} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) || columnType.equalsIgnoreCase( "java.util.Date" ) ) {
+			extratMethod = "stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( FIELD-TOKEN ) )";
+		} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
+			extratMethod = "stream.writeBlob( FIELD-TOKEN )";
+			javaSuffix+= "Blob";
+		} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+			extratMethod = "stream.writeClob( FIELD-TOKEN )";
+			javaSuffix+= "Clob";
+		} else if ( field.isUserType() ) {
+			extratMethod = "stream.writeObject( ("+ field.getStructType() +") FIELD-TOKEN )";
+		} else {
+			throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
+		}
+		this.getWriter().println( TAB_2+""+extratMethod.replace( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
+	}
+	
+	@Override
+	public void generateDaogenBody() throws IOException {
+		this.addSerialVerUID();
+		
+		String blobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Blob" );
+		String clobHandlerType = this.getDaogenConfig().getTypeMapper().getTypeMapConfig().getProperty( "model_java.sql.Clob" );
+		
+		this.generateDaogenBodyStart();
+
+		boolean containsBlob = false;
+		boolean containsClob = false;
+		
+		// blob / clob handling
+		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
+			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+			if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
+				containsBlob = true;
+				PropertyUtils.newProperty( this.getWriter(), field.getId()+"_BLOB", TypeUtils.TYPE_BLOB, false, true );
+			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
+				containsClob = true;
+				PropertyUtils.newProperty( this.getWriter(), field.getId()+"_CLOB", TypeUtils.TYPE_CLOB, false, true );
+			}
+		}
+		
+		this.generateDaogenBodyLob(containsBlob, containsClob, blobHandlerType, clobHandlerType);
 		
 		// readSQL()
 		this.getWriter().println( TAB+"@Override" );
 		this.getWriter().println( TAB+"public void readSQL(SQLInput stream, String typeName) throws SQLException {" );
 		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
-			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
-			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
-			String extratMethod = null;
-			if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
-				extratMethod = "stream.readString()";
-			} else 	if ( columnType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
-				extratMethod = "stream.readBigDecimal()";
-			} else 	if ( columnType.equalsIgnoreCase( "java.sql.Date" ) ) {
-				extratMethod = "stream.readDate()";
-			} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) || columnType.equalsIgnoreCase( "java.util.Date" ) ) {
-				extratMethod = "stream.readTimestamp()";
-			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
-				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() )";
-			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
-				extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.clobToCharHandler( (java.sql.Clob) stream.readObject() )";			
-			} else if ( field.isUserType() ) {
-				extratMethod = " ( ("+ field.getStructType() +") stream.readObject() ) ";
-			} else {
-				throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
-			}
-			this.getWriter().println( TAB_2+"this.set"+javaSuffix+"( "+extratMethod+" );" );
+			this.handleField1(field, blobHandlerType, clobHandlerType);
 		}
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();	
@@ -215,29 +253,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+"this.areLobsSet = false;	// clob and blob will be used only once" );
 		}
 		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
-			String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
-			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
-			String extratMethod = null;
-			if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
-				extratMethod = "stream.writeString( FIELD-TOKEN )";
-			} else 	if ( columnType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
-				extratMethod = "stream.writeBigDecimal( FIELD-TOKEN )";
-			} else 	if ( columnType.equalsIgnoreCase( "java.sql.Date" ) ) {
-				extratMethod = "stream.writeDate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlDate( FIELD-TOKEN ) )";
-			} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) || columnType.equalsIgnoreCase( "java.util.Date" ) ) {
-				extratMethod = "stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( FIELD-TOKEN ) )";
-			} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
-				extratMethod = "stream.writeBlob( FIELD-TOKEN )";
-				javaSuffix+= "Blob";
-			} else 	if ( columnType.equalsIgnoreCase( clobHandlerType ) ) {
-				extratMethod = "stream.writeClob( FIELD-TOKEN )";
-				javaSuffix+= "Clob";
-			} else if ( field.isUserType() ) {
-				extratMethod = "stream.writeObject( ("+ field.getStructType() +") FIELD-TOKEN )";
-			} else {
-				throw new ConfigRuntimeException( "Type : "+columnType+" not handled yet!" );
-			}
-			this.getWriter().println( TAB_2+""+extratMethod.replace( "FIELD-TOKEN" ,  "this.get"+javaSuffix+"()" )+";" );
+			this.handleField2(field, blobHandlerType, clobHandlerType);
 		}
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();	
