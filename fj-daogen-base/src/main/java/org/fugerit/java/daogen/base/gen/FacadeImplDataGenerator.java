@@ -28,7 +28,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		return FacadeGeneratorUtils.isFacadeGenerate( entity );
 	}
 	
-	private void initConfigHelperMode( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
+	private void initConfigHelperMode( DaogenCatalogConfig daogenConfig) {
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_RSE )+"."+this.getEntityRSEName() );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+this.getEntityFinderName() );
@@ -77,7 +77,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.setExtendsClass( DaogenHelperGenerator.toHelperClassName( this.getJavaName() ) );
 			this.configRealClass();
 		} else {
-			this.initConfigHelperMode(daogenConfig, entity);
+			this.initConfigHelperMode(daogenConfig);
 		}		
 	}
 
@@ -279,7 +279,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		}
 	}
 	
-	private void generateHelperClassUpdate( DaogenCatalogField colData, DaogenCatalogField colDataUpdate, GeneratorKeyHelper primaryKeyHelper ) {
+	private void generateHelperClassUpdate( DaogenCatalogField colDataUpdate, GeneratorKeyHelper primaryKeyHelper ) {
 		if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
 			// update by primary key
 			this.getWriter().println( TAB+AT_OVERRIDE );
@@ -330,7 +330,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.generateHelperClassInsert(colData, colDataUpdate, sequenceName, primaryKeyHelper);			
 			this.generateHelperClassLoadPk(primaryKeyHelper);
 			this.generateHelperClassDelete(primaryKeyHelper);
-			this.generateHelperClassUpdate(colData, colDataUpdate, primaryKeyHelper);
+			this.generateHelperClassUpdate(colDataUpdate, primaryKeyHelper);
 		}			
 	}
 	

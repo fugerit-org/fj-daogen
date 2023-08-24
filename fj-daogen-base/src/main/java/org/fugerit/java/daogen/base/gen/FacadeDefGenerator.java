@@ -57,7 +57,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 		}
 	}
 
-	private void methodByKey( GeneratorKeyHelper keyHelper, String keyName, String methodName, String returnType, String returnJavadoc, String comment ) {
+	private void methodByKey( GeneratorKeyHelper keyHelper, String methodName, String returnType, String returnJavadoc, String comment ) {
 		this.getWriter().println( TAB+"/**" );
 		this.getWriter().println( TAB+" * "+comment );
 		this.getWriter().println( TAB+" *" );	
@@ -103,17 +103,17 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println();
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 				GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
-				methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_LOAD_BY_PK, this.getEntityModelName(), "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );
+				methodByKey( primaryKeyHelper.setForLoadInterface(), METHOD_LOAD_BY_PK, this.getEntityModelName(), "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 					DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );	
 					this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
 					this.getWriter().println();
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {
-					methodByKey( primaryKeyHelper.setForLoadInterface(), PRIMARY_KEY, METHOD_DELETE_BY_PK, this.getEntityBaseResult(), "Delete result (resultCode=0, delete ok)", "Delete method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );	
+					methodByKey( primaryKeyHelper.setForLoadInterface(), METHOD_DELETE_BY_PK, this.getEntityBaseResult(), "Delete result (resultCode=0, delete ok)", "Delete method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );	
 				}
 				if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
-					methodByKey( primaryKeyHelper.setForUpdateInterface(), PRIMARY_KEY, METHOD_UPDATE_BY_PK, this.getEntityBaseResult(), "Update result (resultCode=0, update ok)", "Delete method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );	
+					methodByKey( primaryKeyHelper.setForUpdateInterface(), METHOD_UPDATE_BY_PK, this.getEntityBaseResult(), "Update result (resultCode=0, update ok)", "Delete method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );	
 				}
 			}
 		}

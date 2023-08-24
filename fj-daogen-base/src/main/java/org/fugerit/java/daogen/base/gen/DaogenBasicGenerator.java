@@ -55,7 +55,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String CONTEXT_GEN_LIT = "<>( context );";
 	
-	protected static final String COMMA_END_LIT = "<>( context );";
+	protected static final String COMMA_END_LIT = "() );";
 	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
