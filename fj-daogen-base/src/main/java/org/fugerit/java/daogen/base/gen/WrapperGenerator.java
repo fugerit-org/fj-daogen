@@ -49,14 +49,14 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 					baseType = "java.util.List<"+baseType+">";
 				}
 				// metodo set
-				this.getWriter().println( TAB+"@Override" );
+				this.getWriter().println( TAB+AT_OVERRIDE );
 				this.getWriter().println( TAB+"public void set"+className+"( "+baseType+" value ) {" );
 				this.getWriter().println( TAB_2+"this.unwrapModel().set"+className+"( value );" );
 				this.getWriter().println( TAB+"}" );
 				this.getWriter().println();
 				// metodo get
-				this.getWriter().println( TAB+"@Override" );
-				this.getWriter().println( TAB+"public "+baseType+" get"+className+"() {" );
+				this.getWriter().println( TAB+AT_OVERRIDE );
+				this.getWriter().println( TAB+PUBLIC_SPACE_LIT+baseType+" get"+className+"() {" );
 				this.getWriter().println( TAB_2+"return this.unwrapModel().get"+className+"();" );
 				this.getWriter().println( TAB+"}" );
 				this.getWriter().println();
@@ -68,12 +68,12 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		
-		this.getWriter().println( TAB+"public "+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
+		this.getWriter().println( TAB+PUBLIC_SPACE_LIT+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
 		this.getWriter().println( TAB_2+"super( wrapped );" );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
 		
-		this.getWriter().println( TAB+"public "+this.getEntityModelName()+" unwrap( "+this.getEntityWrapperName()+" wrapper ) {" );
+		this.getWriter().println( TAB+PUBLIC_SPACE_LIT+this.getEntityModelName()+" unwrap( "+this.getEntityWrapperName()+" wrapper ) {" );
 		this.getWriter().println( TAB_2+""+this.getEntityModelName()+" res = wrapper;" );
 		this.getWriter().println( TAB_2+"while ( res != null && res instanceof "+this.getEntityWrapperName()+" ) { " );
 		this.getWriter().println( TAB_3+"res = (("+this.getEntityWrapperName()+")res).unwrapModel();" );
@@ -95,14 +95,14 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 			String realJavaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 			// metodo set
-			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+"public void set"+javaSuffix+"( "+realJavaType+" value ) {" );
 			this.getWriter().println( TAB_2+"this.unwrapModel().set"+javaSuffix+"( value );" );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
 			// metodo get
-			this.getWriter().println( TAB+"@Override" );
-			this.getWriter().println( TAB+"public "+realJavaType+" get"+javaSuffix+"() {" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
+			this.getWriter().println( TAB+PUBLIC_SPACE_LIT+realJavaType+" get"+javaSuffix+"() {" );
 			this.getWriter().println( TAB_2+"return this.unwrapModel().get"+javaSuffix+"();" );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
@@ -113,7 +113,7 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 		}
 
 		if ( BooleanUtils.isTrue( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) ) ) {
-			this.getWriter().println( TAB+"@Override" );
+			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+"public boolean isEmpty() {" );
 			this.getWriter().println( TAB_2+"return this.unwrapModel().isEmpty();" );
 			this.getWriter().println( TAB+"}" );

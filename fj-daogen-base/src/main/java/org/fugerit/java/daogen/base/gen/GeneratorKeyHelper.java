@@ -126,7 +126,7 @@ public class GeneratorKeyHelper implements Serializable {
 		if ( StringUtils.isNotEmpty( key ) ) {
 			this.keyBuilder.append( DaogenCatalogConstants.modelName( entity ) );
 			this.keyBuilder.append( " model" );
-			this.paramBuilder.append( "\t * @param 	model\tentity to update" );
+			this.paramBuilder.append( "\t * @param \tmodel\tentity to update" );
 		}
 		return this;
 	}
