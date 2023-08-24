@@ -61,9 +61,9 @@ public class FinderGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB+"/**" );
 			this.getWriter().println( TAB+" *Factory method to create a new finder " );
 			this.getWriter().println( TAB+" *" );	
-			this.getWriter().println( TAB+" * @param id		id to wrap in the finder" );	
+			this.getWriter().println( TAB+" * @param id"+TAB_2+"id to wrap in the finder" );	
 			this.getWriter().println( TAB+" *" );	
-			this.getWriter().println( TAB+" * @return	the finder" );	
+			this.getWriter().println( TAB+" * @return"+TAB+"the finder" );	
 			this.getWriter().println( TAB+" */" );
 			this.getWriter().println( TAB+"public static "+this.getEntityFinderName()+" newInstance( "+type+" id ) { " );
 			this.getWriter().println( TAB_2+""+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );
@@ -75,9 +75,9 @@ public class FinderGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB+"/**" );
 		this.getWriter().println( TAB+" * Factory method to create a new finder " );
 		this.getWriter().println( TAB+" *" );	
-		this.getWriter().println( TAB+" * @param model		the model to wrap in the finder" );
+		this.getWriter().println( TAB+" * @param model"+TAB_2+"the model to wrap in the finder" );
 		this.getWriter().println( TAB+" *" );	
-		this.getWriter().println( TAB+" * @return	the finder" );	
+		this.getWriter().println( TAB+" * @return"+TAB+"the finder" );	
 		this.getWriter().println( TAB+" */" );
 		this.getWriter().println( TAB+"public static "+this.getEntityFinderName()+" newInstance( "+this.getEntityModelName()+" model ) { " );
 		this.getWriter().println( TAB_2+""+this.getEntityFinderName()+" finder = new "+this.getEntityFinderName()+"();" );

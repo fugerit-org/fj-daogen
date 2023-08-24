@@ -56,8 +56,8 @@ public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 					this.getWriter().println( TAB+"/**" );
 					this.getWriter().println( TAB+" * Facade incapsulating persistance for entity : "+current.getName() );
 					this.getWriter().println( TAB+" *" );
-					this.getWriter().println( TAB+" * @return	the facade" );
-					this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+"	in case of problems" );
+					this.getWriter().println( TAB+" * @return"+TAB+"the facade" );
+					this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+TAB+"in case of problems" );
 					this.getWriter().println( TAB+" */" );
 					this.getWriter().println( TAB+""+packageFacade+"."+facadeName+" get"+facadeName+"() throws "+this.getClassDaoException()+";" );
 					this.getWriter().println();	
