@@ -67,6 +67,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String END_LINE_2_LIT = "\" ) ) ";
 	
+	protected static final String RETURN_RES_LIT = "return res;";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {
