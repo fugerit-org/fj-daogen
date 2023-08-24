@@ -4,14 +4,8 @@ import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.lang.annotate.DefineImpl;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.gen.DaogenBasicDecorator;
-import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
 public class DefineImplModelHelperDecorator extends DaogenBasicDecorator {
-
-	@Override
-	public void init(DaogenBasicGenerator generator) {
-		super.init(generator);
-	}
 
 	@Override
 	public void addBeforeClass() throws DAOException {

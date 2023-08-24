@@ -3,7 +3,6 @@ package org.fugerit.java.daogen.base.gen.decorator;
 import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.gen.DaogenBasicDecorator;
-import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
 public class AddAnnotationModelHelperDecorator extends DaogenBasicDecorator {
 
@@ -12,11 +11,6 @@ public class AddAnnotationModelHelperDecorator extends DaogenBasicDecorator {
 	public AddAnnotationModelHelperDecorator(String annotationClassName) {
 		super();
 		this.annotationClassName = annotationClassName;
-	}
-
-	@Override
-	public void init(DaogenBasicGenerator generator) {
-		super.init(generator);
 	}
 
 	@Override

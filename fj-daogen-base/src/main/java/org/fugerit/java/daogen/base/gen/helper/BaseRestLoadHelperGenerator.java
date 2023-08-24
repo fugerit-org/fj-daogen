@@ -39,6 +39,10 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	protected static final String LIST_LIT = "<List<";
 	
+	protected static final String CONTEXT_GET_ATTRIBUTE_LIT = ") context.getAttribute(";
+	
+	protected static final String FACADE_FACTORY_GET_LIT = " facade = factory.get";
+	
 	
 	
 	private String key;
@@ -104,8 +108,8 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	private void generateDaogenBodyHandleLoadDeep( String factoryClassName, GeneratorKeyHelper primaryKeyHelper ) {
 		this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
-		this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+") context.getAttribute("+factoryClassName+ATT_NAME_LIT );
-		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
+		this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+CONTEXT_GET_ATTRIBUTE_LIT+factoryClassName+ATT_NAME_LIT );
+		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+FACADE_FACTORY_GET_LIT+this.getEntityFacadeDefName()+"();" );
 		this.getWriter().println( TAB_2+""+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
 		this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
 		if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
@@ -166,8 +170,8 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 		if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 			GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() ).setForLoadInterface();
 			this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
-			this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+") context.getAttribute("+factoryClassName+ATT_NAME_LIT );
-			this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
+			this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+CONTEXT_GET_ATTRIBUTE_LIT+factoryClassName+ATT_NAME_LIT );
+			this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+FACADE_FACTORY_GET_LIT+this.getEntityFacadeDefName()+"();" );
 			this.getWriter().println( TAB_2+""+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
 			this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
 			this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
@@ -186,8 +190,8 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 		DaogenCustomCode.addCommentRest( "rest.worker" ,DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName(), this.getEntityModelName(), "model" );
 		this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LIST_LIT+this.getEntityModelName()+">> loadByModelWorker( DAOContext context, "+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 		this.getWriter().println( TAB_2+""+this.getEntityFinderName()+" finder = "+this.getEntityFinderName()+".newInstance( model );" );
-		this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+") context.getAttribute("+factoryClassName+ATT_NAME_LIT );
-		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
+		this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+CONTEXT_GET_ATTRIBUTE_LIT+factoryClassName+ATT_NAME_LIT );
+		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+FACADE_FACTORY_GET_LIT+this.getEntityFacadeDefName()+"();" );
 		this.getWriter().println( TAB_2+""+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> resultFacade = facade.loadAllByFinder( context , finder );" );
 		this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LIST_LIT+this.getEntityModelName()+">>  result = "+this.getClassServiceResult()+".newDefaultResult( resultFacade.getList() );" );
 		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );

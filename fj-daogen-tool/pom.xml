@@ -60,7 +60,7 @@
 							<archive>
 								<manifest>
 									<addClasspath>true</addClasspath>
-									<mainClass>DaoGen</mainClass>
+									<mainClass>tool.DaoGen</mainClass>
 								</manifest>
 							</archive>
 						</configuration>

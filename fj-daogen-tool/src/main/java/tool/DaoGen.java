@@ -1,3 +1,4 @@
+package tool;
 import java.util.Properties;
 
 import org.fugerit.java.core.cli.ArgUtils;
