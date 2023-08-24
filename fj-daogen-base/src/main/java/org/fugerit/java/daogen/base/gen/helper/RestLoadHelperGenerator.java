@@ -33,14 +33,14 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		this.getWriter().println( TAB+"@Path(\""+deepUrl+primaryKeyHelper.getUrlParams()+"\")" );
 		this.getWriter().println( TAB+PRODUCE_JSON_LIT );
 		this.getWriter().println( TAB+"public Response getByID"+deepMethod+"("+primaryKeyHelper.getPathParams()+") throws Exception {" );
-		this.getWriter().println( TAB_2+"Response res = null;" );
+		this.getWriter().println( TAB_2+RESPONSE_RES_NULL_LIT );
 		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
 		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+deepWorker+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
 		this.getWriter().println( TAB_3+"res = this.createResponseFromObject( result );" );
 		this.getWriter().println( TAB_2+CATCH_LIT );
 		this.getWriter().println( TAB_3+ERROR_LOAD_LIT+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
 		this.getWriter().println( TAB_2+"}" );
-		this.getWriter().println( TAB_2+"return res;" );
+		this.getWriter().println( TAB_2+RETURN_RES_LIT );
 		this.getWriter().println( TAB+"}" );
 	}
 	
@@ -49,7 +49,7 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		this.getWriter().println( TAB+"@Path(\"/all\")" );
 		this.getWriter().println( TAB+PRODUCE_JSON_LIT );
 		this.getWriter().println( TAB+"public Response getAll() throws Exception {" );
-		this.getWriter().println( TAB_2+"Response res = null;" );
+		this.getWriter().println( TAB_2+RESPONSE_RES_NULL_LIT );
 		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
 		this.getWriter().println( TAB_2+""+factoryClassName+" factory = ("+factoryClassName+") context.getAttribute("+factoryClassName+".ATT_NAME );" );
 		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
@@ -59,7 +59,7 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		this.getWriter().println( TAB_2+CATCH_LIT );
 		this.getWriter().println( TAB_3+ERROR_LOAD_LIT+this.getCurrentEntity().toClassName()+" - getAll - \"+e, e );" );
 		this.getWriter().println( TAB_2+"}" );
-		this.getWriter().println( TAB_2+"return res;" );
+		this.getWriter().println( TAB_2+RETURN_RES_LIT );
 		this.getWriter().println( TAB+"}" );
 	}
 
@@ -68,7 +68,7 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		this.getWriter().println( TAB+"@Path(\"/"+urlName+"/{"+urlName+"}\")" );
 		this.getWriter().println( TAB+PRODUCE_JSON_LIT );
 		this.getWriter().println( TAB+"public Response getAll"+javaName+"(@PathParam( \""+urlName+"\" ) String "+propertyName+") throws Exception {" );
-		this.getWriter().println( TAB_2+"Response res = null;" );
+		this.getWriter().println( TAB_2+RESPONSE_RES_NULL_LIT );
 		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
 		if ( field.getJavaType().equals( "java.lang.String" ) ) {
 			this.getWriter().println( TAB_3+"String value = "+propertyName+";" );
@@ -80,7 +80,7 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		this.getWriter().println( TAB_2+CATCH_LIT );
 		this.getWriter().println( TAB_3+ERROR_LOAD_LIT+this.getCurrentEntity().toClassName()+" - getAll"+javaName+" - \"+e, e );" );
 		this.getWriter().println( TAB_2+"}" );
-		this.getWriter().println( TAB_2+"return res;" );
+		this.getWriter().println( TAB_2+RETURN_RES_LIT );
 		this.getWriter().println( TAB+"}" );
 	}
 
