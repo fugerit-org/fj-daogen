@@ -1,9 +1,9 @@
-﻿1.1.0 (next)
+﻿1.1.0 (2023-03-26)
 ------------------
 + [enhancement] fj-daogen-maven-plugin module reintroduced [1.1.0-rc.5]
-+ [enhancement] update fj-core version 8.2.0-rc.7 [1.1.0-rc.4]
++ [enhancement] update fj-core version 8.2.0 [1.1.0-rc.4]
 + [enhancement] Updated generation for 'static final' modifier order [1.1.0-rc.3]
-+ [enhancement] Code review for fj-core 8.2.0-rc.6 [1.1.0-rc.2]
++ [enhancement] Code review for fj-core 8.2.0 [1.1.0-rc.2]
 + [enhancement] update fj-bom version 1.2.3 [1.1.0-rc.1]
 + [enhancement] Added sonar cloud quality gate [1.1.0-rc.1]
 
