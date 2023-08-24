@@ -28,25 +28,28 @@ public class DaogenFacade {
 		gen.write();
 	}
 	
+	private static void handleCurrentGenerator( DaogenBasicGenerator generator, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity, FactoryType dataType ) throws ConfigException, IOException {
+		if ( generator.isGenerate( daogenConfig, entity ) ) {
+			Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
+			if ( decorators != null ) {
+				// iterationg over decorators
+				for ( FactoryType decoratorType : decorators ) {
+					DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
+					decorator.init( generator );
+				}
+			}
+			generator.init( daogenConfig, entity );	
+			// actual generations
+			generageFile( generator );	
+		}
+	}
+	
 	private static void handleGenerators( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog, DaogenCatalogEntity entity ) throws ConfigException, IOException {
 		if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
 			// iterating over generators
 			for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
 				if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
-					DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
-					if ( generator.isGenerate( daogenConfig, entity ) ) {
-						Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
-						if ( decorators != null ) {
-							// iterationg over decorators
-							for ( FactoryType decoratorType : decorators ) {
-								DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
-								decorator.init( generator );
-							}
-						}
-						generator.init( daogenConfig, entity );	
-						// actual generations
-						generageFile( generator );	
-					}
+					handleCurrentGenerator((DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType())), daogenConfig, entity, dataType);
 				}
 			}
 		}
@@ -72,7 +75,6 @@ public class DaogenFacade {
 			}
 		}
 	}
-	
 	
 	public static void generate( InputStream fis, Properties overrideProperties ) throws ConfigException {
 		try {
