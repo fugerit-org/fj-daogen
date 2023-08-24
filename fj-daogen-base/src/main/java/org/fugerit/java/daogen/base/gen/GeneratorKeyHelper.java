@@ -75,7 +75,7 @@ public class GeneratorKeyHelper implements Serializable {
 					fieldName = GeneratorNameHelper.toPropertyName( currentField );
 					javaType = config.getTypeMapper().mapForModel( field );
 				} catch (Exception e) {
-					logger.info( "Error on field "+fieldName );
+					logger.info( "Error on field {}", fieldName );
 					throw e;
 				}
 				this.keyBuilder.append( javaType );
