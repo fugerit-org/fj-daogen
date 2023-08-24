@@ -13,12 +13,6 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	
 	private static final String RESPONSE_ENTITY_LIT = "ResponseEntity<Object> res = null;";
 	
-	private static final String NEW_CONTEXT_LIT = "try (CloseableDAOContext context = this.newDefaultContext() ) {";
-	
-	private static final String CATCH_LIT = "} catch(Exception e) {" ;
-	
-	private static final String ERROR_LOAD_LIT = "logger.error(\"ERRORE - REST- Load";
-	
 	private static final String RES_BUILD_LIT = "res = ResponseEntity.status( HttpServletResponse.SC_INTERNAL_SERVER_ERROR ).build();";
 	
 	private static final BaseRestLoadHelperGeneratorConfig CONFIG = new BaseRestLoadHelperGeneratorConfig();

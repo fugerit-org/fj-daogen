@@ -23,6 +23,14 @@ import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 
+	protected static final String NEW_CONTEXT_LIT = "try (CloseableDAOContext context = this.newDefaultContext() ) {";
+	
+	protected static final String CATCH_LIT = "} catch(Exception e) {" ;
+	
+	protected static final String ERROR_LOAD_LIT = "logger.error(\"ERRORE - REST- Load";
+	
+	protected static final String PRODUCE_JSON_LIT = "@Produces(MediaType.APPLICATION_JSON)";
+	
 	private String key;
 	
 	private BaseRestLoadHelperGeneratorConfig config;

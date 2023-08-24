@@ -31,14 +31,14 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {
 		this.getWriter().println( TAB+"@GET" );
 		this.getWriter().println( TAB+"@Path(\""+deepUrl+primaryKeyHelper.getUrlParams()+"\")" );
-		this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
+		this.getWriter().println( TAB+PRODUCE_JSON_LIT );
 		this.getWriter().println( TAB+"public Response getByID"+deepMethod+"("+primaryKeyHelper.getPathParams()+") throws Exception {" );
 		this.getWriter().println( TAB_2+"Response res = null;" );
-		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
+		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
 		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+FacadeDefGenerator.METHOD_LOAD_BY_PK+deepWorker+"Worker( context, "+primaryKeyHelper.getRestParams()+" );" );
 		this.getWriter().println( TAB_3+"res = this.createResponseFromObject( result );" );
-		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
+		this.getWriter().println( TAB_2+CATCH_LIT );
+		this.getWriter().println( TAB_3+ERROR_LOAD_LIT+this.getCurrentEntity().toClassName()+" - getByID - \"+e, e );" );
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"return res;" );
 		this.getWriter().println( TAB+"}" );
@@ -47,17 +47,17 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	protected void printLoadAll( String factoryClassName ) {
 		this.getWriter().println( TAB+"@GET" );
 		this.getWriter().println( TAB+"@Path(\"/all\")" );
-		this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
+		this.getWriter().println( TAB+PRODUCE_JSON_LIT );
 		this.getWriter().println( TAB+"public Response getAll() throws Exception {" );
 		this.getWriter().println( TAB_2+"Response res = null;" );
-		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
+		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
 		this.getWriter().println( TAB_2+""+factoryClassName+" factory = ("+factoryClassName+") context.getAttribute("+factoryClassName+".ATT_NAME );" );
 		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
 		this.getWriter().println( TAB_3+""+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> resultFacade = facade.loadAll( context );" );
 		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = "+this.getClassServiceResult()+".newDefaultResult( resultFacade.getList() );" );
 		this.getWriter().println( TAB_3+"res = this.createResponseFromList( result );" );
-		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getAll - \"+e, e );" );
+		this.getWriter().println( TAB_2+CATCH_LIT );
+		this.getWriter().println( TAB_3+ERROR_LOAD_LIT+this.getCurrentEntity().toClassName()+" - getAll - \"+e, e );" );
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"return res;" );
 		this.getWriter().println( TAB+"}" );
@@ -66,10 +66,10 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	protected void printLoadCurrent( String urlName, String propertyName, String javaName, DaogenCatalogField field ) {
 		this.getWriter().println( TAB+"@GET" );
 		this.getWriter().println( TAB+"@Path(\"/"+urlName+"/{"+urlName+"}\")" );
-		this.getWriter().println( TAB+"@Produces(MediaType.APPLICATION_JSON)" );
+		this.getWriter().println( TAB+PRODUCE_JSON_LIT );
 		this.getWriter().println( TAB+"public Response getAll"+javaName+"(@PathParam( \""+urlName+"\" ) String "+propertyName+") throws Exception {" );
 		this.getWriter().println( TAB_2+"Response res = null;" );
-		this.getWriter().println( TAB_2+"try (CloseableDAOContext context = this.newDefaultContext() ) {" );
+		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
 		if ( field.getJavaType().equals( "java.lang.String" ) ) {
 			this.getWriter().println( TAB_3+"String value = "+propertyName+";" );
 		} else {
@@ -77,8 +77,8 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		}
 		this.getWriter().println( TAB_3+""+this.getClassServiceResult()+"<List<"+this.getEntityModelName()+">>  result = loadBy"+javaName+"( context, value );" );
 		this.getWriter().println( TAB_3+"res = this.createResponseFromList( result );" );
-		this.getWriter().println( TAB_2+"} catch(Exception e) {" );
-		this.getWriter().println( TAB_3+"logger.error(\"ERRORE - REST- "+"Load"+this.getCurrentEntity().toClassName()+" - getAll"+javaName+" - \"+e, e );" );
+		this.getWriter().println( TAB_2+CATCH_LIT );
+		this.getWriter().println( TAB_3+ERROR_LOAD_LIT+this.getCurrentEntity().toClassName()+" - getAll"+javaName+" - \"+e, e );" );
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"return res;" );
 		this.getWriter().println( TAB+"}" );
