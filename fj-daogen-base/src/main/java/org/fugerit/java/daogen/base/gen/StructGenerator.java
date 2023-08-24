@@ -74,7 +74,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 		this.getWriter().println();
 		
 		
-		this.getWriter().println( TAB+"public static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model ) {" );
+		this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model ) {" );
 		this.getWriter().println( TAB_2+""+this.getEntityStructName()+" res = null;" );
 		this.getWriter().println( TAB_2+"if ( model instanceof "+this.getEntityStructName()+" ) {" );
 		this.getWriter().println( TAB_3+"res = ("+this.getEntityStructName()+") model;" );
@@ -129,7 +129,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+"boolean check = this.areLobsSet;" );
 			this.getWriter().println( TAB_2+"if ( !check ) {" );
 			StringBuilder line = new StringBuilder();
-			line.append( "			check = " );
+			line.append( TAB_3+"check = " );
 			this.generateDaogenBodyLobField(blobHandlerType, clobHandlerType, line);
 			line.append( ";" );
 			this.getWriter().println( line );
@@ -144,7 +144,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();	
 			// wrapper helpers
-			this.getWriter().println( TAB+"public static "+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model, java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model, java.sql.Connection conn ) throws SQLException {" );
 			this.getWriter().println( TAB_2+""+this.getEntityStructName()+" res = wrap( model );" );
 			this.getWriter().println( TAB_2+"if ( res != null ) {" );
 			this.getWriter().println( TAB_3+"res.setupLobs( conn );" );
@@ -152,7 +152,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+RETURN_RES_LIT );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
-			this.getWriter().println( TAB+"public static "+this.getEntityStructName()+"[] wrap( "+this.getEntityModelName()+"[] list, java.sql.Connection conn ) throws SQLException {" );
+			this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getEntityStructName()+"[] wrap( "+this.getEntityModelName()+"[] list, java.sql.Connection conn ) throws SQLException {" );
 			this.getWriter().println( TAB_2+""+this.getEntityStructName()+"[] res = null;" );
 			this.getWriter().println( TAB_2+"if ( list != null ) {" );
 			this.getWriter().println( TAB_3+"res = new "+this.getEntityStructName()+"[ list.length ];" );
@@ -258,7 +258,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.getWriter().println( TAB_2+"if ( !this.checkLobs() ) {" );
 			this.getWriter().println( TAB_3+"throwUnsupported( \"To use writeSQL() you must invoke setupLobs() for  \"+this.getSQLTypeName() );" );
 			this.getWriter().println( TAB_2+"}" );
-			this.getWriter().println( TAB_2+"this.areLobsSet = false;	// clob and blob will be used only once" );
+			this.getWriter().println( TAB_2+"this.areLobsSet = false;\t// clob and blob will be used only once" );
 		}
 		for ( DaogenCatalogField field : this.getCurrentEntity() )  {
 			this.handleField2(field, blobHandlerType, clobHandlerType);

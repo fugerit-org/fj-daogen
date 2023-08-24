@@ -71,6 +71,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String PUBLIC_SPACE_LIT = "public ";
 	
+	protected static final String PUBLIC_STATIC_SPACE_LIT = "public static ";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {
