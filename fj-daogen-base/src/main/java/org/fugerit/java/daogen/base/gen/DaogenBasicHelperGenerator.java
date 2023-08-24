@@ -64,6 +64,11 @@ public abstract class DaogenBasicHelperGenerator extends DaogenBasicGenerator {
 		}
 	}
 	
+	/**
+	 * Subclasses can override this method.
+	 * 
+	 * @throws IOException in case the subclass override this method an IOException may be thrown
+	 */
 	protected void generateRealClass() throws IOException {
 		this.println( REAL_CLASS_COMMENT );
 	}
