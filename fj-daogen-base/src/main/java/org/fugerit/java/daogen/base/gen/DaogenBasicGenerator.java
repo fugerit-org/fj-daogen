@@ -57,6 +57,12 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String COMMA_END_LIT = "() );";
 	
+	protected static final String RETURN_RESULT_LIT = "return result;";
+	
+	protected static final String DAO_HELPER_UPDATE_LIT = "int res = daoHelper.update( query );";
+	
+	protected static final String EVALUATE_RESULT_LIT = "this.evaluteSqlUpdateResult(res, model, result);";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {

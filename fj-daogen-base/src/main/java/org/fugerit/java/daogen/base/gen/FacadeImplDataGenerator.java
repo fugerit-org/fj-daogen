@@ -174,7 +174,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		}
 		this.getWriter().println( TAB_2+"daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); " );
 		this.getWriter().println( TAB_2+"result.evaluateResultFromList(); " );
-		this.getWriter().println( TAB_2+"return result;" );
+		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();	
 	}
@@ -190,6 +190,14 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		if ( colDataUpdate != null ) {
 			this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
 			this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( currentTime ); " );	
+		}
+		this.getWriter().println( TAB_2+"InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
+		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
+			if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
+				this.getWriter().println( TAB_2+"query.addParam( "+columnConstantName( field.getId() )+MODEL_GET_LIT+GeneratorNameHelper.toClassName( field.getId() )+COMMA_END_LIT );
+			} else {
+				this.getWriter().println( TAB_2+"// skipping selectOnly field : "+field.getId() );		
+			}
 		}
 	}
 	
@@ -212,17 +220,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 				}
 			}
 			this.generateHelperClassInsertColumnHandler(colData, colDataUpdate);
-			this.getWriter().println( TAB_2+"InsertHelper query = daoHelper.newInsertHelper( this.getTableName() );" );
-			for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-				if ( !BooleanUtils.isTrue( field.getSelectOnly() ) ) {
-					this.getWriter().println( TAB_2+"query.addParam( "+columnConstantName( field.getId() )+MODEL_GET_LIT+GeneratorNameHelper.toClassName( field.getId() )+COMMA_END_LIT );
-				} else {
-					this.getWriter().println( TAB_2+"// skipping selectOnly field : "+field.getId() );		
-				}
-			}
-			this.getWriter().println( TAB_2+"int res = daoHelper.update( query );" );
-			this.getWriter().println( TAB_2+"this.evaluteSqlUpdateResult(res, model, result);" );
-			this.getWriter().println( TAB_2+"return result;" );
+			this.getWriter().println( TAB_2+DAO_HELPER_UPDATE_LIT );
+			this.getWriter().println( TAB_2+EVALUATE_RESULT_LIT );
+			this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();	
 		}
@@ -255,7 +255,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		}
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"result = daoHelper.loadOneHelper( query, this.getRse() );" );
-		this.getWriter().println( TAB_2+"return result;" );
+		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
 	}
@@ -271,9 +271,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			for ( String currentField : primaryKeyHelper.getKeyFields() ) {
 				this.getWriter().println( TAB_2+"query.andWhereParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
 			}
-			this.getWriter().println( TAB_2+"int res = daoHelper.update( query );" );
+			this.getWriter().println( TAB_2+DAO_HELPER_UPDATE_LIT );
 			this.getWriter().println( TAB_2+"this.evaluteSqlUpdateResult(res, null, result);" );		
-			this.getWriter().println( TAB_2+"return result;" );
+			this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();	
 		}
@@ -303,9 +303,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			for ( String currentField : primaryKeyHelper.getKeyFields() ) {
 				this.getWriter().println( TAB_2+"query.andWhereParam( COL_"+currentField.toUpperCase()+MODEL_GET_LIT+GeneratorNameHelper.toClassName( currentField )+COMMA_END_LIT );	
 			}
-			this.getWriter().println( TAB_2+"int res = daoHelper.update( query );" );
-			this.getWriter().println( TAB_2+"this.evaluteSqlUpdateResult(res, model, result);" );
-			this.getWriter().println( TAB_2+"return result;" );
+			this.getWriter().println( TAB_2+DAO_HELPER_UPDATE_LIT );
+			this.getWriter().println( TAB_2+EVALUATE_RESULT_LIT );
+			this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();					
 		}
