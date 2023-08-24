@@ -20,7 +20,6 @@ public class MojoDump extends AbstractMojo {
         File file = new File( this.daogenConfigDump );
         try {
         	getLog().info( "daogen config dump path : "+file.getCanonicalPath() );
-            //FileIO.writeString( "test" , file );
         	getLog().info( "SORRY! This goal does nothing at the moment!" );
         } catch (Exception e) {
         	throw new MojoExecutionException( "Error generating code : "+e, e );

@@ -5,6 +5,8 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 
 public class FacadeGeneratorUtils {
 	
+	private FacadeGeneratorUtils() {}
+	
 	public static final String ATT_ENTITY_FACADE_MODE_COMPLETE = "complete";
 	
 	public static final String ATT_ENTITY_FACADE_MODE_SELECT = "select";

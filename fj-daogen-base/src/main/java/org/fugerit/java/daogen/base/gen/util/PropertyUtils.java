@@ -6,6 +6,8 @@ import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
 public class PropertyUtils {
 
+	private PropertyUtils() {}
+	
 	public static void newPropertyOverride( CustomPrintWriter writer, String fieldId, String realJavaType  ) {
 		newProperty( writer, fieldId, realJavaType, true, false );
 	}
