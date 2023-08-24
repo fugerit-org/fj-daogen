@@ -63,6 +63,10 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String EVALUATE_RESULT_LIT = "this.evaluteSqlUpdateResult(res, model, result);";
 	
+	protected static final String END_LINE_1_LIT = "\" ) ";
+	
+	protected static final String END_LINE_2_LIT = "\" ) ) ";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {

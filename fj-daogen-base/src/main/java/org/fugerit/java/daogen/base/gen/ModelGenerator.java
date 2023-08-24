@@ -46,10 +46,10 @@ public class ModelGenerator extends DaogenBasicGenerator {
 					baseType = "java.util.List<"+baseType+">";
 				}
 				DaogenCustomCode.addCommentCommon( "comments.common.getter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
-				this.println( "	"+baseType+" get"+className+"();" );
+				this.println( TAB+baseType+" get"+className+"();" );
 				this.println();
 				DaogenCustomCode.addCommentCommon( "comments.common.setter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
-				this.println( "	void set"+className+"( "+baseType+" value );" );
+				this.println( TAB+"void set"+className+"( "+baseType+" value );" );
 				this.println();	
 			} catch (Exception e) {
 				log.error( "error on relation : {}", relation.getId() );
@@ -71,11 +71,11 @@ public class ModelGenerator extends DaogenBasicGenerator {
 			String type = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 			DaogenCustomCode.addCommentCommon( "comments.common.getter", 
 					DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, field.getNullable(), field.getComments() );
-			this.println( "	"+type+" get"+className+"();" );
+			this.println( TAB+type+" get"+className+"();" );
 			this.println();
 			DaogenCustomCode.addCommentCommon( "comments.common.setter", 
 					DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, field.getNullable(), field.getComments() );
-			this.println( "	void set"+className+"( "+type+" value );" );
+			this.println( TAB+"void set"+className+"( "+type+" value );" );
 			this.println();
 		}
 		if ( relationLast ) {

@@ -105,7 +105,7 @@ public class GeneratorKeyHelper implements Serializable {
 				this.keyBuilder.append( javaType );
 				this.keyBuilder.append( " " );
 				this.keyBuilder.append( fieldName );
-				this.paramBuilder.append( "	 * @param " );
+				this.paramBuilder.append( "\t * @param " );
 				this.paramBuilder.append( fieldName );
 				if ( StringUtils.isNotEmpty( field.getComments() ) ) {
 					this.paramBuilder.append( " " );
@@ -126,7 +126,7 @@ public class GeneratorKeyHelper implements Serializable {
 		if ( StringUtils.isNotEmpty( key ) ) {
 			this.keyBuilder.append( DaogenCatalogConstants.modelName( entity ) );
 			this.keyBuilder.append( " model" );
-			this.paramBuilder.append( "	 * @param 	model	entity to update" );
+			this.paramBuilder.append( "\t * @param 	model	entity to update" );
 		}
 		return this;
 	}
