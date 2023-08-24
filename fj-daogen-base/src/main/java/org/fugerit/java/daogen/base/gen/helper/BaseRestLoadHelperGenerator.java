@@ -102,6 +102,62 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	protected abstract void printLoadCurrent( String urlName, String propertyName, String javaName, DaogenCatalogField field );
 	
+	private void generateDaogenBodyHandleLoadDeep( String factoryClassName, GeneratorKeyHelper primaryKeyHelper ) {
+		this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+		this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+") context.getAttribute("+factoryClassName+ATT_NAME_LIT );
+		this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
+		this.getWriter().println( TAB_2+""+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
+		this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
+		if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
+			this.getWriter().println( TAB_2+"if ( result.getContent() != null ) {" );
+			for ( DaogenCatalogRelation rel : this.getCurrentEntity().getRelations() ) {
+				DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( rel.getTo() );
+				GeneratorKeyHelper relKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , entityTo, entityTo.getPrimaryKey() ).setForLoadInterface();
+				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( rel.getMode() ) && relKeyHelper.getKeyFields().size() == 1 ) {
+					String javaName = GeneratorNameHelper.toClassName( rel.getKey() );
+					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+".loadBy"+javaName+"( context, result.getContent().get"+GeneratorNameHelper.toClassName( this.getCurrentEntity().getPrimaryKey() )+"() ).getContent()";
+					this.getWriter().println( TAB_3+"result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
+				} else {
+					GeneratorKeyHelper relKeyHelper1 = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), rel.getKey() ).setForLoadInterface();
+					List<String> keyList = new ArrayList<String>();
+					for ( String currentFieldKey : relKeyHelper1.getKeyFields() ) {
+						keyList.add( "result.getContent().get"+GeneratorNameHelper.toClassName( currentFieldKey )+"()" );
+					}
+					String keyFields = ConcatHelper.concat( "," , keyList.toArray( new String[0] ) );
+					String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+keyFields+" ).getContent()";
+					this.getWriter().println( TAB_3+"result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
+				}
+			}
+			this.getWriter().println( TAB_2+"}" );	
+		}
+		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
+		this.getWriter().println( TAB+"}" );
+		this.getWriter().println( );
+		this.printPrimaryKeyLoader(primaryKeyHelper, true);
+		this.getWriter().println( );	
+	}
+	
+	private void generateDaogenBodyHandleField() {
+		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
+			String javaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
+			if ( !field.getId().equalsIgnoreCase( this.getCurrentEntity().getPrimaryKey() ) && ( javaType.equalsIgnoreCase( "java.lang.String" ) || javaType.equals( "java.math.BigDecimal" ) ) ) {
+				String javaName = GeneratorNameHelper.toClassName( field.getId() );
+				String urlName = field.getId().toLowerCase();
+				String propertyName = GeneratorNameHelper.toPropertyName( urlName );
+				DaogenCustomCode.addCommentRest( "rest.worker" ,DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName(), propertyName, "current" );
+				this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LIST_LIT+this.getEntityModelName()+">> loadBy"+javaName+"( DAOContext context, "+javaType+" current ) throws "+this.getClassDaoException()+" {" );
+				this.getWriter().println( TAB_2+""+this.helperClass+" model = new "+this.helperClass+"();" );
+				this.getWriter().println( TAB_2+"model.set"+javaName+"( current );" );
+				this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LIST_LIT+this.getEntityModelName()+">>  result = loadByModelWorker( context , model );" );
+				this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
+				this.getWriter().println( TAB+"}" );
+				this.getWriter().println( );
+				this.printLoadCurrent(urlName, propertyName, javaName, field);
+				this.getWriter().println( );
+			}
+		}
+	}
+	
 	@Override
 	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
@@ -121,38 +177,7 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 			this.printPrimaryKeyLoader(primaryKeyHelper, false);
 			this.getWriter().println( );
 			// deep load
-			this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"DeepWorker( DAOContext context, "+primaryKeyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
-			this.getWriter().println( TAB_2+""+factoryClassName+FACTORY_LIT+factoryClassName+") context.getAttribute("+factoryClassName+ATT_NAME_LIT );
-			this.getWriter().println( TAB_2+""+this.getEntityFacadeDefName()+" facade = factory.get"+this.getEntityFacadeDefName()+"();" );
-			this.getWriter().println( TAB_2+""+this.getEntityModelName()+" model = facade.loadById( context , "+primaryKeyHelper.getForwardParams()+" );" );
-			this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LT_LIT+this.getEntityModelName()+">  result = "+this.getClassServiceResult()+".newDefaultResult( model );" );
-			if ( !this.getCurrentEntity().getRelations().isEmpty() ) {
-				this.getWriter().println( TAB_2+"if ( result.getContent() != null ) {" );
-				for ( DaogenCatalogRelation rel : this.getCurrentEntity().getRelations() ) {
-					DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( rel.getTo() );
-					GeneratorKeyHelper relKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , entityTo, entityTo.getPrimaryKey() ).setForLoadInterface();
-					if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( rel.getMode() ) && relKeyHelper.getKeyFields().size() == 1 ) {
-						String javaName = GeneratorNameHelper.toClassName( rel.getKey() );
-						String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+".loadBy"+javaName+"( context, result.getContent().get"+GeneratorNameHelper.toClassName( this.getCurrentEntity().getPrimaryKey() )+"() ).getContent()";
-						this.getWriter().println( TAB_3+"result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
-					} else {
-						GeneratorKeyHelper relKeyHelper1 = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), rel.getKey() ).setForLoadInterface();
-						List<String> keyList = new ArrayList<String>();
-						for ( String currentFieldKey : relKeyHelper1.getKeyFields() ) {
-							keyList.add( "result.getContent().get"+GeneratorNameHelper.toClassName( currentFieldKey )+"()" );
-						}
-						String keyFields = ConcatHelper.concat( "," , keyList.toArray( new String[0] ) );
-						String relMethod = DaogenCatalogConstants.restLoadName( entityTo )+"."+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Worker( context, "+keyFields+" ).getContent()";
-						this.getWriter().println( TAB_3+"result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
-					}
-				}
-				this.getWriter().println( TAB_2+"}" );	
-			}
-			this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
-			this.getWriter().println( TAB+"}" );
-			this.getWriter().println( );
-			this.printPrimaryKeyLoader(primaryKeyHelper, true);
-			this.getWriter().println( );			
+			this.generateDaogenBodyHandleLoadDeep(factoryClassName, primaryKeyHelper);		
 		}
 		// load all
 		this.printLoadAll(factoryClassName);
@@ -168,24 +193,7 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println( );
-		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-			String javaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
-			if ( !field.getId().equalsIgnoreCase( this.getCurrentEntity().getPrimaryKey() ) && ( javaType.equalsIgnoreCase( "java.lang.String" ) || javaType.equals( "java.math.BigDecimal" ) ) ) {
-				String javaName = GeneratorNameHelper.toClassName( field.getId() );
-				String urlName = field.getId().toLowerCase();
-				String propertyName = GeneratorNameHelper.toPropertyName( urlName );
-				DaogenCustomCode.addCommentRest( "rest.worker" ,DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName(), propertyName, "current" );
-				this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getClassServiceResult()+LIST_LIT+this.getEntityModelName()+">> loadBy"+javaName+"( DAOContext context, "+javaType+" current ) throws "+this.getClassDaoException()+" {" );
-				this.getWriter().println( TAB_2+""+this.helperClass+" model = new "+this.helperClass+"();" );
-				this.getWriter().println( TAB_2+"model.set"+javaName+"( current );" );
-				this.getWriter().println( TAB_2+""+this.getClassServiceResult()+LIST_LIT+this.getEntityModelName()+">>  result = loadByModelWorker( context , model );" );
-				this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
-				this.getWriter().println( TAB+"}" );
-				this.getWriter().println( );
-				this.printLoadCurrent(urlName, propertyName, javaName, field);
-				this.getWriter().println( );
-			}
-		}	
+		this.generateDaogenBodyHandleField();
 	}
 
 }
