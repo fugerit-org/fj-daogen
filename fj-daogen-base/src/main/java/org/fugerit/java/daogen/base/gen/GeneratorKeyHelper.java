@@ -55,6 +55,30 @@ public class GeneratorKeyHelper implements Serializable {
 		}
 	}
 	
+	private void setForLoadInterfaceHelper( String javaType, String fieldName ) {
+		// rest data
+		if ( javaType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
+			this.restBuilder.append( "new java.math.BigDecimal(" );
+			this.restBuilder.append( fieldName );
+			this.restBuilder.append( ")" );
+		} else if ( javaType.equalsIgnoreCase( "java.util.Date" ) ) {
+			this.restBuilder.append( "this.defaultConvertToUtilDate(" );
+			this.restBuilder.append( fieldName );
+			this.restBuilder.append( ")" );
+		} else {
+			this.restBuilder.append( fieldName );	
+		}
+		urlParams.append( "/" );
+		urlParams.append( fieldName );
+		urlParams.append( "/{" );
+		urlParams.append( fieldName );
+		urlParams.append( "}" );
+		pathParams.append( "@PathParam( \"" );
+		pathParams.append( fieldName );
+		pathParams.append( "\") String " );
+		pathParams.append( fieldName );
+	}
+	
 	public GeneratorKeyHelper setForLoadInterface() {
 		this.reset();
 		if ( StringUtils.isNotEmpty( key ) ) {
@@ -91,27 +115,7 @@ public class GeneratorKeyHelper implements Serializable {
 				}
 				this.paramBuilder.append( this.config.getLineSeparator() );
 				this.forwardBuilder.append( fieldName );
-				// rest data
-				if ( javaType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
-					this.restBuilder.append( "new java.math.BigDecimal(" );
-					this.restBuilder.append( fieldName );
-					this.restBuilder.append( ")" );
-				} else if ( javaType.equalsIgnoreCase( "java.util.Date" ) ) {
-					this.restBuilder.append( "this.defaultConvertToUtilDate(" );
-					this.restBuilder.append( fieldName );
-					this.restBuilder.append( ")" );
-				} else {
-					this.restBuilder.append( fieldName );	
-				}
-				urlParams.append( "/" );
-				urlParams.append( fieldName );
-				urlParams.append( "/{" );
-				urlParams.append( fieldName );
-				urlParams.append( "}" );
-				pathParams.append( "@PathParam( \"" );
-				pathParams.append( fieldName );
-				pathParams.append( "\") String " );
-				pathParams.append( fieldName );
+				this.setForLoadInterfaceHelper(javaType, fieldName);
 			}
 		}
 		return this;
