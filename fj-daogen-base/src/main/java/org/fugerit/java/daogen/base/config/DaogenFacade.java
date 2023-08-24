@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.base.config;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,40 +22,44 @@ public class DaogenFacade {
 
 	private DaogenFacade() {}
 	
-	private static void generageFile( JavaGenerator gen ) throws Exception {
+	private static void generageFile( JavaGenerator gen ) throws IOException {
 		log.info( "Generating : {}", gen );
 		gen.generate();
 		gen.write();
 	}
 	
-	private static void generate( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog ) throws Exception {
+	private static void handleGenerators( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog, DaogenCatalogEntity entity ) throws ConfigException, IOException {
+		if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
+			// iterating over generators
+			for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
+				if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
+					DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
+					if ( generator.isGenerate( daogenConfig, entity ) ) {
+						Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
+						if ( decorators != null ) {
+							// iterationg over decorators
+							for ( FactoryType decoratorType : decorators ) {
+								DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
+								decorator.init( generator );
+							}
+						}
+						generator.init( daogenConfig, entity );	
+						// actual generations
+						generageFile( generator );	
+					}
+				}
+			}
+		}
+	}
+	
+	private static void generate( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog ) throws ConfigException, IOException {
 		List<String> entityIdList = new ArrayList<String>( daogenConfig.getIdSet() );
 		Collections.sort( entityIdList );
 		// iterating over entity to generate
 		for ( String entityId : entityIdList ) {
 			DaogenCatalogEntity entity = daogenConfig.getListMap( entityId );
 			log.info( "Describe : {} -> {}", entity.getId(), entity.describe() );
-			if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
-				// iterating over generators
-				for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
-					if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
-						DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
-						if ( generator.isGenerate( daogenConfig, entity ) ) {
-							Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
-							if ( decorators != null ) {
-								// iterationg over decorators
-								for ( FactoryType decoratorType : decorators ) {
-									DaogenBasicDecorator decorator = (DaogenBasicDecorator)ClassHelper.newInstance( decoratorType.getType() );
-									decorator.init( generator );
-								}
-							}
-							generator.init( daogenConfig, entity );	
-							// actual generations
-							generageFile( generator );	
-						}
-					}
-				}
-			}
+			handleGenerators(daogenConfig, generatorCatalog, entity);
 		}
 		// iterating over factory generators
 		if ( generatorCatalog.getFactoryGenerators( daogenConfig ) != null ) {
@@ -86,7 +91,7 @@ public class DaogenFacade {
 			for ( DaogenGeneratorCatalog generatorCatalog : daogenConfig.getGeneratorCatalogs() ) {
 				generate(daogenConfig, generatorCatalog);
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw ConfigException.convertEx( "Error during DAO generation", e );
 		}
 	}

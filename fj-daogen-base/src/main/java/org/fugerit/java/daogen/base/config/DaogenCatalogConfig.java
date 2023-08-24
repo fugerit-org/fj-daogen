@@ -54,32 +54,11 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		return this.getGeneralProps().getProperty( key );
 	}
 	
-	public static DaogenCatalogConfig loadConfig( InputStream input ) throws Exception {
+	public static DaogenCatalogConfig loadConfig( InputStream input ) throws ConfigException {
 		return loadConfig( input, DaogenCatalogConfig.class );
 	}
 	
-	public static DaogenCatalogConfig loadConfig( InputStream input, Class<?> c ) throws Exception {
-		DaogenCatalogConfig config = new DaogenCatalogConfig();
-		load( input , config );
-		// class config
-		String classConfigPath = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG, DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG_DEFAULT );
-		try ( InputStream is = StreamHelper.resolveStream( classConfigPath, null, c ) ) {
-			config.classConfig.loadFromXML( is );
-		}
-		// type mapper
-		String typeMapperClass = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_TYPE_MAPPER, DaogenCatalogConstants.GEN_PROP_TYPE_MAPPER_DEFAULT );
-		DaogenTypeMapper typeMapper = (DaogenTypeMapper)ClassHelper.newInstance( typeMapperClass );
-		typeMapper.init( config );
-		config.typeMapper = typeMapper;
-		// decorator catalog
-		String pathDecoratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG_DEFAULT );
-		DaogenGeneratorCatalog daogenDecoratorCatalog = new DaogenGeneratorCatalog();
-		if ( pathDecoratorCatalog != null ) {
-			try ( InputStream is = StreamHelper.resolveStream( pathDecoratorCatalog, null, c )  ) {
-				daogenDecoratorCatalog.configureXML( is );
-			}
-		}
-		config.setDecoratorCatalog( daogenDecoratorCatalog );
+	private static void loadGeneratorCatalog( DaogenCatalogConfig config, Class<?> c ) throws ConfigException {
 		// generator catalog
 		String pathGeneratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG_DEFAULT );
 		try ( InputStream is = StreamHelper.resolveStream( pathGeneratorCatalog, null, c ) ) {
@@ -96,6 +75,37 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 					}
 				}
 			}
+		} catch (Exception e) {
+			throw ConfigException.convertExMethod( "loadGeneratorCatalog" , e );
+		}
+	}
+	
+	public static DaogenCatalogConfig loadConfig( InputStream input, Class<?> c ) throws ConfigException {
+		DaogenCatalogConfig config = new DaogenCatalogConfig();
+		try {
+			load( input , config );
+			// class config
+			String classConfigPath = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG, DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG_DEFAULT );
+			try ( InputStream is = StreamHelper.resolveStream( classConfigPath, null, c ) ) {
+				config.classConfig.loadFromXML( is );
+			}
+			// type mapper
+			String typeMapperClass = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_TYPE_MAPPER, DaogenCatalogConstants.GEN_PROP_TYPE_MAPPER_DEFAULT );
+			DaogenTypeMapper typeMapper = (DaogenTypeMapper)ClassHelper.newInstance( typeMapperClass );
+			typeMapper.init( config );
+			config.typeMapper = typeMapper;
+			// decorator catalog
+			String pathDecoratorCatalog = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG, DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG_DEFAULT );
+			DaogenGeneratorCatalog daogenDecoratorCatalog = new DaogenGeneratorCatalog();
+			if ( pathDecoratorCatalog != null ) {
+				try ( InputStream is = StreamHelper.resolveStream( pathDecoratorCatalog, null, c )  ) {
+					daogenDecoratorCatalog.configureXML( is );
+				}
+			}
+			config.setDecoratorCatalog( daogenDecoratorCatalog );
+			loadGeneratorCatalog(config, c);
+		} catch (Exception e) {
+			throw ConfigException.convertExMethod( "loadConfig", e );
 		}
 		return config;
 	}

@@ -50,6 +50,65 @@ public class DaogenConfigDump {
 		dumpConfig(cf, params, writer, tableNameList, new Properties());
 	}
 	
+	private static void dumpConfigFK( TableModel tableModel, Element currentEntityTag, ListMapStringKey<DaogenCatalogRelation> relations ) {
+		List<String> fk = new ArrayList<String>();
+		for ( ForeignKeyModel foreignKeyModel : tableModel.getForeignKeyList() ) {
+			log.info( "foreign key : {}", foreignKeyModel );
+			fk.add( foreignKeyModel.getForeignTableId().toIdString() );
+			DaogenCatalogRelation relation = new DaogenCatalogRelation();
+			relation.setName( tableModel.getTableId().getTableName()+"_"+foreignKeyModel.getForeignTableId().getTableName() );
+			relation.setMode( DaogenCatalogRelation.MODE_ONE );
+			relation.setFrom( tableModel.getTableId().toIdString() );
+			relation.setTo( foreignKeyModel.getForeignTableId().toIdString() );
+			relation.setId( relation.getFrom()+"_"+relation.getTo() );
+			relation.setComment( "Dump generated relation" );
+			relations.add( relation );
+			List<String> currentKey = new ArrayList<>();
+			for ( ColumnModel col : foreignKeyModel.internalColumnList( tableModel ) ) {
+				currentKey.add( col.getName() );
+			}
+			relation.setKey( StringUtils.concat( ",", currentKey ) );
+		}
+		if ( !fk.isEmpty() ) {
+			currentEntityTag.setAttribute( "foreignKeys" , StringUtils.concat( ",", fk ) );
+		}
+	}
+	
+	private static void dumpConfigColumns( TableModel tableModel, Element currentEntityTag, Document doc ) {
+		for ( ColumnModel columnModel : tableModel.getColumnList() ) {
+			log.info( "column : {} ({})", columnModel, columnModel.getComment() );
+			Element currentFieldTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_FIELD );
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_ID , columnModel.getName() );
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_COMMENTS , columnModel.getComment() );
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_SQL_TYPE , String.valueOf( columnModel.getTypeSql() ) );
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_SQL_TYPE_NAME , columnModel.getTypeName() );
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_SIZE , String.valueOf( columnModel.getSize() ) );
+			String nullable = "unknown";
+			if ( columnModel.getNullable() == ColumnModel.NULLABLE_TRUE ) {
+				nullable = "yes";
+			} else if ( columnModel.getNullable() == ColumnModel.NULLABLE_FALSE ) { 
+				nullable = "no";
+			}
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_NULLABLE , nullable );
+			currentFieldTag.setAttribute( DaogenCatalogField.ATT_JAVA_TYPE , columnModel.getJavaType() );
+			currentEntityTag.appendChild( currentFieldTag );
+		}
+	}
+	
+	private static void dumpRelations( ListMapStringKey<DaogenCatalogRelation> relations, Document doc, Element root ) {
+		for ( DaogenCatalogRelation rel : relations ) {
+			Element currentRelationTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_RELATION );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_ID , rel.getId() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_NAME , rel.getName() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_FROM , rel.getFrom() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_TO , rel.getTo() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_KEY, rel.getKey() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_MODE , rel.getMode() );
+			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_COMMENT , rel.getComment() );
+			root.appendChild( currentRelationTag );
+		}
+	}
+	
 	public static void dumpConfigWorker( DataBaseModel dbModel, Document doc, Element root, Properties mapToTables ) throws ConfigException {
 		ListMapStringKey<DaogenCatalogRelation> relations = new ListMapStringKey<>();
 		for ( TableModel tableModel : dbModel.getTableList() ) {
@@ -80,57 +139,10 @@ public class DaogenConfigDump {
 			for ( IndexModel indexModel : tableModel.getIndexList() ) {
 				log.info( "index : {}", indexModel );
 			}
-			List<String> fk = new ArrayList<String>();
-			for ( ForeignKeyModel foreignKeyModel : tableModel.getForeignKeyList() ) {
-				log.info( "foreign key : {}", foreignKeyModel );
-				fk.add( foreignKeyModel.getForeignTableId().toIdString() );
-				DaogenCatalogRelation relation = new DaogenCatalogRelation();
-				relation.setName( tableModel.getTableId().getTableName()+"_"+foreignKeyModel.getForeignTableId().getTableName() );
-				relation.setMode( DaogenCatalogRelation.MODE_ONE );
-				relation.setFrom( tableModel.getTableId().toIdString() );
-				relation.setTo( foreignKeyModel.getForeignTableId().toIdString() );
-				relation.setId( relation.getFrom()+"_"+relation.getTo() );
-				relation.setComment( "Dump generated relation" );
-				relations.add( relation );
-				List<String> currentKey = new ArrayList<>();
-				for ( ColumnModel col : foreignKeyModel.internalColumnList( tableModel ) ) {
-					currentKey.add( col.getName() );
-				}
-				relation.setKey( StringUtils.concat( ",", currentKey ) );
-			}
-			if ( !fk.isEmpty() ) {
-				currentEntityTag.setAttribute( "foreignKeys" , StringUtils.concat( ",", fk ) );
-			}
-			for ( ColumnModel columnModel : tableModel.getColumnList() ) {
-				log.info( "column : {} ({})", columnModel, columnModel.getComment() );
-				Element currentFieldTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_FIELD );
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_ID , columnModel.getName() );
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_COMMENTS , columnModel.getComment() );
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_SQL_TYPE , String.valueOf( columnModel.getTypeSql() ) );
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_SQL_TYPE_NAME , columnModel.getTypeName() );
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_SIZE , String.valueOf( columnModel.getSize() ) );
-				String nullable = "unknown";
-				if ( columnModel.getNullable() == ColumnModel.NULLABLE_TRUE ) {
-					nullable = "yes";
-				} else if ( columnModel.getNullable() == ColumnModel.NULLABLE_FALSE ) { 
-					nullable = "no";
-				}
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_NULLABLE , nullable );
-				currentFieldTag.setAttribute( DaogenCatalogField.ATT_JAVA_TYPE , columnModel.getJavaType() );
-				currentEntityTag.appendChild( currentFieldTag );
-			}
+			dumpConfigFK(tableModel, currentEntityTag, relations);
+			dumpConfigColumns(tableModel, currentEntityTag, doc);
 		}
-		for ( DaogenCatalogRelation rel : relations ) {
-			Element currentRelationTag = doc.createElement( DaogenCatalogConfig.ATT_DAOGEN_RELATION );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_ID , rel.getId() );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_NAME , rel.getName() );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_FROM , rel.getFrom() );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_TO , rel.getTo() );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_KEY, rel.getKey() );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_MODE , rel.getMode() );
-			currentRelationTag.setAttribute( DaogenCatalogRelation.ATT_COMMENT , rel.getComment() );
-			root.appendChild( currentRelationTag );
-		}
+		dumpRelations(relations, doc, root);
 	}
 	
 	public static void dumpConfig( ConnectionFactory cf, Properties params, Writer writer, List<String> tableNameList, Properties mapToTables ) throws ConfigException {
