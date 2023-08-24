@@ -28,6 +28,7 @@ public class DocOpenAPIBaseRestGenerator extends DaogenBasicGenerator {
 	
 	public DocOpenAPIBaseRestGenerator(String key, int compatibility) {
 		super();
+		this.key = key;
 		this.compatibility = compatibility;
 	}
 

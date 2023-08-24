@@ -49,6 +49,14 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String DAO_HELPER_LIT = " daoHelper = new ";
 	
+	protected static final String MODEL_SET_LIT = "model.set";
+	
+	protected static final String MODEL_GET_LIT = ", model.get";
+	
+	protected static final String CONTEXT_GEN_LIT = "<>( context );";
+	
+	protected static final String COMMA_END_LIT = "<>( context );";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {
