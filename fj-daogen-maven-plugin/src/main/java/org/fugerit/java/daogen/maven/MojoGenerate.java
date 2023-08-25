@@ -20,13 +20,23 @@ public class MojoGenerate extends AbstractMojo {
 	
 	public static final String PARAM_GENERATED_SOURCE_HELPER = "generated.source.helper";
 	
-	public static final String PARAM_GEN_BASE_DIR = "gen.base.dir";
+	public static final String PARAM_GEN_PROP_BASE_SRC_FOLDER= "base-src-folder";
+	
+	public static final String PARAM_GEN_PROP_GENERATOR_CATALOG = "generator-catalog";
+	
+	public static final String PARAM_GEN_PROP_DECORATOR_CATALOG = "decorator-catalog";
 	
     @Parameter(property = "daogenConfig", required = true, alias = PARAM_DAOGEN_CONFIG )
     private String daogenConfig;
 
-    @Parameter(property = "genBaseDir", required = false, alias = PARAM_GEN_BASE_DIR )
+    @Parameter(property = "genBaseDir", required = false, alias = PARAM_GEN_PROP_BASE_SRC_FOLDER )
     private String genBaseDir;
+    
+    @Parameter(property = "generatorCatalog", required = false, alias = PARAM_GEN_PROP_GENERATOR_CATALOG )
+    private String generatorCatalog;
+    
+    @Parameter(property = "decoratorCatalog", required = false, alias = PARAM_GEN_PROP_DECORATOR_CATALOG )
+    private String decoratorCatalog;
     
     @Parameter(property = "generatedSourceHelper", required = false, alias = PARAM_GENERATED_SOURCE_HELPER )
     private String generatedSourceHelper;
@@ -46,6 +56,8 @@ public class MojoGenerate extends AbstractMojo {
         	 Properties overrideProperties = new Properties();
         	 this.addProperty(overrideProperties, DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER, this.genBaseDir);
         	 this.addProperty(overrideProperties, DaogenCatalogConstants.GEN_PROP_SRC_MVN_GENERATED, this.generatedSourceHelper);
+        	 this.addProperty(overrideProperties, DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG, this.generatorCatalog);
+        	 this.addProperty(overrideProperties, DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG, this.decoratorCatalog);
              try ( FileInputStream fis = new FileInputStream( file ) ) {
              	DaogenFacade.generate( fis, overrideProperties );	
              }
