@@ -4,4 +4,9 @@
 
 ## Index
 
+* [Project README](README.md)
+* [DAO Configuration dump](docs/dao_dump.md) feature
+* [DAO Generation](docs/dao_gen.md) feature
 * [Configuration reference](docs/config/config.md)
+
+

@@ -1,0 +1,83 @@
+ <daogen-config
+	base-src-folder="../fj-daogen-sample"
+	database-type="oracle"
+	gen-version="1.0.0"
+	gen-author="fugerit"
+	src-main-java="src/main/java"
+	src-test-java="src/test/java"
+	src-main-resources="src/main/resources"
+	src-test-resources="src/test/resources"
+	src-helpers="SRC-MAIN-JAVA"
+	src-doc-openapi="src/main/doc/openapi_rest"
+	class-config="cl://config/daogen_default_class_config.xml"
+	type-mapper="org.fugerit.java.daogen.base.config.DaogenTypeMapper"
+	type-map-config="cl://config/daogen_default_type_mapping.xml"
+	generator-catalog="cl://config/default-generator-catalog.xml"
+	decorator-catalog="cl://config/default-decorator-catalog.xml"
+	default-column-time-insert="DATE_INSERT"
+	default-column-time-update="DATE_UPDATE"
+	struct_prefix="OBJ_"
+	package-model="org.fugerit.java.daogen.sample.def.model"
+	package-helper="org.fugerit.java.daogen.sample.impl.helper"
+	package-struct="org.fugerit.java.daogen.sample.impl.struct"
+	package-rse="org.fugerit.java.daogen.sample.impl.rse"
+	package-facade-def="org.fugerit.java.daogen.sample.def.facade"
+	package-facade-data-impl="org.fugerit.java.daogen.sample.impl.facade.data"
+	package-rest-load="org.fugerit.java.daogen.sample.impl.rest.load"
+	base-rest-service="org.fugerit.java.daogen.sample.helper.ServiceProviderHelper"
+	factory-def="org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade"
+	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"
+	default-sequence="seq_id_fugerit"
+	openapi_host="http://localhost:9080"
+	openapi_path="/fugerit-sample-web/jax-rs"
+	check-empty-interface="1"
+	>
+
+  <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>
+  <relation id="addressToUser" name="USER" from="PUBLIC.FUGERIT.ADDRESS" to="PUBLIC.FUGERIT.USER" mode="one" key="ID_USER"/>
+	
+  <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT">
+    <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+    <field comments="Password hash" id="PASSWORD" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+    <field comments="Time of last user login" id="LAST_LOGIN" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="1 active, 0 not active" id="STATE" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
+  </entity>
+  <entity catalog="PUBLIC" comments="Contains addresses data" foreignKeys="PUBLIC.FUGERIT.USER" id="PUBLIC.FUGERIT.ADDRESS" name="ADDRESS" primaryKey="ID" schema="FUGERIT">
+    <field comments="Address system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="User linked to to address" id="ID_USER" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="Address info" id="INFO" javaType="java.lang.String" nullable="no" size="256" sqlType="12" sqlTypeName="VARCHAR"/>
+  </entity>
+  <entity catalog="PUBLIC" comments="Contains upload blob" id="PUBLIC.FUGERIT.UPLOAD" name="UPLOAD" primaryKey="ID" schema="FUGERIT">
+    <field comments="" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="CONTENT" javaType="java.sql.Blob" nullable="yes" size="1073741824" sqlType="2004" sqlTypeName="BLOB"/>
+  </entity>
+  <entity catalog="PUBLIC" id="PUBLIC.FUGERIT.LOG_DATA" name="LOG_DATA" schema="FUGERIT">
+    <field comments="" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="" id="LOG_TIME" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="INFO" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+  </entity>
+  <entity catalog="PUBLIC" id="PUBLIC.FUGERIT.TEST_TWO_FIELD_KEY" name="TEST_TWO_FIELD_KEY" primaryKey="ID_ONE,ID_TWO" schema="FUGERIT">
+    <field comments="" id="ID_ONE" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="" id="ID_TWO" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="" id="INFO" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+  </entity>
+  
+  <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER_DATA" name="USER_DATA" primaryKey="ID" schema="FUGERIT" mapToTable="USER">
+    <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+    <field comments="Password hash" id="PASSWORD" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+    <field comments="Time of last user login" id="LAST_LOGIN" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+    <field comments="1 active, 0 not active" id="STATE" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
+  </entity>  
+  
+  
+</daogen-config>

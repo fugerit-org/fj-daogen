@@ -13,5 +13,4 @@ All basic features are implemented.
 *Since* : fj-doc 1.1.0
     
 *Quickstart* :
-
 See : [Daogen Maven Plugin Site](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/generate-mojo.html)
