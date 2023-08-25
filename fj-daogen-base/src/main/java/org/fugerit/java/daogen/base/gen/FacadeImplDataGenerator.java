@@ -146,7 +146,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println();	
 		}		
 		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
-			this.getWriter().println( TAB_2+"public static final String "+columnConstantName( field.getId() )+ " = \""+field.getId()+"\";" );
+			this.getWriter().println( TAB+"public static final String "+columnConstantName( field.getId() )+ " = \""+field.getId()+"\";" );
 		}
 		this.getWriter().println();
 		return defaultOrderBy;
