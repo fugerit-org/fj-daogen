@@ -31,7 +31,7 @@ This plugin contains simple mojos for handling dao generation and dao configurat
 ## [fj-daogen-sample](fj-daogen-sample/README.md) a demo project for [fj-daogen-base](fj-daogen-base/README.md) and [fj-daogen-maven-plugin](fj-daogen-maven-plugin/README.md)
 This projects can be used as a demo for the main features (dao generation and configuration dump) of the other modules. 
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-samplesvg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-sample)
+[![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-sample.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-sample)
 
 ## [fj-daogen-tool](fj-daogen-tool/README.md) tool wrapper
 Simple tool wrapper for dao generation and configuration dump features. 
