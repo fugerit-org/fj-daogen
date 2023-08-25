@@ -61,7 +61,8 @@ public class ModelGenerator extends DaogenBasicGenerator {
 	
 	@Override
 	public void generateDaogenBody() throws IOException {
-		boolean relationLast = BooleanUtils.isTrue( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
+		String valueRelationLast = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST );
+		boolean relationLast = BooleanUtils.isTrue( valueRelationLast );
 		if ( !relationLast ) {
 			this.generateRelations();
 		}
