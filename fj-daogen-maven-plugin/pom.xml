@@ -18,6 +18,9 @@
 
 	<properties>
 		<mvn-site-plugin-version>3.12.1</mvn-site-plugin-version>
+		<mvn-project-info-reports-plugin>3.4.5</mvn-project-info-reports-plugin>
+		<!-- 'report' goal seems not to work with lastest version, 3.9.0 --> 
+		<mvn-plugin-version>3.6.0</mvn-plugin-version>
 	</properties>
 
 	<licenses>
@@ -42,6 +45,11 @@
 	                <artifactId>maven-site-plugin</artifactId>
 	                <version>${mvn-site-plugin-version}</version>
 	            </plugin>
+	            <plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-project-info-reports-plugin</artifactId>
+				    <version>${mvn-project-info-reports-plugin}</version>					
+				</plugin>           
 	        </plugins>
 	    </pluginManagement>
 	    
