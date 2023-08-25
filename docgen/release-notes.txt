@@ -1,4 +1,8 @@
-﻿1.1.1 (2023-08-25) 
+﻿1.1.2 (2023-08-25) 
+------------------
++ [fix] [fj-daogen] fix indentation of column constants in FacadeImplDataGenerator
+
+1.1.1 (2023-08-25) 
 ------------------
 + [enhancement] [fj-daogen]added documentation [1.1.1-rc.2]
 + [enhancement] [fj-daogen-maven-plugin]added site and documentatin [1.1.1-rc.2]
