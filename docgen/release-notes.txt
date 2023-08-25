@@ -1,5 +1,6 @@
 ﻿1.1.1 (next)
 ------------------
++ [enhancement] [fj-daogen-maven-plugin]added site and documentatin [1.1.1-rc.2]
 + [enhancement] [fj-daogen-maven-plugin]added handling of parameters generator-catalog and decorator-catalog [1.1.1-rc.2]
 + [enhancement] updated fj-bom to 1.2.4 [1.1.1-rc.1]
 + [enhancement] fixed sonar cloud issues [1.1.1-rc.1]

@@ -12,6 +12,16 @@ import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenFacade;
 
+/**
+ * 
+ * <p>Convenience plugin for the <code>DaogenFacade.generate()</code> method in module 'fj-daogen-base'.</p>
+ * 
+ * <p>Required parameter are 'daogenConfig' and 'genBaseDir'.</p>
+ * 
+ * <p>Many parameters override 'daogen-config.xml' general properties
+ * (in this case they always have an alias with the same name of the property they override.</p>
+ * 
+ */
 @Mojo( name = "generate" )
 public class MojoGenerate extends AbstractMojo {
 	
@@ -20,27 +30,61 @@ public class MojoGenerate extends AbstractMojo {
 	
 	public static final String PARAM_GENERATED_SOURCE_HELPER = "generated.source.helper";
 	
-	public static final String PARAM_GEN_PROP_BASE_SRC_FOLDER= "base-src-folder";
-	
-	public static final String PARAM_GEN_PROP_GENERATOR_CATALOG = "generator-catalog";
-	
-	public static final String PARAM_GEN_PROP_DECORATOR_CATALOG = "decorator-catalog";
-	
+    /**
+     * <p>The path to 'daogen-config.xml'</p>
+     * 
+     * <p>If it is a file, it is recommended to set it to the full path, for instance : 
+     * <code>file://${project.basedir}/src/main/daogen/daogen-config.xml</code></p>
+     * 
+     * @since 1.1.0
+     */
     @Parameter(property = "daogenConfig", required = true, alias = PARAM_DAOGEN_CONFIG )
-    private String daogenConfig;
+    protected String daogenConfig;
 
-    @Parameter(property = "genBaseDir", required = false, alias = PARAM_GEN_PROP_BASE_SRC_FOLDER )
-    private String genBaseDir;
+    /**
+     * <p>The generation source base directory, overrides <code>'base-src-folder'</code> daogen general property.</p>
+     *  
+     * <p>It is recommended to set it to the full path, for instance : <code>file://${project.basedir}</code></p>
+     *  
+     * @since 1.1.0
+     */
+    @Parameter(property = "genBaseDir", required = true, alias = DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER )
+    protected String genBaseDir;
+
+    /**
+     * <p>Overrides <code>'src-mvn-generated-sources'</code> daogen general property.</p>
+     * 
+     * <p>It represents the generation source directory for maven generated sources 
+     * (for instance 'target/generated-sources/daogen'),
+     * relative to <code>'base-src-folder'</code></p>
+     *  
+     * @since 1.1.1
+     */
+    @Parameter(property = "generatedSourceHelper", required = false, alias = DaogenCatalogConstants.GEN_PROP_SRC_MVN_GENERATED )
+    protected String generatedSourceHelper;
     
-    @Parameter(property = "generatorCatalog", required = false, alias = PARAM_GEN_PROP_GENERATOR_CATALOG )
-    private String generatorCatalog;
+    /**
+     * <p>Overrides <code>'generator-catalog'</code> daogen general property.</p>
+     * 
+     * <p>If it is a file, it is recommended to set it to the full path, for instance : 
+     * <code>file://${project.basedir}/src/main/daogen/generator-catalog.xml</code></p>
+     *  
+     * @since 1.1.1
+     */
+    @Parameter(property = "generatorCatalog", required = false, alias = DaogenCatalogConstants.GEN_PROP_GENERATOR_CATALOG )
+    protected String generatorCatalog;
     
-    @Parameter(property = "decoratorCatalog", required = false, alias = PARAM_GEN_PROP_DECORATOR_CATALOG )
-    private String decoratorCatalog;
-    
-    @Parameter(property = "generatedSourceHelper", required = false, alias = PARAM_GENERATED_SOURCE_HELPER )
-    private String generatedSourceHelper;
-    
+    /**
+     * <p>Overrides <code>'decorator-catalog'</code> daogen general property.</p>
+     * 
+     * <p>If it is a file, it is recommended to set it to the full path, for instance : 
+     * <code>file://${project.basedir}/src/main/daogen/decorator-catalog.xml</code></p>
+     *  
+     * @since 1.1.1
+     */
+    @Parameter(property = "decoratorCatalog", required = false, alias = DaogenCatalogConstants.GEN_PROP_DECORATOR_CATALOG )
+    protected String decoratorCatalog;
+
     private void addProperty( Properties overrideProperties, String key, String value ) {
     	if ( StringUtils.isNotEmpty(value) ) {
     		getLog().info( "override property, key : "+key+", value : "+value );

@@ -16,6 +16,10 @@
 	
 	<description>Maven plugin implementing code generation for DaoGen Framework (fj-daogen:generate)</description>
 
+	<properties>
+		<mvn-site-plugin-version>3.12.1</mvn-site-plugin-version>
+	</properties>
+
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
@@ -23,9 +27,24 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<build>
 		
+	    <pluginManagement>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-plugin-plugin</artifactId>
+	                <version>${mvn-plugin-version}</version>
+	            </plugin>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-site-plugin</artifactId>
+	                <version>${mvn-site-plugin-version}</version>
+	            </plugin>
+	        </plugins>
+	    </pluginManagement>
+	    
 	</build>
 
 	<dependencies>
@@ -55,43 +74,20 @@
 	
 	<url>https://www.fugerit.org/perm/mars</url>
 	
-	<profiles>
-	
-		<profile>
-			<id>full</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<configuration>
-							<stylesheetfile>src/main/javadoc/stylesheet.css</stylesheetfile>
-						</configuration>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>			
-				</plugins>
-			</build>
-		</profile>
-	
-	</profiles>
+	<reporting>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-plugin-plugin</artifactId>
+	            <reportSets>
+	                <reportSet>
+	                    <reports>
+	                        <report>report</report>
+	                    </reports>
+	                </reportSet>
+	            </reportSets>
+	        </plugin>
+	    </plugins>
+	</reporting>	
 	
 </project>
