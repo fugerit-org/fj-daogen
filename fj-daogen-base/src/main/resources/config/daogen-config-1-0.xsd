@@ -6,10 +6,12 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0 (2020-11-12)
+	 * @version    : 1.0.0-rc.2 (2023-08-27)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
+	
+The entry point for daogen-config documentation is : https://marsdocs.fugerit.org/docs/dao_gen.html
 	
 <daogen-config
 	xmlns="http://daogen.fugerit.org"
@@ -25,7 +27,8 @@
 
 	<xsd:element name="daogen-config" type="daogen:daogenConfigType">
 		<xsd:annotation>
-			<xsd:documentation>Reference daogen-config.xsd documentation for Mars - Fugerit DAO Generation Framework (fj-daogen)</xsd:documentation>
+			<xsd:documentation>Reference daogen-config.xsd documentation for Mars - Fugerit DAO Generation Framework (fj-daogen).</xsd:documentation>
+			<xsd:documentation>The entry point for daogen-config configuration is https://marsdocs.fugerit.org/docs/dao_gen.html</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 
@@ -51,7 +54,7 @@
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="gen-author" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>The author that will be added to all generated code. (in javadoc comments or where applicable).</xsd:documentation>
+				<xsd:documentation>The author that will be added to all generated code, for. (in javadoc comments or where applicable).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="src-main-java" use="required">
@@ -60,143 +63,180 @@
 				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="src-test-java">
+		<xsd:attribute type="xsd:string" name="src-test-java" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for test java code. (for instance 'src-test-java' for maven standard layout).</xsd:documentation>
 				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="src-main-resources">
+		<xsd:attribute type="xsd:string" name="src-main-resources" use="required">
 			<xsd:annotation>
 				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for main java resources. (for instance 'src/main/resources' for maven standard layout).</xsd:documentation>
 				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="src-test-resources">
+		<xsd:attribute type="xsd:string" name="src-test-resources" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for test java resources. (for instance 'src/test/resources' for maven standard layout).</xsd:documentation>
 				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="src-doc-openapi">
+		<xsd:attribute type="xsd:string" name="src-doc-openapi" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for openapi documentation. (for instance 'src/main/doc/openapi_rest').</xsd:documentation>
 				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="src-helpers">
+		<xsd:attribute type="xsd:string" name="src-helpers" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory helper java files. (default to 'src-main-java').</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder .</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="src-mvn-generated-sources">
+		<xsd:attribute type="xsd:string" name="src-mvn-generated-sources" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for maven plugin generated file. mainly to be used by fj-daogen-maven-plugin.</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder .</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="class-config">
+		<xsd:attribute type="xsd:string" name="class-config" use="optional" default="cl://config/daogen_default_class_config.xml">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The class mapping for DaoGen classes. It will be default to 'cl://config/daogen_default_class_config.xml'.</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="type-mapper">
+		<xsd:attribute type="xsd:string" name="type-mapper" use="optional" default="org.fugerit.java.daogen.base.config.DaogenTypeMapper">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The type mapper. It will be default to 'org.fugerit.java.daogen.base.config.DaogenTypeMapper'.</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="type-map-config">
+		<xsd:attribute type="xsd:string" name="type-map-config" use="optional" default="cl://config/daogen_default_type_mapping.xml">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The type mapper config. It will be default to 'cl://config/daogen_default_type_mapping.xml'.</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="generator-catalog">
+		<xsd:attribute type="xsd:string" name="generator-catalog" use="optional" default="cl://config/default-generator-catalog.xml">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The generator catalog. It will be default to 'cl://config/default-generator-catalog.xml'.</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="default-column-time-insert">
+		<xsd:attribute type="xsd:string" name="decorator-catalog" use="optional" default="cl://config/default-decorator-catalog.xml">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The decorator catalog. It will be default to 'cl://config/default-decorator-catalog.xml'.</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="default-column-time-insert" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The default column to be used for 'insert' time. (e.g. 'DATE_INSERT').</xsd:documentation>
+				<xsd:documentation>Set this property only if you want a special handling of this column.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="default-column-time-update">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The default column to be used for 'last update' time. (e.g. 'DATE_INSERT').</xsd:documentation>
+				<xsd:documentation>Set this property only if you want a special handling of this column.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="struct-prefix">
+		<xsd:attribute type="xsd:string" name="struct-prefix" use="optional" default="OBJ_">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The prefix for java.sql.Struct classes, it will default to 'OBJ_'. Common alternative may be 'UT_' (for user type).</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-model">
+		<xsd:attribute type="xsd:string" name="package-model" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for model interfaces, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.def.model').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-helper">
+		<xsd:attribute type="xsd:string" name="package-helper" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for basic model implementation classes, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.helper').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-struct">
+		<xsd:attribute type="xsd:string" name="package-struct" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for database java.sql.String classes, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.struct').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-rse">
+		<xsd:attribute type="xsd:string" name="package-rse" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for database org.fugerit.java.core.db.dao.RSExtractor classes, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.rse').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-facade-def">
+		<xsd:attribute type="xsd:string" name="package-facade-def" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for DAO facade interfaces, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.def.facade').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-facade-data-impl">
+		<xsd:attribute type="xsd:string" name="package-facade-data-impl" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for DAO facade basic implementation, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.facade.data').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="package-rest-load">
+		<xsd:attribute type="xsd:string" name="factory-def" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The fully qualified name to be used for DAO factory interface.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="factory-def">
+		<xsd:attribute type="xsd:string" name="factory-data-impl" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The fully qualified name to be used for DAO factory basic implementation.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="factory-data-impl">
+		<xsd:attribute type="xsd:string" name="package-rest-load" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The package to be used for a basic rest service implementation, for load methods, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.rest.load').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
+				<xsd:documentation>NOTE: REST services generation is not recommended, if not as a starting stub.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="base-rest-service">
+		<xsd:attribute type="xsd:string" name="base-rest-service" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The base class for REST services.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.helper.ServiceProviderHelper').</xsd:documentation>
+				<xsd:documentation>NOTE: REST services generation is not recommended, if not as a starting stub.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:anyURI" name="openapi_host">
+		<xsd:attribute type="xsd:anyURI" name="openapi_host" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The host to be used for openapi specification and implementation specification.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="openapi_path">
+		<xsd:attribute type="xsd:string" name="openapi_path" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The path to be used for openapi specification and implementation specification.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="default-sequence">
+		<xsd:attribute type="xsd:string" name="default-sequence" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The default sequence name to be used for the entities (it is possible to override it).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="decorator-catalog">
+		<xsd:attribute type="xsd:string" name="check-empty-interface" use="optional" default="0">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>If set to '1' will check if interfaces have no methods.</xsd:documentation>
+				<xsd:documentation>NOTE: currently ignored.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>	
@@ -218,39 +258,62 @@
 			<xsd:documentation>Metadata for a field in an entity.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
+	<!-- 
+   <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>
+
+ -->
+	
 	
 	<xsd:complexType name="relationType">
-		<xsd:attribute type="xsd:string" name="id" use="optional">
+		<xsd:attribute type="xsd:string" name="id" use="required">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The id of the relation.</xsd:documentation>
+				<xsd:documentation>(e.g. 'userToAddress')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators as base name. (eventually converted with the proper case).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="name" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The name of the relation.</xsd:documentation>
+				<xsd:documentation>(e.g. 'USER_ADDRESSES')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators as base name. (eventually converted with the proper case).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="from" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The name of the entity from which the relation originate. (the model will contain the set method).</xsd:documentation>
+				<xsd:documentation>(e.g. 'PUBLIC.FUGERIT.USER')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="to" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The name of the entity to which the relation goes.</xsd:documentation>
+				<xsd:documentation>(e.g. 'PUBLIC.FUGERIT.ADDRESS')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="mode" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The mode of the relation, 'one' or 'many'.</xsd:documentation>
+				<xsd:documentation>(e.g. 'many')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="key" use="optional">
+		<xsd:attribute type="daogen:relationModeType" name="key" use="optional">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The list of comma separated field ids to be used for mapping the relation.</xsd:documentation>
+				<xsd:documentation>(e.g. 'ID_USER')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
     </xsd:complexType>
+    
+ 	<xsd:simpleType name="relationModeType">
+		<xsd:annotation>
+			<xsd:documentation>The possible modes for a relation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="one"></xsd:enumeration>
+			<xsd:enumeration value="many"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
 
 	<xsd:complexType name="entityType">
 		<xsd:sequence maxOccurs="unbounded" minOccurs="0">
@@ -258,42 +321,54 @@
 		</xsd:sequence>
 		<xsd:attribute type="xsd:string" name="comments" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The comment for the entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'Contains users data')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="id" use="optional" >
+		<xsd:attribute type="xsd:string" name="id" use="required" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The id of the entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'PUBLIC.FUGERIT.USER')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="name" use="optional" >
+		<xsd:attribute type="xsd:string" name="name" use="required" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The name of the entity (i.e. the database table).</xsd:documentation>
+				<xsd:documentation>(e.g. 'USER')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators as base name. (eventually converted with the proper case).</xsd:documentation>
+				<xsd:documentation>(e.g. the ModelGenerator will generate a 'ModelUser' interface.)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="primaryKey" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The primary of the entity. (list of comma separated field ids)</xsd:documentation>
+				<xsd:documentation>(e.g. 'ID')</xsd:documentation>
+				<xsd:documentation>The attribute is optional, but some methods will not be generated if not present.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="schema" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The schema name for the entity. If present it will be prefixed to table name for query.</xsd:documentation>
+				<xsd:documentation>(e.g. 'FUGERIT')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="sequenceName" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The sequence name for this entity. (it not present will default to global 'default-sequence')</xsd:documentation>
+				<xsd:documentation>(e.g. 'SEQ_USER')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="foreignKeys" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>Comma separated list of entity ids.</xsd:documentation>
+				<xsd:documentation>(e.g. 'PUBLIC.FUGERIT.USER')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="facadeMode" use="optional" >
+		<xsd:attribute type="xsd:string" name="facadeMode" use="optional" default="complete">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>Facade mode, comma separated list of accepted values 'complete' (default), 'select', 'insert', 'delete', 'update', 'none'.</xsd:documentation>
+				<xsd:documentation>(e.g. 'complete')</xsd:documentation>
+				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>	
@@ -301,47 +376,58 @@
 	<xsd:complexType name="fieldType">
 		<xsd:attribute type="xsd:string" name="comments" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The comment for the field.</xsd:documentation>
+				<xsd:documentation>(e.g. 'User system id')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="id" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The id of the field.</xsd:documentation>
+				<xsd:documentation>(e.g. 'ID')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators as base name. (eventually converted with the proper case).</xsd:documentation>
+				<xsd:documentation>(e.g. the ModelGenerator will generate a 'getId()' and 'setId()' methods.)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="javaType" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The java type to be used for the field.</xsd:documentation>
+				<xsd:documentation>(e.g. 'java.lang.Long')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="nullable" use="optional" >
+		<xsd:attribute type="xsd:string" name="nullable" use="optional" default="yes">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>'yes' if the field is nullable, 'no' if not. default 'yes'</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:short" name="size" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The size of the  field. (i.e'. the size of a varchar, generally not needed).</xsd:documentation>
+				<xsd:documentation>(e.g. '128')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:short" name="sqlType" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The sql type as for java.sql.Types mapping.</xsd:documentation>
+				<xsd:documentation>(e.g. '5')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="sqlTypeName" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>The sql type name.</xsd:documentation>
+				<xsd:documentation>(e.g. 'BIGINT')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:byte" name="udt" use="optional" >
+		<xsd:attribute type="xsd:boolean" name="udt" use="optional" default="true">
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>Set to 'true' if the field must be included in user defined type mapping (struct).</xsd:documentation>
+				<xsd:documentation>(e.g. 'true')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="structType" use="optional" >
 			<xsd:annotation>
-				<xsd:documentation>TODO</xsd:documentation>
+				<xsd:documentation>Used to override default type in user defined type (struct).</xsd:documentation>
+				<xsd:documentation>(e.g. 'java.lang.Long')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>	

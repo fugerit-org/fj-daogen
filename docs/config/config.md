@@ -11,12 +11,7 @@
       +--field(*)
 ```
 
-Configuration reference : 
-* [daogen-config](tag_daogen-config.md)
-* [relation](tag_daogen-config_relation.md)
-* [entity](tag_daogen-config_entity.md)
-* [field](tag_daogen-config_field.md)
-
+You can refer to the [daogen-config-1-0.xsd](https://marsdocs.fugerit.org/fj-daogen-base/src/main/resources/config/daogen-config-1-0.xsd) and the relative [configuration reference](https://marsdocs.fugerit.org/docs/config/daogen-config-xsd-ref.html)
 
 Additional configuration :
 * [Generator Catalog](file_generator-catalog.md)
