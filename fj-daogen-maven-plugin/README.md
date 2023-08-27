@@ -14,4 +14,5 @@ All basic features are implemented.
     
 *Quickstart* :
 
-See : [Daogen Maven Plugin Site](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/generate-mojo.html)
+See : [Daogen Maven Plugin Site](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/plugin-info.html)
+especially the [daogen:generate](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/generate-mojo.html).
