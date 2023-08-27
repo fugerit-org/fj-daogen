@@ -1,4 +1,9 @@
-﻿1.1.4 (2023-08-27) 
+﻿1.2.0 (next)
+------------------
++ [documentation] [fj-daogen] Added documentation for daogen-config-1.0.xsd
++ [enhancement] [fj-daogen] Removed maven 'full' profile as not needed (inherited from fj-bom)
+
+1.1.4 (2023-08-27) 
 ------------------
 + [enhancement] [fj-daogen-maven-plugin] Added experimental feature 'generate-lazy' plugin (should not run on m2e incremental builds
 

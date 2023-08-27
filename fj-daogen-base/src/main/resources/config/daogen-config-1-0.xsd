@@ -25,82 +25,325 @@
 
 	<xsd:element name="daogen-config" type="daogen:daogenConfigType">
 		<xsd:annotation>
-			<xsd:documentation></xsd:documentation>
+			<xsd:documentation>Reference daogen-config.xsd documentation for Mars - Fugerit DAO Generation Framework (fj-daogen)</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 
 	<xsd:complexType name="daogenConfigType">
-		<xsd:sequence>
-			<xsd:element name="relation" maxOccurs="unbounded" minOccurs="0" type="daogen:relationType"/>
-			<xsd:element name="entity" maxOccurs="unbounded" minOccurs="0" type="daogen:entityType"/>
+		<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="daogen:relation" maxOccurs="unbounded" minOccurs="0"/>
+			<xsd:element ref="daogen:entity" maxOccurs="unbounded" minOccurs="0"/>
 		</xsd:sequence>	
-		<xsd:attribute type="xsd:string" name="base-src-folder"/>
-		<xsd:attribute type="xsd:string" name="database-type"/>
-		<xsd:attribute type="xsd:string" name="gen-version"/>
-		<xsd:attribute type="xsd:string" name="gen-author"/>
-		<xsd:attribute type="xsd:string" name="src-main-java"/>
-		<xsd:attribute type="xsd:string" name="src-test-java"/>
-		<xsd:attribute type="xsd:string" name="src-main-resources"/>
-		<xsd:attribute type="xsd:string" name="src-test-resources"/>
-		<xsd:attribute type="xsd:string" name="src-doc-openapi"/>
-		<xsd:attribute type="xsd:string" name="src-helpers"/>
-		<xsd:attribute type="xsd:string" name="class-config"/>
-		<xsd:attribute type="xsd:string" name="type-mapper"/>
-		<xsd:attribute type="xsd:string" name="type-map-config"/>
-		<xsd:attribute type="xsd:string" name="generator-catalog"/>
-		<xsd:attribute type="xsd:string" name="default-column-time-insert"/>
-		<xsd:attribute type="xsd:string" name="default-column-time-update"/>
-		<xsd:attribute type="xsd:string" name="struct-prefix"/>
-		<xsd:attribute type="xsd:string" name="package-model"/>
-		<xsd:attribute type="xsd:string" name="package-helper"/>
-		<xsd:attribute type="xsd:string" name="package-struct"/>
-		<xsd:attribute type="xsd:string" name="package-rse"/>
-		<xsd:attribute type="xsd:string" name="package-facade-def"/>
-		<xsd:attribute type="xsd:string" name="package-facade-data-impl"/>
-		<xsd:attribute type="xsd:string" name="package-rest-load"/>
-		<xsd:attribute type="xsd:string" name="factory-def"/>
-		<xsd:attribute type="xsd:string" name="factory-data-impl"/>
-		<xsd:attribute type="xsd:string" name="base-rest-service"/>
-		<xsd:attribute type="xsd:anyURI" name="openapi_host"/>
-		<xsd:attribute type="xsd:string" name="openapi_path"/>
-		<xsd:attribute type="xsd:string" name="default-sequence"/>
-		<xsd:attribute type="xsd:string" name="decorator-catalog"/>
+		<xsd:attribute type="xsd:string" name="base-src-folder" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The base source folder to use for generating the code (for example '.', or ${project.basedir} in maven), if not provided will default to current directory (.)</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="database-type" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The database type (currently accepted values are : 'oracle', 'mysql', 'postres')</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="gen-version" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The version that will be added to all generated code. (in javadoc comments or where applicable).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="gen-author" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The author that will be added to all generated code. (in javadoc comments or where applicable).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-main-java" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for main java code. (for instance 'src/main/java' for maven standard layout).</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-test-java">
+			<xsd:annotation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for test java code. (for instance 'src-test-java' for maven standard layout).</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-main-resources">
+			<xsd:annotation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for main java resources. (for instance 'src/main/resources' for maven standard layout).</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-test-resources">
+			<xsd:annotation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for test java resources. (for instance 'src/test/resources' for maven standard layout).</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-doc-openapi">
+			<xsd:annotation>
+				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for openapi documentation. (for instance 'src/main/doc/openapi_rest').</xsd:documentation>
+				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-helpers">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="src-mvn-generated-sources">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="class-config">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="type-mapper">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="type-map-config">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="generator-catalog">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="default-column-time-insert">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="default-column-time-update">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="struct-prefix">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-model">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-helper">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-struct">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-rse">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-facade-def">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-facade-data-impl">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-rest-load">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="factory-def">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="factory-data-impl">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="base-rest-service">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:anyURI" name="openapi_host">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="openapi_path">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="default-sequence">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="decorator-catalog">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>	
 
-       
+	<xsd:element name='relation' type="daogen:relationType">
+		<xsd:annotation>
+			<xsd:documentation>Metadata for a relation between to entities to be generated.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name='entity' type="daogen:entityType">
+		<xsd:annotation>
+			<xsd:documentation>Metadata for an entity to be generated.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name='field' type="daogen:fieldType" >
+		<xsd:annotation>
+			<xsd:documentation>Metadata for a field in an entity.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
 	<xsd:complexType name="relationType">
-		<xsd:attribute type="xsd:string" name="id" use="optional"/>
-		<xsd:attribute type="xsd:string" name="name" use="optional"/>
-		<xsd:attribute type="xsd:string" name="from" use="optional"/>
-		<xsd:attribute type="xsd:string" name="to" use="optional"/>
-		<xsd:attribute type="xsd:string" name="mode" use="optional"/>
-		<xsd:attribute type="xsd:string" name="key" use="optional"/>
+		<xsd:attribute type="xsd:string" name="id" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="name" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="from" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="to" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="mode" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="key" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
     </xsd:complexType>
 
 	<xsd:complexType name="entityType">
-		<xsd:sequence>
-			<xsd:element name="field" maxOccurs="unbounded" minOccurs="0" type="daogen:fieldType"/>
+		<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+			<xsd:element ref="daogen:field"/>
 		</xsd:sequence>
-		<xsd:attribute type="xsd:string" name="comments" use="optional" />
-		<xsd:attribute type="xsd:string" name="id" use="optional" />
-		<xsd:attribute type="xsd:string" name="name" use="optional" />
-		<xsd:attribute type="xsd:string" name="primaryKey" use="optional" />
-		<xsd:attribute type="xsd:string" name="schema" use="optional" />
-		<xsd:attribute type="xsd:string" name="sequenceName" use="optional" />
-		<xsd:attribute type="xsd:string" name="foreignKeys" use="optional" />
-		<xsd:attribute type="xsd:string" name="facadeMode" use="optional" />
+		<xsd:attribute type="xsd:string" name="comments" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="id" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="name" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="primaryKey" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="schema" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="sequenceName" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="foreignKeys" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="facadeMode" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>	
 
 	<xsd:complexType name="fieldType">
-		<xsd:attribute type="xsd:string" name="comments" use="optional" />
-		<xsd:attribute type="xsd:string" name="id" use="optional" />
-		<xsd:attribute type="xsd:string" name="javaType" use="optional" />
-		<xsd:attribute type="xsd:string" name="nullable" use="optional" />
-		<xsd:attribute type="xsd:short" name="size" use="optional" />
-		<xsd:attribute type="xsd:short" name="sqlType" use="optional" />
-		<xsd:attribute type="xsd:string" name="sqlTypeName" use="optional" />
-		<xsd:attribute type="xsd:byte" name="udt" use="optional" />
-		<xsd:attribute type="xsd:string" name="structType" use="optional" />
+		<xsd:attribute type="xsd:string" name="comments" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="id" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="javaType" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="nullable" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:short" name="size" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:short" name="sqlType" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="sqlTypeName" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:byte" name="udt" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="structType" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>TODO</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>	
 
 </xsd:schema>

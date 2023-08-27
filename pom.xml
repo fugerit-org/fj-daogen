@@ -25,7 +25,8 @@
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
 	    <maven.test.skip>true</maven.test.skip>
-		<fj-version>8.2.0</fj-version>  		 	
+		<fj-version>8.2.0</fj-version>  	
+		<fj-doc-version>1.5.3</fj-doc-version>  		 	
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
 		<fj-daogen-version>${project.version}</fj-daogen-version>
 	</properties>
@@ -104,7 +105,13 @@
 				<groupId>org.fugerit.java</groupId>
 				<artifactId>fj-daogen-sample</artifactId>
 				<version>${fj-daogen-version}</version>
-			</dependency>									
+			</dependency>		
+			
+			<dependency>
+				<groupId>org.fugerit.java</groupId>
+				<artifactId>fj-doc-lib-autodoc</artifactId>
+				<version>${fj-doc-version}</version>
+			</dependency>								
 								
 			<dependency>
 				<groupId>javax</groupId>
