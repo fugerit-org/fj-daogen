@@ -55,7 +55,11 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	}
 	
 	public static DaogenCatalogConfig loadConfig( InputStream input ) throws ConfigException {
-		return loadConfig( input, DaogenCatalogConfig.class );
+		return loadConfig(input, DaogenCatalogConfig.class, null);
+	}
+	
+	public static DaogenCatalogConfig loadConfig( InputStream input, Properties overrideProperties ) throws ConfigException {
+		return loadConfig( input, DaogenCatalogConfig.class, overrideProperties );
 	}
 	
 	private static void loadGeneratorCatalog( DaogenCatalogConfig config, Class<?> c ) throws ConfigException {
@@ -81,9 +85,26 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	}
 	
 	public static DaogenCatalogConfig loadConfig( InputStream input, Class<?> c ) throws ConfigException {
+		return loadConfig(input, c, null);
+	}
+	
+	public static DaogenCatalogConfig loadConfig( InputStream input, Class<?> c, Properties overrideProperties ) throws ConfigException {
 		DaogenCatalogConfig config = new DaogenCatalogConfig();
 		try {
 			load( input , config );
+			// override properties START
+			if ( overrideProperties != null ) {
+				config.getLogger().info( "override properties -> {}", overrideProperties );
+				for ( Object k : overrideProperties.keySet() ) {
+					String key = k.toString();
+					String value = overrideProperties.getProperty(key);
+					config.getLogger().info( "ovverride {} -> {}", key, value );
+					config.getGeneralProps().setProperty(key, value);
+				}
+				config.getGeneralProps().keySet().stream().sorted().forEach( 
+						k -> config.getLogger().info( "prop key : {} value : {}", k, config.getGeneralProps().getProperty( k.toString() ) ) );
+			}
+			// override properties END
 			// class config
 			String classConfigPath = config.getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG, DaogenCatalogConstants.GEN_PROP_CLASS_CONFIG_DEFAULT );
 			try ( InputStream is = StreamHelper.resolveStream( classConfigPath, null, c ) ) {

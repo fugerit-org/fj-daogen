@@ -78,18 +78,7 @@ public class DaogenFacade {
 	
 	public static void generate( InputStream fis, Properties overrideProperties ) throws ConfigException {
 		try {
-			DaogenCatalogConfig daogenConfig = DaogenCatalogConfig.loadConfig( fis );
-			if ( overrideProperties != null ) {
-				log.info( "override properties -> {}", overrideProperties );
-				for ( Object k : overrideProperties.keySet() ) {
-					String key = k.toString();
-					String value = overrideProperties.getProperty(key);
-					log.info( "ovverride {} -> {}", key, value );
-					daogenConfig.getGeneralProps().setProperty(key, value);
-				}
-				daogenConfig.getGeneralProps().keySet().stream().sorted().forEach( 
-						k -> log.info( "prop key : {} value : {}", k, daogenConfig.getGeneralProps().getProperty( k.toString() ) ) );
-			}
+			DaogenCatalogConfig daogenConfig = DaogenCatalogConfig.loadConfig( fis, overrideProperties );
 			for ( DaogenGeneratorCatalog generatorCatalog : daogenConfig.getGeneratorCatalogs() ) {
 				generate(daogenConfig, generatorCatalog);
 			}
