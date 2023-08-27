@@ -7,6 +7,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+/**
+ * This is just a stub for now. It will be implemented in the near future
+ */
 @Mojo( name = "dump")
 public class MojoDump extends AbstractMojo {
 	

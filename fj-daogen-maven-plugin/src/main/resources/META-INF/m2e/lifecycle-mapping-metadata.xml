@@ -1,5 +1,6 @@
 <lifecycleMappingMetadata>
   <pluginExecutions>
+    <!-- configurazione for mojo:generate, will run all builds. -->
     <pluginExecution>
       <pluginExecutionFilter>
         <goals>
@@ -10,6 +11,24 @@
       <action>
         <execute>
           <runOnIncremental>true</runOnIncremental>
+          <runOnConfiguration>true</runOnConfiguration>
+        </execute>
+      </action>
+    </pluginExecution>
+    <!-- 
+    	configurazione for mojo:generate-lazy, will not run on incremental builds.
+    	NOTE: it can be recommended in some scenarios, like on a workstation not powerful enough.
+     -->
+    <pluginExecution>
+      <pluginExecutionFilter>
+        <goals>
+          <goal>compile</goal>
+          <goal>generate-lazy</goal>
+        </goals>
+      </pluginExecutionFilter>
+      <action>
+        <execute>
+          <runOnIncremental>false</runOnIncremental>
           <runOnConfiguration>true</runOnConfiguration>
         </execute>
       </action>
