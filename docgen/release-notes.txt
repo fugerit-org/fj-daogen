@@ -1,4 +1,9 @@
-﻿1.1.5 (2023-08-29)
+﻿1.1.6 (2023-08-29)
+------------------
++ [enhancement] [fj-daogen] fj-bom version updated to 1.2.5
++ [enhancement] [fj-daogen] fj-core version updated to 8.2.1
+
+1.1.5 (2023-08-29)
 ------------------
 + [fix] [fj-daogen-base] Fox to SpringBoot rest load generators
 + [documentation] [fj-daogen] Added documentation for daogen-config-1.0.xsd
