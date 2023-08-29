@@ -21,6 +21,9 @@ import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
 import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
 import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 
 	protected static final String NEW_CONTEXT_LIT = "try (CloseableDAOContext context = this.newDefaultContext() ) {";
@@ -43,16 +46,17 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	protected static final String FACADE_FACTORY_GET_LIT = " facade = factory.get";
 	
-	
+	private String propertyPackage;
 	
 	private String key;
 	
 	private BaseRestLoadHelperGeneratorConfig config;
 	
-	protected BaseRestLoadHelperGenerator(String key, BaseRestLoadHelperGeneratorConfig config) {
+	protected BaseRestLoadHelperGenerator(String key, BaseRestLoadHelperGeneratorConfig config, String propertyPackage ) {
 		super();
 		this.key = key;
 		this.config = config;
+		this.propertyPackage = propertyPackage;
 	}
 
 	@Override
@@ -68,8 +72,10 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	protected String helperClass = null;
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
+		String fullObjectBName = fullObjectName( daogenConfig.getGeneralProp( this.propertyPackage ), DaogenCatalogConstants.restLoadName( entity ) );
+		log.info( "propertyPackage:{}, fullObjectBName:{}", this.propertyPackage, fullObjectBName  );
 		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ), 
-				DaogenHelperGenerator.toHelperClassName( fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD ), DaogenCatalogConstants.restLoadName( entity ) ) ), 
+				DaogenHelperGenerator.toHelperClassName( fullObjectBName ), 
 				STYLE_CLASS, daogenConfig, entity );
 		this.getImportList().addAll( this.config.getImportList() );
 		this.setClassDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CONTEXT_BASE, this.getImportList() ) );

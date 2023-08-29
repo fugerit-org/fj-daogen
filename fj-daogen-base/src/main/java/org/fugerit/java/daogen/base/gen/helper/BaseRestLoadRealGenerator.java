@@ -22,7 +22,8 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 		super();
 		this.key = key;
 		this.importList = importList;
-		this.propertyParage = propertyParage;
+		this.propertyPackage = propertyParage;
+		log.debug( "patternBaseAnnotation:{}, patternBaseAnnotation:{}", patternBaseAnnotation, patternBaseAnnotation );
 		this.patternBaseAnnotation = patternBaseAnnotation;
 		this.patternPathAnnotation = patternPathAnnotation;
 	}
@@ -31,7 +32,7 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 	
 	private List<String> importList;
 	
-	private String propertyParage;
+	private String propertyPackage;
 	
 	private String patternBaseAnnotation;
 	
@@ -49,8 +50,10 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 	}
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
+		String fullObjectBName = fullObjectName( daogenConfig.getGeneralProp( this.propertyPackage ), DaogenCatalogConstants.restLoadName( entity ) );
+		log.debug( "propertyPackage:{}, fullObjectBName:{}", this.propertyPackage, fullObjectBName  );
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
-				fullObjectName( daogenConfig.getGeneralProp( this.propertyParage ), DaogenCatalogConstants.restLoadName( entity ) ), 
+				fullObjectBName, 
 				STYLE_CLASS, daogenConfig, entity );
 		for ( String currentImport : this.importList ) {
 			this.getImportList().add( currentImport );
@@ -68,8 +71,9 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 		super.beforeClass();
 		String urlBase = this.getCurrentEntity().getName().replace( "_" , "" ).toLowerCase();
 		this.getWriter().println( patternBaseAnnotation );
+		log.debug( "patternPathAnnotation : {}, urlBase : {}", patternPathAnnotation, urlBase );
 		String pathAnnotation = MessageFormat.format( this.patternPathAnnotation , urlBase);
-		log.info( "pathAnnotation : {}", pathAnnotation );
+		log.debug( "pathAnnotation : {}", pathAnnotation );
 		this.getWriter().println( pathAnnotation );
 	}
 

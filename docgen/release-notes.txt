@@ -1,5 +1,6 @@
-﻿1.2.0 (next)
+﻿1.1.5 (2023-08-29)
 ------------------
++ [fix] [fj-daogen-base] Fox to SpringBoot rest load generators
 + [documentation] [fj-daogen] Added documentation for daogen-config-1.0.xsd
 + [enhancement] [fj-daogen] Removed maven 'full' profile as not needed (inherited from fj-bom)
 

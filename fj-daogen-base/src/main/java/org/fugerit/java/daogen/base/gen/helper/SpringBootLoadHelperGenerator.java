@@ -3,6 +3,7 @@ package org.fugerit.java.daogen.base.gen.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
 import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
@@ -22,19 +23,17 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		importList.add( "javax.servlet.http.HttpServletResponse" );
 		importList.add( "org.springframework.http.ResponseEntity" );
 		importList.add( "org.springframework.web.bind.annotation.PathVariable" );
-		importList.add( "org.springframework.web.bind.annotation.RequestMapping" );
-		importList.add( "org.springframework.web.bind.annotation.RequestMethod" );
-		importList.add( "org.springframework.web.bind.annotation.RequestMethod" );
+		importList.add( "org.springframework.web.bind.annotation.GetMapping" );
 		importList.add( "org.springframework.http.MediaType" );
 		CONFIG.setImportList( importList );
 	}
 	
 	public SpringBootLoadHelperGenerator() {
-		super(KEY, CONFIG);
+		super(KEY, CONFIG, DaogenCatalogConstants.GEN_PROP_PACKAGE_SPRING_REST_LOAD);
 	}
 
 	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {
-		this.getWriter().println( TAB+"@RequestMapping(value = \""+deepUrl+primaryKeyHelper.getUrlParams()+"\", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )" );
+		this.getWriter().println( TAB+"@GetMapping(value = \""+deepUrl+primaryKeyHelper.getUrlParams()+"\", produces = MediaType.APPLICATION_JSON_VALUE )" );
 		this.getWriter().println( TAB+"public ResponseEntity<Object> getByID"+deepMethod+"("+primaryKeyHelper.getPathVarables()+") throws Exception {" );
 		this.getWriter().println( TAB_2+RESPONSE_ENTITY_LIT );
 		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
@@ -45,10 +44,11 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 		this.getWriter().println( TAB_3+RES_BUILD_LIT );
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+RETURN_RES_LIT );
+		this.getWriter().println( TAB+"}" );
 	}
 	
 	protected void printLoadAll( String factoryClassName ) {
-		this.getWriter().println( TAB+"@RequestMapping(value = \"/all\", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )" );
+		this.getWriter().println( TAB+"@GetMapping(value = \"/all\", produces = MediaType.APPLICATION_JSON_VALUE )" );
 		this.getWriter().println( TAB+"public ResponseEntity<Object> getAll() throws Exception {" );
 		this.getWriter().println( TAB_2+RESPONSE_ENTITY_LIT );
 		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );
@@ -66,7 +66,7 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	}
 
 	protected void printLoadCurrent( String urlName, String propertyName, String javaName, DaogenCatalogField field ) {
-		this.getWriter().println( TAB+"@RequestMapping(value = \"/"+urlName+"/{"+urlName+"}\", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )" );
+		this.getWriter().println( TAB+"@GetMapping(value = \"/"+urlName+"/{"+urlName+"}\", produces = MediaType.APPLICATION_JSON_VALUE )" );
 		this.getWriter().println( TAB+"public ResponseEntity<Object> getAll"+javaName+"(@PathVariable( \""+urlName+"\" ) String "+propertyName+") throws Exception {" );
 		this.getWriter().println( TAB_2+RESPONSE_ENTITY_LIT );
 		this.getWriter().println( TAB_2+NEW_CONTEXT_LIT );

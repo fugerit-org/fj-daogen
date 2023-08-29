@@ -23,9 +23,10 @@ public class DaogenFacade {
 	private DaogenFacade() {}
 	
 	private static void generageFile( JavaGenerator gen ) throws IOException {
-		log.info( "Generating : {}", gen );
+		log.debug( "Generating : {} START", gen );
 		gen.generate();
 		gen.write();
+		log.debug( "Generating : {} END", gen );
 	}
 	
 	private static void handleCurrentGenerator( DaogenBasicGenerator generator, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity, FactoryType dataType ) throws ConfigException, IOException {
@@ -48,6 +49,7 @@ public class DaogenFacade {
 		if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
 			// iterating over generators
 			for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
+				log.info( "generator : {} -> {}", dataType.getInfo(), dataType.getType() );
 				if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 					handleCurrentGenerator((DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType())), daogenConfig, entity, dataType);
 				}

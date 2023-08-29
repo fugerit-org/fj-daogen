@@ -3,6 +3,7 @@ package org.fugerit.java.daogen.base.gen.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
 import org.fugerit.java.daogen.base.gen.GeneratorKeyHelper;
@@ -25,7 +26,7 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	}
 	
 	public RestLoadHelperGenerator() {
-		super(KEY, CONFIG);
+		super(KEY, CONFIG, DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD);
 	}
 	
 	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {

@@ -161,6 +161,12 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	}
 
 	public static String fullObjectName( String packageName, String simpleClassName ) {
+		if ( packageName == null ) {
+			throw new ConfigRuntimeException( "fullObjectName() packageName is null" );
+		}
+		if ( simpleClassName == null ) {
+			throw new ConfigRuntimeException( "fullObjectName() simpleClassName is null" );
+		}
 		return packageName+"."+simpleClassName;
 	}
 
@@ -172,6 +178,9 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 			sourceFolder = daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA );
 		} else if ( DaogenCatalogConstants.GEN_PROP_SRC_HELPERS_GEN.equalsIgnoreCase( sourceFolder ) ) {
 			sourceFolder = "target/generated-sources/daogen/";
+		}
+		if ( sourceFolder == null || sourceFolder.equalsIgnoreCase( "null" ) ) {
+			throw new ConfigException( "null source folder for : "+fullObjectBName );
 		}
 		super.init( new File( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER ), sourceFolder ), fullObjectBName, javaStyle, daogenConfig.getGeneralProps(), daogenConfig.getLineSeparator() );
 		this.daogenConfig = daogenConfig;
