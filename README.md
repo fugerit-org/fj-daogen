@@ -4,6 +4,10 @@ Framework for generating model and persistence A.P.I.
 Provides tools for dumping configuration from relational database.
 A [quickstart](https://github.com/fugerit-org/fj-daogen-quickstart) is available too.
 
+[![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-base.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-base)
+[![license](https://img.shields.io/badge/License-Apache%20License%202.0-teal.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_fj-daogen&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-daogen)
+
 **Note : Starting from version 0.4+, minimum required java version changed to 1.8**
 
 Useful resources : [github pages documentation](https://marsdocs.fugerit.org/) | [project home page](https://www.fugerit.org/perm/mars) | docgen [home](https://www.fugerit.org/data/java/doc/mars/index.html) | [release notes](https://www.fugerit.org/data/java/doc/mars/release-notes.html) | [Doagen Maven Plugin Site](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/generate-mojo.html)
@@ -37,7 +41,3 @@ This projects can be used as a demo for the main features (dao generation and co
 Simple tool wrapper for dao generation and configuration dump features. 
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-tool.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-tool)
-
-## Sonar Cloud quality gate
-
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=fugerit-org_fj-daogen)](https://sonarcloud.io/summary/new_code?id=fugerit-org_fj-daogen)
