@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sonar Cloud Maven Build set to use maven profile sonarfugerit and github environmental variable for sonarKey (#9)
 - New changelog style based on : [https://github.com/olivierlacan/keep-a-changelog](https://github.com/olivierlacan/keep-a-changelog) (#8)
 - badge order on README.md
+- directory docs renamed to src/docs (to comply with maven [standard layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html))
 
 ## [1.1.6 and previous]
 

@@ -21,8 +21,8 @@ Note that, being an open source project hosted on maven central, you can find re
 *Description*
 This project provides code generation API, especially for persistence (DAO). But can be used to generate other item too.
 There are two basic feature supplied by the library : 
-1. [DAO Configuration dump](docs/dao_dump.md), this is optional, it provides a configuration dump for the 'DAO Generation' feature.
-2. [DAO Generation](docs/dao_gen.md), this is the main feature, it generates various items based on a configuration file, named 'daogen-config.xml' (see a [sample daogen-config-xml](fj-daogen-sample/src/main/daogen/fugerit-sample-daogen-config.xml))
+1. [DAO Configuration dump](src/docs/dao_dump.md), this is optional, it provides a configuration dump for the 'DAO Generation' feature.
+2. [DAO Generation](src/docs/dao_gen.md), this is the main feature, it generates various items based on a configuration file, named 'daogen-config.xml' (see a [sample daogen-config-xml](fj-daogen-sample/src/main/daogen/fugerit-sample-daogen-config.xml))
 
 ## [fj-daogen-base](fj-daogen-base/README.md) the core module
 This modules contains core functionalities of the library : 'DAO Configuration dump' and 'DAO Generation'
