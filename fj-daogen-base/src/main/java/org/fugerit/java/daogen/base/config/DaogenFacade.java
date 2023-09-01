@@ -29,7 +29,7 @@ public class DaogenFacade {
 		log.debug( "Generating : {} END", gen );
 	}
 	
-	private static void handleCurrentGenerator( DaogenBasicGenerator generator, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity, FactoryType dataType ) throws ConfigException, IOException {
+	private static void handleCurrentGenerator( DaogenBasicGenerator generator, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity, FactoryType dataType ) throws ConfigException, IOException, ClassNotFoundException, NoSuchMethodException {
 		if ( generator.isGenerate( daogenConfig, entity ) ) {
 			Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
 			if ( decorators != null ) {
@@ -45,7 +45,7 @@ public class DaogenFacade {
 		}
 	}
 	
-	private static void handleGenerators( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog, DaogenCatalogEntity entity ) throws ConfigException, IOException {
+	private static void handleGenerators( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog, DaogenCatalogEntity entity ) throws ConfigException, IOException, ClassNotFoundException, NoSuchMethodException {
 		if ( generatorCatalog.getEntityGenerators( daogenConfig ) != null ) {
 			// iterating over generators
 			for ( FactoryType dataType : generatorCatalog.getEntityGenerators( daogenConfig ) ) {
@@ -57,7 +57,7 @@ public class DaogenFacade {
 		}
 	}
 	
-	private static void generate( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog ) throws ConfigException, IOException {
+	private static void generate( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog ) throws ConfigException, IOException, ClassNotFoundException, NoSuchMethodException {
 		List<String> entityIdList = new ArrayList<String>( daogenConfig.getIdSet() );
 		Collections.sort( entityIdList );
 		// iterating over entity to generate
@@ -84,7 +84,7 @@ public class DaogenFacade {
 			for ( DaogenGeneratorCatalog generatorCatalog : daogenConfig.getGeneratorCatalogs() ) {
 				generate(daogenConfig, generatorCatalog);
 			}
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException | NoSuchMethodException e) {
 			throw ConfigException.convertEx( "Error during DAO generation", e );
 		}
 	}

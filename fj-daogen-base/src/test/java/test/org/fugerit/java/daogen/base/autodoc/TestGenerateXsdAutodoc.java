@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TestGenerateXsdAutodoc {
 
-	private static final String TARGET = "../docs/config/daogen-config-xsd-ref.html";
+	private static final String TARGET = "../src/docs/config/daogen-config-xsd-ref.html";
 	
 	@Test
 	public void testParseXsdModel() {

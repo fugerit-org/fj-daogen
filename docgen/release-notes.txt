@@ -1,4 +1,6 @@
-﻿1.1.6 (2023-08-29)
+﻿See new [CHANGELOG](https://github.com/fugerit-org/fj-doc/blob/main/CHANGELOG.md) for details.
+
+1.1.6 (2023-08-29)
 ------------------
 + [enhancement] [fj-daogen] fj-bom version updated to 1.2.5
 + [enhancement] [fj-daogen] fj-core version updated to 8.2.1
