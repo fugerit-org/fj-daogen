@@ -36,7 +36,8 @@
   <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>
   <relation id="addressToUser" name="USER" from="PUBLIC.FUGERIT.ADDRESS" to="PUBLIC.FUGERIT.USER" mode="one" key="ID_USER"/>
 	
-  <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT">
+  <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT"
+  	sequenceName="SEQ_USER" facadeMode="COMPLETE" orderBy="ID ASC" queryView="SELECT * FROM USER" structSqlType="(USE_NAME)">
     <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
     <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
     <field comments="Password hash" id="PASSWORD" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
@@ -44,6 +45,7 @@
     <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="1 active, 0 not active" id="STATE" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
+    <field comments="1 active, 0 not active" id="STATE_TEST" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
   </entity>
   <entity catalog="PUBLIC" comments="Contains addresses data" foreignKeys="PUBLIC.FUGERIT.USER" id="PUBLIC.FUGERIT.ADDRESS" name="ADDRESS" primaryKey="ID" schema="FUGERIT">
     <field comments="Address system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
@@ -51,6 +53,7 @@
     <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="Address info" id="INFO" javaType="java.lang.String" nullable="no" size="256" sqlType="12" sqlTypeName="VARCHAR"/>
+    <field comments="1 active, 0 not active" id="STATE_TEST" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
   </entity>
   <entity catalog="PUBLIC" comments="Contains upload blob" id="PUBLIC.FUGERIT.UPLOAD" name="UPLOAD" primaryKey="ID" schema="FUGERIT">
     <field comments="" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
@@ -68,7 +71,6 @@
     <field comments="" id="ID_TWO" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
     <field comments="" id="INFO" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
   </entity>
-  
   <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER_DATA" name="USER_DATA" primaryKey="ID" schema="FUGERIT" mapToTable="USER">
     <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
     <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
@@ -78,6 +80,4 @@
     <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="1 active, 0 not active" id="STATE" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
   </entity>  
-  
-  
 </daogen-config>

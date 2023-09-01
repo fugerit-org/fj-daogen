@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - badge order on README.md
 - directory docs renamed to src/docs (to comply with maven [standard layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html))
 
+### Fixed
+
+- DaogenCatalogEntity now uses equals() method from java.lang.Object (#11)
+
 ## [1.1.6 and previous]
 
 ### Changed
