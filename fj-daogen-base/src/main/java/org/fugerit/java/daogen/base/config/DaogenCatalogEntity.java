@@ -39,11 +39,6 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 	public DaogenCatalogEntity() {
 		this.relations = new ListMapStringKey<>();
 	}
-	
-	@Override
-	public boolean equals(Object o) {
-		return (this == o);
-	}
 
 	private ListMapStringKey<DaogenCatalogRelation> relations;
 

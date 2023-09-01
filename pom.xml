@@ -24,7 +24,6 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
-	    <maven.test.skip>true</maven.test.skip>
 		<fj-version>8.2.3</fj-version>  	
 		<fj-doc-version>1.5.8</fj-doc-version>  		 	
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
@@ -191,99 +190,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<profiles>
-
-		<profile>
-			<id>full</id>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-source-plugin</artifactId>
-							<version>${mvn-source-version}</version>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-javadoc-plugin</artifactId>
-							<version>${mvn-javadoc-version}</version>
-						</plugin>
-					</plugins>					
-				</pluginManagement>
-			</build>
-		</profile>
-
-		<profile>
-			<id>dep</id>
-			<build>
-				<plugins>
-				   <plugin>
-			        <groupId>org.apache.maven.plugins</groupId>
-			        <artifactId>maven-dependency-plugin</artifactId>
-			        <version>${mvn-dependency-version}</version>
-			        <executions>
-			          <execution>
-			            <id>copy-dependencies</id>
-			            <phase>package</phase>
-			            <goals>
-			              <goal>copy-dependencies</goal>
-			            </goals>
-			            <configuration>
-			              <outputDirectory>${project.build.directory}/dependancy/lib</outputDirectory>
-			              <overWriteReleases>false</overWriteReleases>
-			              <overWriteSnapshots>false</overWriteSnapshots>
-			              <overWriteIfNewer>true</overWriteIfNewer>
-			            </configuration>
-			          </execution>
-			        </executions>
-			      </plugin>							
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>test</id>
-			<properties>
-			    <maven.test.skip>false</maven.test.skip>
-			</properties>
-		</profile>		
-
-		<profile>
-			<id>doRelease</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${nexus-version}</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${mvn-gpg-version}</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-				</plugins>
-			</build>
-		</profile>
-
-	</profiles>
 	
 </project>
