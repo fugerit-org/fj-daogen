@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New changelog style based on : [https://github.com/olivierlacan/keep-a-changelog](https://github.com/olivierlacan/keep-a-changelog) (#8)
 - badge order on README.md
 - directory docs renamed to src/docs (to comply with maven [standard layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html))
+- test resource : fugerit-sample-daogen-config.xml renamed to daogenruntest-sample-daogen-config.xml (to make it clear it is only for test run purpose) (#11)
+- DaogenCatalogEntity increased test coverage (#11)
 
 ### Fixed
 
