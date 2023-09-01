@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.7] - 2023-09-01
+## [1.1.8] - 2023-09-01
 
 ### Added
 
@@ -30,6 +30,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - DaogenCatalogEntity now uses equals() method from java.lang.Object (#11)
+
+## [1.1.7] - 2023-09-01
+
+### Removed
+
+- this version is skipped because of a maven release fail.
 
 ## [1.1.6 and previous]
 
