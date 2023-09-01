@@ -4,6 +4,9 @@
 
 [back to fj-daogen index](../README.md)  
 
+[![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-tool.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-tool)
+[![javadoc](https://javadoc.io/badge2/org.fugerit.java/fj-daogen-tool/javadoc.svg)](https://javadoc.io/doc/org.fugerit.java/fj-daogen-tool)
+
 *Description* :  
 Sample tool wrapper for the [DAO Configuration dump](docs/dao_dump.md) and [DAO Generation](docs/dao_gen.md) features.
 

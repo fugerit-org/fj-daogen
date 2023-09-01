@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - documentation badge
 - keep a changelog badge
 - maven repo central and javadoc badges to modules
+- javadoc badges
 
 ### Changed
 

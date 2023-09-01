@@ -28,18 +28,22 @@ There are two basic feature supplied by the library :
 This modules contains core functionalities of the library : 'DAO Configuration dump' and 'DAO Generation'
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-base.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-base)
+[![javadoc](https://javadoc.io/badge2/org.fugerit.java/fj-daogen-base/javadoc.svg)](https://javadoc.io/doc/org.fugerit.java/fj-daogen-base)
 
 ## [fj-daogen-maven-plugin](fj-daogen-maven-plugin/README.md) a maven plugin for the [fj-daogen-base](fj-daogen-base/README.md) functionalities
 This plugin contains simple mojos for handling dao generation and dao configuration dump. ù
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-maven-plugin.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-maven-plugin)
+[![javadoc](https://javadoc.io/badge2/org.fugerit.java/fj-daogen-maven-plugin/javadoc.svg)](https://javadoc.io/doc/org.fugerit.java/fj-daogen-maven-plugin)
 
 ## [fj-daogen-sample](fj-daogen-sample/README.md) a demo project for [fj-daogen-base](fj-daogen-base/README.md) and [fj-daogen-maven-plugin](fj-daogen-maven-plugin/README.md)
 This projects can be used as a demo for the main features (dao generation and configuration dump) of the other modules. 
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-sample.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-sample)
+[![javadoc](https://javadoc.io/badge2/org.fugerit.java/fj-daogen-sample/javadoc.svg)](https://javadoc.io/doc/org.fugerit.java/fj-daogen-sample)
 
 ## [fj-daogen-tool](fj-daogen-tool/README.md) tool wrapper
 Simple tool wrapper for dao generation and configuration dump features. 
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-tool.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-tool)
+[![javadoc](https://javadoc.io/badge2/org.fugerit.java/fj-daogen-tool/javadoc.svg)](https://javadoc.io/doc/org.fugerit.java/fj-daogen-tool)

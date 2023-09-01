@@ -4,6 +4,9 @@
 
 [back to fj-daogen index](../README.md)  
 
+[![Maven Central](https://img.shields.io/maven-central/v/org.fugerit.java/fj-daogen-base.svg)](https://mvnrepository.com/artifact/org.fugerit.java/fj-daogen-base)
+[![javadoc](https://javadoc.io/badge2/org.fugerit.java/fj-daogen-base/javadoc.svg)](https://javadoc.io/doc/org.fugerit.java/fj-daogen-base)
+
 *Description* :  
 Allows to include the DAO generation in the maven build lifecycle.
 
