@@ -7,13 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Removed
-
-- index.md
-
 ### Added
 
 - [workflow codeql on branch main](.github/workflows/codeql-analysis.yml)
+- badge link to the daogen-config xsd 1.0
+
+### Fixed
+
+- typos to the daogen-config-1-0.xsd
+
+### Removed
+
+- index.md
 
 ## [1.1.10] - 2023-09-04
 

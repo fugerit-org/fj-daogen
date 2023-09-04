@@ -14,6 +14,8 @@ A [quickstart](https://github.com/fugerit-org/fj-daogen-quickstart) is available
 
 Useful resources : [github pages documentation](https://marsdocs.fugerit.org/) | [project home page](https://www.fugerit.org/perm/mars) | docgen [home](https://www.fugerit.org/data/java/doc/mars/index.html) | [release notes](https://www.fugerit.org/data/java/doc/mars/release-notes.html) | [Doagen Maven Plugin Site](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/generate-mojo.html)
 
+daogen-config format [![public xsd](https://img.shields.io/badge/public%20xsd-daogen%201.0-purple.svg)](https://www.fugerit.org/data/java/doc/xsd/daogen-config-1-0.xsd) [![private xsd](https://img.shields.io/badge/private%20xsd-daogen%201.0-purple.svg)](fj-daogen-base/src/main/resources/config/daogen-config-1-0.xsd)
+
 *About javadoc*  
 Javadoc are far from being complete, but you can find latest version at [https://www.fugerit.org](https://www.fugerit.org/data/java/javadoc/)  
 Note that, being an open source project hosted on maven central, you can find release javadoc on [javadoc.io](https://javadoc.io/doc/org.fugerit.java/fj-daogen-base/)

@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.2 (2023-08-27)
+	 * @version    : 1.0.0-rc.3 (2023-09-05)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -85,6 +85,11 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 			<xsd:annotation>
 				<xsd:documentation>Relative path to 'base-src-folder' attribute. The directory for openapi documentation. (for instance 'src/main/doc/openapi_rest').</xsd:documentation>
 				<xsd:documentation>It will be used by the relevant generators as output folder.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="relations-last" use="optional" default="false">
+			<xsd:annotation>
+				<xsd:documentation>'true' if the entities should be generated at the end.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="src-helpers" use="optional">
@@ -211,6 +216,14 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>NOTE: REST services generation is not recommended, if not as a starting stub.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-spring-rest-load" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The package to be used for a basic spring rest service implementation, for load methods, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.spring.rest.load').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
+				<xsd:documentation>NOTE: REST services generation is not recommended, if not as a starting stub.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="base-rest-service" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The base class for REST services.</xsd:documentation>
@@ -272,6 +285,11 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>It will be used by all relevant generators as base name. (eventually converted with the proper case).</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="comment" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Comment for the relation.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="name" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The name of the relation.</xsd:documentation>
@@ -291,13 +309,13 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>(e.g. 'PUBLIC.FUGERIT.ADDRESS')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="mode" use="optional">
+		<xsd:attribute type="daogen:relationModeType" name="mode" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The mode of the relation, 'one' or 'many'.</xsd:documentation>
 				<xsd:documentation>(e.g. 'many')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="daogen:relationModeType" name="key" use="optional">
+		<xsd:attribute type="xsd:string" name="key" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The list of comma separated field ids to be used for mapping the relation.</xsd:documentation>
 				<xsd:documentation>(e.g. 'ID_USER')</xsd:documentation>
@@ -350,6 +368,12 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 			<xsd:annotation>
 				<xsd:documentation>The schema name for the entity. If present it will be prefixed to table name for query.</xsd:documentation>
 				<xsd:documentation>(e.g. 'FUGERIT')</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="catalog" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>The catalog name for the entity. If present it will be prefixed to table name for query.</xsd:documentation>
+				<xsd:documentation>(e.g. 'PUBLIC')</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="sequenceName" use="optional" >
