@@ -2,4 +2,8 @@
 
 ## DaoGen Maven Plugin configuration reference
 
-TODO
+[maven plugin site](https://docs.fugerit.org/data/java/site/fj-daogen-maven-plugin/generate-mojo.html)
+
+TODO : 
+* guidelines
+* ide suppport

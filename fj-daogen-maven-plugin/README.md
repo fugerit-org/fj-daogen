@@ -10,6 +10,8 @@
 *Description* :  
 Allows to include the DAO generation in the maven build lifecycle.
 
+[documentation](../src/docs/maven-plugin/generate.md)
+
 *Status* :  
 All basic features are implemented.
 
