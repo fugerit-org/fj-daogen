@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.9] - 2023-09-04
+
 ### Added
 
 - tag element (HEAD) to scm element. (pom.xml)
