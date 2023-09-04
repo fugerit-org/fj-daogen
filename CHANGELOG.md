@@ -2,14 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.10] - 2023-09-04
+
+### Added
+
+- [dependabot](.github/dependabot.yml) configuration
+
 ### Changed
 
-- fj-doc set to 1.5.9
+- fj-doc set to 1.5.10
+- reference to https://keepachangelog.com/ v1.1.0 in changelog
+
+### Security
+
+- fj-bom set to 1.3.5 
 
 ## [1.1.9] - 2023-09-04
 
