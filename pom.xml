@@ -24,8 +24,9 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
-		<fj-version>8.2.3</fj-version>  	
-		<fj-doc-version>1.5.8</fj-doc-version>  		 	
+		<fj-version>8.2.4</fj-version>  	
+		<fj-doc-version>1.5.8</fj-doc-version>
+		<fj-test-helper-version>0.4.1</fj-test-helper-version>      		 	
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
 		<fj-daogen-version>${project.version}</fj-daogen-version>
 	</properties>
@@ -61,14 +62,24 @@
 	<scm>
 		<connection>scm:git:git://github.com/fugerit-org/fj-daogen.git</connection>
 		<developerConnection>scm:git:ssh://github.com/fugerit-org/fj-daogen.git</developerConnection>
-		<url>http://github.com/fugerit-org/fj-daogen</url>
+		<url>https://github.com/fugerit-org/fj-daogen.git</url>
+		<tag>HEAD</tag>		
 	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/fugerit-org/fj-daogen/issues</url>
+	</issueManagement>
 
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>			
 	</distributionManagement>
 
 	<modules>
