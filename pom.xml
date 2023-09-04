@@ -25,7 +25,7 @@
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
 		<fj-version>8.2.4</fj-version>  	
-		<fj-doc-version>1.5.8</fj-doc-version>
+		<fj-doc-version>1.5.9</fj-doc-version>
 		<fj-test-helper-version>0.4.1</fj-test-helper-version>      		 	
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
 		<fj-daogen-version>${project.version}</fj-daogen-version>
@@ -46,10 +46,16 @@
 
 	<developers>
 		<developer>
-			<name>Matteo a.k.a. Fugerit</name>
+			<name>Matteo Franci a.k.a. Fugerit</name>
 			<email>m@fugerit.org</email>
+			<url>https://www.fugerit.org</url>
+			<timezone>+1</timezone>
 			<organization>Fugerit</organization>
 			<organizationUrl>https://www.fugerit.org</organizationUrl>
+			<roles>
+				<role>IT Senior Consultant</role>
+				<role>Senior Software Architect</role>
+			</roles>
 		</developer>
 		<developer>
 			<name>Daneel</name>
@@ -135,6 +141,19 @@
 			    <artifactId>commons-dbcp</artifactId>
 			    <version>${dbcp-version}</version>
 			</dependency>		
+
+			<dependency>
+				<groupId>org.fugerit.java</groupId>
+				<artifactId>fj-test-helper8</artifactId>
+				<version>${fj-test-helper-version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>*</groupId>
+						<artifactId>*</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>	
 
 		</dependencies>
 
