@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- [workflow codeql on branch main](.github/workflows/codeql-analysis.yml)
+
 ## [1.1.10] - 2023-09-04
 
 ### Added
