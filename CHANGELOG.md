@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [workflow codeql on branch main](.github/workflows/codeql-analysis.yml)
 - badge link to the daogen-config xsd 1.0
 
+### Changed
+
+- fj-bom set to 1.3.6
+- fj-core set to 8.2.7
+- fj-doc set to 2.0.2
+
 ### Fixed
 
 - typos to the daogen-config-1-0.xsd
