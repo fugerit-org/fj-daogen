@@ -6,13 +6,16 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.fugerit.java.core.function.SafeFunction;
 import org.fugerit.java.core.function.SimpleValue;
 import org.fugerit.java.core.io.FileIO;
 import org.fugerit.java.core.lang.helpers.StringUtils;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public class ExtractCustomCode {
 
@@ -63,20 +66,22 @@ public class ExtractCustomCode {
 		} );
 	}
 	
-	private static String addWithCondition( CharSequence text, String customContent, Function<LineCursor, Boolean> condition ) {
+	private static String addWithCondition( CharSequence text, String customContent, Predicate<LineCursor> condition ) {
 		return SafeFunction.get( () -> {
 			try ( BufferedReader reader = new BufferedReader( new StringReader( text.toString() ) );
 					StringWriter buffer = new StringWriter(); 
 					PrintWriter writer = new PrintWriter( buffer, true ) ) {
 				List<String> lines = reader.lines().collect( Collectors.toList() );
 				LineCursor cursor = new LineCursor();
-				cursor.lines = lines;
-				for ( cursor.index = 0; cursor.index<lines.size(); cursor.index++ ) {
-					String currentLine = lines.get( cursor.index );
-					if ( condition.apply( cursor ).booleanValue() ) {
+				cursor.setLines( lines );
+				cursor.setIndex( 0 );
+				while ( cursor.getIndex()<lines.size() ) {
+					String currentLine = lines.get( cursor.getIndex() );
+					if ( condition.test( cursor ) ) {
 						writer.println( customContent );
 					}
 					writer.println( currentLine );
+					cursor.setIndex( cursor.getIndex()+1 );
 				}
 				return buffer.toString();
 			}
@@ -102,9 +107,9 @@ public class ExtractCustomCode {
 
 class LineCursor {
 	
-	public List<String> lines;
+	@Getter @Setter private List<String> lines;
 	
-	public int index;
+	@Getter @Setter private int index;
 	
 	public boolean isLast() {
 		return this.lines.size()-1 == this.index;

@@ -6,14 +6,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
+import org.fugerit.java.core.cli.ArgUtils;
 import org.fugerit.java.core.function.SafeFunction;
 import org.fugerit.java.core.io.StreamIO;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
+import org.fugerit.java.daogen.base.tool.DaoGenToolHandler;
 import org.fugerit.java.daogen.base.tool.handler.CompareHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
 import lombok.extern.slf4j.Slf4j;
+import tool.DaoGen;
 
 @Slf4j
 public class TestCompareHandler {
@@ -21,6 +25,8 @@ public class TestCompareHandler {
 	private static final String SOURCE_GENERATED = "src/test/resources/compare_handler_test/daogen_generated";
 	
 	private static final String SOURCE_ORIGINAL = "src/test/resources/compare_handler_test/daogen_original";
+	
+	private static final File OUTPUT_BASE = new File( "target" );
 	
 	private static void copyHelper( File baseSource, File baseDest, File currentSource ) throws IOException {
 		String relPath = currentSource.getCanonicalPath().substring( baseSource.getCanonicalPath().length() );
@@ -70,7 +76,7 @@ public class TestCompareHandler {
 	
 	@Test
 	public void test001() {
-		File baseDir = new File( "target" );
+		File baseDir = OUTPUT_BASE;
 		File file1 = new File( baseDir, "daogen1" );
 		File file2 = new File( baseDir, "daogen2" );
 		prepare(file1, file2);
@@ -82,6 +88,33 @@ public class TestCompareHandler {
 		params.setProperty( CompareHandler.ARG_TRY_CORRECT_HELPER , BooleanUtils.BOOLEAN_TRUE );
 		params.setProperty( CompareHandler.ARG_TRY_DELETE_EQUAL , BooleanUtils.BOOLEAN_TRUE );
 		handler.handleCompare( baseDir, file1, file2, params );
+	}
+	
+	@Test
+	public void test002() {
+		File baseDir = OUTPUT_BASE;
+		File file1 = new File( baseDir, "daogen1alt" );
+		File file2 = new File( baseDir, "daogen2alt" );
+		prepare(file1, file2);
+		Assert.assertTrue( file1.exists() );
+		Assert.assertTrue( file2.exists() );
+		SafeFunction.apply( () -> {
+			String[] args = {
+					ArgUtils.getArgString( DaoGenToolHandler.ARG_ACTION ), DaoGenToolHandler.ARG_ACTION_COMPARE,
+					ArgUtils.getArgString( CompareHandler.ARG_FOLDER1 ), file1.getCanonicalPath(),
+					ArgUtils.getArgString( CompareHandler.ARG_FOLDER2 ), file2.getCanonicalPath(),
+			};	
+			DaoGen.main(args);
+		} );
+	}
+	
+	@Test
+	public void test003Fail() {
+		CompareHandler handler = new CompareHandler();
+		Properties params = new Properties();
+		Assert.assertThrows( ConfigRuntimeException.class , () -> handler.handleCompare(params) );
+		params.setProperty( CompareHandler.ARG_FOLDER1 , "not-exists" );
+		Assert.assertThrows( ConfigRuntimeException.class , () -> handler.handleCompare(params) );
 	}
 	
 }

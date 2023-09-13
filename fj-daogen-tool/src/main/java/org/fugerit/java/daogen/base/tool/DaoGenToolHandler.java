@@ -14,6 +14,7 @@ import org.fugerit.java.core.db.connect.ConnectionFactoryImpl;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.PropsIO;
 import org.fugerit.java.daogen.base.config.DaogenFacade;
+import org.fugerit.java.daogen.base.tool.handler.CompareHandler;
 import org.fugerit.java.daogen.base.config.DaogenConfigDump;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class DaoGenToolHandler {
 	public static final String ARG_ACTION = "action";
 	public static final String ARG_ACTION_DAOGEN = "daogen";
 	public static final String ARG_ACTION_DUMP = "dump";
+	public static final String ARG_ACTION_COMPARE = "compare";
 	
 	public static void handle( Properties params ) {
 		String action = params.getProperty( ARG_ACTION );
@@ -41,6 +43,9 @@ public class DaoGenToolHandler {
 			handleDaogen(params);
 		} else if ( ARG_ACTION_DUMP.equalsIgnoreCase( action ) ) {
 			handleDump(params);
+		} else if ( ARG_ACTION_COMPARE.equalsIgnoreCase( action ) ) {
+			CompareHandler handler = new CompareHandler();
+			handler.handleCompare(params);
 		} else {
 			throw new ConfigRuntimeException( "Reuired parameter : "+ARG_ACTION+" ("+ARG_ACTION_DAOGEN+"|"+ARG_ACTION_DUMP+")" );
 		}

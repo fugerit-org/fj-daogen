@@ -13,6 +13,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.function.SafeFunction;
 import org.fugerit.java.core.io.FileIO;
 import org.fugerit.java.core.javagen.SimpleJavaGenerator;
@@ -27,6 +28,10 @@ public class CompareHandler {
 
 	private static final String SERIAL_UID_STRING = "serialVersionUID";
 	
+	public static final String ARG_BASE_FOLDER = "base-folder";
+	public static final String ARG_FOLDER1 = "folder1";
+	public static final String ARG_FOLDER2 = "folder1";
+	
 	public static final String ARG_REPORT = "report";
 	
 	public static final String ARG_TRY_DELETE_EQUAL = "try-delere-equal";
@@ -36,6 +41,29 @@ public class CompareHandler {
 	public static final String ARG_CUSTOM_CODE_END = "custom-code-end";
 	public static final String ARG_CUSTOM_IMPORT_START = "custom-import-start";
 	public static final String ARG_CUSTOM_IMPORT_END = "custom-import-end";
+	
+	private File getFolder( Properties params, String param, boolean required ) {
+		File file = null;
+		String path = params.getProperty( param );
+		if ( required && StringUtils.isEmpty( path ) ) {
+			throw new ConfigRuntimeException( "Required arg missing : "+param );
+		} else {
+			if ( StringUtils.isNotEmpty( path ) ) {
+				file = new File( path );
+				if ( !file.exists() ) {
+					throw new ConfigRuntimeException( "Directory not exists : "+param+", path : "+path );	
+				}	
+			}
+		}
+		return file;
+	}
+	
+	public void handleCompare( Properties params ) {
+		File baseDir = getFolder( params, ARG_BASE_FOLDER, false );
+		File file1 = getFolder( params, ARG_FOLDER1, true );
+		File file2 = getFolder( params, ARG_FOLDER2, true );
+		handleCompare(baseDir, file1, file2, params);
+	}
 	
 	public void handleCompare( File baseDir, File file1, File file2, Properties params ) {
 		SafeFunction.apply( () -> {
