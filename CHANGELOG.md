@@ -7,16 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2023-09-13
+
 ### Added
 
+- [maven deploy workflow](.github/workflows/deploy_maven_package.yml)
 - [workflow codeql on branch main](.github/workflows/codeql-analysis.yml)
 - badge link to the daogen-config xsd 1.0
 
 ### Changed
 
 - fj-bom set to 1.3.6
-- fj-core set to 8.2.7
-- fj-doc set to 2.0.2
+- fj-core set to 8.2.8
+- fj-doc set to 3.0.3
 
 ### Fixed
 
