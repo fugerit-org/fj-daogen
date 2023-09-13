@@ -74,10 +74,10 @@ public class CompareHandler {
 		if ( StringUtils.isNotEmpty( contentCode ) || StringUtils.isNotEmpty( contentImport ) ) {
 			String realFileContent = FileIO.readString( realFile );	
 			if ( StringUtils.isNotEmpty( contentCode ) ) {
-				realFileContent = ExtractCustomCode.addCustomContent( realFileContent , customCodeStart, customCodeEnd, contentCode );
+				realFileContent = ExtractCustomCode.addBeforeClassEnd( realFileContent, contentCode );
 			}
 			if ( StringUtils.isNotEmpty( contentImport ) ) {
-				realFileContent = ExtractCustomCode.addCustomContent( realFileContent , customImportStart, customImportEnd, contentImport );
+				realFileContent = ExtractCustomCode.addAfterPackageClassEnd( realFileContent, contentImport );
 			}
 			FileIO.writeString( realFileContent , realFile );
 			report.print( " real file customized! "+realFileContent );

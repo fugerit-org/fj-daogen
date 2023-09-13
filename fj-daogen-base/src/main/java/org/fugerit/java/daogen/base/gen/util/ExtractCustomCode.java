@@ -5,10 +5,14 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.fugerit.java.core.function.SafeFunction;
 import org.fugerit.java.core.function.SimpleValue;
 import org.fugerit.java.core.io.FileIO;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 
 public class ExtractCustomCode {
 
@@ -59,4 +63,58 @@ public class ExtractCustomCode {
 		} );
 	}
 	
+	private static String addWithCondition( CharSequence text, String customContent, Function<LineCursor, Boolean> condition ) {
+		return SafeFunction.get( () -> {
+			try ( BufferedReader reader = new BufferedReader( new StringReader( text.toString() ) );
+					StringWriter buffer = new StringWriter(); 
+					PrintWriter writer = new PrintWriter( buffer, true ) ) {
+				List<String> lines = reader.lines().collect( Collectors.toList() );
+				LineCursor cursor = new LineCursor();
+				cursor.lines = lines;
+				for ( cursor.index = 0; cursor.index<lines.size(); cursor.index++ ) {
+					String currentLine = lines.get( cursor.index );
+					if ( condition.apply( cursor ).booleanValue() ) {
+						writer.println( customContent );
+					}
+					writer.println( currentLine );
+				}
+				return buffer.toString();
+			}
+		} );
+	}
+	
+	public static String addAfterPackageClassEnd( CharSequence text, String customContent ) {
+		return addWithCondition(text, customContent, c -> {
+			boolean ok = false;
+			String previousLine = c.getPreviousLine();
+			if ( StringUtils.isNotEmpty( previousLine ) ) {
+				ok = previousLine.trim().startsWith( "package" );
+			}
+			return ok;
+		} );
+	}
+	
+	public static String addBeforeClassEnd( CharSequence text, String customContent ) {
+		return addWithCondition(text, customContent, c -> c.isLast() && c.getCurrentLine().trim().equals( "}" ) );
+	}
+	
+}
+
+class LineCursor {
+	
+	public List<String> lines;
+	
+	public int index;
+	
+	public boolean isLast() {
+		return this.lines.size()-1 == this.index;
+	}
+	
+	public String getPreviousLine() {
+		return this.index==0 ? null : this.lines.get( this.index-1 );
+	}
+	
+	public String getCurrentLine() {
+		return this.lines.get( this.index );
+	}
 }
