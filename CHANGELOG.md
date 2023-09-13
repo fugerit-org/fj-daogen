@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [maven deploy workflow](.github/workflows/deploy_maven_package.yml)
 - [workflow codeql on branch main](.github/workflows/codeql-analysis.yml)
 - badge link to the daogen-config xsd 1.0
+- badge for test coverage
 
 ### Changed
 
