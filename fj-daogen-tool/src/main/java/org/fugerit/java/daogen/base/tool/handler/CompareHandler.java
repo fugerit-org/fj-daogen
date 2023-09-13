@@ -122,7 +122,7 @@ public class CompareHandler {
 		String fileEntry1 = removePath( file1.getCanonicalPath(), removePath );
 		String fileEntry2 = removePath( file2.getCanonicalPath(), removePath );
 		log.info( "handleCompare {} - {}", fileEntry1, fileEntry2 );
-		if ( file1.isDirectory() && file1.isDirectory() ) {
+		if ( file1.isDirectory() && file2.isDirectory() ) {
 			report.println( "# directory : "+fileEntry1 );
 			for ( File file : file1.listFiles() ) {
 				if ( file.isDirectory() ) {
@@ -130,7 +130,7 @@ public class CompareHandler {
 				}
 				this.handleCompareWork( removePath, file, new File( file2, file.getName() ), params, report );
 			}
-		} else if ( file1.isDirectory() || file1.isDirectory() ) {
+		} else if ( file1.isDirectory() || file2.isDirectory() ) {
 			throw new ConfigException( "Only one is directory : "+file1+"("+file1.isDirectory()+"), : "+file2+"("+file2.isDirectory()+")" );
 		} else {
 			report.print( "- "+fileEntry1+" -> "+fileEntry2+" : " );
