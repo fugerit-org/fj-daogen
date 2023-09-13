@@ -18,7 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TestCompareHandler {
 	
-	private static final String SOURCE_TEST = "src/test/resources/compare_handler_test/daogen";
+	private static final String SOURCE_GENERATED = "src/test/resources/compare_handler_test/daogen_generated";
+	
+	private static final String SOURCE_ORIGINAL = "src/test/resources/compare_handler_test/daogen_original";
 	
 	private static void copyHelper( File baseSource, File baseDest, File currentSource ) throws IOException {
 		String relPath = currentSource.getCanonicalPath().substring( baseSource.getCanonicalPath().length() );
@@ -36,24 +38,38 @@ public class TestCompareHandler {
 		}
 	}
 	
-	private static void copyHelper( File sourceFile, File testDir ) throws IOException {
-		if ( !testDir.exists() ) {
-			copyHelper(sourceFile, testDir, sourceFile );
-		} else {
-			log.info( "testDir already exists! {}", testDir );
+	private static int deleteRecurse( File dir ) {
+		int res = 0;
+		if ( dir.isDirectory() ) {
+			for ( File file : dir.listFiles() ) {
+				res+= deleteRecurse( file );
+			}
 		}
+		if ( dir.delete() ) {
+			res++;
+		}
+		return res;
+	}
+	
+	private static void copyHelper( File sourceFile, File testDir ) throws IOException {
+		if ( testDir.exists() ) {
+			int res = deleteRecurse( testDir );
+			log.info( "delete result {} : {}", testDir, res );
+		}
+		copyHelper(sourceFile, testDir, sourceFile );
 	}
 	
 	private static void prepare( File file1, File file2 ) {
 		SafeFunction.apply( () -> {
-			File sourceDir = new File( SOURCE_TEST );
+			File sourceDir = new File( SOURCE_GENERATED );
+			File sourceDirOriginal = new File( SOURCE_ORIGINAL );
 			copyHelper( sourceDir, file1 );
-			copyHelper( sourceDir, file2 );
+			copyHelper( sourceDirOriginal, file2 );
 		});
 	}
 	
 	@Test
-	public void test() {
+	public void test001() {
 		File baseDir = new File( "target" );
 		File file1 = new File( baseDir, "daogen1" );
 		File file2 = new File( baseDir, "daogen2" );
@@ -62,6 +78,7 @@ public class TestCompareHandler {
 		Assert.assertTrue( file2.exists() );
 		CompareHandler handler = new CompareHandler();
 		Properties params = new Properties();
+		params.setProperty( CompareHandler.ARG_REPORT , "target/report_compare_handler_001.md" );
 		params.setProperty( CompareHandler.ARG_TRY_CORRECT_HELPER , BooleanUtils.BOOLEAN_TRUE );
 		params.setProperty( CompareHandler.ARG_TRY_DELETE_EQUAL , BooleanUtils.BOOLEAN_TRUE );
 		handler.handleCompare( baseDir, file1, file2, params );
