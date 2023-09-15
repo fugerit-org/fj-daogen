@@ -152,7 +152,7 @@ public class DaogenConfigDump {
 			String paramEntityType = params.getProperty( PARAM_ENTITY_TYPE , PARAM_ENTITY_TYPE_DEFAULT );
 			String[] types = { paramEntityType };
 			if ( PARAM_ENTITY_TYPE_ALL.equalsIgnoreCase( paramEntityType )  ) {
-				types = MetaDataUtils.TYPES_ALL;
+				types = MetaDataUtils.typesAll();
 			}
 			DataBaseModel dbModel = MetaDataUtils.createModel( cf, catalog, schema, tableNameList, types );
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

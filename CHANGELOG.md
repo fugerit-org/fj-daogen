@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2023-09-15
+
+### Changed
+
+- fj-bom set to 1.4.0 (fj-test-helper8 now managed by parent pom)
+- fj-core set to 8.3.1 (some changes needed because of MetaDataUtils)
+- fj-doc set to 3.0.4
+
+### Security
+
+- [Apache Commons Compress denial of service vulnerability](https://github.com/fugerit-org/fj-bom/security/dependabot/1)
+
 ## [1.2.0] - 2023-09-13
 
 ### Added
