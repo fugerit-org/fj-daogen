@@ -75,7 +75,7 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 		
 		this.getWriter().println( TAB+PUBLIC_SPACE_LIT+this.getEntityModelName()+" unwrap( "+this.getEntityWrapperName()+" wrapper ) {" );
 		this.getWriter().println( TAB_2+""+this.getEntityModelName()+" res = wrapper;" );
-		this.getWriter().println( TAB_2+"while ( res != null && res instanceof "+this.getEntityWrapperName()+" ) { " );
+		this.getWriter().println( TAB_2+"while ( res instanceof "+this.getEntityWrapperName()+" ) { " );
 		this.getWriter().println( TAB_3+"res = (("+this.getEntityWrapperName()+")res).unwrapModel();" );
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"return res;" );
