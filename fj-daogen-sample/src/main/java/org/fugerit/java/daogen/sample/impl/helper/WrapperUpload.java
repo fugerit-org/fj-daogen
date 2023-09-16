@@ -28,7 +28,7 @@ public class WrapperUpload extends BasicWrapper<ModelUpload> implements ModelUpl
 
 	public ModelUpload unwrap( WrapperUpload wrapper ) {
 		ModelUpload res = wrapper;
-		while ( res != null && res instanceof WrapperUpload ) { 
+		while ( res instanceof WrapperUpload ) { 
 			res = ((WrapperUpload)res).unwrapModel();
 		}
 		return res;

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] - 2023-09-16
+
+### Changed
+
+- WrapperGenerator unwrap() method does not check for null on instanceof.
+
 ## [1.2.1] - 2023-09-15
 
 ### Changed

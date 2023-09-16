@@ -29,7 +29,7 @@ public class WrapperAddress extends BasicWrapper<ModelAddress> implements ModelA
 
 	public ModelAddress unwrap( WrapperAddress wrapper ) {
 		ModelAddress res = wrapper;
-		while ( res != null && res instanceof WrapperAddress ) { 
+		while ( res instanceof WrapperAddress ) { 
 			res = ((WrapperAddress)res).unwrapModel();
 		}
 		return res;

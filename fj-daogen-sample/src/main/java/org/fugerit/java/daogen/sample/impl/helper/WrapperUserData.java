@@ -28,7 +28,7 @@ public class WrapperUserData extends BasicWrapper<ModelUserData> implements Mode
 
 	public ModelUserData unwrap( WrapperUserData wrapper ) {
 		ModelUserData res = wrapper;
-		while ( res != null && res instanceof WrapperUserData ) { 
+		while ( res instanceof WrapperUserData ) { 
 			res = ((WrapperUserData)res).unwrapModel();
 		}
 		return res;

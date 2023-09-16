@@ -28,7 +28,7 @@ public class WrapperTestTwoFieldKey extends BasicWrapper<ModelTestTwoFieldKey> i
 
 	public ModelTestTwoFieldKey unwrap( WrapperTestTwoFieldKey wrapper ) {
 		ModelTestTwoFieldKey res = wrapper;
-		while ( res != null && res instanceof WrapperTestTwoFieldKey ) { 
+		while ( res instanceof WrapperTestTwoFieldKey ) { 
 			res = ((WrapperTestTwoFieldKey)res).unwrapModel();
 		}
 		return res;

@@ -28,7 +28,7 @@ public class WrapperLogData extends BasicWrapper<ModelLogData> implements ModelL
 
 	public ModelLogData unwrap( WrapperLogData wrapper ) {
 		ModelLogData res = wrapper;
-		while ( res != null && res instanceof WrapperLogData ) { 
+		while ( res instanceof WrapperLogData ) { 
 			res = ((WrapperLogData)res).unwrapModel();
 		}
 		return res;

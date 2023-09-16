@@ -29,7 +29,7 @@ public class WrapperUser extends BasicWrapper<ModelUser> implements ModelUser {
 
 	public ModelUser unwrap( WrapperUser wrapper ) {
 		ModelUser res = wrapper;
-		while ( res != null && res instanceof WrapperUser ) { 
+		while ( res instanceof WrapperUser ) { 
 			res = ((WrapperUser)res).unwrapModel();
 		}
 		return res;
