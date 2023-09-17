@@ -14,7 +14,7 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	
 	private static final BaseRestLoadHelperGeneratorConfig CONFIG = new BaseRestLoadHelperGeneratorConfig();
 	static {
-		List<String> importList = new ArrayList<String>();
+		List<String> importList = new ArrayList<>();
 		importList.add( "java.util.List" );
 		importList.add( "javax.ws.rs.GET" );
 		importList.add( "javax.ws.rs.Path" );

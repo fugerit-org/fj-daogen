@@ -271,11 +271,6 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 			<xsd:documentation>Metadata for a field in an entity.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
-	<!-- 
-   <relation id="userToAddress" name="USER_ADDRESSES" from="PUBLIC.FUGERIT.USER" to="PUBLIC.FUGERIT.ADDRESS" mode="many" key="ID_USER"/>
-
- -->
-	
 	
 	<xsd:complexType name="relationType">
 		<xsd:attribute type="xsd:string" name="id" use="required">

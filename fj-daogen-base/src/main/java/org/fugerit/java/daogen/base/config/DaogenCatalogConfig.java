@@ -46,7 +46,7 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		this.getGeneralProps().setProperty( ATT_LIST_TYPE , DaogenCatalogEntity.class.getName() );
 		this.classConfig = new Properties();
 		this.relations = new ListMapStringKey<>();
-		this.generatorCatalogs = new ArrayList<DaogenGeneratorCatalog>();
+		this.generatorCatalogs = new ArrayList<>();
 		this.lineSeparator = DEFAULT_LINE_SEPARATOR;
 	}
 	

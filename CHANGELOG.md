@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- added java/maven badges
+
+### Changed
+
+- fj-core set to 8.3.5 (some changes needed because of MetaDataUtils)
+- fj-doc set to 3.0.5
+- All Sonar Cloud issues addressed
+
 ## [1.2.2] - 2023-09-16
 
 ### Changed

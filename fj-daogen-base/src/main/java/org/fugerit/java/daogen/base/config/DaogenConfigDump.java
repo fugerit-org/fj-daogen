@@ -51,7 +51,7 @@ public class DaogenConfigDump {
 	}
 	
 	private static void dumpConfigFK( TableModel tableModel, Element currentEntityTag, ListMapStringKey<DaogenCatalogRelation> relations ) {
-		List<String> fk = new ArrayList<String>();
+		List<String> fk = new ArrayList<>();
 		for ( ForeignKeyModel foreignKeyModel : tableModel.getForeignKeyList() ) {
 			log.info( "foreign key : {}", foreignKeyModel );
 			fk.add( foreignKeyModel.getForeignTableId().toIdString() );
@@ -130,7 +130,7 @@ public class DaogenConfigDump {
 			IndexModel primaryKey = tableModel.getPrimaryKey();
 			if ( primaryKey != null ) {
 				log.info( "primary key : {} - {}", primaryKey, primaryKey.getColumnList().size() );
-				List<String> temp = new ArrayList<String>();
+				List<String> temp = new ArrayList<>();
 				for ( ColumnModel columnModel : primaryKey.getColumnList() ) {
 					temp.add( columnModel.getName() );
 				}
