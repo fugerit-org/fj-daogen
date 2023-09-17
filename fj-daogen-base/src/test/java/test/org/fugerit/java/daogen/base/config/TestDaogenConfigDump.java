@@ -41,6 +41,7 @@ public class TestDaogenConfigDump extends MemDBTestBase {
 				for ( DaogenCatalogField field : entity ) {
 					logger.info( "field : {} ({})", field.toString(), field.describe() );	
 				}
+				logger.info( "equals : {}, hash code {}", entity.equals( entity ), entity.hashCode() ); // coverage testing
 			}
 			ok = true;
 		}

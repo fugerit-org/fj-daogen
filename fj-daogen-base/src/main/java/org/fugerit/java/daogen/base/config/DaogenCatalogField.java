@@ -129,7 +129,7 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	}
 	
 	public String describe() {
-		 List<String> list = new ArrayList<String>();
+		 List<String> list = new ArrayList<>();
 		 list.add( StringUtils.concat( ":" , ATT_SQL_TYPE, this.getSqlType() ) );
 		 list.add( StringUtils.concat( ":" , ATT_SQL_TYPE_NAME, this.getSqlTypeName() ) );
 		 list.add( StringUtils.concat( ":" , ATT_JAVA_TYPE, this.getJavaType() ) );

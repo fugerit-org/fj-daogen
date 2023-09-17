@@ -48,7 +48,7 @@ public class GeneratorKeyHelper implements Serializable {
 		this.key = key;
 		if ( StringUtils.isNotEmpty( key ) ) {
 			String[] split =  key.split( "," );
-			this.keyFields = new TreeSet<String>();
+			this.keyFields = new TreeSet<>();
 			for ( int k=0; k<split.length; k++ ) {
 				this.keyFields.add( split[k] );	
 			}

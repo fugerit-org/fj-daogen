@@ -24,8 +24,8 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
-		<fj-version>8.3.1</fj-version>  	
-		<fj-doc-version>3.0.4</fj-doc-version>      		 	
+		<fj-version>8.3.5</fj-version>  	
+		<fj-doc-version>3.0.5</fj-doc-version>      		 	
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
 		<fj-daogen-version>${project.version}</fj-daogen-version>
 	</properties>

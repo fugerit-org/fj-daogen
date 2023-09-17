@@ -129,7 +129,7 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 					this.getWriter().println( TAB_3+"result.getContent().set"+GeneratorNameHelper.toClassName( rel.getName() )+"("+relMethod+");" );
 				} else {
 					GeneratorKeyHelper relKeyHelper1 = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), rel.getKey() ).setForLoadInterface();
-					List<String> keyList = new ArrayList<String>();
+					List<String> keyList = new ArrayList<>();
 					for ( String currentFieldKey : relKeyHelper1.getKeyFields() ) {
 						keyList.add( "result.getContent().get"+GeneratorNameHelper.toClassName( currentFieldKey )+"()" );
 					}

@@ -13,6 +13,18 @@ import lombok.Setter;
 
 public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> implements IdConfigType {
 
+	@Override
+	public int hashCode() {
+		// super class implementation is ok
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// super class implementation is ok
+		return super.equals(o);
+	}
+	
 	public static final String DEFAULT_ID_FIELD = "ID";
 	
 	public static final String ATT_ID = "id";
@@ -175,7 +187,7 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 	private static final String SEP = ":";
 	
 	public String describe() {
-		 List<String> list = new ArrayList<String>();
+		 List<String> list = new ArrayList<>();
 		 list.add( StringUtils.concat( SEP , ATT_NAME, this.getName() ) );
 		 list.add( StringUtils.concat( SEP , ATT_SCHEMA, this.getSchema() ) );
 		 list.add( StringUtils.concat( SEP , ATT_CATALOG, this.getCatalog() ) );

@@ -58,7 +58,7 @@ public class DaogenFacade {
 	}
 	
 	private static void generate( DaogenCatalogConfig daogenConfig, DaogenGeneratorCatalog generatorCatalog ) throws ConfigException, IOException, ClassNotFoundException, NoSuchMethodException {
-		List<String> entityIdList = new ArrayList<String>( daogenConfig.getIdSet() );
+		List<String> entityIdList = new ArrayList<>( daogenConfig.getIdSet() );
 		Collections.sort( entityIdList );
 		// iterating over entity to generate
 		for ( String entityId : entityIdList ) {
