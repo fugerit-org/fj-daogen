@@ -60,7 +60,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 		// obj mapper impl
 		this.getWriter().println( TAB+AT_OVERRIDE );
 		this.getWriter().println( TAB+"public Map<String, Class<?>> newTypeMapper() throws SQLException {" );
-		this.getWriter().println( TAB_2+"Map<String, Class<?>> map = new HashMap<String, Class<?>>();" );
+		this.getWriter().println( TAB_2+"Map<String, Class<?>> map = new HashMap<>();" );
 		this.getWriter().println( TAB_2+"map.put( SQL_TYPE_NAME, "+this.getEntityStructName()+".class );" );
 		this.getWriter().println( TAB_2+"return map;" );
 		this.getWriter().println( TAB+"}" );
@@ -146,9 +146,7 @@ public class StructGenerator extends DaogenBasicGenerator {
 			// wrapper helpers
 			this.getWriter().println( TAB+PUBLIC_STATIC_SPACE_LIT+this.getEntityStructName()+" wrap( "+this.getEntityModelName()+" model, java.sql.Connection conn ) throws SQLException {" );
 			this.getWriter().println( TAB_2+""+this.getEntityStructName()+" res = wrap( model );" );
-			this.getWriter().println( TAB_2+"if ( res != null ) {" );
 			this.getWriter().println( TAB_3+"res.setupLobs( conn );" );
-			this.getWriter().println( TAB_2+"}" );
 			this.getWriter().println( TAB_2+RETURN_RES_LIT );
 			this.getWriter().println( TAB+"}" );
 			this.getWriter().println();
