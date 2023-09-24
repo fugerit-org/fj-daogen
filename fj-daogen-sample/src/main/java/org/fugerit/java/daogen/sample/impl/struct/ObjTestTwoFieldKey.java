@@ -44,7 +44,7 @@ public class ObjTestTwoFieldKey extends WrapperTestTwoFieldKey implements SQLDat
 
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
-		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		Map<String, Class<?>> map = new HashMap<>();
 		map.put( SQL_TYPE_NAME, ObjTestTwoFieldKey.class );
 		return map;
 	}

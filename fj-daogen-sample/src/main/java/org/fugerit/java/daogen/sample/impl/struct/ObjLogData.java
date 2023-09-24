@@ -44,7 +44,7 @@ public class ObjLogData extends WrapperLogData implements SQLData, StructMapper 
 
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
-		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		Map<String, Class<?>> map = new HashMap<>();
 		map.put( SQL_TYPE_NAME, ObjLogData.class );
 		return map;
 	}

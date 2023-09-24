@@ -10,8 +10,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import org.fugerit.java.core.db.dao.DAORuntimeException;
+
 public class MemDBHelper {
 
+	private MemDBHelper() {} 
+	
 	public static final String DEFAULT_DB_CONN_PATH = "test/memdb/base-db-conn.properties";
 	public static final String DEFAULT_DB_INIT_PATH = "test/memdb/base_db_init.sql";
 
@@ -23,28 +27,32 @@ public class MemDBHelper {
 
 	private static Properties cf;
 	
-	private static Connection newConnection( Properties props ) throws Exception {
-		Class.forName( props.getProperty( DRV ) );
-		return DriverManager.getConnection( props.getProperty( URL ), props.getProperty( USR ), props.getProperty( PWD ) );
+	private static Connection newConnection( Properties props ) {
+		return DAORuntimeException.get( () -> {
+			Class.forName( props.getProperty( DRV ) );
+			return DriverManager.getConnection( props.getProperty( URL ), props.getProperty( USR ), props.getProperty( PWD ) );	
+		} );
 	}
 
-    public static void init() throws Exception
+    public static void init()
     {
     	if ( cf == null ) {
-    		try ( InputStream is = MemDBHelper.class.getClassLoader().getResourceAsStream( DEFAULT_DB_CONN_PATH ) ) {
-    			Properties props = new Properties();
-    			props.load( is );
-            	try ( Connection conn = newConnection( props ) ) {
-            		try ( SQLScriptReader reader = new SQLScriptReader( MemDBHelper.class.getClassLoader().getResourceAsStream( DEFAULT_DB_INIT_PATH ) ) ) {
-            			executeAll(reader, conn);
-            			cf = props;
-            		}
+    		DAORuntimeException.apply( () -> {
+        		try ( InputStream is = MemDBHelper.class.getClassLoader().getResourceAsStream( DEFAULT_DB_CONN_PATH ) ) {
+        			Properties props = new Properties();
+        			props.load( is );
+                	try ( Connection conn = newConnection( props ) ) {
+                		try ( SQLScriptReader reader = new SQLScriptReader( MemDBHelper.class.getClassLoader().getResourceAsStream( DEFAULT_DB_INIT_PATH ) ) ) {
+                			executeAll(reader, conn);
+                			cf = props;
+                		}
+            		}	
         		}	
-    		}
+    		});
     	}
     } 
     
-    public static Connection newConnection() throws Exception {
+    public static Connection newConnection() {
     	init();
     	return newConnection( cf );
     }
