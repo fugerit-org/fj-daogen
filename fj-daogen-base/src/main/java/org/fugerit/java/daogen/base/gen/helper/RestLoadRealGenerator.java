@@ -8,10 +8,10 @@ public class RestLoadRealGenerator extends BaseRestLoadRealGenerator {
 
 	public static final String KEY = RestLoadRealGenerator.class.getSimpleName();
 	
-	private static final String[] IMPORTS = { "javax.ejb.Stateless", "javax.ws.rs.Path" };
+	private static final String[] IMPORTS = { "javax.ws.rs.Path" };
 
 	public RestLoadRealGenerator() {
-		super( KEY, Arrays.asList( IMPORTS ), DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD, "@Stateless", "@Path(\"/{0}/load\")" );
+		super( KEY, Arrays.asList( IMPORTS ), DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD, null, "@Path(\"/{0}/load\")" );
 	}
 
 }

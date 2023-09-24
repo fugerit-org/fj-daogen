@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.function.SafeFunction;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -23,7 +24,7 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 		this.key = key;
 		this.importList = importList;
 		this.propertyPackage = propertyParage;
-		log.debug( "patternBaseAnnotation:{}, patternBaseAnnotation:{}", patternBaseAnnotation, patternBaseAnnotation );
+		log.debug( "patternBaseAnnotation:{}, patternPathAnnotation:{}", patternBaseAnnotation, patternPathAnnotation );
 		this.patternBaseAnnotation = patternBaseAnnotation;
 		this.patternPathAnnotation = patternPathAnnotation;
 	}
@@ -70,7 +71,7 @@ public class BaseRestLoadRealGenerator extends DaogenBasicGenerator {
 	protected void beforeClass() {
 		super.beforeClass();
 		String urlBase = this.getCurrentEntity().getName().replace( "_" , "" ).toLowerCase();
-		this.getWriter().println( patternBaseAnnotation );
+		SafeFunction.applyIfNotNull( this.patternBaseAnnotation, () -> this.getWriter().println( patternBaseAnnotation ) );
 		log.debug( "patternPathAnnotation : {}, urlBase : {}", patternPathAnnotation, urlBase );
 		String pathAnnotation = MessageFormat.format( this.patternPathAnnotation , urlBase);
 		log.debug( "pathAnnotation : {}", pathAnnotation );
