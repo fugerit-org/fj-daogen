@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.3 (2023-09-05)
+	 * @version    : 1.0.0-rc.4 (2023-09-24)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -390,6 +390,12 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="mapToTable" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Map the entity to a different table.</xsd:documentation>
+				<xsd:documentation>(e.g. 'alt_entity_name')</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>	
 
 	<xsd:complexType name="fieldType">
@@ -419,7 +425,7 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>'yes' if the field is nullable, 'no' if not. default 'yes'</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:short" name="size" use="optional" >
+		<xsd:attribute type="xsd:int" name="size" use="optional" >
 			<xsd:annotation>
 				<xsd:documentation>The size of the  field. (i.e'. the size of a varchar, generally not needed).</xsd:documentation>
 				<xsd:documentation>(e.g. '128')</xsd:documentation>
