@@ -73,6 +73,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String PUBLIC_STATIC_SPACE_LIT = "public static ";
 	
+	protected static final String IN_CASE_OF_ERRORS_LIT = "in case of errors";
+	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {
 		if ( !this.isNoCustomComment() ) {

@@ -67,7 +67,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( keyHelper.getJavadocParams() );	
 		this.getWriter().println( TAB+" *" );
 		this.getWriter().println( TAB+" * @return "+returnJavadoc );	
-		this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+"in case of errors" );	
+		this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+IN_CASE_OF_ERRORS_LIT );	
 		this.getWriter().println( TAB+" */" );
 		this.getWriter().println( TAB+""+returnType+" "+methodName+"( "+this.getClassDaogenContext()+CONTEXT_LIT+keyHelper.getKeyParams()+" ) throws "+this.getClassDaoException()+";" );
 		this.getWriter().println();
@@ -89,7 +89,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 		} else {
 			this.getWriter().println( TAB+" * @return search result" );	
 		}
-		this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+"in case of errors" );	
+		this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+IN_CASE_OF_ERRORS_LIT );	
 		this.getWriter().println( TAB+" */" );
 	}
 	
@@ -108,7 +108,7 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+PARAM_CONTEXT_LIT+TAB+"DAOContext" );	
 			this.getWriter().println( TAB+" *" );	
 			this.getWriter().println( TAB+" * @return search result" );	
-			this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+"in case of errors" );	
+			this.getWriter().println( TAB+JD_THROWS+this.getClassDaoException()+TAB_3+IN_CASE_OF_ERRORS_LIT );	
 			this.getWriter().println( TAB+" */" );
 			this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> loadAll( "+this.getClassDaogenContext()+" context ) throws "+this.getClassDaoException()+";" );
 			this.getWriter().println();
