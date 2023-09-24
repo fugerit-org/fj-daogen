@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Code of conduct badge and file
 
+### Changed
+
+- [Sonar cloud workflow merged in maven build](.github/workflows/deploy_maven_package.yml)
+- fj-bom version set to 1.4.4
+- fj-core version set to 8.3.8
+- fj-doc version set to 3.0.9
+
+### Removed
+
+- Sonar cloud workflow yml removed. (after being merged with maven build)
+
 ## [1.2.4] - 2023-09-20
 
 ### Changed
