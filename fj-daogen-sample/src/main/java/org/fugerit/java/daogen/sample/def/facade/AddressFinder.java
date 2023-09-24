@@ -20,7 +20,7 @@ public class AddressFinder extends BaseIdFinder {
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
 
-	private static final long serialVersionUID = 566741358487L;
+	private static final long serialVersionUID = 991425775053L;
 
 	private ModelAddress model;
 
