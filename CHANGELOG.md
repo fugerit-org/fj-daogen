@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed javax.ejb.Stateles annotation from default rest generator
 - Fixed typo on FactoryDefGenerator
 - Stream loadAll method added to FacadeDefGenerator and FacadeImplDataGenerator (#17)
+- Added loadById Optional to FacadeDefGenerator and FacadeImplDataGenerator (#17)
 - Sample stub for finder, facade and rest load classes regenerated.
 
 ### Removed

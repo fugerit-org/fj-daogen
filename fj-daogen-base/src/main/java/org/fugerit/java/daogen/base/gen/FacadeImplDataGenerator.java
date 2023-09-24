@@ -1,6 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -58,6 +59,9 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.setImplementsInterface( DaogenHelperGenerator.toHelperClassName( this.getEntityFacadeDefName() ) );
 		}
 		this.getImportList().add( Stream.class.getName() );
+		if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
+			this.getImportList().add( Optional.class.getName() );
+		}
 		this.setExtendsClass( this.getClassDataFacade()+LT_LIT+this.getEntityModelName()+">" );
 	}
 	
@@ -241,7 +245,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 	private void generateHelperClassLoadPk( GeneratorKeyHelper primaryKeyHelper ) {
 		// load by primary key
 		this.getWriter().println( TAB+AT_OVERRIDE );
-		this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+		this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+CLOSE_AND_THROWS+this.getClassDaoException()+" {" );
 		this.getWriter().println( TAB_2+this.getEntityModelName()+" result = null;" );
 		this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
 		this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
@@ -268,13 +272,18 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
+		// load by primary key optional
+		this.getWriter().println( TAB+AT_OVERRIDE );
+		this.getWriter().println( TAB+PUBLIC_LIT+Optional.class.getSimpleName()+"<"+this.getEntityModelName()+"> "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"Optional( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+CLOSE_AND_THROWS+this.getClassDaoException()+" {" );
+		this.getWriter().println( TAB_2+"return "+Optional.class.getSimpleName()+".ofNullable( "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"("+CONTEXT_LIT+primaryKeyHelper.getFieldNames()+") );" );
+		this.getWriter().println( TAB+"}" );
+		this.getWriter().println();
 	}
 	
 	private void generateHelperClassDelete(GeneratorKeyHelper primaryKeyHelper) {
 		if ( FacadeGeneratorUtils.isFacadeModeDelete( this.getCurrentEntity() ) ) {
 			// delete by primary key
-			this.getWriter().println( TAB+AT_OVERRIDE );
-			this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+" ) throws "+this.getClassDaoException()+" {" );
+			this.getWriter().println( TAB+AT_OVERRIDE );			this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+CLOSE_AND_THROWS+this.getClassDaoException()+" {" );
 			this.getWriter().println( TAB_2+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+GENERIC_LIT );
 			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
 			this.getWriter().println( TAB_2+"DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );" );

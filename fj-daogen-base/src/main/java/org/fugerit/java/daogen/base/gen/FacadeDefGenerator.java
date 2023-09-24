@@ -1,6 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.fugerit.java.core.cfg.ConfigException;
@@ -56,6 +57,9 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.setClassBaseResult( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_RESULT_BASE, this.getImportList() ) );
 			this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 			this.getImportList().add( Stream.class.getName() );
+			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
+				this.getImportList().add( Optional.class.getName() );
+			}
 		}
 	}
 
@@ -120,7 +124,10 @@ public class FacadeDefGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println();
 			if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 				GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
+				// load by id
 				methodByKey( primaryKeyHelper.setForLoadInterface(), METHOD_LOAD_BY_PK, this.getEntityModelName(), "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );
+				// load by id optional
+				methodByKey( primaryKeyHelper.setForLoadInterface(), METHOD_LOAD_BY_PK+Optional.class.getSimpleName(), Optional.class.getSimpleName()+"<"+this.getEntityModelName()+">", "The found object or <code>null</code>", "Load method by "+PRIMARY_KEY+FOR_ENTITY_LIT+this.getEntityModelName() );
 				if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 					DaogenCustomCode.addCommentFacadeDef( "facade.def.create" , DaogenCustomCode.INDENT_1, this.getWriter(), this.getEntityModelName() );	
 					this.getWriter().println( TAB+""+this.getClassBaseResult()+"<"+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+";" );
