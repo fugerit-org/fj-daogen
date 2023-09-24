@@ -3,6 +3,7 @@ package org.fugerit.java.daogen.base.gen;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.StringUtils;
@@ -41,6 +42,10 @@ public class GeneratorKeyHelper implements Serializable {
 	private StringBuilder pathParams = new StringBuilder();
 	
 	private Set<String> keyFields;
+	
+	public String getFieldNames() {
+		return StringUtils.concat( "," , this.keyFields.stream().map( GeneratorNameHelper::toPropertyName ).collect( Collectors.toList() ) );
+	}
 	
 	public GeneratorKeyHelper( DaogenCatalogConfig config, DaogenCatalogEntity entity, String key ) {
 		this.config = config;

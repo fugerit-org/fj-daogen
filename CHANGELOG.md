@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2023-09-24
+
 ### Added
 
 - Code of conduct badge and file
@@ -14,9 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - [Sonar cloud workflow merged in maven build](.github/workflows/deploy_maven_package.yml)
-- fj-bom version set to 1.4.4
-- fj-core version set to 8.3.8
+- fj-bom version set to 1.4.5
+- fj-core version set to 8.3.9
 - fj-doc version set to 3.0.9
+- Removed javax.ejb.Stateles annotation from default rest generator
+- Fixed typo on FactoryDefGenerator
+- Stream loadAll method added to FacadeDefGenerator and FacadeImplDataGenerator (#17)
+- Added loadById Optional to FacadeDefGenerator and FacadeImplDataGenerator (#17)
+- Sample stub for finder, facade and rest load classes regenerated.
+- column size attribute from short to int daogen-config-1-0.xsd
+- definition of mapToTable entity attribute daogen-config-1-0.xsd
+- code optimization
 
 ### Removed
 

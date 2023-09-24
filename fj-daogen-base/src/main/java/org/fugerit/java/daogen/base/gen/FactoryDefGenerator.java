@@ -54,7 +54,7 @@ public class FactoryDefGenerator extends DaogenBasicHelperGenerator {
 					String facadeName = DaogenCatalogConstants.facadeDefName( current );
 					String packageFacade = this.getDaogenConfig().getGeneralProp(DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF );
 					this.getWriter().println( TAB+"/**" );
-					this.getWriter().println( TAB+" * Facade incapsulating persistance for entity : "+current.getName() );
+					this.getWriter().println( TAB+" * Facade encapsulating persistance for entity : "+current.getName() );
 					this.getWriter().println( TAB+" *" );
 					this.getWriter().println( TAB+" * @return"+TAB+"the facade" );
 					this.getWriter().println( TAB+" * @throws "+this.getClassDaoException()+TAB+"in case of problems" );

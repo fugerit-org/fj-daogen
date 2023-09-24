@@ -5,8 +5,8 @@ import org.fugerit.java.core.db.dao.DAOException;
 import org.fugerit.java.core.db.daogen.CloseableDAOContext;
 import org.fugerit.java.core.db.daogen.CloseableDAOContextSC;
 import org.fugerit.java.core.db.daogen.SimpleServiceProvider;
+import org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacadeHelper;
 import org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade;
-import org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacadeHelper;
 import org.fugerit.java.test.db.helper.MemDBHelper;
 
 public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
@@ -24,7 +24,7 @@ public class ServiceProviderHelper<T> extends SimpleServiceProvider<T> {
 			 * The object asking for the context is responsible for closing it.
 			 */
 			context = new CloseableDAOContextSC( MemDBHelper.newConnection() );		// NOSONAR
-			context.setAttribute( FugeritDataLogicFacadeHelper.ATT_NAME, new FugeritDataLogicFacade() );
+			context.setAttribute( FugeritLogicFacadeHelper.ATT_NAME, new FugeritDataLogicFacade() );
 			return context;	
 		} catch (Exception e) {
 			if ( context != null ) {

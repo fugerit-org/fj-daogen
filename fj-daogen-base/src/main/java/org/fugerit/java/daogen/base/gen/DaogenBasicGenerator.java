@@ -33,6 +33,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String JD_THROWS = " * @throws ";
 	
+	protected static final String CLOSE_AND_THROWS = " ) throws ";
+	
 	protected static final String AT_OVERRIDE = "@Override";
 	
 	protected static final String REAL_CLASS_COMMENT = TAB+"// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
@@ -72,6 +74,8 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	protected static final String PUBLIC_SPACE_LIT = "public ";
 	
 	protected static final String PUBLIC_STATIC_SPACE_LIT = "public static ";
+	
+	protected static final String IN_CASE_OF_ERRORS_LIT = "in case of errors";
 	
 	@Override
 	protected void customPartWorker( String startTag, String endTag, String indent ) throws IOException {

@@ -44,7 +44,7 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 
 	@Override
 	public Map<String, Class<?>> newTypeMapper() throws SQLException {
-		Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+		Map<String, Class<?>> map = new HashMap<>();
 		map.put( SQL_TYPE_NAME, ObjUpload.class );
 		return map;
 	}
@@ -92,9 +92,7 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 
 	public static ObjUpload wrap( ModelUpload model, java.sql.Connection conn ) throws SQLException {
 		ObjUpload res = wrap( model );
-		if ( res != null ) {
 			res.setupLobs( conn );
-		}
 		return res;
 	}
 

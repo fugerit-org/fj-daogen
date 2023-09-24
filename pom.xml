@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.fugerit.java</groupId>
 		<artifactId>fj-bom</artifactId>
-		<version>1.4.4</version>
+		<version>1.4.5</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>fj-daogen</artifactId>
 
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.3.0</version>
 	<packaging>pom</packaging>
 
 	<name>fj-daogen</name>
@@ -24,7 +24,7 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
-		<fj-version>8.3.8</fj-version>  	
+		<fj-version>8.3.9</fj-version>  	
 		<fj-doc-version>3.0.9</fj-doc-version>      		 	
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
 		<fj-daogen-version>${project.version}</fj-daogen-version>
