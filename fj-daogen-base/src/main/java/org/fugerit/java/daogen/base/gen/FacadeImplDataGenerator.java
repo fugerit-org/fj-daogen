@@ -1,6 +1,7 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
@@ -56,6 +57,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+DaogenHelperGenerator.toHelperClassName( this.getEntityFacadeDefName() ) );
 			this.setImplementsInterface( DaogenHelperGenerator.toHelperClassName( this.getEntityFacadeDefName() ) );
 		}
+		this.getImportList().add( Stream.class.getName() );
 		this.setExtendsClass( this.getClassDataFacade()+LT_LIT+this.getEntityModelName()+">" );
 	}
 	
@@ -175,6 +177,14 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( TAB_2+"daoHelper.loadAllHelper( result.getList(), query, this.getRse() ); " );
 		this.getWriter().println( TAB_2+"result.evaluateResultFromList(); " );
 		this.getWriter().println( TAB_2+RETURN_RESULT_LIT );
+		this.getWriter().println( TAB+"}" );
+		this.getWriter().println();	
+	}
+	
+	private void generateHelperClassLoadAllStream() {
+		this.getWriter().println( TAB+AT_OVERRIDE );
+		this.getWriter().println( TAB+PUBLIC_LIT+Stream.class.getSimpleName()+LT_LIT+this.getEntityModelName()+"> loadAllByFinderStream( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityFinderName()+" finder ) throws DAOException {" );
+		this.getWriter().println( TAB_2+"return this.loadAllByFinder( context, finder ).stream();" );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();	
 	}
@@ -317,6 +327,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		String sequenceName = this.generateHelperClassSetupAndSequenceName();
 		String defaultOrderBy = this.generateHelperClassSetupAndDefaultOrderBy();
 		this.generateHelperClassLoadAll(defaultOrderBy);
+		this.generateHelperClassLoadAllStream();
 		if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
 			GeneratorKeyHelper primaryKeyHelper = new GeneratorKeyHelper( this.getDaogenConfig() , this.getCurrentEntity(), this.getCurrentEntity().getPrimaryKey() );
 			DaogenCatalogField colData = null;

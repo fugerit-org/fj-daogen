@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fj-doc version set to 3.0.9
 - Removed javax.ejb.Stateles annotation from default rest generator
 - Fixed typo on FactoryDefGenerator
+- Stream loadAll method added to FacadeDefGenerator and FacadeImplDataGenerator (#17)
 
 ### Removed
 
