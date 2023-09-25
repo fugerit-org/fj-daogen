@@ -1,8 +1,5 @@
 package org.fugerit.java.daogen.base.gen.helper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
@@ -12,21 +9,8 @@ public class RestLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 
 	public static final String KEY = RestLoadHelperGenerator.class.getSimpleName();
 	
-	private static final BaseRestLoadHelperGeneratorConfig CONFIG = new BaseRestLoadHelperGeneratorConfig();
-	static {
-		List<String> importList = new ArrayList<>();
-		importList.add( "java.util.List" );
-		importList.add( "javax.ws.rs.GET" );
-		importList.add( "javax.ws.rs.Path" );
-		importList.add( "javax.ws.rs.PathParam" );
-		importList.add( "javax.ws.rs.Produces" );
-		importList.add( "javax.ws.rs.core.MediaType" );
-		importList.add( "javax.ws.rs.core.Response" );
-		CONFIG.setImportList( importList );
-	}
-	
 	public RestLoadHelperGenerator() {
-		super(KEY, CONFIG, DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD);
+		super(KEY, DaogenCatalogConstants.GEN_PROP_PACKAGE_REST_LOAD);
 	}
 	
 	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {

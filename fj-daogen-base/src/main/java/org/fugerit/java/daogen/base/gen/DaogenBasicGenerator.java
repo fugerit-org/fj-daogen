@@ -153,7 +153,23 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	private DaogenCatalogConfig daogenConfig;
 	
 	private DaogenCatalogEntity currentEntity;
-
+	
+	protected Integer getJdkTargetVersion() {
+		return Integer.valueOf( StringUtils.valueWithDefault( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION ) , DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION_DEFAULT ) );
+	}
+	
+	protected boolean isJdkVersionEquals( Integer jdkVerson ) {
+		return this.getJdkTargetVersion().intValue() == jdkVerson.intValue();
+	}
+	
+	protected boolean isJdkVersionAtLeast( Integer jdkVerson ) {
+		return this.getJdkTargetVersion().intValue() >= jdkVerson.intValue();
+	}
+	
+	protected String getJeeTargetMode() {
+		return StringUtils.valueWithDefault( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_JEE_TARGET_MODE ) , DaogenCatalogConstants.GEN_PROP_JEE_TARGET_MODE_DEFAULT );
+	}
+	
 	private boolean skipWrite = false;
 	
 	public boolean isSkipWrite() {

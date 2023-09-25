@@ -1,8 +1,5 @@
 package org.fugerit.java.daogen.base.gen.helper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.gen.FacadeDefGenerator;
@@ -16,22 +13,21 @@ public class SpringBootLoadHelperGenerator extends BaseRestLoadHelperGenerator {
 	
 	private static final String RES_BUILD_LIT = "res = ResponseEntity.status( HttpServletResponse.SC_INTERNAL_SERVER_ERROR ).build();";
 	
-	private static final BaseRestLoadHelperGeneratorConfig CONFIG = new BaseRestLoadHelperGeneratorConfig();
-	static {
-		List<String> importList = new ArrayList<>();
-		importList.add( "java.util.List" );
-		importList.add( "javax.servlet.http.HttpServletResponse" );
-		importList.add( "org.springframework.http.ResponseEntity" );
-		importList.add( "org.springframework.web.bind.annotation.PathVariable" );
-		importList.add( "org.springframework.web.bind.annotation.GetMapping" );
-		importList.add( "org.springframework.http.MediaType" );
-		CONFIG.setImportList( importList );
-	}
-	
 	public SpringBootLoadHelperGenerator() {
-		super(KEY, CONFIG, DaogenCatalogConstants.GEN_PROP_PACKAGE_SPRING_REST_LOAD);
+		super(KEY, DaogenCatalogConstants.GEN_PROP_PACKAGE_SPRING_REST_LOAD);
 	}
 
+	@Override
+	protected void populateImportListBase() {
+		String jeeTarget = this.getJeeTargetMode();
+		this.getImportList().add( "java.util.List" );
+		this.getImportList().add( jeeTarget+".servlet.http.HttpServletResponse" );
+		this.getImportList().add( "org.springframework.http.ResponseEntity" );
+		this.getImportList().add( "org.springframework.web.bind.annotation.PathVariable" );
+		this.getImportList().add( "org.springframework.web.bind.annotation.GetMapping" );
+		this.getImportList().add( "org.springframework.http.MediaType" );
+	}
+	
 	protected void printPrimaryKeyLoader( GeneratorKeyHelper primaryKeyHelper, String deepUrl, String deepMethod, String deepWorker ) {
 		this.getWriter().println( TAB+"@GetMapping(value = \""+deepUrl+primaryKeyHelper.getUrlParams()+"\", produces = MediaType.APPLICATION_JSON_VALUE )" );
 		this.getWriter().println( TAB+"public ResponseEntity<Object> getByID"+deepMethod+"("+primaryKeyHelper.getPathVarables()+") throws Exception {" );

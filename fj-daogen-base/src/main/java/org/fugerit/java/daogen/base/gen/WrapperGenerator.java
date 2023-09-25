@@ -67,16 +67,19 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
-		
 		this.getWriter().println( TAB+PUBLIC_SPACE_LIT+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
 		this.getWriter().println( TAB_2+"super( wrapped );" );
 		this.getWriter().println( TAB+"}" );
 		this.getWriter().println();
-		
 		this.getWriter().println( TAB+PUBLIC_SPACE_LIT+this.getEntityModelName()+" unwrap( "+this.getEntityWrapperName()+" wrapper ) {" );
 		this.getWriter().println( TAB_2+""+this.getEntityModelName()+" res = wrapper;" );
-		this.getWriter().println( TAB_2+"while ( res instanceof "+this.getEntityWrapperName()+" ) { " );
-		this.getWriter().println( TAB_3+"res = (("+this.getEntityWrapperName()+")res).unwrapModel();" );
+		if ( this.isJdkVersionAtLeast( DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION_17 ) ) {
+			this.getWriter().println( TAB_2+"while ( res instanceof "+this.getEntityWrapperName()+" wrappedinstance ) { " );
+			this.getWriter().println( TAB_3+"res = wrappedinstance.unwrapModel();" );
+		} else {
+			this.getWriter().println( TAB_2+"while ( res instanceof "+this.getEntityWrapperName()+" ) { " );
+			this.getWriter().println( TAB_3+"res = (("+this.getEntityWrapperName()+")res).unwrapModel();" );
+		}
 		this.getWriter().println( TAB_2+"}" );
 		this.getWriter().println( TAB_2+"return res;" );
 		this.getWriter().println( TAB+"}" );

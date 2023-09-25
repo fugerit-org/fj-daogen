@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2023-09-25
+
+### Added
+
+- Attribute 'jdk-target-version' for element 'daogen-config' (default is '8', allowed values are '8', '11', '17', '21')
+- Attribute 'jee-target-mode' for element 'daogen-config' (default is 'javax', allowed values are 'javax', 'jakarta')
+
+### Changed
+
+- If 'jee-target-mode' is set to 'jakarta' the prefix for enterprise edition packages will be 'jakarta' [see jesp](https://jakarta.ee/about/jesp/)
+- If 'jdk-target-version' is set to '17'+ some 
+
 ## [1.3.0] - 2023-09-24
 
 ### Added

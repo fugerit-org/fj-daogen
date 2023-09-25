@@ -57,6 +57,18 @@ public class DaogenCatalogConstants {
 	
 	public static final String GEN_PROP_CHECK_EMPTY_INTERFACE = "check-empty-interface";
 	
+	public static final String GEN_PROP_JDK_TARGET_VERSION = "jdk-target-version";
+	public static final Integer GEN_PROP_JDK_TARGET_VERSION_8 = Integer.valueOf( 8 );
+	public static final Integer GEN_PROP_JDK_TARGET_VERSION_11 = Integer.valueOf( 11 );
+	public static final Integer GEN_PROP_JDK_TARGET_VERSION_17 = Integer.valueOf( 17 );
+	public static final Integer GEN_PROP_JDK_TARGET_VERSION_21 = Integer.valueOf( 21 );
+	public static final String GEN_PROP_JDK_TARGET_VERSION_DEFAULT = GEN_PROP_JDK_TARGET_VERSION_8.toString();
+	
+	public static final String GEN_PROP_JEE_TARGET_MODE = "jee-target-mode";
+	public static final String GEN_PROP_JEE_TARGET_MODE_JAVAX = "javax";
+	public static final String GEN_PROP_JEE_TARGET_MODE_JAKARTA = "jakarta";
+	public static final String GEN_PROP_JEE_TARGET_MODE_DEFAULT = GEN_PROP_JEE_TARGET_MODE_JAVAX;
+	
 	public static final String PREFIX_MODEL = "Model";
 	
 	public static final String PREFIX_HELPER = "Helper";

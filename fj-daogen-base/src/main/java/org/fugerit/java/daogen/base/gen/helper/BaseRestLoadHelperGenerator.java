@@ -50,12 +50,9 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	private String key;
 	
-	private BaseRestLoadHelperGeneratorConfig config;
-	
-	protected BaseRestLoadHelperGenerator(String key, BaseRestLoadHelperGeneratorConfig config, String propertyPackage ) {
+	protected BaseRestLoadHelperGenerator(String key, String propertyPackage ) {
 		super();
 		this.key = key;
-		this.config = config;
 		this.propertyPackage = propertyPackage;
 	}
 
@@ -71,13 +68,24 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	protected String helperClass = null;
 	
+	protected void populateImportListBase() {
+		String jeeTarget = this.getJeeTargetMode();
+		this.getImportList().add( "java.util.List" );
+		this.getImportList().add( jeeTarget+".ws.rs.GET" );
+		this.getImportList().add( jeeTarget+".ws.rs.Path" );
+		this.getImportList().add( jeeTarget+".ws.rs.PathParam" );
+		this.getImportList().add( jeeTarget+".ws.rs.Produces" );
+		this.getImportList().add( jeeTarget+".ws.rs.core.MediaType" );
+		this.getImportList().add( jeeTarget+".ws.rs.core.Response" );
+	}
+	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
 		String fullObjectBName = fullObjectName( daogenConfig.getGeneralProp( this.propertyPackage ), DaogenCatalogConstants.restLoadName( entity ) );
 		log.info( "propertyPackage:{}, fullObjectBName:{}", this.propertyPackage, fullObjectBName  );
 		super.init( DaogenHelperGenerator.toHelperSourceFolder( daogenConfig ), 
 				DaogenHelperGenerator.toHelperClassName( fullObjectBName ), 
 				STYLE_CLASS, daogenConfig, entity );
-		this.getImportList().addAll( this.config.getImportList() );
+		this.populateImportListBase();
 		this.setClassDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CONTEXT_BASE, this.getImportList() ) );
 		this.setClassCloseableDaogenContext( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_CLOSEABLECONTEXT_BASE, this.getImportList() ) );
 		this.setClassDaoException( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_EXCEPTION_BASE, this.getImportList() ) );

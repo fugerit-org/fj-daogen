@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.4 (2023-09-24)
+	 * @version    : 1.0.0-rc.5 (2023-09-25)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -252,7 +252,19 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>NOTE: currently ignored.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="daogen:jdkTargetVersionType" name="jdk-target-version" use="optional" default="8">
+			<xsd:annotation>
+				<xsd:documentation>The jdk target version.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="daogen:jeeTargetModeType" name="jee-target-mode" use="optional" default="javax">
+			<xsd:annotation>
+				<xsd:documentation>The enterprise edition target environment.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>	
+
+	
 
 	<xsd:element name='relation' type="daogen:relationType">
 		<xsd:annotation>
@@ -325,6 +337,30 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="one"></xsd:enumeration>
 			<xsd:enumeration value="many"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+ 	<xsd:simpleType name="jdkTargetVersionType">
+		<xsd:annotation>
+			<xsd:documentation>The target jdk version. currently possible values are '8', '11', '17', '21'.</xsd:documentation>
+			<xsd:documentation>Some code may be different based on the target version.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="8"></xsd:enumeration>
+			<xsd:enumeration value="11"></xsd:enumeration>
+			<xsd:enumeration value="17"></xsd:enumeration>
+			<xsd:enumeration value="21"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+ 	<xsd:simpleType name="jeeTargetModeType">
+		<xsd:annotation>
+			<xsd:documentation>The target enterprise edition, possible values are 'javax' and 'jakarta'.</xsd:documentation>
+			<xsd:documentation>See https://jakarta.ee/about/jesp/.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="javax"></xsd:enumeration>
+			<xsd:enumeration value="jakarta"></xsd:enumeration>
 		</xsd:restriction>
 	</xsd:simpleType>
 
