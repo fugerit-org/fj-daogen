@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- java and maven badges link
 - fj-bom version set to 1.4.7
 
 ### Fixed
