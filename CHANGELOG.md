@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fj-bom version set to 1.4.7
 - fj-version set to 8.4.1
 - fj-doc-version set to 3.1.2
+- fj-bom version set to 1.4.8
 
 ### Fixed
 
