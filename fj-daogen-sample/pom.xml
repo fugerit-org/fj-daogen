@@ -17,6 +17,7 @@
 		<build-helper-maven-plugin-version>3.4.0</build-helper-maven-plugin-version>
 		<gen.base.dir>${project.basedir}</gen.base.dir>
 		<generated.source.daogen>target/generated-sources/daogen</generated.source.daogen>
+		<javadoc-javasource-path-extra>:${gen.base.dir}/${generated.source.daogen}</javadoc-javasource-path-extra>
 	</properties>
 
 	<licenses>
