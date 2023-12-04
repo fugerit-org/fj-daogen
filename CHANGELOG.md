@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - java and maven badges link
 - fj-bom version set to 1.5.0
 - fj-version set to 8.4.5
-- fj-doc-version set to 3.1.8
+- fj-doc-version set to 3.2.2
 - fj-bom version set to 1.4.8
 
 ### Fixed
