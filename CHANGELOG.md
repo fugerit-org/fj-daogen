@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Added java 21 to github action workflow for compatibility check
+- fj-doc-version set to 3.3.1
 
 ## [1.3.2] - 2023-12-23
 
