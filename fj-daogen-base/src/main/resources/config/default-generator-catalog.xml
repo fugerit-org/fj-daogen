@@ -30,7 +30,10 @@
     	info="package-rse"/>
     <data id="DocOpenAPIRestGenerator" 
     	type="org.fugerit.java.daogen.base.gen.DocOpenAPIV3RestGenerator"
-    	info="src-doc-openapi"/>     	    	 	
+    	info="src-doc-openapi"/>
+	  <data id="Junit4ModelGenerator"
+			type="org.fugerit.java.daogen.base.gen.Junit4ModelGenerator"
+			info="package-junit4-model"/>
   </factory>
 
   <factory id="entity_generators" extends="entity_generators_base">
