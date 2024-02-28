@@ -34,6 +34,9 @@
 	  <data id="Junit4ModelGenerator"
 			type="org.fugerit.java.daogen.base.gen.Junit4ModelGenerator"
 			info="package-junit4-model"/>
+	  <data id="Junit5ModelGenerator"
+			type="org.fugerit.java.daogen.base.gen.Junit5ModelGenerator"
+			info="package-junit5-model"/>
   </factory>
 
   <factory id="entity_generators" extends="entity_generators_base">

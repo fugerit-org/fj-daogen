@@ -47,6 +47,8 @@ public class DaogenCatalogConstants {
 
 	public static final String GEN_PROP_PACKAGE_JUNIT4_MODEL = 	"package-junit4-model";
 
+	public static final String GEN_PROP_PACKAGE_JUNIT5_MODEL = 	"package-junit5-model";
+
 	public static final String GEN_PROP_STRUCT_PREFIX = 	"struct-prefix";
 	public static final String GEN_PROP_STRUCT_PREFIX_DEFAULT = 	"OBJ_";
 	
@@ -89,6 +91,8 @@ public class DaogenCatalogConstants {
 	public static final String PREFIX_FACADE_IMPL_DATA = "Data";
 
 	public static final String SUFFIX_JUNIT4_MODEL = "Junit4ModelTest";
+
+	public static final String SUFFIX_JUNIT5_MODEL = "Junit5ModelTest";
 	
 	public static String modelName( DaogenCatalogEntity entity ) {
 		return PREFIX_MODEL+entity.toClassName();
@@ -121,7 +125,11 @@ public class DaogenCatalogConstants {
 	public static String junit4ModelName( DaogenCatalogEntity entity ) {
 		return entity.toClassName()+SUFFIX_JUNIT4_MODEL;
 	}
-	
+
+	public static String junit5ModelName( DaogenCatalogEntity entity ) {
+		return entity.toClassName()+SUFFIX_JUNIT5_MODEL;
+	}
+
 	public static String facadeDefName( DaogenCatalogEntity entity ) {
 		return PREFIX_FACADE_DEF+entity.toClassName()+SUFFIX_FACADE_DEF;
 	}

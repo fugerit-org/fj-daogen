@@ -1,9 +1,7 @@
 package org.fugerit.java.daogen.base.gen.helper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 

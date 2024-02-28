@@ -23,7 +23,6 @@
 	package-facade-def="org.fugerit.java.daogen.sample.def.facade"
 	package-facade-data-impl="org.fugerit.java.daogen.sample.impl.facade.data"
 	package-rest-load="org.fugerit.java.daogen.sample.impl.rest.load"
-    package-junit4-model="org.fugerit.java.daogen.sample.junit4test.model"
 	base-rest-service="org.fugerit.java.daogen.sample.helper.ServiceProviderHelper"
 	factory-def="org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade"
 	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"

@@ -232,6 +232,14 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>NOTE: The junit generation is a very simple stub to start with.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-junit5-model" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The package to be used for a basic junit 5 implementation, for each entity.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.junit5test.model').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
+				<xsd:documentation>NOTE: The junit generation is a very simple stub to start with.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="base-rest-service" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The base class for REST services.</xsd:documentation>

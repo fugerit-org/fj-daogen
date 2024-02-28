@@ -222,7 +222,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.daogenConfig = daogenConfig;
 	}
 
-	protected DaogenCatalogEntity getCurrentEntity() {
+	public DaogenCatalogEntity getCurrentEntity() {
 		return currentEntity;
 	}
 
