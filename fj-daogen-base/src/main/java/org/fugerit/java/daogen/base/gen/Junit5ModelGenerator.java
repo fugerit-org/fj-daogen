@@ -28,6 +28,7 @@ public class Junit5ModelGenerator extends DaogenBasicGenerator {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_TEST_JAVA ),
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_JUNIT5_MODEL ), DaogenCatalogConstants.junit4ModelName( entity ) ),
 				STYLE_INTERFACE, daogenConfig, entity );
+		this.setPublicClass( false );
 		this.setJavaStyle( STYLE_CLASS );
 		GenUtils.addAll( this.getImportList(), "org.slf4j.Logger", "org.slf4j.LoggerFactory", "org.junit.jupiter.api.Assertions", "org.junit.jupiter.api.Test",
 				this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName(),
