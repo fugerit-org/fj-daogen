@@ -29,6 +29,7 @@
 	base-rest-service="org.fugerit.java.daogen.sample.helper.ServiceProviderHelper"
 	factory-def="org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade"
 	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"
+    graalvm-reflect-config="daogen-reflect-config.json"
 	default-sequence="seq_id_fugerit"
 	openapi_host="http://localhost:9080"
 	openapi_path="/fugerit-sample-web/jax-rs"

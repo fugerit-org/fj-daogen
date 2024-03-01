@@ -11,7 +11,7 @@
 
 	<artifactId>fj-daogen</artifactId>
 
-	<version>1.5.1</version>
+	<version>1.5.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>fj-daogen</name>
@@ -26,7 +26,8 @@
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
 		<fj-version>8.4.10</fj-version>
 		<fj-doc-version>3.4.3</fj-doc-version>
-		<javax-rs-api-version>2.1.1</javax-rs-api-version>    
+		<javax-rs-api-version>2.1.1</javax-rs-api-version>
+		<native-helper-graalvm-version>1.0.0</native-helper-graalvm-version>
 		<fj-daogen-version>${project.version}</fj-daogen-version>
 	</properties>
 

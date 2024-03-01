@@ -78,16 +78,23 @@
     	info="package-spring-rest-load"/>    
   </factory>
 
-  <factory id="factory_generators">
+	<factory id="factory_generators_base">
+		<!-- graalvm specific generators -->
+		<data id="GraalVMReflectConfigGenerator"
+			  type="org.fugerit.java.daogen.base.gen.GraalVMReflectConfigGenerator"
+			  info="graalvm-reflect-config"/>
+	</factory>
+
+	<factory id="factory_generators" extends="factory_generators_base">
     <data id="FactoryDefGenerator" 
     	type="org.fugerit.java.daogen.base.gen.FactoryDefGenerator"
     	info="factory-def"/>   
     <data id="FactoryDataImplGenerator" 
     	type="org.fugerit.java.daogen.base.gen.FactoryDataImplGenerator"
-    	info="factory-data-impl"/>        	 	
+    	info="factory-data-impl"/>
   </factory>  
     
-  <factory id="factory_generators_helper">
+  <factory id="factory_generators_helper" extends="factory_generators_base">
     <data id="FactoryDefHelperGenerator" 
     	type="org.fugerit.java.daogen.base.gen.helper.FactoryDefHelperGenerator"
     	info="factory-def"/>     

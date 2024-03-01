@@ -55,8 +55,16 @@ Here is the default genetaor catalog :
 	</tr>
 	<tr>
 		<td><a href="#DocOpenAPIRestGenerator">DocOpenAPIRestGenerator</a></td>
-		<td>Gemeratpr fpr sample ${Entity}.yaml to use as basic definition for rest services</td>
-	</tr>														
+		<td>Generator fpr sample ${Entity}.yaml to use as basic definition for rest services</td>
+	</tr>
+	<tr>
+		<td><a href="#Junit4ModelGenerator">Junit4ModelGenerator</a></td>
+		<td>Generator for class ${Entity}Junit4ModelTest for basic unit test with junit 4</td>
+	</tr>	
+	<tr>
+		<td><a href="#Junit5ModelGenerator">Junit5ModelGenerator</a></td>
+		<td>Generator for class ${Entity}Junit5ModelTest for basic unit test with junit 5</td>
+	</tr>	
 </table>
 
 <br/><a href="#top">top</a><br/>

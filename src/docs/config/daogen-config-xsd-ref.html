@@ -465,10 +465,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_32_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >base-rest-service</span>
+		<span >graalvm-reflect-config=</span>
 				</td>
 				<td id="cell_32_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The base class for REST services. (e.g. 'org.fugerit.java.daogen.sample.helper.ServiceProviderHelper'). NOTE: REST services generation is not recommended, if not as a starting stub.</span>
+		<span >Path to the reflect-config.json file to be created (e.g. 'daogen-reflect-config.json'). Initial folder is defined by 'src-main-resources' property. NOTE: Only one file for all the project will be created.</span>
 				</td>
 				<td id="cell_32_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -476,32 +476,32 @@
 		</tr>				
 		<tr>
 				<td id="cell_33_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >openapi_host</span>
+		<span >base-rest-service</span>
 				</td>
 				<td id="cell_33_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The host to be used for openapi specification and implementation specification.</span>
+		<span >The base class for REST services. (e.g. 'org.fugerit.java.daogen.sample.helper.ServiceProviderHelper'). NOTE: REST services generation is not recommended, if not as a starting stub.</span>
 				</td>
 				<td id="cell_33_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >anyURI</span>
-				</td>
-		</tr>				
-		<tr>
-				<td id="cell_34_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >openapi_path</span>
-				</td>
-				<td id="cell_34_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The path to be used for openapi specification and implementation specification.</span>
-				</td>
-				<td id="cell_34_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
 				</td>
 		</tr>				
 		<tr>
+				<td id="cell_34_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >openapi_host</span>
+				</td>
+				<td id="cell_34_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >The host to be used for openapi specification and implementation specification.</span>
+				</td>
+				<td id="cell_34_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >anyURI</span>
+				</td>
+		</tr>				
+		<tr>
 				<td id="cell_35_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >default-sequence</span>
+		<span >openapi_path</span>
 				</td>
 				<td id="cell_35_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The default sequence name to be used for the entities (it is possible to override it).</span>
+		<span >The path to be used for openapi specification and implementation specification.</span>
 				</td>
 				<td id="cell_35_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -509,10 +509,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_36_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >check-empty-interface</span>
+		<span >default-sequence</span>
 				</td>
 				<td id="cell_36_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >If set to '1' will check if interfaces have no methods. NOTE: currently ignored.</span>
+		<span >The default sequence name to be used for the entities (it is possible to override it).</span>
 				</td>
 				<td id="cell_36_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -520,23 +520,34 @@
 		</tr>				
 		<tr>
 				<td id="cell_37_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >jdk-target-version</span>
+		<span >check-empty-interface</span>
 				</td>
 				<td id="cell_37_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The jdk target version.</span>
+		<span >If set to '1' will check if interfaces have no methods. NOTE: currently ignored.</span>
 				</td>
 				<td id="cell_37_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >jdkTargetVersionType , base : string , enumeration : [ 8 , 11 , 17 , 21 ]</span>
+		<span >string</span>
 				</td>
 		</tr>				
 		<tr>
 				<td id="cell_38_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >jee-target-mode</span>
+		<span >jdk-target-version</span>
 				</td>
 				<td id="cell_38_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The enterprise edition target environment.</span>
+		<span >The jdk target version.</span>
 				</td>
 				<td id="cell_38_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >jdkTargetVersionType , base : string , enumeration : [ 8 , 11 , 17 , 21 ]</span>
+				</td>
+		</tr>				
+		<tr>
+				<td id="cell_39_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >jee-target-mode</span>
+				</td>
+				<td id="cell_39_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >The enterprise edition target environment.</span>
+				</td>
+				<td id="cell_39_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >jeeTargetModeType , base : string , enumeration : [ javax , jakarta ]</span>
 				</td>
 		</tr>				
