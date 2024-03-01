@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Sample GraalVMReflectConfigGenerator
-- added [org.fugerit.java/native-helper.graalvm](https://github.com/fugerit-org/native-helper-graalvm) dependency 1.0.0
+- <https://github.com/fugerit-org/native-helper-graalvm> version 1.0.0
 
 ### Changed
 

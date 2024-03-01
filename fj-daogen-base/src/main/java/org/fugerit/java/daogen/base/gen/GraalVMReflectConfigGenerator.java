@@ -21,10 +21,6 @@ public class GraalVMReflectConfigGenerator extends DaogenBasicGenerator {
 
 	public static final String KEY = GraalVMReflectConfigGenerator.class.getSimpleName();
 
-	public GraalVMReflectConfigGenerator() {
-		super();
-	}
-
 	@Override
 	public String getKey() {
 		return KEY;
@@ -54,7 +50,7 @@ public class GraalVMReflectConfigGenerator extends DaogenBasicGenerator {
 			log.info( "name : {}", name );
 			entry.setName( name );
 			reflectConfig.add( entry );
-			org.fugerit.java.nhg.reflect.config.EntryMethod initMethod = new EntryMethod();
+			EntryMethod initMethod = new EntryMethod();
 			initMethod.setName( "<init>" );
 			List<EntryMethod> methods = new ArrayList<>();
 			methods.add( initMethod );
