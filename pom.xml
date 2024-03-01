@@ -24,7 +24,7 @@
 	    <maven.compiler.source>${java-version-compliance}</maven.compiler.source>
 	    <maven.compiler.target>${java-version-compliance}</maven.compiler.target>	
 	    <maven.compiler.release>${java-version-compliance}</maven.compiler.release>
-		<fj-version>8.4.10</fj-version>
+		<fj-version>8.5.0</fj-version>
 		<fj-doc-version>3.4.3</fj-doc-version>
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>
 		<native-helper-graalvm-version>1.0.0</native-helper-graalvm-version>
