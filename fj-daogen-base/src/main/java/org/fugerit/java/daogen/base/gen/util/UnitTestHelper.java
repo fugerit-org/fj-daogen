@@ -14,7 +14,11 @@ public class UnitTestHelper {
 
     public static void genBodyBasicTest( DaogenBasicGenerator gen, int junitLevel ) {
         // logger
-        GenUtils.addLogger( gen, DaogenCatalogConstants.junit4ModelName( gen.getCurrentEntity() ) );
+        if ( junitLevel < 5 ) {
+            GenUtils.addLogger( gen, DaogenCatalogConstants.junit4ModelName( gen.getCurrentEntity() ) );
+        } else {
+            GenUtils.addLogger( gen, DaogenCatalogConstants.junit5ModelName( gen.getCurrentEntity() ) );
+        }
         // read all fields
         UnitTestHelper.createSampleEntityPrintAllMethod( gen );
         // creates a new instance
