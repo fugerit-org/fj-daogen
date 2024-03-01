@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - fj-version set to 8.5.0
 
+### Fixed
+
+- relation fields now handled in GraalVMReflectConfigGenerator
+
 ## [1.6.1] - 2024-03-01
 
 ### Fixed
