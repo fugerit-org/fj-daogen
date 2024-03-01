@@ -11,7 +11,7 @@
 	 * XSD for fugerit daogen configuration
 	 */
 	
-The entry point for daogen-config documentation is : https://marsdocs.fugerit.org/docs/dao_gen.html
+The entry point for daogen-config documentation is : https://marsdocs.fugerit.org/src/docs/config/config.html
 	
 <daogen-config
 	xmlns="http://daogen.fugerit.org"

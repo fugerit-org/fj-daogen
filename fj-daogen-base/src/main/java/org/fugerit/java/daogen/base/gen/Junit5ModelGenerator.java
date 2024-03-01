@@ -26,7 +26,7 @@ public class Junit5ModelGenerator extends DaogenBasicGenerator {
 	
 	public void init( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) throws ConfigException {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_TEST_JAVA ),
-				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_JUNIT5_MODEL ), DaogenCatalogConstants.junit4ModelName( entity ) ),
+				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_JUNIT5_MODEL ), DaogenCatalogConstants.junit5ModelName( entity ) ),
 				STYLE_INTERFACE, daogenConfig, entity );
 		this.setPublicClass( false );
 		this.setJavaStyle( STYLE_CLASS );

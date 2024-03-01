@@ -31,6 +31,8 @@ There are two basic feature supplied by the library :
 1. [DAO Configuration dump](src/docs/dao_dump.md), this is optional, it provides a configuration dump for the 'DAO Generation' feature.
 2. [DAO Generation](src/docs/dao_gen.md), this is the main feature, it generates various items based on a configuration file, named 'daogen-config.xml' (see a [sample daogen-config-xml](fj-daogen-sample/src/main/daogen/fugerit-sample-daogen-config.xml))
 
+[configuration entry point](https://marsdocs.fugerit.org/src/docs/config/config.html)
+
 ## [fj-daogen-base](fj-daogen-base/README.md) the core module
 This modules contains core functionalities of the library : 'DAO Configuration dump' and 'DAO Generation'
 

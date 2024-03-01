@@ -1,8 +1,5 @@
 package org.fugerit.java.daogen.base.gen;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
@@ -13,9 +10,7 @@ import org.fugerit.java.nhg.reflect.config.Entry;
 import org.fugerit.java.nhg.reflect.config.EntryMethod;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,14 +23,11 @@ public class GraalVMReflectConfigGenerator extends DaogenBasicGenerator {
 
 	public GraalVMReflectConfigGenerator() {
 		super();
-		this.key = KEY;
 	}
-
-	private String key;
 
 	@Override
 	public String getKey() {
-		return this.key;
+		return KEY;
 	}
 
 	@Override

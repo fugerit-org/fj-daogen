@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Sample GraalVMReflectConfigGenerator
+- added [org.fugerit.java/native-helper.graalvm](https://github.com/fugerit-org/native-helper-graalvm) dependency 1.0.0
+
+### Changed
+
+- Documentation for GraalVMReflectConfigGenerator, Junit4ModelGenerator, Junit5ModelGenerator,.
+
+### Fixed
+
+- fix name in Junit5ModelGenerator generated classes
+
 ## [1.5.1] - 2024-02-28
 
 ### Changed
