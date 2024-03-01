@@ -35,8 +35,14 @@
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-doc-lib-autodoc</artifactId>
-		</dependency>		
-		
+		</dependency>
+
+		<dependency>
+			<groupId>org.fugerit.java</groupId>
+			<artifactId>native-helper-graalvm</artifactId>
+			<version>${native-helper-graalvm-version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.fugerit.java</groupId>
 			<artifactId>fj-test-helper8</artifactId>

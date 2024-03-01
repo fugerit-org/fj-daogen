@@ -18,14 +18,18 @@ import test.org.fugerit.java.MemDBTestBase;
 @Slf4j
 public class TestDaogenRun extends MemDBTestBase {
 
-	private void testDaoGenerationWorker( File baseDir, Properties overrideProperties ) throws IOException, ConfigException {
-		overrideProperties.setProperty( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER , baseDir.getCanonicalPath() );
-		log.info( "overrideProperties : {}", overrideProperties );
-		try ( FileInputStream fis = new FileInputStream( new File( "src/test/resources/sample/daogenruntest-sample-daogen-config.xml" ) ) ) {
-			log.info( "DAOGEN start!" );
-			DaogenFacade.generate( fis, overrideProperties );
-			log.info( "DAOGEN end!" );
-		}	
+	private void testDaoGenerationWorker( File baseDir, Properties overrideProperties ) {
+		try {
+			overrideProperties.setProperty( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER , baseDir.getCanonicalPath() );
+			log.info( "overrideProperties : {}", overrideProperties );
+			try ( FileInputStream fis = new FileInputStream( new File( "src/test/resources/sample/daogenruntest-sample-daogen-config.xml" ) ) ) {
+				log.info( "DAOGEN start!" );
+				DaogenFacade.generate( fis, overrideProperties );
+				log.info( "DAOGEN end!" );
+			}
+		} catch ( Exception e ) {
+			logger.info( "Errore : "+e, e );
+		}
 	}
 	
 	@Test

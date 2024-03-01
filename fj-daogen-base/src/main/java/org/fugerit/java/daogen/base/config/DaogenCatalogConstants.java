@@ -54,7 +54,9 @@ public class DaogenCatalogConstants {
 	
 	public static final String GEN_PROP_PACKAGE_FACTORY_DEF = 			"factory-def";
 	public static final String GEN_PROP_PACKAGE_FACTORY_DATA_IMPL = 	"factory-data-impl";
-	
+
+	public static final String GEN_PROP_GRAALVM_REFLECT_CONFIG = 			"graalvm-reflect-config";
+
 	public static final String GEN_PROP_DEFAULT_COLUMN_TIME_INSERT = "default-column-time-insert";
 	public static final String GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE = "default-column-time-update";
 	

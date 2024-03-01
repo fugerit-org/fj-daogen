@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.5 (2023-09-25)
+	 * @version    : 1.0.0-rc.6 (2024-03-01)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -238,6 +238,14 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.junit5test.model').</xsd:documentation>
 				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 				<xsd:documentation>NOTE: The junit generation is a very simple stub to start with.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="graalvm-reflect-config=" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Path to the reflect-config.json file to be created</xsd:documentation>
+				<xsd:documentation>(e.g. 'daogen-reflect-config.json').</xsd:documentation>
+				<xsd:documentation>Initial folder is defined by 'src-main-resources' property.</xsd:documentation>
+				<xsd:documentation>NOTE: Only one file for all the project will be created.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="base-rest-service" use="optional">
