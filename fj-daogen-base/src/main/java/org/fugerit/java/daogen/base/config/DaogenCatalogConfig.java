@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.CustomListCatalogConfig;
+import org.fugerit.java.core.cfg.xml.ListMapCatalogConfig;
 import org.fugerit.java.core.cfg.xml.XmlBeanHelper;
 import org.fugerit.java.core.io.helper.CustomPrintWriter;
 import org.fugerit.java.core.io.helper.StreamHelper;
@@ -130,7 +131,11 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 		}
 		return config;
 	}
-	
+
+	private void finishingTouch() {
+		this.getIdSet().forEach( entityId -> this.getListMap( entityId ).finishingTouch() );
+	}
+
 	@Override
 	public void configure(Element tag) throws ConfigException {
 		super.configure(tag);
@@ -148,6 +153,8 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 				throw new ConfigException( e );
 			}
 		}
+		// finishing touch
+		this.finishingTouch();
 	}
 
 	private Properties classConfig;
@@ -192,5 +199,5 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	public void setLineSeparator(String lineSeparator) {
 		this.lineSeparator = lineSeparator;
 	}
-	
+
 }

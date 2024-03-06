@@ -54,7 +54,7 @@ public class GraalVMReflectConfigGenerator extends DaogenBasicGenerator {
 			// init methods
 			methods.add( new EntryMethod( "<init>" ) );
 			// main properties getter
-			methods.addAll( entity.stream().map( field -> {
+			methods.addAll( entity.getAllFields().stream().map( field -> {
 				EntryMethod m = new EntryMethod();
 				m.setName( "get"+GeneratorNameHelper.toClassName( field.getId() ) );
 				return m;

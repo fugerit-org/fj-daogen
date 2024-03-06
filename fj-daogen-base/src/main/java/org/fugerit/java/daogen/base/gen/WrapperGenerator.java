@@ -93,7 +93,7 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB+"/*" );
 		this.getWriter().println( TAB+" * fields generated for entity attributes " );
 		this.getWriter().println( TAB+" */" );
-		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
+		for ( DaogenCatalogField field : this.getCurrentEntity().getAllFields() ) {
 			// property 
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 			String realJavaType = this.getDaogenConfig().getTypeMapper().mapForModel( field );

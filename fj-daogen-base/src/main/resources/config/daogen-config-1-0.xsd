@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.6 (2024-03-01)
+	 * @version    : 1.0.0-rc.7 (2024-03-06)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -513,6 +513,11 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 			<xsd:annotation>
 				<xsd:documentation>Used to override default type in user defined type (struct).</xsd:documentation>
 				<xsd:documentation>(e.g. 'java.lang.Long')</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="virtual" use="optional" default="false">
+			<xsd:annotation>
+				<xsd:documentation>Virtual ('true') field will be included in model, but not in persistente (i.e. CRUD) operations.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>	

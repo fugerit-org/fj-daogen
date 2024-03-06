@@ -66,7 +66,7 @@ public class ModelGenerator extends DaogenBasicGenerator {
 		if ( !relationLast ) {
 			this.generateRelations();
 		}
-		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
+		for ( DaogenCatalogField field : this.getCurrentEntity().getAllFields() ) {
 			String propertyName = GeneratorNameHelper.toPropertyName( field.getId() );
 			String className = GeneratorNameHelper.toClassName( field.getId() );
 			String type = this.getDaogenConfig().getTypeMapper().mapForModel( field );
