@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.xml.CustomListCatalogConfig;
-import org.fugerit.java.core.cfg.xml.ListMapCatalogConfig;
 import org.fugerit.java.core.cfg.xml.XmlBeanHelper;
 import org.fugerit.java.core.io.helper.CustomPrintWriter;
 import org.fugerit.java.core.io.helper.StreamHelper;
