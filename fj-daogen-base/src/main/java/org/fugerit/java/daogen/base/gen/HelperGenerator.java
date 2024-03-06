@@ -78,7 +78,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB+"/*" );
 		this.getWriter().println( TAB+" * fields generated for entity attributes " );
 		this.getWriter().println( TAB+" */" );
-		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
+		for ( DaogenCatalogField field : this.getCurrentEntity().getAllFields() ) {
 			// property 
 			String javaProperty = GeneratorNameHelper.toPropertyName( field.getId() );
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
@@ -107,7 +107,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		this.getWriter().println( TAB_2+"StringBuilder buffer = new StringBuilder();" );
 		this.getWriter().println( TAB_2+"buffer.append( this.getClass().getSimpleName() );" );
 		boolean firstColumn = true;
-		for ( DaogenCatalogField field : this.getCurrentEntity() ) {
+		for ( DaogenCatalogField field : this.getCurrentEntity().getAllFields() ) {
 			String javaProperty = GeneratorNameHelper.toPropertyName( field.getId() );
 			String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 			if ( firstColumn ) {

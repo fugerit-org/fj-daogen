@@ -1,10 +1,12 @@
 package org.fugerit.java.daogen.base.config;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.fugerit.java.core.cfg.xml.IdConfigType;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
+import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.core.util.collection.ListMapStringKey;
 
@@ -50,6 +52,7 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 
 	public DaogenCatalogEntity() {
 		this.relations = new ListMapStringKey<>();
+		this.allFields = new ListMapStringKey<>();
 	}
 
 	private ListMapStringKey<DaogenCatalogRelation> relations;
@@ -207,5 +210,26 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 	public boolean containsDefaultId() {
 		return this.get( DEFAULT_ID_FIELD.toLowerCase() ) != null || this.get( DEFAULT_ID_FIELD.toUpperCase() ) != null;
 	}
-	
+
+	private ListMapStringKey<DaogenCatalogField> allFields;
+
+	public ListMapStringKey<DaogenCatalogField> getAllFields() {
+		return allFields;
+	}
+
+	public void setAllFields(ListMapStringKey<DaogenCatalogField> allFields) {
+		this.allFields = allFields;
+	}
+
+	protected void finishingTouch() {
+		this.allFields.clear();
+		this.allFields.addAll( this );
+		Iterator<DaogenCatalogField> it = this.iterator();
+		while ( it.hasNext() ) {
+			if (BooleanUtils.isTrue( it.next().getVirtual() )) {
+				it.remove();
+			}
+		}
+	}
+
 }
