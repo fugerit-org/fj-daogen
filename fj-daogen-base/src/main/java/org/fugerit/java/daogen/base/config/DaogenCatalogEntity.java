@@ -15,6 +15,37 @@ import lombok.Setter;
 
 public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> implements IdConfigType {
 
+	private ListMapStringKey<DaogenCatalogRelation> relations;
+
+	private ListMapStringKey<DaogenCatalogField> allFields;
+
+	@Getter @Setter private String id;
+
+	private String catalog;
+
+	private String schema;
+
+	private String name;
+
+	private String comments;
+
+	private String primaryKey;
+
+	private String foreignKeys;
+
+	private String sequenceName;
+
+	private String orderBy;
+
+	private String mapToTable;
+
+	private String queryView;
+
+	private String facadeMode;
+
+	private String structSqlType;
+
+
 	@Override
 	public int hashCode() {
 		// super class implementation is ok
@@ -54,34 +85,6 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 		this.relations = new ListMapStringKey<>();
 		this.allFields = new ListMapStringKey<>();
 	}
-
-	private ListMapStringKey<DaogenCatalogRelation> relations;
-
-	@Getter @Setter private String id;
-	
-	private String catalog;
-	
-	private String schema;
-	
-	private String name;
-	
-	private String comments;
-	
-	private String primaryKey;
-	
-	private String foreignKeys;
-	
-	private String sequenceName;
-	
-	private String orderBy;
-	
-	private String mapToTable;
-	
-	private String queryView;
-	
-	private String facadeMode;
-	
-	private String structSqlType;
 
 	public String getOrderBy() {
 		return orderBy;
@@ -187,6 +190,14 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 		return relations;
 	}
 
+	public ListMapStringKey<DaogenCatalogField> getAllFields() {
+		return allFields;
+	}
+
+	public void setAllFields(ListMapStringKey<DaogenCatalogField> allFields) {
+		this.allFields = allFields;
+	}
+
 	private static final String SEP = ":";
 	
 	public String describe() {
@@ -209,16 +220,6 @@ public class DaogenCatalogEntity extends ListMapStringKey<DaogenCatalogField> im
 	
 	public boolean containsDefaultId() {
 		return this.get( DEFAULT_ID_FIELD.toLowerCase() ) != null || this.get( DEFAULT_ID_FIELD.toUpperCase() ) != null;
-	}
-
-	private ListMapStringKey<DaogenCatalogField> allFields;
-
-	public ListMapStringKey<DaogenCatalogField> getAllFields() {
-		return allFields;
-	}
-
-	public void setAllFields(ListMapStringKey<DaogenCatalogField> allFields) {
-		this.allFields = allFields;
 	}
 
 	protected void finishingTouch() {
