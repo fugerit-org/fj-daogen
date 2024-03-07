@@ -53,7 +53,7 @@ public class UnitTestHelper {
     public static void createSampleEntityInstanceMethod( DaogenBasicGenerator gen ) {
         // creates a new instance
         gen.getWriter().println( DaogenBasicGenerator.TAB+"public "+gen.getEntityModelName()+" newInstance() { " );
-        gen.getWriter().println( DaogenBasicGenerator.TAB_2+""+gen.getEntityHelperName()+" current = new "+gen.getEntityHelperName()+"();" );
+        gen.getWriter().println( DaogenBasicGenerator.TAB_2+""+gen.getEntityHelperName()+" current = new "+gen.getEntityWrapperName()+"( new "+gen.getEntityHelperName()+"() );" );
         for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
             handleFieldNewInstance( gen.getDaogenConfig(), field, gen.getWriter() );
         }
