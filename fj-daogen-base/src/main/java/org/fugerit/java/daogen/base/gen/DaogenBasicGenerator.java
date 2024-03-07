@@ -472,6 +472,19 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		}
 	}
 	
-	
+	protected void writeSerialHelpers() {
+		this.getWriter().println( TAB+"private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {" );
+		this.getWriter().println( TAB_2+"// this class is conditionally serializable, depending on contained object" );
+		this.getWriter().println( TAB_2+"// special situation can be handled using this method in future" );
+		this.getWriter().println( TAB_2+"out.defaultWriteObject();" );
+		this.getWriter().println( TAB+"}" );
+		this.getWriter().println();
+		this.getWriter().println( TAB+"private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {" );
+		this.getWriter().println( TAB_2+"// this class is conditionally serializable, depending on contained object" );
+		this.getWriter().println( TAB_2+"// special situation can be handled using this method in future" );
+		this.getWriter().println( TAB_2+"in.defaultReadObject();" );
+		this.getWriter().println( TAB+"}" );
+		this.getWriter().println();
+	}
 
 }

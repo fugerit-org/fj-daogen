@@ -71,6 +71,7 @@ public class HelperGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
+		this.writeSerialHelpers();
 		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
 		if ( !relationLast ) {
 			this.generateRelations();

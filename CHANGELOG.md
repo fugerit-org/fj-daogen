@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Better serialization handling
 - JunitGenerator 4 and 5 cover Wrappers too
 
 ## [1.7.0] - 2024-03-06
