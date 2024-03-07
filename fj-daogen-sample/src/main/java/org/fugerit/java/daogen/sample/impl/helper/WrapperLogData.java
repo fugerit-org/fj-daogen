@@ -22,6 +22,18 @@ public class WrapperLogData extends BasicWrapper<ModelLogData> implements ModelL
 
 	private static final long serialVersionUID = 827293319822L;
 
+	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+		// this class is conditionally serializable, depending on contained object
+		// special situation can be handled using this method in future
+		out.defaultWriteObject();
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+		// this class is conditionally serializable, depending on contained object
+		// special situation can be handled using this method in future
+		in.defaultReadObject();
+	}
+
 	public WrapperLogData( ModelLogData wrapped ) {
 		super( wrapped );
 	}
