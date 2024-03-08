@@ -85,6 +85,11 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_ENABLED = "enabled";
 	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED = "disabled";
 
+	public static final String GEN_PROP_DAO_FINDER_NG_MODE = "dao-finder-ng-mode";
+
+	public static final String GEN_PROP_DAO_FINDER_NG_MODE_ENABLED = "enabled";
+	public static final String GEN_PROP_DAO_FINDER_NG_MODE_DISABLED = "disabled";
+
 	public static final String PREFIX_MODEL = "Model";
 	
 	public static final String PREFIX_HELPER = "Helper";

@@ -377,21 +377,21 @@
 		</tr>				
 		<tr>
 				<td id="cell_24_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-struct</span>
+		<span >dao-finder-ng-mode</span>
 				</td>
 				<td id="cell_24_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for database java.sql.String classes, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.struct'). The relevant generators and decorators will only by run if this property is set.</span>
+		<span >If set to 'enabled' the 'dao.finder.ng' property set will be selected. NOTE: when enabled, Finder entities will not be made serializable.</span>
 				</td>
 				<td id="cell_24_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >string</span>
+		<span >enabledDisabledType , base : string , enumeration : [ enabled , disabled ]</span>
 				</td>
 		</tr>				
 		<tr>
 				<td id="cell_25_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-rse</span>
+		<span >package-struct</span>
 				</td>
 				<td id="cell_25_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for database org.fugerit.java.core.db.dao.RSExtractor classes, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.rse'). The relevant generators and decorators will only by run if this property is set.</span>
+		<span >The package to be used for database java.sql.String classes, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.struct'). The relevant generators and decorators will only by run if this property is set.</span>
 				</td>
 				<td id="cell_25_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -399,10 +399,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_26_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-facade-def</span>
+		<span >package-rse</span>
 				</td>
 				<td id="cell_26_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for DAO facade interfaces, for each entity. (e.g. 'org.fugerit.java.daogen.sample.def.facade'). The relevant generators and decorators will only by run if this property is set.</span>
+		<span >The package to be used for database org.fugerit.java.core.db.dao.RSExtractor classes, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.rse'). The relevant generators and decorators will only by run if this property is set.</span>
 				</td>
 				<td id="cell_26_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -410,10 +410,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_27_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-facade-data-impl</span>
+		<span >package-facade-def</span>
 				</td>
 				<td id="cell_27_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for DAO facade basic implementation, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.facade.data'). The relevant generators and decorators will only by run if this property is set.</span>
+		<span >The package to be used for DAO facade interfaces, for each entity. (e.g. 'org.fugerit.java.daogen.sample.def.facade'). The relevant generators and decorators will only by run if this property is set.</span>
 				</td>
 				<td id="cell_27_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -421,10 +421,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_28_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >factory-def</span>
+		<span >package-facade-data-impl</span>
 				</td>
 				<td id="cell_28_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The fully qualified name to be used for DAO factory interface. (e.g. 'org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade'). The relevant generators and decorators will only by run if this property is set.</span>
+		<span >The package to be used for DAO facade basic implementation, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.facade.data'). The relevant generators and decorators will only by run if this property is set.</span>
 				</td>
 				<td id="cell_28_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -432,10 +432,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_29_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >factory-data-impl</span>
+		<span >factory-def</span>
 				</td>
 				<td id="cell_29_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The fully qualified name to be used for DAO factory basic implementation. (e.g. 'org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade'). The relevant generators and decorators will only by run if this property is set.</span>
+		<span >The fully qualified name to be used for DAO factory interface. (e.g. 'org.fugerit.java.daogen.sample.def.facade.FugeritLogicFacade'). The relevant generators and decorators will only by run if this property is set.</span>
 				</td>
 				<td id="cell_29_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -443,10 +443,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_30_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-rest-load</span>
+		<span >factory-data-impl</span>
 				</td>
 				<td id="cell_30_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for a basic rest service implementation, for load methods, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.rest.load'). The relevant generators and decorators will only by run if this property is set. NOTE: REST services generation is not recommended, if not as a starting stub.</span>
+		<span >The fully qualified name to be used for DAO factory basic implementation. (e.g. 'org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade'). The relevant generators and decorators will only by run if this property is set.</span>
 				</td>
 				<td id="cell_30_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -454,10 +454,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_31_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-spring-rest-load</span>
+		<span >package-rest-load</span>
 				</td>
 				<td id="cell_31_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for a basic spring rest service implementation, for load methods, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.spring.rest.load'). The relevant generators and decorators will only by run if this property is set. NOTE: REST services generation is not recommended, if not as a starting stub.</span>
+		<span >The package to be used for a basic rest service implementation, for load methods, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.rest.load'). The relevant generators and decorators will only by run if this property is set. NOTE: REST services generation is not recommended, if not as a starting stub.</span>
 				</td>
 				<td id="cell_31_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -465,10 +465,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_32_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-junit4-model</span>
+		<span >package-spring-rest-load</span>
 				</td>
 				<td id="cell_32_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for a basic junit 4 implementation, for each entity. (e.g. 'org.fugerit.java.daogen.sample.junit4test.model'). The relevant generators and decorators will only by run if this property is set. NOTE: The junit generation is a very simple stub to start with.</span>
+		<span >The package to be used for a basic spring rest service implementation, for load methods, for each entity. (e.g. 'org.fugerit.java.daogen.sample.impl.spring.rest.load'). The relevant generators and decorators will only by run if this property is set. NOTE: REST services generation is not recommended, if not as a starting stub.</span>
 				</td>
 				<td id="cell_32_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -476,10 +476,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_33_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >package-junit5-model</span>
+		<span >package-junit4-model</span>
 				</td>
 				<td id="cell_33_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The package to be used for a basic junit 5 implementation, for each entity. (e.g. 'org.fugerit.java.daogen.sample.junit5test.model'). The relevant generators and decorators will only by run if this property is set. NOTE: The junit generation is a very simple stub to start with.</span>
+		<span >The package to be used for a basic junit 4 implementation, for each entity. (e.g. 'org.fugerit.java.daogen.sample.junit4test.model'). The relevant generators and decorators will only by run if this property is set. NOTE: The junit generation is a very simple stub to start with.</span>
 				</td>
 				<td id="cell_33_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -487,10 +487,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_34_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >graalvm-reflect-config=</span>
+		<span >package-junit5-model</span>
 				</td>
 				<td id="cell_34_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >Path to the reflect-config.json file to be created (e.g. 'daogen-reflect-config.json'). Initial folder is defined by 'src-main-resources' property. NOTE: Only one file for all the project will be created.</span>
+		<span >The package to be used for a basic junit 5 implementation, for each entity. (e.g. 'org.fugerit.java.daogen.sample.junit5test.model'). The relevant generators and decorators will only by run if this property is set. NOTE: The junit generation is a very simple stub to start with.</span>
 				</td>
 				<td id="cell_34_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -498,10 +498,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_35_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >base-rest-service</span>
+		<span >graalvm-reflect-config=</span>
 				</td>
 				<td id="cell_35_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The base class for REST services. (e.g. 'org.fugerit.java.daogen.sample.helper.ServiceProviderHelper'). NOTE: REST services generation is not recommended, if not as a starting stub.</span>
+		<span >Path to the reflect-config.json file to be created (e.g. 'daogen-reflect-config.json'). Initial folder is defined by 'src-main-resources' property. NOTE: Only one file for all the project will be created.</span>
 				</td>
 				<td id="cell_35_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -509,32 +509,32 @@
 		</tr>				
 		<tr>
 				<td id="cell_36_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >openapi_host</span>
+		<span >base-rest-service</span>
 				</td>
 				<td id="cell_36_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The host to be used for openapi specification and implementation specification.</span>
+		<span >The base class for REST services. (e.g. 'org.fugerit.java.daogen.sample.helper.ServiceProviderHelper'). NOTE: REST services generation is not recommended, if not as a starting stub.</span>
 				</td>
 				<td id="cell_36_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >anyURI</span>
-				</td>
-		</tr>				
-		<tr>
-				<td id="cell_37_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >openapi_path</span>
-				</td>
-				<td id="cell_37_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The path to be used for openapi specification and implementation specification.</span>
-				</td>
-				<td id="cell_37_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
 				</td>
 		</tr>				
 		<tr>
+				<td id="cell_37_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >openapi_host</span>
+				</td>
+				<td id="cell_37_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >The host to be used for openapi specification and implementation specification.</span>
+				</td>
+				<td id="cell_37_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >anyURI</span>
+				</td>
+		</tr>				
+		<tr>
 				<td id="cell_38_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >default-sequence</span>
+		<span >openapi_path</span>
 				</td>
 				<td id="cell_38_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The default sequence name to be used for the entities (it is possible to override it).</span>
+		<span >The path to be used for openapi specification and implementation specification.</span>
 				</td>
 				<td id="cell_38_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -542,10 +542,10 @@
 		</tr>				
 		<tr>
 				<td id="cell_39_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >check-empty-interface</span>
+		<span >default-sequence</span>
 				</td>
 				<td id="cell_39_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >If set to '1' will check if interfaces have no methods. NOTE: currently ignored.</span>
+		<span >The default sequence name to be used for the entities (it is possible to override it).</span>
 				</td>
 				<td id="cell_39_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >string</span>
@@ -553,23 +553,34 @@
 		</tr>				
 		<tr>
 				<td id="cell_40_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >jdk-target-version</span>
+		<span >check-empty-interface</span>
 				</td>
 				<td id="cell_40_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The jdk target version.</span>
+		<span >If set to '1' will check if interfaces have no methods. NOTE: currently ignored.</span>
 				</td>
 				<td id="cell_40_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >jdkTargetVersionType , base : string , enumeration : [ 8 , 11 , 17 , 21 ]</span>
+		<span >string</span>
 				</td>
 		</tr>				
 		<tr>
 				<td id="cell_41_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >jee-target-mode</span>
+		<span >jdk-target-version</span>
 				</td>
 				<td id="cell_41_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
-		<span >The enterprise edition target environment.</span>
+		<span >The jdk target version.</span>
 				</td>
 				<td id="cell_41_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >jdkTargetVersionType , base : string , enumeration : [ 8 , 11 , 17 , 21 ]</span>
+				</td>
+		</tr>				
+		<tr>
+				<td id="cell_42_0"  style="width: 20%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >jee-target-mode</span>
+				</td>
+				<td id="cell_42_1"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
+		<span >The enterprise edition target environment.</span>
+				</td>
+				<td id="cell_42_2"  style="width: 40%; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; padding: 2px;"> 
 		<span >jeeTargetModeType , base : string , enumeration : [ javax , jakarta ]</span>
 				</td>
 		</tr>				

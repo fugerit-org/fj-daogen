@@ -21,6 +21,7 @@
 	package-helper="org.fugerit.java.daogen.sample.impl.helper"
     dao-helper-ng-mode="enabled"
     dao-wrapper-ng-mode="enabled"
+    dao-finder-ng-mode="enabled"
 	package-struct="org.fugerit.java.daogen.sample.impl.struct"
 	package-rse="org.fugerit.java.daogen.sample.impl.rse"
 	package-facade-def="org.fugerit.java.daogen.sample.def.facade"

@@ -52,6 +52,24 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
+	public void testDaoGenerationClassicalEntity() throws IOException, ConfigException {
+		File file = new File( "target/daogen-run-classical-entity" );
+		Properties overrideProperties = new Properties();
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE ,
+				DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED);
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE ,
+				DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED );
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE ,
+				DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE_DISABLED );
+		int result = this.testDaoGenerationWorker(file, overrideProperties);
+		Assert.assertTrue( file.exists() );
+		Assert.assertEquals( Result.RESULT_CODE_OK, result );
+	}
+
+	@Test
 	public void testDaoGenerationFailHelperNg() throws IOException, ConfigException {
 		File file = new File( "target/daogen-run-fail-helper-ng" );
 		Properties overrideProperties = new Properties();
@@ -67,6 +85,16 @@ public class TestDaogenRun extends MemDBTestBase {
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty(
 				DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE , "unknown" );
+		int result = this.testDaoGenerationWorker(file, overrideProperties);
+		Assert.assertEquals( Result.RESULT_CODE_KO, result );
+	}
+
+	@Test
+	public void testDaoGenerationFailFinderNg() throws IOException, ConfigException {
+		File file = new File( "target/daogen-run-fail-finder-ng" );
+		Properties overrideProperties = new Properties();
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE , "unknown" );
 		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertEquals( Result.RESULT_CODE_KO, result );
 	}

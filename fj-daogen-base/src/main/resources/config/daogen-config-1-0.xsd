@@ -178,6 +178,12 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>NOTE: when enabled, Wrapper entities will not be made serializable.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="daogen:enabledDisabledType" name="dao-finder-ng-mode" use="optional" default="disabled">
+			<xsd:annotation>
+				<xsd:documentation>If set to 'enabled' the 'dao.finder.ng' property set will be selected.</xsd:documentation>
+				<xsd:documentation>NOTE: when enabled, Finder entities will not be made serializable.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="package-struct" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The package to be used for database java.sql.String classes, for each entity.</xsd:documentation>

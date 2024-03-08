@@ -15,6 +15,8 @@
 <entry key="dao.basefinder.class">BaseIdFinder</entry>
 <entry key="dao.genericfinder.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.genericfinder.class">GenericIdFinder</entry>
+<entry key="dao.finder.ng.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.finder.ng.class">IdFinderNG</entry>
 <!-- base result -->
 <entry key="dao.result.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.result.class">BasicDaoResult</entry>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.fugerit.java.core.cfg.ConfigException;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -30,21 +31,34 @@ public class FinderGenerator extends DaogenBasicGenerator {
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ), DaogenCatalogConstants.finderlName( entity ) ), 
 				STYLE_INTERFACE, daogenConfig, entity );
 		this.setJavaStyle( STYLE_CLASS );
-		DaogenCatalogField idField = entity.get( DaogenCatalogEntity.DEFAULT_ID_FIELD );
+		String daoFinderNgMode = daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE_DISABLED );
+		logger.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE, daoFinderNgMode );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
-		if ( idField == null || this.getDaogenConfig().getTypeMapper().mapForModel( idField ).equalsIgnoreCase( BigDecimal.class.getName() ) ) {
-			this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_BASEFINDER_BASE, this.getImportList() ) );	
-			this.setExtendsClass( this.getClassBaseFinder() );
+		if ( DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE_DISABLED.equalsIgnoreCase( daoFinderNgMode ) ) {
+			DaogenCatalogField idField = entity.get( DaogenCatalogEntity.DEFAULT_ID_FIELD );
+			if ( idField == null || this.getDaogenConfig().getTypeMapper().mapForModel( idField ).equalsIgnoreCase( BigDecimal.class.getName() ) ) {
+				this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_BASEFINDER_BASE, this.getImportList() ) );
+				this.setExtendsClass( this.getClassBaseFinder() );
+			} else {
+				String type = this.getDaogenConfig().getTypeMapper().mapForModel( idField );
+				this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_GENERICFINDER_BASE, this.getImportList() ) );
+				this.setExtendsClass( this.getClassBaseFinder()+"<"+type+">" );
+			}
+		} else if ( DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE_ENABLED.equalsIgnoreCase( daoFinderNgMode ) ) {
+			String finderNgClass = DaogenClassConfigHelper.findClassConfigProp( daogenConfig, DaogenClassConfigHelper.DAO_FINDER_NG_BASE, DaogenClassConfigHelper.DAO_BASE_CLASS );
+			if ( StringUtils.isNotEmpty( finderNgClass ) ) {
+				this.setClassBaseHelper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_FINDER_NG_BASE, this.getImportList() ) );
+				this.setExtendsClass( this.getClassBaseHelper() );
+			}
 		} else {
-			String type = this.getDaogenConfig().getTypeMapper().mapForModel( idField );
-			this.setClassBaseFinder( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_GENERICFINDER_BASE, this.getImportList() ) );
-			this.setExtendsClass( this.getClassBaseFinder()+"<"+type+">" );
+			throw new ConfigException( "Invalid "+DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE+" parameter : "+daoFinderNgMode );
 		}
 	}
 
 	@Override
 	public void generateDaogenBody() throws IOException {
-		this.addSerialVerUID();
+		String daoFinderNgMode = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE_DISABLED );
+		this.generateSerial( DaogenCatalogConstants.GEN_PROP_DAO_FINDER_NG_MODE_DISABLED.equalsIgnoreCase( daoFinderNgMode ) );
 		this.getWriter().println( TAB+"private "+this.getEntityModelName()+" model;" );
 		this.getWriter().println();
 		this.getWriter().println( TAB+"public void setModel( "+this.getEntityModelName()+" model ) {"  );

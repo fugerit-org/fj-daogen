@@ -28,6 +28,8 @@ public class DaogenClassConfigHelper {
 
 	public static final String DAO_WRAPPER_NG_BASE = "dao.wrapper.ng";
 
+	public static final String DAO_FINDER_NG_BASE = "dao.finder.ng";
+
 	public static final String DAO_DAOHELPER_BASE = "dao.daohelper";
 	public static final String DAO_SELECTHELPER_BASE = "dao.selecthelper";
 	public static final String DAO_DELETEHELPER_BASE = "dao.deletehelper";
