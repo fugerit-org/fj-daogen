@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.7 (2024-03-06)
+	 * @version    : 1.0.0-rc.8 (2024-03-08)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -164,6 +164,18 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>The package to be used for basic model implementation classes, for each entity.</xsd:documentation>
 				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.helper').</xsd:documentation>
 				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="daogen:enabledDisabledType" name="dao-helper-ng-mode" use="optional" default="disabled">
+			<xsd:annotation>
+				<xsd:documentation>If set to 'enabled' the 'dao.helper.ng' property set will be selected.</xsd:documentation>
+				<xsd:documentation>NOTE: when enabled, Helper entities will not be made serializable.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="daogen:enabledDisabledType" name="dao-wrapper-ng-mode" use="optional" default="disabled">
+			<xsd:annotation>
+				<xsd:documentation>If set to 'enabled' the 'dao.wrapper.ng' property set will be selected.</xsd:documentation>
+				<xsd:documentation>NOTE: when enabled, Wrapper entities will not be made serializable.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="package-struct" use="optional">
@@ -361,6 +373,16 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="one"></xsd:enumeration>
 			<xsd:enumeration value="many"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="enabledDisabledType">
+		<xsd:annotation>
+			<xsd:documentation>Property to set enabled/disabled, may be extended in future</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="enabled"></xsd:enumeration>
+			<xsd:enumeration value="disabled"></xsd:enumeration>
 		</xsd:restriction>
 	</xsd:simpleType>
 

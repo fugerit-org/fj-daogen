@@ -29,10 +29,13 @@ public class UnitTestHelper {
             appendPublic = "public";
         }
         gen.getWriter().println( DaogenBasicGenerator.TAB+"@Test" );
-        gen.getWriter().println( DaogenBasicGenerator.TAB+appendPublic+" void testJUnit4Model"+GeneratorNameHelper.toClassName( gen.getCurrentEntity().getName() )+"() { " );
+        gen.getWriter().println( DaogenBasicGenerator.TAB+appendPublic+" void testJUnit"+junitLevel+"Model"+GeneratorNameHelper.toClassName( gen.getCurrentEntity().getName() )+"() { " );
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+gen.getEntityModelName()+" current = this.newInstance();" );
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+"this.printAll( current );" );
-        gen.getWriter().println( DaogenBasicGenerator.TAB_2+"org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );" );
+        String daoHelperNgMode = gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED );
+        if ( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED.equalsIgnoreCase( daoHelperNgMode ) ) {
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );" );
+        }
         if ( junitLevel < 5 ) {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+"Assert.assertNotNull( current );" );
         } else {

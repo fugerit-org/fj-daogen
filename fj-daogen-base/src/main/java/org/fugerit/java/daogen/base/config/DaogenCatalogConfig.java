@@ -53,6 +53,10 @@ public class DaogenCatalogConfig extends CustomListCatalogConfig<DaogenCatalogFi
 	public String getGeneralProp( String key ) {
 		return this.getGeneralProps().getProperty( key );
 	}
+
+	public String getGeneralProp( String key, String defValue ) {
+		return this.getGeneralProps().getProperty( key, defValue );
+	}
 	
 	public static DaogenCatalogConfig loadConfig( InputStream input ) throws ConfigException {
 		return loadConfig(input, DaogenCatalogConfig.class, null);

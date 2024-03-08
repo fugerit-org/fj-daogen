@@ -75,7 +75,16 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_JEE_TARGET_MODE_JAVAX = "javax";
 	public static final String GEN_PROP_JEE_TARGET_MODE_JAKARTA = "jakarta";
 	public static final String GEN_PROP_JEE_TARGET_MODE_DEFAULT = GEN_PROP_JEE_TARGET_MODE_JAVAX;
-	
+
+	public static final String GEN_PROP_DAO_HELPER_NG_MODE = "dao-helper-ng-mode";
+	public static final String GEN_PROP_DAO_HELPER_NG_MODE_ENABLED = "enabled";
+	public static final String GEN_PROP_DAO_HELPER_NG_MODE_DISABLED = "disabled";
+
+	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE = "dao-wrapper-ng-mode";
+
+	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_ENABLED = "enabled";
+	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED = "disabled";
+
 	public static final String PREFIX_MODEL = "Model";
 	
 	public static final String PREFIX_HELPER = "Helper";

@@ -6,6 +6,7 @@ import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.compare.CheckEmptyHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -26,9 +27,21 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER ), DaogenCatalogConstants.helperName( entity ) ), 
 				STYLE_CLASS, daogenConfig, entity );
-		this.setClassBaseHelper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_HELPER_BASE, this.getImportList() ) );
+		String daoHelperNgMode = daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED );
+		logger.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE, daoHelperNgMode );
+		if ( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED.equalsIgnoreCase( daoHelperNgMode ) ) {
+			this.setClassBaseHelper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_HELPER_BASE, this.getImportList() ) );
+			this.setExtendsClass( this.getClassBaseHelper() );
+		} else if ( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_ENABLED.equalsIgnoreCase( daoHelperNgMode ) ) {
+			String helperNgClass = DaogenClassConfigHelper.findClassConfigProp( daogenConfig, DaogenClassConfigHelper.DAO_HELPER_NG_BASE, DaogenClassConfigHelper.DAO_BASE_CLASS );
+			if ( StringUtils.isNotEmpty( helperNgClass ) ) {
+				this.setClassBaseHelper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_HELPER_NG_BASE, this.getImportList() ) );
+				this.setExtendsClass( this.getClassBaseHelper() );
+			}
+		} else {
+			throw new ConfigException( "Invalid "+DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE+" parameter : "+daoHelperNgMode );
+		}
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
-		this.setExtendsClass( this.getClassBaseHelper() );
 		this.setImplementsInterface( this.getEntityModelName() );
 		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
 			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
@@ -70,8 +83,8 @@ public class HelperGenerator extends DaogenBasicGenerator {
 	
 	@Override
 	public void generateDaogenBody() throws IOException {
-		this.addSerialVerUID();
-		this.writeSerialHelpers();
+		String daoHelperNgMode = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED );
+		this.generateSerial( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED.equalsIgnoreCase( daoHelperNgMode ) );
 		boolean relationLast = "true".equalsIgnoreCase( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST ) );
 		if ( !relationLast ) {
 			this.generateRelations();

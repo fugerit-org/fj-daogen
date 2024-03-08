@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
@@ -25,9 +26,21 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 		super.init( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_SRC_MAIN_JAVA ), 
 				fullObjectName( daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER ), DaogenCatalogConstants.wrapperName( entity ) ), 
 				STYLE_CLASS, daogenConfig, entity );
-		this.setClassBaseWrapper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_WRAPPER_BASE, this.getImportList() ) );
+		String daoWrapperNgMode = daogenConfig.getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED );
+		logger.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE, daoWrapperNgMode );
+		if ( DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED.equalsIgnoreCase( daoWrapperNgMode ) ) {
+			this.setClassBaseWrapper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_WRAPPER_BASE, this.getImportList() ) );
+			this.setExtendsClass( this.getClassBaseWrapper()+"<"+this.getEntityModelName()+">" );
+		} else if ( DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE_ENABLED.equalsIgnoreCase( daoWrapperNgMode ) ) {
+			String wrapperNgClass = DaogenClassConfigHelper.findClassConfigProp( daogenConfig, DaogenClassConfigHelper.DAO_WRAPPER_NG_BASE, DaogenClassConfigHelper.DAO_BASE_CLASS );
+			if ( StringUtils.isNotEmpty( wrapperNgClass ) ) {
+				this.setClassBaseWrapper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_WRAPPER_NG_BASE, this.getImportList() ) );
+				this.setExtendsClass( this.getClassBaseWrapper()+"<"+this.getEntityModelName()+">" );
+			}
+		} else {
+			throw new ConfigException( "Invalid "+DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE+" parameter : "+daoWrapperNgMode );
+		}
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
-		this.setExtendsClass( this.getClassBaseWrapper()+"<"+this.getEntityModelName()+">" );
 		this.setImplementsInterface( this.getEntityModelName() );
 		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
 			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
@@ -66,8 +79,8 @@ public class WrapperGenerator extends DaogenBasicGenerator {
 
 	@Override
 	public void generateDaogenBody() throws IOException {
-		this.addSerialVerUID();
-		this.writeSerialHelpers();
+		String daoWrapperNgMode = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED );
+		this.generateSerial( DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED.equalsIgnoreCase( daoWrapperNgMode ) );
 		this.getWriter().println( TAB+PUBLIC_SPACE_LIT+this.getEntityWrapperName()+"( "+this.getEntityModelName()+" wrapped ) {" );
 		this.getWriter().println( TAB_2+"super( wrapped );" );
 		this.getWriter().println( TAB+"}" );

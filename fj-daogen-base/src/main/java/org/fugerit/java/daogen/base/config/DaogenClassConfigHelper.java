@@ -23,7 +23,11 @@ public class DaogenClassConfigHelper {
 	public static final String DAO_SERVICERESULT_BASE = "dao.serviceresult";
 	public static final String DAO_HELPER_BASE = "dao.helper";
 	public static final String DAO_WRAPPER_BASE = "dao.wrapper";
-	
+
+	public static final String DAO_HELPER_NG_BASE = "dao.helper.ng";
+
+	public static final String DAO_WRAPPER_NG_BASE = "dao.wrapper.ng";
+
 	public static final String DAO_DAOHELPER_BASE = "dao.daohelper";
 	public static final String DAO_SELECTHELPER_BASE = "dao.selecthelper";
 	public static final String DAO_DELETEHELPER_BASE = "dao.deletehelper";
@@ -35,13 +39,19 @@ public class DaogenClassConfigHelper {
 	public static final String DAO_RSEHELPER_BASE = "dao.rsehelper";
 	
 	public static final String DAO_STRUCTMAPPER_BASE = "dao.structmapper";
-	
+
+	public static String findClassConfigProp( DaogenCatalogConfig config, String base, String type ) {
+		log.info( "search, base:{} - type:{}", base, type );
+		String fullKey = base+"."+type;
+		String fullValue = config.getClassConfig().getProperty( fullKey );
+		log.info( "search, fullKey:{} - fullValue:{}", fullKey, fullValue );
+		return fullValue;
+	}
+
 	public static String addImport( DaogenCatalogConfig config, String base, Collection<String> imports ) {
 		log.info( "props > {}", config.getClassConfig() );
-		String classPropKey = base+"."+DAO_BASE_CLASS;
-		String pacakgePropKey = base+"."+DAO_BASE_PACKAGE;
-		String simpleName = config.getClassConfig().getProperty( classPropKey );
-		String packageName = config.getClassConfig().getProperty( pacakgePropKey );
+		String simpleName = findClassConfigProp(config, base, DAO_BASE_CLASS );
+		String packageName = findClassConfigProp(config, base, DAO_BASE_PACKAGE );
 		if ( simpleName == null || packageName == null ) {
 			throw new ConfigRuntimeException( "Daogen class configuration not set properly" );
 		}

@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
+import org.fugerit.java.core.util.result.Result;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenFacade;
 import org.junit.Assert;
@@ -18,7 +19,8 @@ import test.org.fugerit.java.MemDBTestBase;
 @Slf4j
 public class TestDaogenRun extends MemDBTestBase {
 
-	private void testDaoGenerationWorker( File baseDir, Properties overrideProperties ) {
+	private int testDaoGenerationWorker( File baseDir, Properties overrideProperties ) {
+		int result = Result.RESULT_CODE_OK;
 		try {
 			overrideProperties.setProperty( DaogenCatalogConstants.GEN_PROP_BASE_SRC_FOLDER , baseDir.getCanonicalPath() );
 			log.info( "overrideProperties : {}", overrideProperties );
@@ -28,8 +30,10 @@ public class TestDaogenRun extends MemDBTestBase {
 				log.info( "DAOGEN end!" );
 			}
 		} catch ( Exception e ) {
+			result = Result.RESULT_CODE_KO;
 			logger.info( "Errore : "+e, e );
 		}
+		return result;
 	}
 	
 	@Test
@@ -41,11 +45,32 @@ public class TestDaogenRun extends MemDBTestBase {
 		overrideProperties.setProperty( 
 				DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST , BooleanUtils.BOOLEAN_TRUE );		
 		overrideProperties.setProperty( 
-				DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION , DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION_17.toString() );		
-		this.testDaoGenerationWorker(file, overrideProperties);
+				DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION , DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION_17.toString() );
+		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertTrue( file.exists() );
+		Assert.assertEquals( Result.RESULT_CODE_OK, result );
 	}
-	
+
+	@Test
+	public void testDaoGenerationFailHelperNg() throws IOException, ConfigException {
+		File file = new File( "target/daogen-run-fail-helper-ng" );
+		Properties overrideProperties = new Properties();
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE , "unknown" );
+		int result = this.testDaoGenerationWorker(file, overrideProperties);
+		Assert.assertEquals( Result.RESULT_CODE_KO, result );
+	}
+
+	@Test
+	public void testDaoGenerationFailWrapperNg() throws IOException, ConfigException {
+		File file = new File( "target/daogen-run-fail-wrapper-ng" );
+		Properties overrideProperties = new Properties();
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE , "unknown" );
+		int result = this.testDaoGenerationWorker(file, overrideProperties);
+		Assert.assertEquals( Result.RESULT_CODE_KO, result );
+	}
+
 	@Test
 	public void testDaoGenerationDefault() throws IOException, ConfigException {
 		File file = new File( "target/daogen-run" );

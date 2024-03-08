@@ -20,10 +20,13 @@
 <entry key="dao.result.class">BasicDaoResult</entry>
 <!-- base helper -->
 <entry key="dao.helper.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.helper.ng.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.helper.class">BasicHelper</entry>
 <!-- base wrapper -->
 <entry key="dao.wrapper.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.wrapper.class">BasicWrapper</entry>
+<entry key="dao.wrapper.ng.package">org.fugerit.java.core.db.daogen</entry>
+<entry key="dao.wrapper.ng.class">BasicWrapperNG</entry>
 <!-- dao helper -->
 <entry key="dao.daohelper.package">org.fugerit.java.core.db.daogen</entry>
 <entry key="dao.daohelper.class">BasicDAOHelper</entry>

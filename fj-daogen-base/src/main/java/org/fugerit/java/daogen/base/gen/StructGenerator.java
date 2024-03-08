@@ -247,14 +247,14 @@ public class StructGenerator extends DaogenBasicGenerator {
 			this.handleField1(field, blobHandlerType, clobHandlerType);
 		}
 		this.getWriter().println( TAB+"}" );
-		this.getWriter().println();	
-		
+		this.getWriter().println();
+
 		// readSQL()
 		this.getWriter().println( TAB+AT_OVERRIDE );
 		this.getWriter().println( TAB+"public void writeSQL(SQLOutput stream) throws SQLException {" );
 		if ( containsBlob || containsClob ) {
 			this.getWriter().println( TAB_2+"if ( !this.checkLobs() ) {" );
-			this.getWriter().println( TAB_3+"throwUnsupported( \"To use writeSQL() you must invoke setupLobs() for  \"+this.getSQLTypeName() );" );
+			this.getWriter().println( TAB_3+"org.fugerit.java.core.db.daogen.BasicHelper.throwUnsupported( \"To use writeSQL() you must invoke setupLobs() for  \"+this.getSQLTypeName() );" );
 			this.getWriter().println( TAB_2+"}" );
 			this.getWriter().println( TAB_2+"this.areLobsSet = false;\t// clob and blob will be used only once" );
 		}

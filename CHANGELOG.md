@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Added
+
+- daogen property : dao-helper-ng-mode ('dao.helper.ng' will be selected and no serialization)
+- daogen property : dao-wrapper-ng-mode ('dao.wrapper.ng' will be selected and no serialization)
+
+### Changed
+
+- fj-version set to 8.5.2
+
+### Fixed
+
+- name of junit 5 methods
+
 ## [1.7.2] - 2024-03-08
 
 ### Changed
