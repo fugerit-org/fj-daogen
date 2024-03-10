@@ -1,20 +1,15 @@
 package org.fugerit.java.daogen.base.gen;
 
-import java.io.IOException;
-
+import lombok.extern.slf4j.Slf4j;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.io.helper.HelperIOException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.compare.CheckEmpty;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
-import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
-import org.fugerit.java.daogen.base.config.DaogenCatalogField;
-import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
-import org.fugerit.java.daogen.base.config.DaogenCustomCode;
+import org.fugerit.java.daogen.base.config.*;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 public class ModelGenerator extends DaogenBasicGenerator {
@@ -43,7 +38,7 @@ public class ModelGenerator extends DaogenBasicGenerator {
 				String className = GeneratorNameHelper.toClassName( relation.getName() );
 				String propertyName = GeneratorNameHelper.toClassName( relation.getName() );
 				if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
-					baseType = "java.util.List<"+baseType+">";
+					baseType = List.class.getName()+"<"+baseType+">";
 				}
 				DaogenCustomCode.addCommentCommon( "comments.common.getter", DaogenCustomCode.INDENT_1, this.getWriter(), propertyName, "yes", "relation to entity : "+entityTo.getName() );
 				this.println( TAB+baseType+" get"+className+"();" );

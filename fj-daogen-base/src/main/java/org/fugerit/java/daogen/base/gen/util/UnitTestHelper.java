@@ -1,12 +1,11 @@
 package org.fugerit.java.daogen.base.gen.util;
 
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
-import org.fugerit.java.daogen.base.config.DaogenCatalogField;
+import org.fugerit.java.daogen.base.config.*;
 import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class UnitTestHelper {
 
@@ -52,6 +51,10 @@ public class UnitTestHelper {
         for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+" logger.info( \""+field.getId()+"-> {}\", current.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
         }
+        for ( DaogenCatalogRelation relation : gen.getCurrentEntity().getRelations() ) {
+            String className = GeneratorNameHelper.toClassName( relation.getName() );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+" logger.info( \"relation : "+relation.getId()+"-> {}\", current.get"+className+"() );" );
+        }
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );
         gen.getWriter().println();
     }
@@ -62,6 +65,15 @@ public class UnitTestHelper {
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+""+gen.getEntityWrapperName()+" current = new "+gen.getEntityWrapperName()+"( new "+gen.getEntityHelperName()+"() );" );
         for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
             handleFieldNewInstance( gen.getDaogenConfig(), field, gen.getWriter() );
+        }
+        for ( DaogenCatalogRelation relation : gen.getCurrentEntity().getRelations() ) {
+            DaogenCatalogEntity entityTo = gen.getDaogenConfig().getListMap( relation.getTo() );
+            String className = GeneratorNameHelper.toClassName( relation.getName() );
+            String baseType = gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+DaogenCatalogConstants.helperName( entityTo );
+            if ( DaogenCatalogRelation.MODE_MANY.equalsIgnoreCase( relation.getMode() ) ) {
+                baseType = ArrayList.class.getName()+"<"+gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+DaogenCatalogConstants.modelName( entityTo )+">";
+            }
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"current.set"+className+"( new "+baseType+"() );" );
         }
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+"return current;" );
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );

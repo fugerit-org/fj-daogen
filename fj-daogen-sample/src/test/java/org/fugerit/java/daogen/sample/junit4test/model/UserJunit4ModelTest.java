@@ -34,6 +34,7 @@ public class UserJunit4ModelTest {
 		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
 		 logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
 		 logger.info( "STATE-> {}", current.getState() );
+		 logger.info( "relation : userToAddress-> {}", current.getUserAddresses() );
 	}
 
 	public ModelUser newInstance() { 
@@ -45,6 +46,7 @@ public class UserJunit4ModelTest {
 		current.setDateInsert(new java.util.Date());
 		current.setDateUpdate(new java.util.Date());
 		current.setState(new java.math.BigDecimal( "1" ));
+		current.setUserAddresses( new java.util.ArrayList<org.fugerit.java.daogen.sample.def.model.ModelAddress>() );
 		return current;
 	}
 	@Test
