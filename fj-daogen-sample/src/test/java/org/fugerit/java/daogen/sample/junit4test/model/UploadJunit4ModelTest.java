@@ -26,6 +26,7 @@ public class UploadJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( UploadJunit4ModelTest.class );
+
 	public void printAll( ModelUpload current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
@@ -46,6 +47,7 @@ public class UploadJunit4ModelTest {
 		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
+
 	@Test
 	public void testJUnit4ModelUpload() { 
 		ModelUpload current = this.newInstance();

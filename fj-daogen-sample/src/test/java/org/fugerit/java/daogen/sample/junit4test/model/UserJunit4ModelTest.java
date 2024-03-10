@@ -26,6 +26,7 @@ public class UserJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( UserJunit4ModelTest.class );
+
 	public void printAll( ModelUser current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "USERNAME-> {}", current.getUsername() );
@@ -57,6 +58,7 @@ public class UserJunit4ModelTest {
 		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
+
 	@Test
 	public void testJUnit4ModelUser() { 
 		ModelUser current = this.newInstance();

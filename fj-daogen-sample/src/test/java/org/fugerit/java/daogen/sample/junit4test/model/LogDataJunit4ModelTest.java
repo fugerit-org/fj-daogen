@@ -26,6 +26,7 @@ public class LogDataJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( LogDataJunit4ModelTest.class );
+
 	public void printAll( ModelLogData current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "LOG_TIME-> {}", current.getLogTime() );
@@ -43,6 +44,7 @@ public class LogDataJunit4ModelTest {
 		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
+
 	@Test
 	public void testJUnit4ModelLogData() { 
 		ModelLogData current = this.newInstance();

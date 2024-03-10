@@ -26,6 +26,7 @@ public class AddressJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( AddressJunit4ModelTest.class );
+
 	public void printAll( ModelAddress current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "ID_USER-> {}", current.getIdUser() );
@@ -51,6 +52,7 @@ public class AddressJunit4ModelTest {
 		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
+
 	@Test
 	public void testJUnit4ModelAddress() { 
 		ModelAddress current = this.newInstance();

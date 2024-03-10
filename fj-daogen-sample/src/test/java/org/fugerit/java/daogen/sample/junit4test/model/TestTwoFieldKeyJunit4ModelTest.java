@@ -26,6 +26,7 @@ public class TestTwoFieldKeyJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( TestTwoFieldKeyJunit4ModelTest.class );
+
 	public void printAll( ModelTestTwoFieldKey current ) { 
 		 logger.info( "ID_ONE-> {}", current.getIdOne() );
 		 logger.info( "ID_TWO-> {}", current.getIdTwo() );
@@ -43,6 +44,7 @@ public class TestTwoFieldKeyJunit4ModelTest {
 		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
+
 	@Test
 	public void testJUnit4ModelTestTwoFieldKey() { 
 		ModelTestTwoFieldKey current = this.newInstance();

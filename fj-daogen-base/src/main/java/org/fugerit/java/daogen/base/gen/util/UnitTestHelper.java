@@ -22,6 +22,7 @@ public class UnitTestHelper {
         } else {
             GenUtils.addLogger( gen, DaogenCatalogConstants.junit5ModelName( gen.getCurrentEntity() ) );
         }
+        gen.getWriter().println();
         // read all fields
         UnitTestHelper.createSampleEntityPrintAllMethod( gen );
         // creates a new instance
@@ -74,6 +75,7 @@ public class UnitTestHelper {
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+"logger.info( \"unwrap :  {}\", current.unwrap( current ) );" );
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+"return current;" );
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );
+        gen.getWriter().println();
     }
 
     private static void handleFieldNewInstance(DaogenCatalogConfig config, DaogenCatalogField field, PrintWriter writer ) {
