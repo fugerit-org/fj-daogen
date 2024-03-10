@@ -35,8 +35,12 @@ public class LogDataJunit4ModelTest {
 	public ModelLogData newInstance() { 
 		WrapperLogData current = new WrapperLogData( new HelperLogData() );
 		current.setId(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setLogTime(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setInfo("1");
+		Assert.assertFalse( current.isEmpty() );
+		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
 	@Test

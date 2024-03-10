@@ -35,8 +35,12 @@ public class TestTwoFieldKeyJunit4ModelTest {
 	public ModelTestTwoFieldKey newInstance() { 
 		WrapperTestTwoFieldKey current = new WrapperTestTwoFieldKey( new HelperTestTwoFieldKey() );
 		current.setIdOne(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setIdTwo(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setInfo("1");
+		Assert.assertFalse( current.isEmpty() );
+		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
 	@Test

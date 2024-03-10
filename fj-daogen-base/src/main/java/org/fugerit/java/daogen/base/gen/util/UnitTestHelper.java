@@ -12,8 +12,12 @@ public class UnitTestHelper {
     private UnitTestHelper() {}
 
     public static void genBodyBasicTest( DaogenBasicGenerator gen, int junitLevel ) {
-        // logger
+        // create / print test
+        String assertionClass = "Assertions";
+        String appendPublic = "";
         if ( junitLevel < 5 ) {
+            assertionClass = "Assert";
+            appendPublic = "public";
             GenUtils.addLogger( gen, DaogenCatalogConstants.junit4ModelName( gen.getCurrentEntity() ) );
         } else {
             GenUtils.addLogger( gen, DaogenCatalogConstants.junit5ModelName( gen.getCurrentEntity() ) );
@@ -21,12 +25,7 @@ public class UnitTestHelper {
         // read all fields
         UnitTestHelper.createSampleEntityPrintAllMethod( gen );
         // creates a new instance
-        UnitTestHelper.createSampleEntityInstanceMethod( gen );
-        // create / print test
-        String appendPublic = "";
-        if ( junitLevel < 5 ) {
-            appendPublic = "public";
-        }
+        UnitTestHelper.createSampleEntityInstanceMethod( gen, assertionClass );
         gen.getWriter().println( DaogenBasicGenerator.TAB+"@Test" );
         gen.getWriter().println( DaogenBasicGenerator.TAB+appendPublic+" void testJUnit"+junitLevel+"Model"+GeneratorNameHelper.toClassName( gen.getCurrentEntity().getName() )+"() { " );
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+gen.getEntityModelName()+" current = this.newInstance();" );
@@ -37,16 +36,12 @@ public class UnitTestHelper {
         if ( DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE_DISABLED.equalsIgnoreCase( daoHelperNgMode ) ) {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+"org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );" );
         }
-        if ( junitLevel < 5 ) {
-            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"Assert.assertNotNull( current );" );
-        } else {
-            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"Assertions.assertNotNull( current );" );
-        }
+        gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( current );" );
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );
         gen.getWriter().println();
     }
 
-    public static void createSampleEntityPrintAllMethod( DaogenBasicGenerator gen ) {
+    private static void createSampleEntityPrintAllMethod( DaogenBasicGenerator gen ) {
         gen.getWriter().println( DaogenBasicGenerator.TAB+"public void printAll( "+gen.getEntityModelName()+" current ) { " );
         for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+" logger.info( \""+field.getId()+"-> {}\", current.get"+GeneratorNameHelper.toClassName( field.getId() )+"() );" );
@@ -59,12 +54,13 @@ public class UnitTestHelper {
         gen.getWriter().println();
     }
 
-    public static void createSampleEntityInstanceMethod( DaogenBasicGenerator gen ) {
+    private static void createSampleEntityInstanceMethod( DaogenBasicGenerator gen, String assertionClass ) {
         // creates a new instance
         gen.getWriter().println( DaogenBasicGenerator.TAB+"public "+gen.getEntityModelName()+" newInstance() { " );
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+""+gen.getEntityWrapperName()+" current = new "+gen.getEntityWrapperName()+"( new "+gen.getEntityHelperName()+"() );" );
         for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
             handleFieldNewInstance( gen.getDaogenConfig(), field, gen.getWriter() );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertFalse( current.isEmpty() );" );
         }
         for ( DaogenCatalogRelation relation : gen.getCurrentEntity().getRelations() ) {
             DaogenCatalogEntity entityTo = gen.getDaogenConfig().getListMap( relation.getTo() );
@@ -75,6 +71,7 @@ public class UnitTestHelper {
             }
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+"current.set"+className+"( new "+baseType+"() );" );
         }
+        gen.getWriter().println( DaogenBasicGenerator.TAB_2+"logger.info( \"unwrap :  {}\", current.unwrap( current ) );" );
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+"return current;" );
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );
     }

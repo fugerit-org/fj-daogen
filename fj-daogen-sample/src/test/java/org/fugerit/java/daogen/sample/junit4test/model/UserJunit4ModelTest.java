@@ -40,13 +40,21 @@ public class UserJunit4ModelTest {
 	public ModelUser newInstance() { 
 		WrapperUser current = new WrapperUser( new HelperUser() );
 		current.setId(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setUsername("1");
+		Assert.assertFalse( current.isEmpty() );
 		current.setPassword("1");
+		Assert.assertFalse( current.isEmpty() );
 		current.setLastLogin(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setDateInsert(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setDateUpdate(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setState(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setUserAddresses( new java.util.ArrayList<org.fugerit.java.daogen.sample.def.model.ModelAddress>() );
+		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
 	@Test

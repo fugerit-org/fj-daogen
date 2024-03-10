@@ -36,9 +36,14 @@ public class UploadJunit4ModelTest {
 	public ModelUpload newInstance() { 
 		WrapperUpload current = new WrapperUpload( new HelperUpload() );
 		current.setId(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setDateInsert(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setDateUpdate(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setContent(null);
+		Assert.assertFalse( current.isEmpty() );
+		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
 	@Test

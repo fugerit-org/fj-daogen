@@ -38,11 +38,17 @@ public class AddressJunit4ModelTest {
 	public ModelAddress newInstance() { 
 		WrapperAddress current = new WrapperAddress( new HelperAddress() );
 		current.setId(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setIdUser(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setDateInsert(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setDateUpdate(new java.util.Date());
+		Assert.assertFalse( current.isEmpty() );
 		current.setInfo("1");
+		Assert.assertFalse( current.isEmpty() );
 		current.setUser( new org.fugerit.java.daogen.sample.impl.helper.HelperUser() );
+		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;
 	}
 	@Test
