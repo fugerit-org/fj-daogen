@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.sample.junit4test.model;
 
 import org.fugerit.java.daogen.sample.def.model.ModelLogData;
 import org.fugerit.java.daogen.sample.impl.helper.HelperLogData;
+import org.fugerit.java.daogen.sample.impl.helper.WrapperLogData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,23 +26,26 @@ public class LogDataJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( LogDataJunit4ModelTest.class );
-	public ModelLogData newInstance() { 
-		HelperLogData current = new HelperLogData();
-		current.setId(new java.math.BigDecimal( "1" ));
-		current.setLogTime(new java.util.Date());
-		current.setInfo("1");
-		return current;
-	}
 	public void printAll( ModelLogData current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "LOG_TIME-> {}", current.getLogTime() );
 		 logger.info( "INFO-> {}", current.getInfo() );
 	}
 
+	public ModelLogData newInstance() { 
+		WrapperLogData current = new WrapperLogData( new HelperLogData() );
+		current.setId(new java.math.BigDecimal( "1" ));
+		current.setLogTime(new java.util.Date());
+		current.setInfo("1");
+		return current;
+	}
 	@Test
-	public void testModelLogData() { 
+	public void testJUnit4ModelLogData() { 
 		ModelLogData current = this.newInstance();
 		this.printAll( current );
+		logger.info( "current toString() : {}", current );
+		logger.info( "current isEmpty() : {}", current.isEmpty() );
+		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}
 

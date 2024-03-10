@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.sample.junit4test.model;
 
 import org.fugerit.java.daogen.sample.def.model.ModelAddress;
 import org.fugerit.java.daogen.sample.impl.helper.HelperAddress;
+import org.fugerit.java.daogen.sample.impl.helper.WrapperAddress;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,15 +26,6 @@ public class AddressJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( AddressJunit4ModelTest.class );
-	public ModelAddress newInstance() { 
-		HelperAddress current = new HelperAddress();
-		current.setId(new java.math.BigDecimal( "1" ));
-		current.setIdUser(new java.math.BigDecimal( "1" ));
-		current.setDateInsert(new java.util.Date());
-		current.setDateUpdate(new java.util.Date());
-		current.setInfo("1");
-		return current;
-	}
 	public void printAll( ModelAddress current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "ID_USER-> {}", current.getIdUser() );
@@ -42,10 +34,22 @@ public class AddressJunit4ModelTest {
 		 logger.info( "INFO-> {}", current.getInfo() );
 	}
 
+	public ModelAddress newInstance() { 
+		WrapperAddress current = new WrapperAddress( new HelperAddress() );
+		current.setId(new java.math.BigDecimal( "1" ));
+		current.setIdUser(new java.math.BigDecimal( "1" ));
+		current.setDateInsert(new java.util.Date());
+		current.setDateUpdate(new java.util.Date());
+		current.setInfo("1");
+		return current;
+	}
 	@Test
-	public void testModelAddress() { 
+	public void testJUnit4ModelAddress() { 
 		ModelAddress current = this.newInstance();
 		this.printAll( current );
+		logger.info( "current toString() : {}", current );
+		logger.info( "current isEmpty() : {}", current.isEmpty() );
+		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}
 

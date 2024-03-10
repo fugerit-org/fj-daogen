@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.sample.junit4test.model;
 
 import org.fugerit.java.daogen.sample.def.model.ModelUpload;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUpload;
+import org.fugerit.java.daogen.sample.impl.helper.WrapperUpload;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,14 +26,6 @@ public class UploadJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( UploadJunit4ModelTest.class );
-	public ModelUpload newInstance() { 
-		HelperUpload current = new HelperUpload();
-		current.setId(new java.math.BigDecimal( "1" ));
-		current.setDateInsert(new java.util.Date());
-		current.setDateUpdate(new java.util.Date());
-		current.setContent(null);
-		return current;
-	}
 	public void printAll( ModelUpload current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
@@ -40,10 +33,21 @@ public class UploadJunit4ModelTest {
 		 logger.info( "CONTENT-> {}", current.getContent() );
 	}
 
+	public ModelUpload newInstance() { 
+		WrapperUpload current = new WrapperUpload( new HelperUpload() );
+		current.setId(new java.math.BigDecimal( "1" ));
+		current.setDateInsert(new java.util.Date());
+		current.setDateUpdate(new java.util.Date());
+		current.setContent(null);
+		return current;
+	}
 	@Test
-	public void testModelUpload() { 
+	public void testJUnit4ModelUpload() { 
 		ModelUpload current = this.newInstance();
 		this.printAll( current );
+		logger.info( "current toString() : {}", current );
+		logger.info( "current isEmpty() : {}", current.isEmpty() );
+		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}
 

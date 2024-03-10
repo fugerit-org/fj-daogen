@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.sample.junit4test.model;
 
 import org.fugerit.java.daogen.sample.def.model.ModelUserData;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUserData;
+import org.fugerit.java.daogen.sample.impl.helper.WrapperUserData;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,17 +26,6 @@ public class UserDataJunit4ModelTest {
 	// custom code end ( code below here will be overwritten )
 
 	private static final Logger logger = LoggerFactory.getLogger( UserDataJunit4ModelTest.class );
-	public ModelUserData newInstance() { 
-		HelperUserData current = new HelperUserData();
-		current.setId(new java.math.BigDecimal( "1" ));
-		current.setUsername("1");
-		current.setPassword("1");
-		current.setLastLogin(new java.util.Date());
-		current.setDateInsert(new java.util.Date());
-		current.setDateUpdate(new java.util.Date());
-		current.setState(new java.math.BigDecimal( "1" ));
-		return current;
-	}
 	public void printAll( ModelUserData current ) { 
 		 logger.info( "ID-> {}", current.getId() );
 		 logger.info( "USERNAME-> {}", current.getUsername() );
@@ -46,10 +36,24 @@ public class UserDataJunit4ModelTest {
 		 logger.info( "STATE-> {}", current.getState() );
 	}
 
+	public ModelUserData newInstance() { 
+		WrapperUserData current = new WrapperUserData( new HelperUserData() );
+		current.setId(new java.math.BigDecimal( "1" ));
+		current.setUsername("1");
+		current.setPassword("1");
+		current.setLastLogin(new java.util.Date());
+		current.setDateInsert(new java.util.Date());
+		current.setDateUpdate(new java.util.Date());
+		current.setState(new java.math.BigDecimal( "1" ));
+		return current;
+	}
 	@Test
-	public void testModelUserData() { 
+	public void testJUnit4ModelUserData() { 
 		ModelUserData current = this.newInstance();
 		this.printAll( current );
+		logger.info( "current toString() : {}", current );
+		logger.info( "current isEmpty() : {}", current.isEmpty() );
+		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}
 
