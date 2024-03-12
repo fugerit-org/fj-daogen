@@ -5,7 +5,6 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
-import org.fugerit.java.daogen.base.gen.util.GenUtils;
 import org.fugerit.java.daogen.base.gen.util.UnitTestHelper;
 
 import java.io.IOException;
@@ -30,10 +29,7 @@ public class Junit5ModelGenerator extends DaogenBasicGenerator {
 				STYLE_INTERFACE, daogenConfig, entity );
 		this.setPublicClass( false );
 		this.setJavaStyle( STYLE_CLASS );
-		GenUtils.addAll( this.getImportList(), "org.slf4j.Logger", "org.slf4j.LoggerFactory", "org.junit.jupiter.api.Assertions", "org.junit.jupiter.api.Test",
-				this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName(),
-				this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+this.getEntityHelperName(),
-				this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+this.getEntityWrapperName() );
+		UnitTestHelper.genInitBasicTest( this, 5 );
 	}
 
 	@Override

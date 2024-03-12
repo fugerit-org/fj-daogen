@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.junit4test.model;
 
+import org.fugerit.java.daogen.sample.def.facade.TestTwoFieldKeyFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
 import org.fugerit.java.daogen.sample.impl.helper.HelperTestTwoFieldKey;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperTestTwoFieldKey;
@@ -28,9 +29,9 @@ public class TestTwoFieldKeyJunit4ModelTest {
 	private static final Logger logger = LoggerFactory.getLogger( TestTwoFieldKeyJunit4ModelTest.class );
 
 	public void printAll( ModelTestTwoFieldKey current ) { 
-		 logger.info( "ID_ONE-> {}", current.getIdOne() );
-		 logger.info( "ID_TWO-> {}", current.getIdTwo() );
-		 logger.info( "INFO-> {}", current.getInfo() );
+		logger.info( "ID_ONE-> {}", current.getIdOne() );
+		logger.info( "ID_TWO-> {}", current.getIdTwo() );
+		logger.info( "INFO-> {}", current.getInfo() );
 	}
 
 	public ModelTestTwoFieldKey newInstance() { 
@@ -53,6 +54,10 @@ public class TestTwoFieldKeyJunit4ModelTest {
 		logger.info( "current toString() : {}", current );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
+		TestTwoFieldKeyFinder finder1 = new TestTwoFieldKeyFinder();
+		finder1.setModel( current );
+		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		Assert.assertNotNull( finder1 );
 	}
 
 }

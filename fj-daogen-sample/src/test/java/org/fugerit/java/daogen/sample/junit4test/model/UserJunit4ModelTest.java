@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.junit4test.model;
 
+import org.fugerit.java.daogen.sample.def.facade.UserFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelUser;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUser;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperUser;
@@ -28,14 +29,14 @@ public class UserJunit4ModelTest {
 	private static final Logger logger = LoggerFactory.getLogger( UserJunit4ModelTest.class );
 
 	public void printAll( ModelUser current ) { 
-		 logger.info( "ID-> {}", current.getId() );
-		 logger.info( "USERNAME-> {}", current.getUsername() );
-		 logger.info( "PASSWORD-> {}", current.getPassword() );
-		 logger.info( "LAST_LOGIN-> {}", current.getLastLogin() );
-		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
-		 logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
-		 logger.info( "STATE-> {}", current.getState() );
-		 logger.info( "relation : userToAddress-> {}", current.getUserAddresses() );
+		logger.info( "ID-> {}", current.getId() );
+		logger.info( "USERNAME-> {}", current.getUsername() );
+		logger.info( "PASSWORD-> {}", current.getPassword() );
+		logger.info( "LAST_LOGIN-> {}", current.getLastLogin() );
+		logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
+		logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
+		logger.info( "STATE-> {}", current.getState() );
+		logger.info( "relation : userToAddress-> {}", current.getUserAddresses() );
 	}
 
 	public ModelUser newInstance() { 
@@ -69,6 +70,13 @@ public class UserJunit4ModelTest {
 		logger.info( "current toString() : {}", current );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
+		UserFinder finder1 = new UserFinder();
+		finder1.setModel( current );
+		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		finder1.setId( current.getId() );
+		Assert.assertEquals( current.getId(), finder1.getId() );
+		Assert.assertNotNull( UserFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( finder1 );
 	}
 
 }

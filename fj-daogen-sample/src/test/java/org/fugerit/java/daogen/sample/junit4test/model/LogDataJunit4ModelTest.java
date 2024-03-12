@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.junit4test.model;
 
+import org.fugerit.java.daogen.sample.def.facade.LogDataFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelLogData;
 import org.fugerit.java.daogen.sample.impl.helper.HelperLogData;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperLogData;
@@ -28,9 +29,9 @@ public class LogDataJunit4ModelTest {
 	private static final Logger logger = LoggerFactory.getLogger( LogDataJunit4ModelTest.class );
 
 	public void printAll( ModelLogData current ) { 
-		 logger.info( "ID-> {}", current.getId() );
-		 logger.info( "LOG_TIME-> {}", current.getLogTime() );
-		 logger.info( "INFO-> {}", current.getInfo() );
+		logger.info( "ID-> {}", current.getId() );
+		logger.info( "LOG_TIME-> {}", current.getLogTime() );
+		logger.info( "INFO-> {}", current.getInfo() );
 	}
 
 	public ModelLogData newInstance() { 
@@ -53,6 +54,13 @@ public class LogDataJunit4ModelTest {
 		logger.info( "current toString() : {}", current );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
+		LogDataFinder finder1 = new LogDataFinder();
+		finder1.setModel( current );
+		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		finder1.setId( current.getId() );
+		Assert.assertEquals( current.getId(), finder1.getId() );
+		Assert.assertNotNull( LogDataFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( finder1 );
 	}
 
 }

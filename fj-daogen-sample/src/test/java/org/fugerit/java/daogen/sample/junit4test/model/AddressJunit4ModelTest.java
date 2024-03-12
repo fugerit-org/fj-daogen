@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.junit4test.model;
 
+import org.fugerit.java.daogen.sample.def.facade.AddressFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelAddress;
 import org.fugerit.java.daogen.sample.impl.helper.HelperAddress;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperAddress;
@@ -28,12 +29,12 @@ public class AddressJunit4ModelTest {
 	private static final Logger logger = LoggerFactory.getLogger( AddressJunit4ModelTest.class );
 
 	public void printAll( ModelAddress current ) { 
-		 logger.info( "ID-> {}", current.getId() );
-		 logger.info( "ID_USER-> {}", current.getIdUser() );
-		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
-		 logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
-		 logger.info( "INFO-> {}", current.getInfo() );
-		 logger.info( "relation : addressToUser-> {}", current.getUser() );
+		logger.info( "ID-> {}", current.getId() );
+		logger.info( "ID_USER-> {}", current.getIdUser() );
+		logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
+		logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
+		logger.info( "INFO-> {}", current.getInfo() );
+		logger.info( "relation : addressToUser-> {}", current.getUser() );
 	}
 
 	public ModelAddress newInstance() { 
@@ -61,6 +62,13 @@ public class AddressJunit4ModelTest {
 		logger.info( "current toString() : {}", current );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
+		AddressFinder finder1 = new AddressFinder();
+		finder1.setModel( current );
+		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		finder1.setId( current.getId() );
+		Assert.assertEquals( current.getId(), finder1.getId() );
+		Assert.assertNotNull( AddressFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( finder1 );
 	}
 
 }
