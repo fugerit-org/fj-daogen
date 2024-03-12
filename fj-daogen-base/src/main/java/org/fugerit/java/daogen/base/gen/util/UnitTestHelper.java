@@ -63,7 +63,7 @@ public class UnitTestHelper {
         if ( checkIsEmpty ) {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertTrue( current.isEmpty() );" );
         }
-        for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
+        for ( DaogenCatalogField field : gen.getCurrentEntity().getAllFields() ) {
             handleFieldNewInstance( gen.getDaogenConfig(), field, gen.getWriter() );
             if ( checkIsEmpty ) {
                 gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertFalse( current.isEmpty() );" );

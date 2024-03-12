@@ -164,4 +164,22 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 */
 	void setState( java.math.BigDecimal value );
 
+	/**
+	 * Getter method for property : stateVirtual (nullable: no)
+	 *
+	 * 1 active, 0 not active
+	 *
+	 * @return the value of stateVirtual
+	 */
+	java.math.BigDecimal getStateVirtual();
+
+	/**
+	 * Setter method for property : stateVirtual (nullable: no)
+	 *
+	 * 1 active, 0 not active
+	 *
+	 * @param value the value of stateVirtual
+	 */
+	void setStateVirtual( java.math.BigDecimal value );
+
 }

@@ -55,6 +55,8 @@ public class UserJunit4ModelTest {
 		Assert.assertFalse( current.isEmpty() );
 		current.setState(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
+		current.setStateVirtual(new java.math.BigDecimal( "1" ));
+		Assert.assertFalse( current.isEmpty() );
 		current.setUserAddresses( new java.util.ArrayList<org.fugerit.java.daogen.sample.def.model.ModelAddress>() );
 		logger.info( "unwrap :  {}", current.unwrap( current ) );
 		return current;

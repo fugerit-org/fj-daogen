@@ -44,6 +44,7 @@
     <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="1 active, 0 not active" id="STATE" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
+    <field virtual="true" comments="1 active, 0 not active" id="STATE_VIRTUAL" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
   </entity>
   <entity catalog="PUBLIC" comments="Contains addresses data" foreignKeys="PUBLIC.FUGERIT.USER" id="PUBLIC.FUGERIT.ADDRESS" name="ADDRESS" primaryKey="ID" schema="FUGERIT">
     <field comments="Address system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>

@@ -135,6 +135,16 @@ public class WrapperUser extends BasicWrapper<ModelUser> implements ModelUser {
 	}
 
 	@Override
+	public void setStateVirtual( java.math.BigDecimal value ) {
+		this.unwrapModel().setStateVirtual( value );
+	}
+
+	@Override
+	public java.math.BigDecimal getStateVirtual() {
+		return this.unwrapModel().getStateVirtual();
+	}
+
+	@Override
 	public boolean isEmpty() {
 		return this.unwrapModel().isEmpty();
 	}

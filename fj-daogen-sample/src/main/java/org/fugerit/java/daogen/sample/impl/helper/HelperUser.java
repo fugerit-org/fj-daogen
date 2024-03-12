@@ -138,6 +138,18 @@ public class HelperUser extends BasicHelper implements ModelUser {
 		return this.state;
 	}
 
+	private java.math.BigDecimal stateVirtual;
+
+	@Override
+	public void setStateVirtual( java.math.BigDecimal value ) {
+		this.stateVirtual = value;
+	}
+
+	@Override
+	public java.math.BigDecimal getStateVirtual() {
+		return this.stateVirtual;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
@@ -156,6 +168,8 @@ public class HelperUser extends BasicHelper implements ModelUser {
 		buffer.append( this.getDateUpdate() );
 		buffer.append( ",state=" );
 		buffer.append( this.getState() );
+		buffer.append( ",stateVirtual=" );
+		buffer.append( this.getStateVirtual() );
 		buffer.append( "]" );
 		return buffer.toString();
 	}
