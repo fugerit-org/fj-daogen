@@ -46,6 +46,8 @@ public class TestDaogenRun extends MemDBTestBase {
 				DaogenCatalogConstants.GEN_PROP_RELATIONS_LAST , BooleanUtils.BOOLEAN_TRUE );		
 		overrideProperties.setProperty( 
 				DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION , DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION_17.toString() );
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE , BooleanUtils.BOOLEAN_FALSE );
 		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertTrue( file.exists() );
 		Assert.assertEquals( Result.RESULT_CODE_OK, result );

@@ -57,7 +57,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String CONTEXT_GEN_LIT = "<>( context );";
 	
-	protected static final String COMMA_END_LIT = "() );";
+	public static final String COMMA_END_LIT = "() );";
 	
 	protected static final String RETURN_RESULT_LIT = "return result;";
 	

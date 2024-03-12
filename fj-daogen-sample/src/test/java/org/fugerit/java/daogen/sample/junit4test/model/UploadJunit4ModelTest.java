@@ -36,6 +36,7 @@ public class UploadJunit4ModelTest {
 
 	public ModelUpload newInstance() { 
 		WrapperUpload current = new WrapperUpload( new HelperUpload() );
+		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
 		current.setDateInsert(new java.util.Date());
@@ -53,7 +54,6 @@ public class UploadJunit4ModelTest {
 		ModelUpload current = this.newInstance();
 		this.printAll( current );
 		logger.info( "current toString() : {}", current );
-		logger.info( "current isEmpty() : {}", current.isEmpty() );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}

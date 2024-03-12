@@ -38,6 +38,7 @@ public class AddressJunit4ModelTest {
 
 	public ModelAddress newInstance() { 
 		WrapperAddress current = new WrapperAddress( new HelperAddress() );
+		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
 		current.setIdUser(new java.math.BigDecimal( "1" ));
@@ -58,7 +59,6 @@ public class AddressJunit4ModelTest {
 		ModelAddress current = this.newInstance();
 		this.printAll( current );
 		logger.info( "current toString() : {}", current );
-		logger.info( "current isEmpty() : {}", current.isEmpty() );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}

@@ -39,6 +39,7 @@ public class UserDataJunit4ModelTest {
 
 	public ModelUserData newInstance() { 
 		WrapperUserData current = new WrapperUserData( new HelperUserData() );
+		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
 		current.setUsername("1");
@@ -62,7 +63,6 @@ public class UserDataJunit4ModelTest {
 		ModelUserData current = this.newInstance();
 		this.printAll( current );
 		logger.info( "current toString() : {}", current );
-		logger.info( "current isEmpty() : {}", current.isEmpty() );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 	}
