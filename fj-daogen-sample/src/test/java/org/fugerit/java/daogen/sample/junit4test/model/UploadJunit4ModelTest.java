@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.junit4test.model;
 
+import org.fugerit.java.daogen.sample.def.facade.UploadFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelUpload;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUpload;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperUpload;
@@ -28,10 +29,10 @@ public class UploadJunit4ModelTest {
 	private static final Logger logger = LoggerFactory.getLogger( UploadJunit4ModelTest.class );
 
 	public void printAll( ModelUpload current ) { 
-		 logger.info( "ID-> {}", current.getId() );
-		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
-		 logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
-		 logger.info( "CONTENT-> {}", current.getContent() );
+		logger.info( "ID-> {}", current.getId() );
+		logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
+		logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
+		logger.info( "CONTENT-> {}", current.getContent() );
 	}
 
 	public ModelUpload newInstance() { 
@@ -56,6 +57,13 @@ public class UploadJunit4ModelTest {
 		logger.info( "current toString() : {}", current );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
+		UploadFinder finder1 = new UploadFinder();
+		finder1.setModel( current );
+		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		finder1.setId( current.getId() );
+		Assert.assertEquals( current.getId(), finder1.getId() );
+		Assert.assertNotNull( UploadFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( finder1 );
 	}
 
 }

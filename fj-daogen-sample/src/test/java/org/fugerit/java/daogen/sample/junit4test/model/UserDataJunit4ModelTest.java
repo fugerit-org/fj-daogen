@@ -1,5 +1,6 @@
 package org.fugerit.java.daogen.sample.junit4test.model;
 
+import org.fugerit.java.daogen.sample.def.facade.UserDataFinder;
 import org.fugerit.java.daogen.sample.def.model.ModelUserData;
 import org.fugerit.java.daogen.sample.impl.helper.HelperUserData;
 import org.fugerit.java.daogen.sample.impl.helper.WrapperUserData;
@@ -28,13 +29,13 @@ public class UserDataJunit4ModelTest {
 	private static final Logger logger = LoggerFactory.getLogger( UserDataJunit4ModelTest.class );
 
 	public void printAll( ModelUserData current ) { 
-		 logger.info( "ID-> {}", current.getId() );
-		 logger.info( "USERNAME-> {}", current.getUsername() );
-		 logger.info( "PASSWORD-> {}", current.getPassword() );
-		 logger.info( "LAST_LOGIN-> {}", current.getLastLogin() );
-		 logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
-		 logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
-		 logger.info( "STATE-> {}", current.getState() );
+		logger.info( "ID-> {}", current.getId() );
+		logger.info( "USERNAME-> {}", current.getUsername() );
+		logger.info( "PASSWORD-> {}", current.getPassword() );
+		logger.info( "LAST_LOGIN-> {}", current.getLastLogin() );
+		logger.info( "DATE_INSERT-> {}", current.getDateInsert() );
+		logger.info( "DATE_UPDATE-> {}", current.getDateUpdate() );
+		logger.info( "STATE-> {}", current.getState() );
 	}
 
 	public ModelUserData newInstance() { 
@@ -65,6 +66,13 @@ public class UserDataJunit4ModelTest {
 		logger.info( "current toString() : {}", current );
 		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
+		UserDataFinder finder1 = new UserDataFinder();
+		finder1.setModel( current );
+		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		finder1.setId( current.getId() );
+		Assert.assertEquals( current.getId(), finder1.getId() );
+		Assert.assertNotNull( UserDataFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( finder1 );
 	}
 
 }

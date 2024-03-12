@@ -2,6 +2,7 @@ package org.fugerit.java.daogen.base.gen.util;
 
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.*;
 import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
@@ -12,6 +13,24 @@ public class UnitTestHelper {
 
     private UnitTestHelper() {}
 
+    public static void genInitBasicTest( DaogenBasicGenerator gen, int junitLevel ) {
+		if ( junitLevel < 5 ) {
+			GenUtils.addAll( gen.getImportList(), "org.junit.Assert", "org.junit.Test" );
+		} else {
+			GenUtils.addAll( gen.getImportList(), "org.junit.jupiter.api.Assertions", "org.junit.jupiter.api.Test" );
+		}
+		GenUtils.addAll( gen.getImportList(), "org.slf4j.Logger", "org.slf4j.LoggerFactory",
+				gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+gen.getEntityModelName(),
+				gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+gen.getEntityHelperName(),
+				gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+gen.getEntityWrapperName() );
+		if ( StringUtils.isNotEmpty( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ) ) ) {
+			GenUtils.addAll( gen.getImportList(),
+                    gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+gen.getEntityFinderName() );
+		}
+    }
+
+
+    
     public static void genBodyBasicTest( DaogenBasicGenerator gen, int junitLevel ) {
         // create / print test
         String assertionClass = "Assertions";
@@ -38,18 +57,33 @@ public class UnitTestHelper {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+"org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );" );
         }
         gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( current );" );
+        generateFinderTest( gen, assertionClass );
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );
         gen.getWriter().println();
+    }
+
+    private static void generateFinderTest( DaogenBasicGenerator gen, String assertionClass ) {
+        if ( StringUtils.isNotEmpty( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ) ) ) {
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+gen.getEntityFinderName()+" finder1 = new "+gen.getEntityFinderName()+"();" );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"finder1.setModel( current );" );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"logger.info( \"finder1.getModel() -> {}\", finder1.getModel"+DaogenBasicGenerator.COMMA_END_LIT );
+            if ( gen.getCurrentEntity().containsDefaultId() ) {
+                gen.getWriter().println( DaogenBasicGenerator.TAB_2+"finder1.setId( current.getId() );" );
+                gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertEquals( current.getId(), finder1.getId() );" );
+                gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( "+gen.getEntityFinderName()+".newInstance( current.getId() ) );" );
+            }
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( finder1 );" );
+        }
     }
 
     private static void createSampleEntityPrintAllMethod( DaogenBasicGenerator gen ) {
         gen.getWriter().println( DaogenBasicGenerator.TAB+"public void printAll( "+gen.getEntityModelName()+" current ) { " );
         for ( DaogenCatalogField field : gen.getCurrentEntity() ) {
-            gen.getWriter().println( DaogenBasicGenerator.TAB_2+" logger.info( \""+field.getId()+"-> {}\", current.get"+GeneratorNameHelper.toClassName( field.getId() )+DaogenBasicGenerator.COMMA_END_LIT );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"logger.info( \""+field.getId()+"-> {}\", current.get"+GeneratorNameHelper.toClassName( field.getId() )+DaogenBasicGenerator.COMMA_END_LIT );
         }
         for ( DaogenCatalogRelation relation : gen.getCurrentEntity().getRelations() ) {
             String className = GeneratorNameHelper.toClassName( relation.getName() );
-            gen.getWriter().println( DaogenBasicGenerator.TAB_2+" logger.info( \"relation : "+relation.getId()+"-> {}\", current.get"+className+DaogenBasicGenerator.COMMA_END_LIT );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"logger.info( \"relation : "+relation.getId()+"-> {}\", current.get"+className+DaogenBasicGenerator.COMMA_END_LIT );
         }
         gen.getWriter().println( DaogenBasicGenerator.TAB+"}" );
         gen.getWriter().println();
