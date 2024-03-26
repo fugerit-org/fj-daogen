@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.8.0] - 2024-03-12
 
+### Changed
+
+- newInstance(model) coverage in Junit4ModelGenerator/Junit5ModelGenerator
+
 ### Added
 
 - Finder test coverage for Junit4ModelGenerator/Junit5ModelGenerator #48 <https://github.com/fugerit-org/fj-daogen/issues/48>
-
 
 ## [1.7.9] - 2024-03-12
 

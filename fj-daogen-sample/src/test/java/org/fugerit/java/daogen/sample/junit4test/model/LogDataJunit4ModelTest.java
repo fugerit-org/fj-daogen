@@ -60,6 +60,7 @@ public class LogDataJunit4ModelTest {
 		finder1.setId( current.getId() );
 		Assert.assertEquals( current.getId(), finder1.getId() );
 		Assert.assertNotNull( LogDataFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( LogDataFinder.newInstance( current ) );
 		Assert.assertNotNull( finder1 );
 	}
 

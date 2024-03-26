@@ -76,6 +76,7 @@ public class UserJunit4ModelTest {
 		finder1.setId( current.getId() );
 		Assert.assertEquals( current.getId(), finder1.getId() );
 		Assert.assertNotNull( UserFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( UserFinder.newInstance( current ) );
 		Assert.assertNotNull( finder1 );
 	}
 

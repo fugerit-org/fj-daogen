@@ -72,6 +72,7 @@ public class UnitTestHelper {
                 gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertEquals( current.getId(), finder1.getId() );" );
                 gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( "+gen.getEntityFinderName()+".newInstance( current.getId() ) );" );
             }
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( "+gen.getEntityFinderName()+".newInstance( current ) );" );
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertNotNull( finder1 );" );
         }
     }

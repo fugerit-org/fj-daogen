@@ -57,6 +57,7 @@ public class TestTwoFieldKeyJunit4ModelTest {
 		TestTwoFieldKeyFinder finder1 = new TestTwoFieldKeyFinder();
 		finder1.setModel( current );
 		logger.info( "finder1.getModel() -> {}", finder1.getModel() );
+		Assert.assertNotNull( TestTwoFieldKeyFinder.newInstance( current ) );
 		Assert.assertNotNull( finder1 );
 	}
 

@@ -68,6 +68,7 @@ public class AddressJunit4ModelTest {
 		finder1.setId( current.getId() );
 		Assert.assertEquals( current.getId(), finder1.getId() );
 		Assert.assertNotNull( AddressFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( AddressFinder.newInstance( current ) );
 		Assert.assertNotNull( finder1 );
 	}
 

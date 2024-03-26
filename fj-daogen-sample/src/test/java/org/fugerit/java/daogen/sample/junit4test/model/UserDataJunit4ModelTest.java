@@ -72,6 +72,7 @@ public class UserDataJunit4ModelTest {
 		finder1.setId( current.getId() );
 		Assert.assertEquals( current.getId(), finder1.getId() );
 		Assert.assertNotNull( UserDataFinder.newInstance( current.getId() ) );
+		Assert.assertNotNull( UserDataFinder.newInstance( current ) );
 		Assert.assertNotNull( finder1 );
 	}
 
