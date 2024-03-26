@@ -27,7 +27,7 @@
 		<fj-version>8.5.3</fj-version>
 		<fj-doc-version>3.4.4</fj-doc-version>
 		<javax-rs-api-version>2.1.1</javax-rs-api-version>
-		<native-helper-graalvm-version>1.0.0</native-helper-graalvm-version>
+		<native-helper-graalvm-version>1.1.1</native-helper-graalvm-version>
 		<fj-daogen-version>${project.version}</fj-daogen-version>
 	</properties>
 
