@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### Changed
+
+- fj-bom version set to 1.6.3
+- fj-doc version set to 3.4.5
+- native-helper-graalvm set to 1.1.1
+
 ## [1.8.0] - 2024-03-12
 
 ### Changed
