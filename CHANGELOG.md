@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fj-doc version set to 3.4.5
 - native-helper-graalvm set to 1.1.1
 
-## [1.8.0] - 2024-03-12
+## [1.8.1] - 2024-03-26
 
 ### Changed
 
 - newInstance(model) coverage in Junit4ModelGenerator/Junit5ModelGenerator
+
+## [1.8.0] - 2024-03-12
 
 ### Added
 
