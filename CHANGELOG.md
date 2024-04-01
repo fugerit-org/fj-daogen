@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - fj-bom version set to 1.6.3
 - fj-doc version set to 3.4.5
-- native-helper-graalvm set to 1.1.1
+- native-helper-graalvm set to 1.3.4
 
 ## [1.8.1] - 2024-03-26
 
