@@ -178,7 +178,8 @@ public abstract class BaseRestLoadHelperGenerator extends DaogenBasicGenerator {
 	
 	@Override
 	public void generateDaogenBody() throws IOException {
-		this.addSerialVerUID();
+		String daoRestNgMode = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DAO_REST_NG_MODE, DaogenCatalogConstants.GEN_PROP_DAO_REST_NG_MODE_DISABLED );
+		this.generateSerial( DaogenCatalogConstants.GEN_PROP_DAO_REST_NG_MODE_DISABLED.equalsIgnoreCase( daoRestNgMode ) );
 		String factoryClassName = GeneratorNameHelper.classFromPackage( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACTORY_DEF ) );
 		// load by id
 		if ( StringUtils.isNotEmpty( this.getCurrentEntity().getPrimaryKey() ) ) {
