@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- fj-bom version set to 1.6.3
+- fj-bom version set to 1.6.5
 - fj-doc version set to 3.4.5
 - native-helper-graalvm set to 1.3.4
 
