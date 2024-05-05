@@ -69,6 +69,9 @@ public class TestDaogenRun extends MemDBTestBase {
 		overrideProperties.setProperty(
 				DaogenCatalogConstants.GEN_PROP_DAO_REST_NG_MODE ,
 				DaogenCatalogConstants.GEN_PROP_DAO_REST_NG_MODE_DISABLED );
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG ,
+				DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_DISABLED );
 		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertTrue( file.exists() );
 		Assert.assertEquals( Result.RESULT_CODE_OK, result );

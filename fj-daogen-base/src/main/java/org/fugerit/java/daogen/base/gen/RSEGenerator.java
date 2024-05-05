@@ -1,17 +1,19 @@
 package org.fugerit.java.daogen.base.gen;
 
-import java.io.IOException;
-
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
-import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
-import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
-import org.fugerit.java.daogen.base.config.DaogenCatalogField;
-import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
+import org.fugerit.java.daogen.base.config.*;
 import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 
 public class RSEGenerator extends DaogenBasicGenerator {
 
@@ -69,18 +71,24 @@ public class RSEGenerator extends DaogenBasicGenerator {
 			indent = TAB;
 		}
 		boolean tryCatch = false;
-		if ( columnType.equalsIgnoreCase( "java.lang.String" ) ) {
+		if ( columnType.equalsIgnoreCase( String.class.getName() ) ) {
 			extratMethod = "rs.getString( \""+columnName+END_LINE_1_LIT;
-		} else 	if ( columnType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
+		} else 	if ( columnType.equalsIgnoreCase(BigDecimal.class.getName() ) ) {
 			extratMethod = "rs.getBigDecimal( \""+columnName+END_LINE_1_LIT;
-		} else 	if ( columnType.equalsIgnoreCase( "java.lang.Integer" ) ) {
+		} else 	if ( columnType.equalsIgnoreCase( Integer.class.getName() ) ) {
 			extratMethod = "rs.getInt( \""+columnName+END_LINE_1_LIT;				
-		} else 	if ( columnType.equalsIgnoreCase( "java.sql.Date" ) ) {
+		} else 	if ( columnType.equalsIgnoreCase(java.sql.Date.class.getName()) ) {
 			extratMethod = "rs.getDate( \""+columnName+END_LINE_1_LIT;				
-		} else 	if ( columnType.equalsIgnoreCase( "java.sql.Timestamp" ) ) {
-			extratMethod = "rs.getDate( \""+columnName+END_LINE_1_LIT;				
-		} else 	if ( columnType.equalsIgnoreCase( "java.util.Date" ) ) {				
-			extratMethod = "rs.getTimestamp( \""+columnName+END_LINE_1_LIT;	
+		} else 	if ( columnType.equalsIgnoreCase(Date.class.getName()) ) {
+			extratMethod = "rs.getTimestamp( \""+columnName+END_LINE_1_LIT;
+		} else 	if ( columnType.equalsIgnoreCase( Timestamp.class.getName() ) ) {
+			extratMethod = "rs.getTimestamp( \""+columnName+END_LINE_1_LIT;
+		} else 	if ( columnType.equalsIgnoreCase( LocalDate.class.getName() ) ) {
+			extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDate( rs.getDate( \""+columnName+END_LINE_2_LIT;
+		} else 	if ( columnType.equalsIgnoreCase( LocalTime.class.getName() ) ) {
+			extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalTime( rs.getTime( \""+columnName+END_LINE_2_LIT;
+		} else 	if ( columnType.equalsIgnoreCase( LocalDateTime.class.getName() ) ) {
+			extratMethod = "org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( \""+columnName+END_LINE_2_LIT;
 		} else 	if ( columnType.equalsIgnoreCase( blobHandlerType ) ) {
 			extratMethod = blobHandlerType+".newHandlerPreload( rs.getBlob( \""+columnName+END_LINE_2_LIT;	
 			tryCatch = true;

@@ -8,11 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - daogen property : dao-rest-ng-mode ('dao.rest.ng' will be selected and no serialization)
+- daogen property : type-mapper-time-ng (when enabled, By default java.time.LocalDate/LocalTime/LocalDateTime will be used for model)
 
 ### Changed
 
 - fj-bom version set to 1.6.5
-- fj-version set to 8.5.6
+- fj-version set to 8.5.9
 - fj-doc version set to 8.4.6
 - native-helper-graalvm set to 1.3.4
 

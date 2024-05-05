@@ -4,6 +4,9 @@ import org.fugerit.java.core.javagen.GeneratorNameHelper;
 
 public class DaogenCatalogConstants {
 
+	private static final String ENABLED = "enabled";
+	private static final String DISABLED = "disabled";
+
 	private DaogenCatalogConstants() {}
 	
 	public static final String GEN_PROP_BASE_SRC_FOLDER = "base-src-folder";
@@ -33,8 +36,12 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_TYPE_MAPPER = "type-mapper";
 	public static final String GEN_PROP_TYPE_MAPPER_DEFAULT = "org.fugerit.java.daogen.base.config.DaogenTypeMapper";
 	public static final String GEN_PROP_TYPE_MAP_CONFIG = "type-map-config";
-	public static final String GEN_PROP_TYPE_MAP_CONFIG_DEFAULT = "cl://config/daogen_default_type_mapping.xml";	
-	
+	public static final String GEN_PROP_TYPE_MAP_CONFIG_DEFAULT = "cl://config/daogen_default_type_mapping.xml";
+
+	public static final String GEN_PROP_TIME_MAPPER_NG = "type-mapper-time-ng";
+	public static final String GEN_PROP_TIME_MAPPER_NG_ENABLED = ENABLED;
+	public static final String GEN_PROP_TIME_MAPPER_NG_DISABLED = DISABLED;
+
 	public static final String GEN_PROP_PACKAGE_MODEL =			"package-model";
 	public static final String GEN_PROP_PACKAGE_HELPER =		"package-helper";
 	public static final String GEN_PROP_PACKAGE_FACADE_DEF = 	"package-facade-def";
@@ -77,23 +84,23 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_JEE_TARGET_MODE_DEFAULT = GEN_PROP_JEE_TARGET_MODE_JAVAX;
 
 	public static final String GEN_PROP_DAO_HELPER_NG_MODE = "dao-helper-ng-mode";
-	public static final String GEN_PROP_DAO_HELPER_NG_MODE_ENABLED = "enabled";
-	public static final String GEN_PROP_DAO_HELPER_NG_MODE_DISABLED = "disabled";
+	public static final String GEN_PROP_DAO_HELPER_NG_MODE_ENABLED = ENABLED;
+	public static final String GEN_PROP_DAO_HELPER_NG_MODE_DISABLED = DISABLED;
 
 	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE = "dao-wrapper-ng-mode";
 
-	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_ENABLED = "enabled";
-	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED = "disabled";
+	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_ENABLED = ENABLED;
+	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_DISABLED = DISABLED;
 
 	public static final String GEN_PROP_DAO_FINDER_NG_MODE = "dao-finder-ng-mode";
 
-	public static final String GEN_PROP_DAO_FINDER_NG_MODE_ENABLED = "enabled";
-	public static final String GEN_PROP_DAO_FINDER_NG_MODE_DISABLED = "disabled";
+	public static final String GEN_PROP_DAO_FINDER_NG_MODE_ENABLED = ENABLED;
+	public static final String GEN_PROP_DAO_FINDER_NG_MODE_DISABLED = DISABLED;
 
 	public static final String GEN_PROP_DAO_REST_NG_MODE = "dao-rest-ng-mode";
 
-	public static final String GEN_PROP_DAO_REST_NG_MODE_ENABLED = "enabled";
-	public static final String GEN_PROP_DAO_REST_NG_MODE_DISABLED = "disabled";
+	public static final String GEN_PROP_DAO_REST_NG_MODE_ENABLED = ENABLED;
+	public static final String GEN_PROP_DAO_REST_NG_MODE_DISABLED = DISABLED;
 
 	public static final String PREFIX_MODEL = "Model";
 	

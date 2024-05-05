@@ -190,6 +190,12 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>NOTE: when enabled, Rest entities will not be made serializable.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="daogen:enabledDisabledType" name="type-mapper-time-ng" use="optional" default="disabled">
+			<xsd:annotation>
+				<xsd:documentation>If set to 'enabled' the model_ng property in type mapper is selected.</xsd:documentation>
+				<xsd:documentation>NOTE: when enabled, By default java.time.LocalDate/LocalTime/LocalDateTime will be used for model.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="package-struct" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The package to be used for database java.sql.String classes, for each entity.</xsd:documentation>

@@ -22,6 +22,7 @@
     dao-helper-ng-mode="enabled"
     dao-wrapper-ng-mode="enabled"
     dao-finder-ng-mode="enabled"
+    type-mapper-time-ng="enabled"
 	package-struct="org.fugerit.java.daogen.sample.impl.struct"
 	package-rse="org.fugerit.java.daogen.sample.impl.rse"
 	package-facade-def="org.fugerit.java.daogen.sample.def.facade"
@@ -86,5 +87,10 @@
     <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="DATE_UPDATE" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="1 active, 0 not active" id="STATE" javaType="java.lang.Integer" nullable="no" size="0" sqlType="4" sqlTypeName="INTEGER"/>
-  </entity>  
-</daogen-config>
+  </entity>
+     <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.TYPE_TEST" name="TYPE_TEST" primaryKey="TIME_FIELD,TIMESTAMP_FIELD,DATE_FIELD" schema="FUGERIT">
+         <field comments="Time field" id="TIME_FIELD" javaType="java.sql.Time" nullable="no" size="0" sqlType="92" sqlTypeName="TIME"/>
+         <field comments="Timestamp field" id="TIMESTAMP_FIELD" javaType="java.sql.Timestamp" nullable="no" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
+         <field comments="Date field" id="DATE_FIELD" javaType="java.sql.Date" nullable="no" size="0" sqlType="91" sqlTypeName="DATE"/>
+     </entity>
+ </daogen-config>

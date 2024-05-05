@@ -1,6 +1,11 @@
 package org.fugerit.java.daogen.base.gen;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -62,12 +67,24 @@ public class GeneratorKeyHelper implements Serializable {
 	
 	private void setForLoadInterfaceHelper( String javaType, String fieldName ) {
 		// rest data
-		if ( javaType.equalsIgnoreCase( "java.math.BigDecimal" ) ) {
+		if ( javaType.equalsIgnoreCase(BigDecimal.class.getName()) ) {
 			this.restBuilder.append( "new java.math.BigDecimal(" );
 			this.restBuilder.append( fieldName );
 			this.restBuilder.append( ")" );
-		} else if ( javaType.equalsIgnoreCase( "java.util.Date" ) ) {
+		} else if ( javaType.equalsIgnoreCase(Date.class.getName()) ) {
 			this.restBuilder.append( "this.defaultConvertToUtilDate(" );
+			this.restBuilder.append( fieldName );
+			this.restBuilder.append( ")" );
+		} else if ( javaType.equalsIgnoreCase(LocalDate.class.getName()) ) {
+			this.restBuilder.append( "java.time.LocalDate.parse(" );
+			this.restBuilder.append( fieldName );
+			this.restBuilder.append( ")" );
+		} else if ( javaType.equalsIgnoreCase(LocalDateTime.class.getName()) ) {
+			this.restBuilder.append( "java.time.LocalDateTime.parse(" );
+			this.restBuilder.append( fieldName );
+			this.restBuilder.append( ")" );
+		} else if ( javaType.equalsIgnoreCase(LocalTime.class.getName()) ) {
+			this.restBuilder.append( "java.time.LocalTime.parse(" );
 			this.restBuilder.append( fieldName );
 			this.restBuilder.append( ")" );
 		} else {

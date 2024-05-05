@@ -7,8 +7,11 @@
 <entry key="model_java.lang.Short">java.math.BigDecimal</entry>
 <entry key="model_java.lang.Byte">java.math.BigDecimal</entry>
 <entry key="model_java.sql.Date">java.util.Date</entry>
+<entry key="model_ng_java.sql.Date">java.time.LocalDate</entry>
 <entry key="model_java.sql.Time">java.util.Date</entry>
+<entry key="model_ng_java.sql.Time">java.time.LocalTime</entry>
 <entry key="model_java.sql.Timestamp">java.util.Date</entry>
+<entry key="model_ng_java.sql.Timestamp">java.time.LocalDateTime</entry>
 <entry key="model_java.sql.Blob">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
 <entry key="model_oracle.sql.BLOB">org.fugerit.java.core.db.daogen.ByteArrayDataHandler</entry>
 <entry key="model_java.sql.Clob">org.fugerit.java.core.db.daogen.CharArrayDataHandler</entry>
