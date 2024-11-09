@@ -25,8 +25,6 @@ public class AddressRSE extends BasicRSExtractor<ModelAddress> {
 
 	private static final long serialVersionUID = 582538368203L;
 
-	public static final AddressRSE DEFAULT = new AddressRSE();
-
 	@Override
 	public ModelAddress extractNext( ResultSet rs ) throws SQLException { 
 		HelperAddress current = new HelperAddress();

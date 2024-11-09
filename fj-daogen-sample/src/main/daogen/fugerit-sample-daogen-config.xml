@@ -30,6 +30,7 @@
 	default-sequence="seq_id_fugerit"
 	openapi_host="http://localhost:9080"
 	openapi_path="/fugerit-sample-web/jax-rs"
+    disable-singleton="enabled"
 	check-empty-interface="1"
 	>
 

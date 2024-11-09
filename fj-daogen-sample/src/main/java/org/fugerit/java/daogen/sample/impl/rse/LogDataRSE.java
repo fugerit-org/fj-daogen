@@ -25,8 +25,6 @@ public class LogDataRSE extends BasicRSExtractor<ModelLogData> {
 
 	private static final long serialVersionUID = 543407837219L;
 
-	public static final LogDataRSE DEFAULT = new LogDataRSE();
-
 	@Override
 	public ModelLogData extractNext( ResultSet rs ) throws SQLException { 
 		HelperLogData current = new HelperLogData();

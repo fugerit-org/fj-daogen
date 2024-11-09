@@ -87,6 +87,10 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_DAO_HELPER_NG_MODE_ENABLED = ENABLED;
 	public static final String GEN_PROP_DAO_HELPER_NG_MODE_DISABLED = DISABLED;
 
+	public static final String GEN_PROP_DISABLE_SINGLETON = "disable-singleton";
+	public static final String GEN_PROP_DISABLE_SINGLETON_ENABLED = ENABLED;
+	public static final String GEN_PROP_DISABLE_SINGLETON_DISABLED = DISABLED;
+
 	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE = "dao-wrapper-ng-mode";
 
 	public static final String GEN_PROP_DAO_WRAPPER_NG_MODE_ENABLED = ENABLED;

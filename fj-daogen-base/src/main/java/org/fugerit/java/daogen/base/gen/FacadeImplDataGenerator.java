@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
@@ -16,6 +17,7 @@ import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.config.DaogenHelperGenerator;
 import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
+@Slf4j
 public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 
 	public static final String KEY = FacadeImplDataGenerator.class.getSimpleName();
@@ -121,12 +123,19 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		}
 		
 		this.getWriter().println( TAB+PUBLIC_LIT+superType+"() {" );
-		this.getWriter().println( TAB_2+"super( TABLE_NAME, "+this.getEntityRSEName()+".DEFAULT, "+queryViewInit+" );");
+
+		String rseCreate = this.getEntityRSEName()+".DEFAULT";
+		String disableSingleton = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_DISABLED );
+		log.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, disableSingleton );
+		if ( DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED.equalsIgnoreCase( disableSingleton ) ) {
+			rseCreate = "new "+this.getEntityRSEName()+"()";
+		}
+		this.getWriter().println( TAB_2+"super( TABLE_NAME, "+rseCreate+", "+queryViewInit+" );");
 		this.getWriter().println( TAB+"}");
 		this.getWriter().println();
 		
 		this.getWriter().println( TAB+PUBLIC_LIT+superType+"( String tableName, String queryView ) {" );
-		this.getWriter().println( TAB_2+"super( tableName, "+this.getEntityRSEName()+".DEFAULT, queryView );");
+		this.getWriter().println( TAB_2+"super( tableName, "+rseCreate+", queryView );");
 		this.getWriter().println( TAB+"}");
 		this.getWriter().println();
 		String sequenceName = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DEFAULT_SEQUENCE );

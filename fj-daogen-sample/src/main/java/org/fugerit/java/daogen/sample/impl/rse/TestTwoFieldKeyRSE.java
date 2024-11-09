@@ -25,8 +25,6 @@ public class TestTwoFieldKeyRSE extends BasicRSExtractor<ModelTestTwoFieldKey> {
 
 	private static final long serialVersionUID = 164046700498L;
 
-	public static final TestTwoFieldKeyRSE DEFAULT = new TestTwoFieldKeyRSE();
-
 	@Override
 	public ModelTestTwoFieldKey extractNext( ResultSet rs ) throws SQLException { 
 		HelperTestTwoFieldKey current = new HelperTestTwoFieldKey();

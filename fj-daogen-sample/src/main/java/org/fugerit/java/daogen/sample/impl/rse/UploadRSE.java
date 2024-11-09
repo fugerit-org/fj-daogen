@@ -25,8 +25,6 @@ public class UploadRSE extends BasicRSExtractor<ModelUpload> {
 
 	private static final long serialVersionUID = 807254852474L;
 
-	public static final UploadRSE DEFAULT = new UploadRSE();
-
 	@Override
 	public ModelUpload extractNext( ResultSet rs ) throws SQLException { 
 		HelperUpload current = new HelperUpload();

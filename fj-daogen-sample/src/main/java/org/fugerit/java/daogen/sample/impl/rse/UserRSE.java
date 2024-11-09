@@ -25,8 +25,6 @@ public class UserRSE extends BasicRSExtractor<ModelUser> {
 
 	private static final long serialVersionUID = 577630883979L;
 
-	public static final UserRSE DEFAULT = new UserRSE();
-
 	@Override
 	public ModelUser extractNext( ResultSet rs ) throws SQLException { 
 		HelperUser current = new HelperUser();

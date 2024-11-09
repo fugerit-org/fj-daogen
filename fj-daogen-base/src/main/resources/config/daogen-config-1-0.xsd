@@ -166,6 +166,11 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="daogen:enabledDisabledType" name="disable-singleton" use="optional" default="disabled">
+			<xsd:annotation>
+				<xsd:documentation>If set to 'enabled' the singleton generation. (i.e. RSE DEFAULT field).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 		<xsd:attribute type="daogen:enabledDisabledType" name="dao-helper-ng-mode" use="optional" default="disabled">
 			<xsd:annotation>
 				<xsd:documentation>If set to 'enabled' the 'dao.helper.ng' property set will be selected.</xsd:documentation>

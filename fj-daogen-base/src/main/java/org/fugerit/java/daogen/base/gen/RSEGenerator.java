@@ -1,9 +1,11 @@
 package org.fugerit.java.daogen.base.gen;
 
+import lombok.extern.slf4j.Slf4j;
 import org.fugerit.java.core.cfg.ConfigException;
 import org.fugerit.java.core.cfg.ConfigRuntimeException;
 import org.fugerit.java.core.javagen.GeneratorNameHelper;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
+import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.*;
 import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
+@Slf4j
 public class RSEGenerator extends DaogenBasicGenerator {
 
 	public static final String KEY = "RSEGenerator";
@@ -44,8 +47,12 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	@Override
 	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
-		this.getWriter().println( TAB+"public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
-		this.getWriter().println();
+		String disableSingleton = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_DISABLED );
+		log.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, disableSingleton );
+		if ( !DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED.equalsIgnoreCase( disableSingleton ) ) {
+			this.getWriter().println( TAB+"public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
+			this.getWriter().println();
+		}
 		this.getWriter().println( TAB+"@Override" );
 		this.getWriter().println( TAB+"public "+this.getEntityModelName()+" extractNext( ResultSet rs ) throws SQLException { " );
 		this.getWriter().println( TAB_2+""+this.getEntityHelperName()+" current = new "+this.getEntityHelperName()+"();" );

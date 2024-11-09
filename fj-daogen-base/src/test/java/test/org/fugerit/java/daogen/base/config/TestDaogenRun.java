@@ -48,6 +48,8 @@ public class TestDaogenRun extends MemDBTestBase {
 				DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION , DaogenCatalogConstants.GEN_PROP_JDK_TARGET_VERSION_17.toString() );
 		overrideProperties.setProperty(
 				DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE , BooleanUtils.BOOLEAN_FALSE );
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON , DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED );
 		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertTrue( file.exists() );
 		Assert.assertEquals( Result.RESULT_CODE_OK, result );
