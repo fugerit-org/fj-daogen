@@ -126,7 +126,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 
 		String rseCreate = this.getEntityRSEName()+".DEFAULT";
 		String disableSingleton = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_DISABLED );
-		log.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, disableSingleton );
+		log.debug( "{} -> '{}' - check : {}", DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, disableSingleton, !DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED.equalsIgnoreCase( disableSingleton ) );
 		if ( DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED.equalsIgnoreCase( disableSingleton ) ) {
 			rseCreate = "new "+this.getEntityRSEName()+"()";
 		}

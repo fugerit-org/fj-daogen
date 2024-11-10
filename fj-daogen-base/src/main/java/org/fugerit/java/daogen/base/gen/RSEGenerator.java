@@ -11,6 +11,8 @@ import org.fugerit.java.daogen.base.gen.util.FacadeGeneratorUtils;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,8 +41,8 @@ public class RSEGenerator extends DaogenBasicGenerator {
 		this.setClassRSEHelper( DaogenClassConfigHelper.addImport( daogenConfig , DaogenClassConfigHelper.DAO_RSEHELPER_BASE, this.getImportList() ) );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+this.getEntityHelperName() );
-		this.getImportList().add( "java.sql.ResultSet" );
-		this.getImportList().add( "java.sql.SQLException" );
+		this.getImportList().add(ResultSet.class.getName());
+		this.getImportList().add(SQLException.class.getName());
 		this.setExtendsClass( this.getClassRSEHelper()+"<"+this.getEntityModelName()+">" );
 	}
 
@@ -48,7 +50,7 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	public void generateDaogenBody() throws IOException {
 		this.addSerialVerUID();
 		String disableSingleton = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_DISABLED );
-		log.info( "{} -> {}", DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, disableSingleton );
+		log.debug( "{} -> '{}' - check : {}", DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON, disableSingleton, !DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED.equalsIgnoreCase( disableSingleton ) );
 		if ( !DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED.equalsIgnoreCase( disableSingleton ) ) {
 			this.getWriter().println( TAB+"public static final "+this.getEntityRSEName()+" DEFAULT = new "+this.getEntityRSEName()+"();" );
 			this.getWriter().println();
