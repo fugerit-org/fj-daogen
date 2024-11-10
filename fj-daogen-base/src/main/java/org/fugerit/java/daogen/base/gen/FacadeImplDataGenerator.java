@@ -311,7 +311,16 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println();	
 		}
 	}
-	
+
+	private String dateUpdateType() {
+		boolean timeNgMode = DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_ENABLED.equalsIgnoreCase( this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG, DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_DISABLED ) );
+		if ( timeNgMode ) {
+			return "( java.time.LocalDateTime.now() ); ";
+		} else {
+			return "( new java.sql.Timestamp( System.currentTimeMillis() ) ); ";
+		}
+	}
+
 	private void generateHelperClassUpdate( DaogenCatalogField colDataUpdate, GeneratorKeyHelper primaryKeyHelper ) {
 		if ( FacadeGeneratorUtils.isFacadeModeUpdate( this.getCurrentEntity() ) ) {
 			// update by primary key
@@ -321,12 +330,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
 			if ( colDataUpdate != null ) {
 				this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );
-				boolean timeNgMode = DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_ENABLED.equalsIgnoreCase( this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG, DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_DISABLED ) );
-				if ( timeNgMode ) {
-					this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( java.time.LocalDateTime.now() ); " );
-				} else {
-					this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );
-				}
+				this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+this.dateUpdateType() );
 			}
 			this.getWriter().println( TAB_2+"UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 			for ( DaogenCatalogField field : this.getCurrentEntity() ) {
