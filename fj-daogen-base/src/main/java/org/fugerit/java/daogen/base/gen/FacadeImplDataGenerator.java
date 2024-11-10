@@ -204,7 +204,12 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 	
 	private void generateHelperClassInsertColumnHandler( DaogenCatalogField colData, DaogenCatalogField colDataUpdate ) {
 		if ( colData != null || colDataUpdate != null ) {
-			this.getWriter().println( TAB_2+"java.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );" );	
+			boolean timeNgMode = DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_ENABLED.equalsIgnoreCase( this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG, DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_DISABLED ) );
+			if ( timeNgMode ) {
+				this.getWriter().println( TAB_2+"java.time.LocalDateTime currentTime = java.time.LocalDateTime.now();" );
+			} else {
+				this.getWriter().println( TAB_2+"java.sql.Timestamp currentTime = new java.sql.Timestamp( System.currentTimeMillis() );" );
+			}
 		}
 		if ( colData != null ) {
 			this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_INSERT+" : true - i will set insert time" );	
@@ -315,8 +320,13 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB_2+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+GENERIC_LIT );
 			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
 			if ( colDataUpdate != null ) {
-				this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );	
-				this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );	
+				this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );
+				boolean timeNgMode = DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_ENABLED.equalsIgnoreCase( this.getDaogenConfig().getGeneralProps().getProperty( DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG, DaogenCatalogConstants.GEN_PROP_TIME_MAPPER_NG_DISABLED ) );
+				if ( timeNgMode ) {
+					this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( java.time.LocalDateTime.now() ); " );
+				} else {
+					this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+"( new java.sql.Timestamp( System.currentTimeMillis() ) ); " );
+				}
 			}
 			this.getWriter().println( TAB_2+"UpdateHelper query = daoHelper.newUpdateHelper( this.getTableName() );" );
 			for ( DaogenCatalogField field : this.getCurrentEntity() ) {
