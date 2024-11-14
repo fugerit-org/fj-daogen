@@ -110,8 +110,8 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 	@Override
 	public void readSQL(SQLInput stream, String typeName) throws SQLException {
 		this.setId( stream.readBigDecimal() );
-		this.setDateInsert( stream.readTimestamp() );
-		this.setDateUpdate( stream.readTimestamp() );
+		this.setDateInsert( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
+		this.setDateUpdate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
 		this.setContent( org.fugerit.java.core.db.daogen.SQLTypeConverter.blobToByteHandler( (java.sql.Blob) stream.readObject() ) );
 	}
 
@@ -122,8 +122,8 @@ public class ObjUpload extends WrapperUpload implements SQLData, StructMapper {
 		}
 		this.areLobsSet = false;	// clob and blob will be used only once
 		stream.writeBigDecimal( this.getId() );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getDateInsert() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getDateUpdate() ) );
 		stream.writeBlob( this.getContentBlob() );
 	}
 

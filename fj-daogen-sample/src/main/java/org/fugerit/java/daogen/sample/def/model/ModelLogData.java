@@ -45,7 +45,7 @@ public interface ModelLogData extends org.fugerit.java.core.lang.compare.CheckEm
 	 *
 	 * @return the value of logTime
 	 */
-	java.util.Date getLogTime();
+	java.time.LocalDateTime getLogTime();
 
 	/**
 	 * Setter method for property : logTime (nullable: yes)
@@ -54,7 +54,7 @@ public interface ModelLogData extends org.fugerit.java.core.lang.compare.CheckEm
 	 *
 	 * @param value the value of logTime
 	 */
-	void setLogTime( java.util.Date value );
+	void setLogTime( java.time.LocalDateTime value );
 
 	/**
 	 * Getter method for property : info (nullable: no)

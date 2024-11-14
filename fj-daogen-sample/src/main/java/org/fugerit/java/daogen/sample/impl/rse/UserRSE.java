@@ -31,9 +31,9 @@ public class UserRSE extends BasicRSExtractor<ModelUser> {
 		current.setId( rs.getBigDecimal( "ID" )  );
 		current.setUsername( rs.getString( "USERNAME" )  );
 		current.setPassword( rs.getString( "PASSWORD" )  );
-		current.setLastLogin( rs.getTimestamp( "LAST_LOGIN" )  );
-		current.setDateInsert( rs.getTimestamp( "DATE_INSERT" )  );
-		current.setDateUpdate( rs.getTimestamp( "DATE_UPDATE" )  );
+		current.setLastLogin( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "LAST_LOGIN" ) )  );
+		current.setDateInsert( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "DATE_INSERT" ) )  );
+		current.setDateUpdate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "DATE_UPDATE" ) )  );
 		current.setState( rs.getBigDecimal( "STATE" )  );
 		return current;
 	} 

@@ -30,8 +30,8 @@ public class AddressRSE extends BasicRSExtractor<ModelAddress> {
 		HelperAddress current = new HelperAddress();
 		current.setId( rs.getBigDecimal( "ID" )  );
 		current.setIdUser( rs.getBigDecimal( "ID_USER" )  );
-		current.setDateInsert( rs.getTimestamp( "DATE_INSERT" )  );
-		current.setDateUpdate( rs.getTimestamp( "DATE_UPDATE" )  );
+		current.setDateInsert( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "DATE_INSERT" ) )  );
+		current.setDateUpdate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "DATE_UPDATE" ) )  );
 		current.setInfo( rs.getString( "INFO" )  );
 		return current;
 	} 

@@ -29,8 +29,8 @@ public class UploadRSE extends BasicRSExtractor<ModelUpload> {
 	public ModelUpload extractNext( ResultSet rs ) throws SQLException { 
 		HelperUpload current = new HelperUpload();
 		current.setId( rs.getBigDecimal( "ID" )  );
-		current.setDateInsert( rs.getTimestamp( "DATE_INSERT" )  );
-		current.setDateUpdate( rs.getTimestamp( "DATE_UPDATE" )  );
+		current.setDateInsert( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "DATE_INSERT" ) )  );
+		current.setDateUpdate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "DATE_UPDATE" ) )  );
 		try { 
 			current.setContent( org.fugerit.java.core.db.daogen.ByteArrayDataHandler.newHandlerPreload( rs.getBlob( "CONTENT" ) )  );
 		} catch (Exception e) {

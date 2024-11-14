@@ -28,6 +28,10 @@
  	package-junit4-model="org.fugerit.java.daogen.sample.junit4test.model"
 	factory-data-impl="org.fugerit.java.daogen.sample.impl.facade.data.FugeritDataLogicFacade"
 	default-sequence="seq_id_fugerit"
+    dao-helper-ng-mode="enabled"
+    dao-wrapper-ng-mode="enabled"
+    dao-finder-ng-mode="enabled"
+    type-mapper-time-ng="enabled"
 	openapi_host="http://localhost:9080"
 	openapi_path="/fugerit-sample-web/jax-rs"
     disable-singleton="enabled"
@@ -38,8 +42,8 @@
   <relation id="addressToUser" name="USER" from="PUBLIC.FUGERIT.ADDRESS" to="PUBLIC.FUGERIT.USER" mode="one" key="ID_USER"/>
 	
   <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT">
-    <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
-    <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
+    <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT" exampleData="123"/>
+    <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR" exampleData="user1"/>
     <field comments="Password hash" id="PASSWORD" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
     <field comments="Time of last user login" id="LAST_LOGIN" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>
     <field comments="" id="DATE_INSERT" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>

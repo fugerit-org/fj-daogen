@@ -44,6 +44,7 @@ public class DaogenCatalogConstants {
 
 	public static final String GEN_PROP_PACKAGE_MODEL =			"package-model";
 	public static final String GEN_PROP_PACKAGE_HELPER =		"package-helper";
+	public static final String GEN_PROP_PACKAGE_HELPER_MICROPROFILE =		"package-helper-microprofile";
 	public static final String GEN_PROP_PACKAGE_FACADE_DEF = 	"package-facade-def";
 	public static final String GEN_PROP_PACKAGE_FACADE_DATA_IMPL = 	"package-facade-data-impl";
 	public static final String GEN_PROP_PACKAGE_RSE = 	"package-rse";
@@ -111,6 +112,8 @@ public class DaogenCatalogConstants {
 	public static final String PREFIX_HELPER = "Helper";
 	
 	public static final String PREFIX_WRAPPER = "Wrapper";
+
+	public static final String PREFIX_MPSCHEMA = "MPSchema";
 	
 	public static final String PREFIX_RESTLOAD = "Load";
 	
@@ -148,6 +151,10 @@ public class DaogenCatalogConstants {
 	
 	public static String wrapperName( DaogenCatalogEntity entity ) {
 		return PREFIX_WRAPPER+entity.toClassName();
+	}
+
+	public static String mpSchemaName( DaogenCatalogEntity entity ) {
+		return PREFIX_MPSCHEMA+entity.toClassName();
 	}
 	
 	public static String finderlName( DaogenCatalogEntity entity ) {

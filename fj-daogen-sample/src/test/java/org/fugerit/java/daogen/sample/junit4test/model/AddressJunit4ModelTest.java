@@ -44,9 +44,9 @@ public class AddressJunit4ModelTest {
 		Assert.assertFalse( current.isEmpty() );
 		current.setIdUser(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
-		current.setDateInsert(new java.util.Date());
+		current.setDateInsert(null);
 		Assert.assertFalse( current.isEmpty() );
-		current.setDateUpdate(new java.util.Date());
+		current.setDateUpdate(null);
 		Assert.assertFalse( current.isEmpty() );
 		current.setInfo("1");
 		Assert.assertFalse( current.isEmpty() );
@@ -60,7 +60,6 @@ public class AddressJunit4ModelTest {
 		ModelAddress current = this.newInstance();
 		this.printAll( current );
 		logger.info( "current toString() : {}", current );
-		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 		AddressFinder finder1 = new AddressFinder();
 		finder1.setModel( current );

@@ -69,9 +69,9 @@ public class ObjUserData extends WrapperUserData implements SQLData, StructMappe
 		this.setId( stream.readBigDecimal() );
 		this.setUsername( stream.readString() );
 		this.setPassword( stream.readString() );
-		this.setLastLogin( stream.readTimestamp() );
-		this.setDateInsert( stream.readTimestamp() );
-		this.setDateUpdate( stream.readTimestamp() );
+		this.setLastLogin( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
+		this.setDateInsert( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
+		this.setDateUpdate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
 		this.setState( stream.readBigDecimal() );
 	}
 
@@ -80,9 +80,9 @@ public class ObjUserData extends WrapperUserData implements SQLData, StructMappe
 		stream.writeBigDecimal( this.getId() );
 		stream.writeString( this.getUsername() );
 		stream.writeString( this.getPassword() );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getLastLogin() ) );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getLastLogin() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getDateInsert() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getDateUpdate() ) );
 		stream.writeBigDecimal( this.getState() );
 	}
 

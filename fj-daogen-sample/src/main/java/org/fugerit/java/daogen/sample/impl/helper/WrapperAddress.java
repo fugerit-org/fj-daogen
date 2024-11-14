@@ -1,6 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
-import org.fugerit.java.core.db.daogen.BasicWrapper;
+import org.fugerit.java.core.db.daogen.BasicWrapperNG;
 import org.fugerit.java.daogen.sample.def.model.ModelAddress;
 import org.fugerit.java.daogen.sample.def.model.ModelUser;
 
@@ -16,24 +16,10 @@ import org.fugerit.java.daogen.sample.def.model.ModelUser;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class WrapperAddress extends BasicWrapper<ModelAddress> implements ModelAddress {
+public class WrapperAddress extends BasicWrapperNG<ModelAddress> implements ModelAddress {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
-
-	private static final long serialVersionUID = 608697339771L;
-
-	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-		// this class is conditionally serializable, depending on contained object
-		// special situation can be handled using this method in future
-		out.defaultWriteObject();
-	}
-
-	private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-		// this class is conditionally serializable, depending on contained object
-		// special situation can be handled using this method in future
-		in.defaultReadObject();
-	}
 
 	public WrapperAddress( ModelAddress wrapped ) {
 		super( wrapped );
@@ -85,22 +71,22 @@ public class WrapperAddress extends BasicWrapper<ModelAddress> implements ModelA
 	}
 
 	@Override
-	public void setDateInsert( java.util.Date value ) {
+	public void setDateInsert( java.time.LocalDateTime value ) {
 		this.unwrapModel().setDateInsert( value );
 	}
 
 	@Override
-	public java.util.Date getDateInsert() {
+	public java.time.LocalDateTime getDateInsert() {
 		return this.unwrapModel().getDateInsert();
 	}
 
 	@Override
-	public void setDateUpdate( java.util.Date value ) {
+	public void setDateUpdate( java.time.LocalDateTime value ) {
 		this.unwrapModel().setDateUpdate( value );
 	}
 
 	@Override
-	public java.util.Date getDateUpdate() {
+	public java.time.LocalDateTime getDateUpdate() {
 		return this.unwrapModel().getDateUpdate();
 	}
 
