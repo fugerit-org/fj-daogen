@@ -30,6 +30,7 @@ public class DaogenFacade {
 	}
 	
 	private static void handleCurrentGenerator( DaogenBasicGenerator generator, DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity, FactoryType dataType ) throws ConfigException, IOException, ClassNotFoundException, NoSuchMethodException {
+		log.info( "current generator : {}, entity : {}", generator.getKey(), entity.getId() );
 		if ( generator.isGenerate( daogenConfig, entity ) ) {
 			Collection<FactoryType> decorators = daogenConfig.getDecoratorCatalog().getDataList( dataType.getId() );
 			if ( decorators != null ) {
@@ -71,6 +72,7 @@ public class DaogenFacade {
 			for ( FactoryType dataType : generatorCatalog.getFactoryGenerators( daogenConfig ) ) {
 				if ( daogenConfig.getGeneralProps().containsKey( dataType.getInfo() ) ) {
 					DaogenBasicGenerator generator = (DaogenBasicGenerator)(ClassHelper.newInstance( dataType.getType()));
+					log.debug( "current generator : {}", generator.getKey() );
 					generator.init( daogenConfig, null );	
 					generageFile( generator );	
 				}

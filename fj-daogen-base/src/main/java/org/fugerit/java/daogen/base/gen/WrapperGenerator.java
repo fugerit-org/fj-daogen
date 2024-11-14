@@ -3,15 +3,9 @@ package org.fugerit.java.daogen.base.gen;
 import java.io.IOException;
 
 import org.fugerit.java.core.cfg.ConfigException;
-import org.fugerit.java.core.javagen.GeneratorNameHelper;
-import org.fugerit.java.core.lang.helpers.BooleanUtils;
-import org.fugerit.java.core.lang.helpers.StringUtils;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConfig;
 import org.fugerit.java.daogen.base.config.DaogenCatalogConstants;
 import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
-import org.fugerit.java.daogen.base.config.DaogenCatalogField;
-import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
-import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
 import org.fugerit.java.daogen.base.gen.util.WrapperUtils;
 
 public class WrapperGenerator extends DaogenBasicGenerator {

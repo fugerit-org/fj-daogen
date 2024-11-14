@@ -9,7 +9,6 @@ import org.fugerit.java.daogen.base.config.*;
 import org.fugerit.java.daogen.base.gen.DaogenBasicGenerator;
 
 import java.io.IOException;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Slf4j
