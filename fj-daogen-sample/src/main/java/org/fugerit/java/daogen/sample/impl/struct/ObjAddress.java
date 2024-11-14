@@ -68,8 +68,8 @@ public class ObjAddress extends WrapperAddress implements SQLData, StructMapper 
 	public void readSQL(SQLInput stream, String typeName) throws SQLException {
 		this.setId( stream.readBigDecimal() );
 		this.setIdUser( stream.readBigDecimal() );
-		this.setDateInsert( stream.readTimestamp() );
-		this.setDateUpdate( stream.readTimestamp() );
+		this.setDateInsert( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
+		this.setDateUpdate( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
 		this.setInfo( stream.readString() );
 	}
 
@@ -77,8 +77,8 @@ public class ObjAddress extends WrapperAddress implements SQLData, StructMapper 
 	public void writeSQL(SQLOutput stream) throws SQLException {
 		stream.writeBigDecimal( this.getId() );
 		stream.writeBigDecimal( this.getIdUser() );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateInsert() ) );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getDateUpdate() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getDateInsert() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getDateUpdate() ) );
 		stream.writeString( this.getInfo() );
 	}
 

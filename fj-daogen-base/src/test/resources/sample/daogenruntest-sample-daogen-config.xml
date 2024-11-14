@@ -19,6 +19,7 @@
 	struct_prefix="OBJ_"
 	package-model="org.fugerit.java.daogen.sample.def.model"
 	package-helper="org.fugerit.java.daogen.sample.impl.helper"
+    package-helper-microprofile="org.fugerit.java.daogen.sample.impl.helper"
     dao-helper-ng-mode="enabled"
     dao-wrapper-ng-mode="enabled"
     dao-finder-ng-mode="enabled"
@@ -45,7 +46,7 @@
 	
   <entity catalog="PUBLIC" comments="Contains users data" id="PUBLIC.FUGERIT.USER" name="USER" primaryKey="ID" schema="FUGERIT"
   	sequenceName="SEQ_USER" facadeMode="COMPLETE" orderBy="ID ASC" queryView="SELECT * FROM USER" structSqlType="(USE_NAME)">
-    <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT"/>
+    <field comments="User system id" id="ID" javaType="java.lang.Long" nullable="no" size="0" sqlType="-5" sqlTypeName="BIGINT" exampleData="134"/>
     <field comments="User chosen id" id="USERNAME" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
     <field comments="Password hash" id="PASSWORD" javaType="java.lang.String" nullable="no" size="128" sqlType="12" sqlTypeName="VARCHAR"/>
     <field comments="Time of last user login" id="LAST_LOGIN" javaType="java.sql.Timestamp" nullable="yes" size="0" sqlType="93" sqlTypeName="TIMESTAMP"/>

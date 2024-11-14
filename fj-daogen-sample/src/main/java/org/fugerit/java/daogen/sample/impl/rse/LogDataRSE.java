@@ -29,7 +29,7 @@ public class LogDataRSE extends BasicRSExtractor<ModelLogData> {
 	public ModelLogData extractNext( ResultSet rs ) throws SQLException { 
 		HelperLogData current = new HelperLogData();
 		current.setId( rs.getBigDecimal( "ID" )  );
-		current.setLogTime( rs.getTimestamp( "LOG_TIME" )  );
+		current.setLogTime( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( rs.getTimestamp( "LOG_TIME" ) )  );
 		current.setInfo( rs.getString( "INFO" )  );
 		return current;
 	} 

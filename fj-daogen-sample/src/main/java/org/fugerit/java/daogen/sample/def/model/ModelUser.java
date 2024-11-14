@@ -99,7 +99,7 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 *
 	 * @return the value of lastLogin
 	 */
-	java.util.Date getLastLogin();
+	java.time.LocalDateTime getLastLogin();
 
 	/**
 	 * Setter method for property : lastLogin (nullable: yes)
@@ -108,7 +108,7 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 *
 	 * @param value the value of lastLogin
 	 */
-	void setLastLogin( java.util.Date value );
+	void setLastLogin( java.time.LocalDateTime value );
 
 	/**
 	 * Getter method for property : dateInsert (nullable: yes)
@@ -117,7 +117,7 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 *
 	 * @return the value of dateInsert
 	 */
-	java.util.Date getDateInsert();
+	java.time.LocalDateTime getDateInsert();
 
 	/**
 	 * Setter method for property : dateInsert (nullable: yes)
@@ -126,7 +126,7 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 *
 	 * @param value the value of dateInsert
 	 */
-	void setDateInsert( java.util.Date value );
+	void setDateInsert( java.time.LocalDateTime value );
 
 	/**
 	 * Getter method for property : dateUpdate (nullable: yes)
@@ -135,7 +135,7 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 *
 	 * @return the value of dateUpdate
 	 */
-	java.util.Date getDateUpdate();
+	java.time.LocalDateTime getDateUpdate();
 
 	/**
 	 * Setter method for property : dateUpdate (nullable: yes)
@@ -144,7 +144,7 @@ public interface ModelUser extends org.fugerit.java.core.lang.compare.CheckEmpty
 	 *
 	 * @param value the value of dateUpdate
 	 */
-	void setDateUpdate( java.util.Date value );
+	void setDateUpdate( java.time.LocalDateTime value );
 
 	/**
 	 * Getter method for property : state (nullable: no)

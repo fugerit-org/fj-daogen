@@ -1,6 +1,5 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
-import org.fugerit.java.core.db.daogen.BasicHelper;
 import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
 
 // custom import start ( code above here will be overwritten )
@@ -15,24 +14,10 @@ import org.fugerit.java.daogen.sample.def.model.ModelTestTwoFieldKey;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class HelperTestTwoFieldKey extends BasicHelper implements ModelTestTwoFieldKey {
+public class HelperTestTwoFieldKey implements ModelTestTwoFieldKey {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
-
-	private static final long serialVersionUID = 145827814931L;
-
-	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-		// this class is conditionally serializable, depending on contained object
-		// special situation can be handled using this method in future
-		out.defaultWriteObject();
-	}
-
-	private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-		// this class is conditionally serializable, depending on contained object
-		// special situation can be handled using this method in future
-		in.defaultReadObject();
-	}
 
 	/*
 	 * fields generated for entity attributes 

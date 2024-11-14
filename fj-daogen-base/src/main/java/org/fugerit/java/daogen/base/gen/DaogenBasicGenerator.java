@@ -35,7 +35,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String CLOSE_AND_THROWS = " ) throws ";
 	
-	protected static final String AT_OVERRIDE = "@Override";
+	public static final String AT_OVERRIDE = "@Override";
 	
 	protected static final String REAL_CLASS_COMMENT = TAB+"// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
 
@@ -71,7 +71,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	
 	protected static final String RETURN_RES_LIT = "return res;";
 	
-	protected static final String PUBLIC_SPACE_LIT = "public ";
+	public static final String PUBLIC_SPACE_LIT = "public ";
 	
 	protected static final String PUBLIC_STATIC_SPACE_LIT = "public static ";
 	
@@ -162,7 +162,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return this.getJdkTargetVersion().intValue() == jdkVerson.intValue();
 	}
 	
-	protected boolean isJdkVersionAtLeast( Integer jdkVerson ) {
+	public boolean isJdkVersionAtLeast( Integer jdkVerson ) {
 		return this.getJdkTargetVersion().intValue() >= jdkVerson.intValue();
 	}
 	
@@ -270,7 +270,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	public String getEntityWrapperName() {
 		return DaogenCatalogConstants.wrapperName( this.getCurrentEntity() );
 	}
-	
+
 	public String getEntityFacadeDefName() {
 		return DaogenCatalogConstants.facadeDefName( this.getCurrentEntity() );
 	}
@@ -377,7 +377,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return classBaseWrapper;
 	}
 
-	protected void setClassBaseWrapper(String classBaseWrapper) {
+	public void setClassBaseWrapper(String classBaseWrapper) {
 		this.classBaseWrapper = classBaseWrapper;
 	}
 
@@ -472,7 +472,7 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		}
 	}
 
-	protected void generateSerial( boolean condition ) throws IOException {
+	public void generateSerial( boolean condition ) throws IOException {
 		if ( condition ) {
 			this.addSerialVerUID();
 			this.writeSerialHelpers();
@@ -494,4 +494,13 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		this.getWriter().println();
 	}
 
+	@Override
+	public void setExtendsClass(String extendsClass) {
+		super.setExtendsClass(extendsClass);
+	}
+
+	@Override
+	public void setImplementsInterface(String implementsInterface) {
+		super.setImplementsInterface(implementsInterface);
+	}
 }

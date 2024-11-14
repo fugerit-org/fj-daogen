@@ -18,8 +18,9 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	public static final String ATT_COMMENTS = "comments";
 	public static final String ATT_UDT = "udt";
 	public static final String ATT_STRUCT_TYPE = "structType";
-
+	public static final String ATT_STRUCT_SQL_TYPE = "structSqlType=";
 	public static final String ATT_VIRTUAL = "virtual";
+	public static final String ATT_EXAMPLE_DATA = "exampleData";
 	
 	/**
 	 * 
@@ -47,6 +48,8 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	private String structType;
 
 	private String virtual;
+
+	private String exampleData;
 
 	public boolean isUserType() {
 		return BooleanUtils.isTrue( this.getUdt() );
@@ -140,6 +143,15 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		this.virtual = virtual;
 	}
 
+	public String getExampleData() {
+		return exampleData;
+	}
+
+	public void setExampleData(String exampleData) {
+		this.exampleData = exampleData;
+	}
+
+
 	public String describe() {
 		 List<String> list = new ArrayList<>();
 		 list.add( StringUtils.concat( ":" , ATT_SQL_TYPE, this.getSqlType() ) );
@@ -151,6 +163,7 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		 list.add( StringUtils.concat( ":" , ATT_UDT, this.getUdt() ) );
 		 list.add( StringUtils.concat( ":" , ATT_STRUCT_TYPE, this.getStructType() ) );
 		 list.add( StringUtils.concat( ":" , ATT_VIRTUAL, this.getVirtual() ) );
+		 list.add( StringUtils.concat( ":" , ATT_EXAMPLE_DATA, this.getExampleData() ) );
 		 return StringUtils.concat(  ",", list );
 	}
 	

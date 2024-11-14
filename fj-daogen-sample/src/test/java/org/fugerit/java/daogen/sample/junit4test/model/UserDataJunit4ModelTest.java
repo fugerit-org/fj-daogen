@@ -47,11 +47,11 @@ public class UserDataJunit4ModelTest {
 		Assert.assertFalse( current.isEmpty() );
 		current.setPassword("1");
 		Assert.assertFalse( current.isEmpty() );
-		current.setLastLogin(new java.util.Date());
+		current.setLastLogin(null);
 		Assert.assertFalse( current.isEmpty() );
-		current.setDateInsert(new java.util.Date());
+		current.setDateInsert(null);
 		Assert.assertFalse( current.isEmpty() );
-		current.setDateUpdate(new java.util.Date());
+		current.setDateUpdate(null);
 		Assert.assertFalse( current.isEmpty() );
 		current.setState(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
@@ -64,7 +64,6 @@ public class UserDataJunit4ModelTest {
 		ModelUserData current = this.newInstance();
 		this.printAll( current );
 		logger.info( "current toString() : {}", current );
-		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 		UserDataFinder finder1 = new UserDataFinder();
 		finder1.setModel( current );

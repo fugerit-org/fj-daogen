@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.9 (2024-11-09)
+	 * @version    : 1.0.0-rc.10 (2024-11-14)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -118,7 +118,7 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="type-map-config" use="optional" default="cl://config/daogen_default_type_mapping.xml">
 			<xsd:annotation>
-				<xsd:documentation>The type mapper config. It will be default to 'cl://config/daogen_default_type_mapping.xml'.</xsd:documentation>
+				<xsd:documentation>The type mapper config. It will default to 'cl://config/daogen_default_type_mapping.xml'.</xsd:documentation>
 				<xsd:documentation>It is usually safe to keep the default.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
@@ -156,14 +156,21 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 			<xsd:annotation>
 				<xsd:documentation>The package to be used for model interfaces, for each entity.</xsd:documentation>
 				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.def.model').</xsd:documentation>
-				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="xsd:string" name="package-helper" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>The package to be used for basic model implementation classes, for each entity.</xsd:documentation>
 				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.helper').</xsd:documentation>
-				<xsd:documentation>The relevant generators and decorators will only by run if this property is set.</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only run if this property is set.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="package-helper-microprofile" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The package to be used model helper on miprofile specification.</xsd:documentation>
+				<xsd:documentation>(e.g. 'org.fugerit.java.daogen.sample.impl.helper' or 'org.fugerit.java.daogen.sample.impl.microprofile').</xsd:documentation>
+				<xsd:documentation>The relevant generators and decorators will only run if this property is set.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 		<xsd:attribute type="daogen:enabledDisabledType" name="disable-singleton" use="optional" default="disabled">
@@ -563,6 +570,13 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 		<xsd:attribute type="xsd:string" name="virtual" use="optional" default="false">
 			<xsd:annotation>
 				<xsd:documentation>Virtual ('true') field will be included in model, but not in persistente (i.e. CRUD) operations.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="exampleData" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>Example data for the field.</xsd:documentation>
+				<xsd:documentation>(e.g. '123')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators. (for instance MicroProfileSchemaWrapperGenerator)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>	

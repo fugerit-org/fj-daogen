@@ -45,7 +45,7 @@ public interface ModelUpload extends org.fugerit.java.core.lang.compare.CheckEmp
 	 *
 	 * @return the value of dateInsert
 	 */
-	java.util.Date getDateInsert();
+	java.time.LocalDateTime getDateInsert();
 
 	/**
 	 * Setter method for property : dateInsert (nullable: yes)
@@ -54,7 +54,7 @@ public interface ModelUpload extends org.fugerit.java.core.lang.compare.CheckEmp
 	 *
 	 * @param value the value of dateInsert
 	 */
-	void setDateInsert( java.util.Date value );
+	void setDateInsert( java.time.LocalDateTime value );
 
 	/**
 	 * Getter method for property : dateUpdate (nullable: yes)
@@ -63,7 +63,7 @@ public interface ModelUpload extends org.fugerit.java.core.lang.compare.CheckEmp
 	 *
 	 * @return the value of dateUpdate
 	 */
-	java.util.Date getDateUpdate();
+	java.time.LocalDateTime getDateUpdate();
 
 	/**
 	 * Setter method for property : dateUpdate (nullable: yes)
@@ -72,7 +72,7 @@ public interface ModelUpload extends org.fugerit.java.core.lang.compare.CheckEmp
 	 *
 	 * @param value the value of dateUpdate
 	 */
-	void setDateUpdate( java.util.Date value );
+	void setDateUpdate( java.time.LocalDateTime value );
 
 	/**
 	 * Getter method for property : content (nullable: yes)

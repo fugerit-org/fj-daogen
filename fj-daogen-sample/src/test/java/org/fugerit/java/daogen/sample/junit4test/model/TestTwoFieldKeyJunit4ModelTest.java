@@ -52,7 +52,6 @@ public class TestTwoFieldKeyJunit4ModelTest {
 		ModelTestTwoFieldKey current = this.newInstance();
 		this.printAll( current );
 		logger.info( "current toString() : {}", current );
-		org.fugerit.java.core.function.SafeFunction.apply( () -> org.fugerit.java.core.io.ObjectIO.fullSerializationTest( current ) );
 		Assert.assertNotNull( current );
 		TestTwoFieldKeyFinder finder1 = new TestTwoFieldKeyFinder();
 		finder1.setModel( current );

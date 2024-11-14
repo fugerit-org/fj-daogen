@@ -19,6 +19,9 @@
     <data id="WrapperGenerator" 
     	type="org.fugerit.java.daogen.base.gen.WrapperGenerator"
     	info="package-helper"/>
+    <data id="MicroProfileSchemaWrapperGenerator"
+		type="org.fugerit.java.daogen.base.gen.MicroProfileSchemaWrapperGenerator"
+		info="package-helper-microprofile"/>
     <data id="StructGenerator" 
     	type="org.fugerit.java.daogen.base.gen.StructGenerator"
     	info="package-struct"/>    	

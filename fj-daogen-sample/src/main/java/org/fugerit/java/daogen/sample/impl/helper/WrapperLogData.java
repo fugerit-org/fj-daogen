@@ -1,6 +1,6 @@
 package org.fugerit.java.daogen.sample.impl.helper;
 
-import org.fugerit.java.core.db.daogen.BasicWrapper;
+import org.fugerit.java.core.db.daogen.BasicWrapperNG;
 import org.fugerit.java.daogen.sample.def.model.ModelLogData;
 
 // custom import start ( code above here will be overwritten )
@@ -15,24 +15,10 @@ import org.fugerit.java.daogen.sample.def.model.ModelLogData;
  * // custom code start ( code above here will be overwritten )
  * // custom code end ( code below here will be overwritten )
  */
-public class WrapperLogData extends BasicWrapper<ModelLogData> implements ModelLogData {
+public class WrapperLogData extends BasicWrapperNG<ModelLogData> implements ModelLogData {
 
 	// custom code start ( code above here will be overwritten )
 	// custom code end ( code below here will be overwritten )
-
-	private static final long serialVersionUID = 827293319822L;
-
-	private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-		// this class is conditionally serializable, depending on contained object
-		// special situation can be handled using this method in future
-		out.defaultWriteObject();
-	}
-
-	private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-		// this class is conditionally serializable, depending on contained object
-		// special situation can be handled using this method in future
-		in.defaultReadObject();
-	}
 
 	public WrapperLogData( ModelLogData wrapped ) {
 		super( wrapped );
@@ -60,12 +46,12 @@ public class WrapperLogData extends BasicWrapper<ModelLogData> implements ModelL
 	}
 
 	@Override
-	public void setLogTime( java.util.Date value ) {
+	public void setLogTime( java.time.LocalDateTime value ) {
 		this.unwrapModel().setLogTime( value );
 	}
 
 	@Override
-	public java.util.Date getLogTime() {
+	public java.time.LocalDateTime getLogTime() {
 		return this.unwrapModel().getLogTime();
 	}
 

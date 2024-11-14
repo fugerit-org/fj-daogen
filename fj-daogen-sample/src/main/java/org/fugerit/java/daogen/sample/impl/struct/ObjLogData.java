@@ -67,14 +67,14 @@ public class ObjLogData extends WrapperLogData implements SQLData, StructMapper 
 	@Override
 	public void readSQL(SQLInput stream, String typeName) throws SQLException {
 		this.setId( stream.readBigDecimal() );
-		this.setLogTime( stream.readTimestamp() );
+		this.setLogTime( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToLocalDateTime( stream.readDate() ) );
 		this.setInfo( stream.readString() );
 	}
 
 	@Override
 	public void writeSQL(SQLOutput stream) throws SQLException {
 		stream.writeBigDecimal( this.getId() );
-		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.utilDateToSqlTimestamp( this.getLogTime() ) );
+		stream.writeTimestamp( org.fugerit.java.core.db.daogen.SQLTypeConverter.localDateTimeToSqlTimestamp( this.getLogTime() ) );
 		stream.writeString( this.getInfo() );
 	}
 
