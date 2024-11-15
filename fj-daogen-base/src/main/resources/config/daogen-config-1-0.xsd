@@ -572,10 +572,24 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>Virtual ('true') field will be included in model, but not in persistente (i.e. CRUD) operations.</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
-		<xsd:attribute type="xsd:string" name="exampleData" use="optional" >
+		<xsd:attribute type="xsd:string" name="openapiExample" use="optional" >
 			<xsd:annotation>
 				<xsd:documentation>Example data for the field.</xsd:documentation>
-				<xsd:documentation>(e.g. '123')</xsd:documentation>
+				<xsd:documentation>(e.g. '1')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators. (for instance MicroProfileSchemaWrapperGenerator)</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="openapiEnumeration" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>Comma separated enumeration of values. (normal comma escaped as {,})</xsd:documentation>
+				<xsd:documentation>(e.g. '0,1')</xsd:documentation>
+				<xsd:documentation>It will be used by all relevant generators. (for instance MicroProfileSchemaWrapperGenerator)</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="openapiFormat" use="optional" >
+			<xsd:annotation>
+				<xsd:documentation>OpenAPI format to use.</xsd:documentation>
+				<xsd:documentation>(e.g. 'int32')</xsd:documentation>
 				<xsd:documentation>It will be used by all relevant generators. (for instance MicroProfileSchemaWrapperGenerator)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>

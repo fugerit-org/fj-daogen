@@ -39,14 +39,25 @@ public class MicroProfileSchemaWrapperGenerator extends DaogenBasicGenerator {
 		return DaogenCatalogConstants.mpSchemaName( this.getCurrentEntity() );
 	}
 
+	private static void addIfNotEmpty( StringBuilder extra, String value, String formatString ) {
+		if ( StringUtils.isNotEmpty( value ) ) {
+			extra.append( String.format( formatString, value ) );
+		}
+	}
+
 	@Override
 	public void generateDaogenBody() throws IOException {
 		WrapperUtils.generateBody( this, f -> {
 			if (StringUtils.isNotEmpty( f.getComments() ) ) {
 				String base = "@Schema( description = \"%s\" %s)";
-				String extra = "";
-				if ( StringUtils.isNotEmpty( f.getExampleData() ) ) {
-					extra = String.format( ", example =\"%s\"", f.getExampleData() );
+				StringBuilder extra = new StringBuilder();
+				addIfNotEmpty( extra, f.getOpenapiExample(), ", example =\"%s\"" );
+				addIfNotEmpty( extra, f.getOpenapiFormat(), ", format =\"%s\"" );
+				if ( StringUtils.isNotEmpty( f.getOpenapiEnumeration() ) ) {
+					String[] split = f.getOpenapiEnumeration().split( "," );
+					extra.append( ", enumeration = { \"" );
+					extra.append( StringUtils.concat( "\" , \"", split ) );
+					extra.append( "\" }" );
 				}
 				return String.format( base , f.getComments(), extra );
 			} else {
