@@ -39,7 +39,8 @@ public class UserDataJunit4ModelTest {
 	}
 
 	public ModelUserData newInstance() { 
-		WrapperUserData current = new WrapperUserData( new HelperUserData() );
+		ModelUserData model = new HelperUserData();
+		WrapperUserData current = new WrapperUserData( model );
 		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );

@@ -40,7 +40,8 @@ public class UserJunit4ModelTest {
 	}
 
 	public ModelUser newInstance() { 
-		WrapperUser current = new WrapperUser( new HelperUser() );
+		ModelUser model = new HelperUser();
+		WrapperUser current = new WrapperUser( model );
 		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );

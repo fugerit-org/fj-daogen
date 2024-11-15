@@ -38,7 +38,8 @@ public class AddressJunit4ModelTest {
 	}
 
 	public ModelAddress newInstance() { 
-		WrapperAddress current = new WrapperAddress( new HelperAddress() );
+		ModelAddress model = new HelperAddress();
+		WrapperAddress current = new WrapperAddress( model );
 		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );

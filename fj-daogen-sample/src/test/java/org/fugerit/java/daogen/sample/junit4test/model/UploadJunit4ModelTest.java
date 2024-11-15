@@ -36,7 +36,8 @@ public class UploadJunit4ModelTest {
 	}
 
 	public ModelUpload newInstance() { 
-		WrapperUpload current = new WrapperUpload( new HelperUpload() );
+		ModelUpload model = new HelperUpload();
+		WrapperUpload current = new WrapperUpload( model );
 		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );

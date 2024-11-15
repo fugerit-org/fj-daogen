@@ -35,7 +35,8 @@ public class LogDataJunit4ModelTest {
 	}
 
 	public ModelLogData newInstance() { 
-		WrapperLogData current = new WrapperLogData( new HelperLogData() );
+		ModelLogData model = new HelperLogData();
+		WrapperLogData current = new WrapperLogData( model );
 		Assert.assertTrue( current.isEmpty() );
 		current.setId(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
