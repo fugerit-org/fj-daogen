@@ -50,6 +50,8 @@ public class TestDaogenRun extends MemDBTestBase {
 				DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE , BooleanUtils.BOOLEAN_FALSE );
 		overrideProperties.setProperty(
 				DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON , DaogenCatalogConstants.GEN_PROP_DISABLE_SINGLETON_ENABLED );
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER_MICROPROFILE , "org.fugerit.java.daogen.sample.impl.helper" );
 		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertTrue( file.exists() );
 		Assert.assertEquals( Result.RESULT_CODE_OK, result );

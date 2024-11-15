@@ -35,7 +35,8 @@ public class TestTwoFieldKeyJunit4ModelTest {
 	}
 
 	public ModelTestTwoFieldKey newInstance() { 
-		WrapperTestTwoFieldKey current = new WrapperTestTwoFieldKey( new HelperTestTwoFieldKey() );
+		ModelTestTwoFieldKey model = new HelperTestTwoFieldKey();
+		WrapperTestTwoFieldKey current = new WrapperTestTwoFieldKey( model );
 		Assert.assertTrue( current.isEmpty() );
 		current.setIdOne(new java.math.BigDecimal( "1" ));
 		Assert.assertFalse( current.isEmpty() );
