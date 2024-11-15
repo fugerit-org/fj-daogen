@@ -3,6 +3,8 @@ package org.fugerit.java.daogen.base.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.fugerit.java.core.cfg.xml.BasicIdConfigType;
 import org.fugerit.java.core.lang.helpers.BooleanUtils;
 import org.fugerit.java.core.lang.helpers.StringUtils;
@@ -18,139 +20,47 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	public static final String ATT_COMMENTS = "comments";
 	public static final String ATT_UDT = "udt";
 	public static final String ATT_STRUCT_TYPE = "structType";
-	public static final String ATT_STRUCT_SQL_TYPE = "structSqlType=";
 	public static final String ATT_VIRTUAL = "virtual";
-	public static final String ATT_EXAMPLE_DATA = "exampleData";
+	public static final String ATT_OPENAPI_EXAMPLE = "openapiExample";
+	public static final String ATT_OPENAPI_ENUMERATION = "openapiEnumeration";
+	public static final String ATT_OPENAPI_FORMAT = "openapiFormat";
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7578925751213309863L;
-	
-	private String comments;
 
-	private String sqlType;
-	
-	private String sqlTypeName;
-	
-	private String javaType;
-	
-	private String size;
-	
-	private String nullable;
-	
-	private String unsafe;
-	
-	private String selectOnly;
-	
-	private String udt;
+	@Getter @Setter private String comments;
 
-	private String structType;
+	@Getter @Setter private String sqlType;
 
-	private String virtual;
+	@Getter @Setter private String sqlTypeName;
 
-	private String exampleData;
+	@Getter @Setter private String javaType;
+
+	@Getter @Setter private String size;
+
+	@Getter @Setter private String nullable;
+
+	@Getter @Setter private String unsafe;
+
+	@Getter @Setter private String selectOnly;
+
+	@Getter @Setter private String udt;
+
+	@Getter @Setter private String structType;
+
+	@Getter @Setter private String virtual;
+
+	@Getter @Setter private String openapiExample;
+
+	@Getter @Setter private String openapiEnumeration;
+
+	@Getter @Setter private String openapiFormat;
 
 	public boolean isUserType() {
 		return BooleanUtils.isTrue( this.getUdt() );
 	}
-	
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public String getSqlType() {
-		return sqlType;
-	}
-
-	public void setSqlType(String sqlType) {
-		this.sqlType = sqlType;
-	}
-
-	public String getSqlTypeName() {
-		return sqlTypeName;
-	}
-
-	public void setSqlTypeName(String sqlTypeName) {
-		this.sqlTypeName = sqlTypeName;
-	}
-
-	public String getJavaType() {
-		return javaType;
-	}
-
-	public void setJavaType(String javaType) {
-		this.javaType = javaType;
-	}
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public String getNullable() {
-		return nullable;
-	}
-
-	public void setNullable(String nullable) {
-		this.nullable = nullable;
-	}
-
-	public String getUnsafe() {
-		return unsafe;
-	}
-
-	public void setUnsafe(String unsafe) {
-		this.unsafe = unsafe;
-	}
-
-	public String getSelectOnly() {
-		return selectOnly;
-	}
-
-	public void setSelectOnly(String selectOnly) {
-		this.selectOnly = selectOnly;
-	}
-
-	public String getUdt() {
-		return udt;
-	}
-
-	public void setUdt(String udt) {
-		this.udt = udt;
-	}
-
-	public String getStructType() {
-		return structType;
-	}
-
-	public void setStructType(String structType) {
-		this.structType = structType;
-	}
-
-	public String getVirtual() {
-		return virtual;
-	}
-
-	public void setVirtual(String virtual) {
-		this.virtual = virtual;
-	}
-
-	public String getExampleData() {
-		return exampleData;
-	}
-
-	public void setExampleData(String exampleData) {
-		this.exampleData = exampleData;
-	}
-
 
 	public String describe() {
 		 List<String> list = new ArrayList<>();
@@ -163,7 +73,9 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		 list.add( StringUtils.concat( ":" , ATT_UDT, this.getUdt() ) );
 		 list.add( StringUtils.concat( ":" , ATT_STRUCT_TYPE, this.getStructType() ) );
 		 list.add( StringUtils.concat( ":" , ATT_VIRTUAL, this.getVirtual() ) );
-		 list.add( StringUtils.concat( ":" , ATT_EXAMPLE_DATA, this.getExampleData() ) );
+		 list.add( StringUtils.concat( ":" , ATT_OPENAPI_EXAMPLE, this.getOpenapiExample() ) );
+		 list.add( StringUtils.concat( ":" , ATT_OPENAPI_ENUMERATION, this.getOpenapiEnumeration() ) );
+		 list.add( StringUtils.concat( ":" , ATT_OPENAPI_FORMAT, this.getOpenapiFormat() ) );
 		 return StringUtils.concat(  ",", list );
 	}
 	
