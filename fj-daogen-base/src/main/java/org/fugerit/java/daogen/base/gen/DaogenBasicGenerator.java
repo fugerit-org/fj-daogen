@@ -271,6 +271,10 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 		return DaogenCatalogConstants.wrapperName( this.getCurrentEntity() );
 	}
 
+	public String getEntityMpSchemaName() {
+		return DaogenCatalogConstants.mpSchemaName( this.getCurrentEntity() );
+	}
+
 	public String getEntityFacadeDefName() {
 		return DaogenCatalogConstants.facadeDefName( this.getCurrentEntity() );
 	}

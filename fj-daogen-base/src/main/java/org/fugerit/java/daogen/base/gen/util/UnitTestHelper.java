@@ -23,6 +23,9 @@ public class UnitTestHelper {
 				gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+gen.getEntityModelName(),
 				gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+gen.getEntityHelperName(),
 				gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER )+"."+gen.getEntityWrapperName() );
+        if ( StringUtils.isNotEmpty( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER_MICROPROFILE ) ) ) {
+            gen.getImportList().add( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER_MICROPROFILE )+"."+gen.getEntityMpSchemaName() );
+        }
 		if ( StringUtils.isNotEmpty( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF ) ) ) {
 			GenUtils.addAll( gen.getImportList(),
                     gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_FACADE_DEF )+"."+gen.getEntityFinderName() );
@@ -93,7 +96,13 @@ public class UnitTestHelper {
     private static void createSampleEntityInstanceMethod( DaogenBasicGenerator gen, String assertionClass ) {
         // creates a new instance
         gen.getWriter().println( DaogenBasicGenerator.TAB+"public "+gen.getEntityModelName()+" newInstance() { " );
-        gen.getWriter().println( DaogenBasicGenerator.TAB_2+""+gen.getEntityWrapperName()+" current = new "+gen.getEntityWrapperName()+"( new "+gen.getEntityHelperName()+DaogenBasicGenerator.COMMA_END_LIT );
+        gen.getWriter().println( DaogenBasicGenerator.TAB_2+gen.getEntityModelName()+" model = new "+gen.getEntityHelperName()+"();" );
+        if ( StringUtils.isNotEmpty( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER_MICROPROFILE ) ) ) {
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+gen.getEntityMpSchemaName()+" microprofile = new "+gen.getEntityMpSchemaName()+"( model );" );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"model = microprofile;" );
+            gen.getWriter().println( DaogenBasicGenerator.TAB_2+"logger.info( \"unwrap :  {}\", microprofile.unwrap( microprofile ) );" );
+        }
+        gen.getWriter().println( DaogenBasicGenerator.TAB_2+gen.getEntityWrapperName()+" current = new "+gen.getEntityWrapperName()+"( model );" );
         boolean checkIsEmpty = BooleanUtils.isTrue( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_CHECK_EMPTY_INTERFACE ) );
         if ( checkIsEmpty ) {
             gen.getWriter().println( DaogenBasicGenerator.TAB_2+assertionClass+".assertTrue( current.isEmpty() );" );
