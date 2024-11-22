@@ -82,6 +82,18 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
+	public void testDaoModelAndHelperInTheSameFolder() throws IOException, ConfigException {
+		File file = new File( "target/daogen-run-model-helper-coexists" );
+		Properties overrideProperties = new Properties();
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_PACKAGE_HELPER ,
+				"org.fugerit.java.daogen.sample.def.model");
+		int result = this.testDaoGenerationWorker(file, overrideProperties);
+		Assert.assertTrue( file.exists() );
+		Assert.assertEquals( Result.RESULT_CODE_OK, result );
+	}
+
+	@Test
 	public void testDaoGenerationFailHelperNg() throws IOException, ConfigException {
 		File file = new File( "target/daogen-run-fail-helper-ng" );
 		Properties overrideProperties = new Properties();

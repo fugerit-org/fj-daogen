@@ -13,6 +13,7 @@ import org.fugerit.java.daogen.base.config.DaogenCatalogEntity;
 import org.fugerit.java.daogen.base.config.DaogenCatalogField;
 import org.fugerit.java.daogen.base.config.DaogenCatalogRelation;
 import org.fugerit.java.daogen.base.config.DaogenClassConfigHelper;
+import org.fugerit.java.daogen.base.gen.util.HelperUtils;
 
 public class HelperGenerator extends DaogenBasicGenerator {
 
@@ -41,12 +42,8 @@ public class HelperGenerator extends DaogenBasicGenerator {
 		} else {
 			throw new ConfigException( "Invalid "+DaogenCatalogConstants.GEN_PROP_DAO_HELPER_NG_MODE+" parameter : "+daoHelperNgMode );
 		}
-		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 		this.setImplementsInterface( this.getEntityModelName() );
-		for ( DaogenCatalogRelation relation : this.getCurrentEntity().getRelations() ) {
-			DaogenCatalogEntity entityTo = this.getDaogenConfig().getListMap( relation.getTo() );
-			this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+DaogenCatalogConstants.modelName( entityTo ) );
-		}
+		HelperUtils.checkImportModel( this.getDaogenConfig(), this );
 	}
 
 	private void generateRelations() {

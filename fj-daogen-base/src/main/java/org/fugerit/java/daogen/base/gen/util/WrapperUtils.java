@@ -31,12 +31,8 @@ public class WrapperUtils {
         } else {
             throw new ConfigException( "Invalid "+DaogenCatalogConstants.GEN_PROP_DAO_WRAPPER_NG_MODE+" parameter : "+daoWrapperNgMode );
         }
-        gen.getImportList().add( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+gen.getEntityModelName() );
         gen.setImplementsInterface( gen.getEntityModelName() );
-        for ( DaogenCatalogRelation relation : gen.getCurrentEntity().getRelations() ) {
-            DaogenCatalogEntity entityTo = gen.getDaogenConfig().getListMap( relation.getTo() );
-            gen.getImportList().add( gen.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+DaogenCatalogConstants.modelName( entityTo ) );
-        }
+        HelperUtils.checkImportModel( daogenConfig, gen );
     }
 
     public static void generateRelations(DaogenBasicGenerator gen ) {
