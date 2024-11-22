@@ -37,7 +37,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 	
 	@Test
-	public void testDaoGenerationJdk17SpringBoot() throws IOException, ConfigException {
+	public void testDaoGenerationJdk17SpringBoot() {
 		File file = new File( "target/daogen-run-jdk17-sprint-boot" );
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty( 
@@ -58,7 +58,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
-	public void testDaoGenerationClassicalEntity() throws IOException, ConfigException {
+	public void testDaoGenerationClassicalEntity() {
 		File file = new File( "target/daogen-run-classical-entity" );
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty(
@@ -82,7 +82,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
-	public void testDaoModelAndHelperInTheSameFolder() throws IOException, ConfigException {
+	public void testDaoModelAndHelperInTheSameFolder() {
 		File file = new File( "target/daogen-run-model-helper-coexists" );
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty(
@@ -94,7 +94,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
-	public void testDaoGenerationFailHelperNg() throws IOException, ConfigException {
+	public void testDaoGenerationFailHelperNg() {
 		File file = new File( "target/daogen-run-fail-helper-ng" );
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty(
@@ -104,7 +104,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
-	public void testDaoGenerationFailWrapperNg() throws IOException, ConfigException {
+	public void testDaoGenerationFailWrapperNg() {
 		File file = new File( "target/daogen-run-fail-wrapper-ng" );
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty(
@@ -114,7 +114,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
-	public void testDaoGenerationFailFinderNg() throws IOException, ConfigException {
+	public void testDaoGenerationFailFinderNg() {
 		File file = new File( "target/daogen-run-fail-finder-ng" );
 		Properties overrideProperties = new Properties();
 		overrideProperties.setProperty(
@@ -124,7 +124,7 @@ public class TestDaogenRun extends MemDBTestBase {
 	}
 
 	@Test
-	public void testDaoGenerationDefault() throws IOException, ConfigException {
+	public void testDaoGenerationDefault() throws IOException, ConfigException  {
 		File file = new File( "target/daogen-run" );
 		try ( FileInputStream fis = new FileInputStream( new File( "src/test/resources/sample/daogenruntest-sample-daogen-config.xml" ) ) ) {
 			log.info( "DAOGEN start!" );
