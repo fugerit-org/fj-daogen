@@ -79,6 +79,8 @@ public class TestDaogenRun extends MemDBTestBase {
 		int result = this.testDaoGenerationWorker(file, overrideProperties);
 		Assert.assertTrue( file.exists() );
 		Assert.assertEquals( Result.RESULT_CODE_OK, result );
+        // second run
+        Assert.assertEquals( Result.RESULT_CODE_OK, this.testDaoGenerationWorker(file, overrideProperties) );
 	}
 
 	@Test
