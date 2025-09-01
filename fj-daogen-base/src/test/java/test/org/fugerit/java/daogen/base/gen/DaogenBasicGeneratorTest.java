@@ -12,7 +12,7 @@ public class DaogenBasicGeneratorTest {
     private PrintWriter pw;
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() {
         sw = new StringWriter();
         pw = new PrintWriter(sw);
     }
