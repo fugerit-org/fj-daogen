@@ -36,8 +36,10 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	protected static final String CLOSE_AND_THROWS = " ) throws ";
 	
 	public static final String AT_OVERRIDE = "@Override";
-	
-	protected static final String REAL_CLASS_COMMENT = TAB+"// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
+
+    protected static final String REAL_CLASS_COMMENT_BASE = "// [HELPER/IMPL MODEL] this class is a stub and can be modified as you see fit (it will not been overwritten)";
+
+	protected static final String REAL_CLASS_COMMENT = TAB+REAL_CLASS_COMMENT_BASE+" [do not delete this line]";
 
 	protected static final String CONTEXT_LIT = " context, ";
 	
@@ -125,10 +127,11 @@ public abstract class DaogenBasicGenerator extends SimpleJavaGenerator implement
 	}
 	
 	protected boolean checkSkipRealClass() throws IOException {
+        log.debug( "checkSkipRealClass : {} -> {}", this.getJavaFile(), this.getJavaFile().exists() );
 		if ( this.getJavaFile().exists() ) {
 			String content = FileIO.readString( this.getJavaFile() );
-			if ( content.contains( REAL_CLASS_COMMENT ) ) {
-				this.setSkipWrite( true );
+			if ( content.contains( REAL_CLASS_COMMENT_BASE ) ) {
+				this.setSkipWrite( Boolean.TRUE );
 			}
 		}
 		return this.isSkipWrite();
