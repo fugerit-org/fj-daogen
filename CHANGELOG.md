@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- new sonatype server for deploy workflow
 - fj-doc-version set to 8.16.1
 
 ### Fixed
