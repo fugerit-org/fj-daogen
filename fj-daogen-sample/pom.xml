@@ -11,7 +11,7 @@
 	</parent>
 
 	<name>fj-daogen-sample</name>
-	<description></description>
+    <description>Fugerit DaoGen Sample</description>
 
 	<properties>
 		<build-helper-maven-plugin-version>3.4.0</build-helper-maven-plugin-version>

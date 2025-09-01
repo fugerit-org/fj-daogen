@@ -11,7 +11,7 @@
 	</parent>
 
 	<name>fj-daogen-base</name>
-	<description></description>
+    <description>Fugerit DaoGen Base</description>
 
 	<licenses>
 		<license>
