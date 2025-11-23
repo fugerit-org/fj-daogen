@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] - 2025-11-23
+
 ### Added
 
 - new daogen configuration 'use-statement-helper' to set up PreparedStatement configuration
