@@ -107,6 +107,8 @@ public class DaogenCatalogConstants {
 	public static final String GEN_PROP_DAO_REST_NG_MODE_ENABLED = ENABLED;
 	public static final String GEN_PROP_DAO_REST_NG_MODE_DISABLED = DISABLED;
 
+	public static final String GEN_PROP_USE_STATEMENT_HELPER = "use-statement-helper";
+
 	public static final String PREFIX_MODEL = "Model";
 	
 	public static final String PREFIX_HELPER = "Helper";

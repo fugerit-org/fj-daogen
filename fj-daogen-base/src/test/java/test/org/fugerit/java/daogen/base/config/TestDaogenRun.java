@@ -135,5 +135,20 @@ public class TestDaogenRun extends MemDBTestBase {
 		}
 		Assert.assertTrue( file.exists() );
 	}
+
+	@Test
+	public void testDaoGenerationUseStatementHelper() throws IOException, ConfigException  {
+		File file = new File( "target/daogen-run-use-statement-helper" );
+		Properties overrideProperties = new Properties();
+		overrideProperties.setProperty(
+				DaogenCatalogConstants.GEN_PROP_USE_STATEMENT_HELPER , "org.fugerit.java.core.db.daogen.StatementHelperLibrary.DO_NOTHING_STATEMENT_HELPER" );
+		overrideProperties.setProperty( "base-src-folder", file.getAbsolutePath() );
+		try ( FileInputStream fis = new FileInputStream( new File( "src/test/resources/sample/daogenruntest-sample-daogen-config.xml" ) ) ) {
+			log.info( "DAOGEN start!" );
+			DaogenFacade.generate( fis, overrideProperties );
+			log.info( "DAOGEN end!" );
+		}
+		Assert.assertTrue( file.exists() );
+	}
 	
 }

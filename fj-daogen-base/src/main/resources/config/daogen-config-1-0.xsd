@@ -6,7 +6,7 @@
 	 *
 	 * @project    : fj-daogen
 	 * @creation   : 2020-11-12
-	 * @version    : 1.0.0-rc.10 (2024-11-14)
+	 * @version    : 1.0.0-rc.11 (2025-11-23)
 	 *
 	 * XSD for fugerit daogen configuration
 	 */
@@ -326,6 +326,12 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 		<xsd:attribute type="daogen:jeeTargetModeType" name="jee-target-mode" use="optional" default="javax">
 			<xsd:annotation>
 				<xsd:documentation>The enterprise edition target environment.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="use-statement-helper">
+			<xsd:annotation>
+				<xsd:documentation>Must be the full qualified name of an implementation of BiFunction%lt;PreparedStatement, DAOContext, PreparedStatement%gt;.</xsd:documentation>
+				<xsd:documentation>It can be used to set up custom PreparedStatement configuration, like setQueryTimeout().</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>	

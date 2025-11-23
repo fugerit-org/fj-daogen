@@ -31,7 +31,16 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 	public boolean isGenerate( DaogenCatalogConfig daogenConfig, DaogenCatalogEntity entity ) {
 		return FacadeGeneratorUtils.isFacadeGenerate( entity );
 	}
-	
+
+	private void handleClassDaoHelper() {
+		String useStatementHelper = this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_USE_STATEMENT_HELPER );
+		if ( StringUtils.isEmpty( useStatementHelper ) ) {
+			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
+		} else {
+			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+"<>( context, "+useStatementHelper+" );" );
+		}
+	}
+
 	private void initConfigHelperMode( DaogenCatalogConfig daogenConfig) {
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_MODEL )+"."+this.getEntityModelName() );
 		this.getImportList().add( this.getDaogenConfig().getGeneralProp( DaogenCatalogConstants.GEN_PROP_PACKAGE_RSE )+"."+this.getEntityRSEName() );
@@ -173,7 +182,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( TAB+AT_OVERRIDE );
 		this.getWriter().println( TAB+PUBLIC_LIT+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> loadAllByFinder( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityFinderName()+" finder ) throws DAOException {" );
 		this.getWriter().println( TAB_2+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+GENERIC_LIT );
-		this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
+		this.handleClassDaoHelper();
 		this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
 		if ( this.getCurrentEntity().containsDefaultId() ) {
 			this.getWriter().println( TAB_2+"query.andEqualParam( COL_ID, finder.getId() );" );	
@@ -228,14 +237,14 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			}
 		}
 	}
-	
+
 	private void generateHelperClassInsert( DaogenCatalogField colData, DaogenCatalogField colDataUpdate, String sequenceName, GeneratorKeyHelper primaryKeyHelper ) {
 		if ( FacadeGeneratorUtils.isFacadeModeInsert( this.getCurrentEntity() ) ) {
 			// create
 			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+PUBLIC_LIT+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> create( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws DAOException {" );
 			this.getWriter().println( TAB_2+this.getClassBaseResult()+LT_LIT+this.getEntityModelName()+"> result = new "+this.getClassBaseResult()+GENERIC_LIT );
-			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
+			this.handleClassDaoHelper();
 			if ( sequenceName != null ) {
 				for ( String currentField : primaryKeyHelper.getKeyFields() ) {
 					DaogenCatalogField field = this.getCurrentEntity().get( currentField );
@@ -261,7 +270,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 		this.getWriter().println( TAB+AT_OVERRIDE );
 		this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityModelName()+" "+FacadeDefGenerator.METHOD_LOAD_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+CLOSE_AND_THROWS+this.getClassDaoException()+" {" );
 		this.getWriter().println( TAB_2+this.getEntityModelName()+" result = null;" );
-		this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
+		this.handleClassDaoHelper();
 		this.getWriter().println( TAB_2+"SelectHelper query = daoHelper.newSelectHelper( this.getQueryView(), this.getTableName() );" );
 		// check key start
 		StringBuilder checkKey = new StringBuilder();
@@ -299,7 +308,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			// delete by primary key
 			this.getWriter().println( TAB+AT_OVERRIDE );			this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_DELETE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+primaryKeyHelper.setForLoadInterface().getKeyParams()+CLOSE_AND_THROWS+this.getClassDaoException()+" {" );
 			this.getWriter().println( TAB_2+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+GENERIC_LIT );
-			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
+			this.handleClassDaoHelper();
 			this.getWriter().println( TAB_2+"DeleteHelper query = daoHelper.newDeleteHelper( this.getTableName() );" );
 			for ( String currentField : primaryKeyHelper.getKeyFields() ) {
 				this.getWriter().println( TAB_2+"query.andWhereParam( COL_"+currentField.toUpperCase()+", "+GeneratorNameHelper.toPropertyName( currentField )+" );" );	
@@ -327,7 +336,7 @@ public class FacadeImplDataGenerator extends DaogenBasicHelperGenerator {
 			this.getWriter().println( TAB+AT_OVERRIDE );
 			this.getWriter().println( TAB+PUBLIC_LIT+this.getEntityBaseResult()+" "+FacadeDefGenerator.METHOD_UPDATE_BY_PK+"( "+this.getClassDaogenContext()+CONTEXT_LIT+this.getEntityModelName()+" model ) throws "+this.getClassDaoException()+" {" );
 			this.getWriter().println( TAB_2+this.getEntityBaseResult()+" result = new "+this.getClassBaseResult()+GENERIC_LIT );
-			this.getWriter().println( TAB_2+this.getClassDaoHelper()+LT_LIT+this.getEntityModelName()+GT_LIT+DAO_HELPER_LIT+this.getClassDaoHelper()+CONTEXT_GEN_LIT );
+			this.handleClassDaoHelper();
 			if ( colDataUpdate != null ) {
 				this.getWriter().println( TAB_2+"//  "+DaogenCatalogConstants.GEN_PROP_DEFAULT_COLUMN_TIME_UPDATE+" : true - i will set update time" );
 				this.getWriter().println( TAB_2+MODEL_SET_LIT+GeneratorNameHelper.toClassName( colDataUpdate.getId() )+this.dateUpdateType() );

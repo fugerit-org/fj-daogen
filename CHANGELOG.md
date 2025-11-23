@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- new daogen configuration 'use-statement-helper' to set up PreparedStatement configuration
+
 ### Changed
 
 - fj-core version 8.7.3
