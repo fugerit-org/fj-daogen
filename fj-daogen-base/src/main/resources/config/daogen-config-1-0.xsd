@@ -599,6 +599,11 @@ The entry point for daogen-config documentation is : https://marsdocs.fugerit.or
 				<xsd:documentation>It will be used by all relevant generators. (for instance MicroProfileSchemaWrapperGenerator)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute type="xsd:string" name="databaseField" use="optional" default="false">
+			<xsd:annotation>
+				<xsd:documentation>The field name of DB; if not set equal to "id".</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>	
 
 </xsd:schema>

@@ -71,4 +71,11 @@ INSERT INTO fugerit.address ( id, id_user, info ) VALUES ( seq_test.nextval, 1, 
 
 INSERT INTO fugerit.test_two_field_key ( id_one, id_two, info ) VALUES ( seq_test.nextval, seq_test.nextval, 'test info 01' );
 
+CREATE TABLE fugerit.test_column_rename (
+                                            id bigint NOT NULL,
+                                            renamed_field_one VARCHAR2(128) NOT NULL
+);
+ALTER TABLE fugerit.test_column_rename ADD CONSTRAINT test_column_rename_pk PRIMARY KEY ( id );
+
+
 SET DATABASE SQL SYNTAX PGS TRUE;

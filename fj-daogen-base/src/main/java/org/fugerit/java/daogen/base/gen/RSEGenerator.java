@@ -68,7 +68,7 @@ public class RSEGenerator extends DaogenBasicGenerator {
 	}
 	
 	private void handleField( DaogenCatalogField field, String blobHandlerType, String clobHandlerType ) {
-		String columnName = field.getId();
+		String columnName = field.getDatabaseField();
 		String columnType = this.getDaogenConfig().getTypeMapper().mapForModel( field );
 		String javaSuffix = GeneratorNameHelper.toClassName( field.getId() );
 		String extratMethod = null;
