@@ -30,7 +30,7 @@ jobs:
     - name: Import gpg
       run: echo -e "${{ secrets.PASSPHRASE }}" | echo -e "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --allow-secret-key-import --import
     - name: Build package
-      run: mvn clean install -Dmaven.buildNumber.doCheck=false -P full,coverage,metadata
+      run: mvn clean install -Dmaven.buildNumber.doCheck=false -P full,coverage
     - name: Publish package
       run: mvn -Dmaven.buildNumber.doCheck=false --batch-mode deploy -P doRelease
       env:
