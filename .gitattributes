@@ -1,4 +1,4 @@
 * text=auto
-*.java text eol=lf
-*.xml text eol=lf
-*.properties text eol=lf
+*.java text eol=crlf
+*.xml text eol=crlf
+*.properties text eol=crlf
