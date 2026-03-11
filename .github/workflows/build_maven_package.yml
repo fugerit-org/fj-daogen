@@ -30,3 +30,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           disable-maven-dependency-submission: ${{ vars.DISABLE_MAVEN_DEPENDENCY_SUBMISSION }}
+          maven-additional-options: -Dmaven.buildNumber.doCheck=false
