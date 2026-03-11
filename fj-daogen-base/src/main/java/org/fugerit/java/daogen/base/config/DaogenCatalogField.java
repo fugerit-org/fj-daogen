@@ -24,6 +24,7 @@ public class DaogenCatalogField extends BasicIdConfigType {
 	public static final String ATT_OPENAPI_EXAMPLE = "openapiExample";
 	public static final String ATT_OPENAPI_ENUMERATION = "openapiEnumeration";
 	public static final String ATT_OPENAPI_FORMAT = "openapiFormat";
+	public static final String ATT_DATABASE_FIELD = "databaseField";
 	
 	/**
 	 * 
@@ -58,6 +59,12 @@ public class DaogenCatalogField extends BasicIdConfigType {
 
 	@Getter @Setter private String openapiFormat;
 
+	@Setter private String databaseField;
+
+	public String getDatabaseField() {
+		return StringUtils.valueWithDefault( this.databaseField, this.getId() );
+	}
+
 	public boolean isUserType() {
 		return BooleanUtils.isTrue( this.getUdt() );
 	}
@@ -76,6 +83,7 @@ public class DaogenCatalogField extends BasicIdConfigType {
 		 list.add( StringUtils.concat( ":" , ATT_OPENAPI_EXAMPLE, this.getOpenapiExample() ) );
 		 list.add( StringUtils.concat( ":" , ATT_OPENAPI_ENUMERATION, this.getOpenapiEnumeration() ) );
 		 list.add( StringUtils.concat( ":" , ATT_OPENAPI_FORMAT, this.getOpenapiFormat() ) );
+		list.add( StringUtils.concat( ":" , ATT_DATABASE_FIELD, this.getDatabaseField() ) );
 		 return StringUtils.concat(  ",", list );
 	}
 	

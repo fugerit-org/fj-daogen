@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- renamed database field handling  <https://github.com/fugerit-org/fj-daogen/issues/159>
+
+
 ## [1.9.0] - 2025-11-23
 
 ### Added
